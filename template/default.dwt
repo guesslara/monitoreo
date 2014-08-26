@@ -14,7 +14,7 @@
 <script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
 <script type="text/javascript" src="{PATH}/js/scripts1.js"></script>
 <script type="text/javascript" src="{PATH}/js/scripts2.js"></script>
-<!--<script type="text/javascript" src="{PATH}/js/funcionesMapas.js"></script>-->
+<script type="text/javascript" src="{PATH}/js/funcionesMapas.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="public/libs/phpgridv1.5.2/lib/js/jqgrid/css/ui.jqgrid.css">
 <script type="text/javascript" src="public/js/colorpicker.js"></script>
 <script type="text/javascript" src="public/js/ui/jquery.numeric.js"></script>
@@ -33,6 +33,7 @@
 
 </head>
 <body onload="init();">
+<input type="hidden" id="usuarioId" value="{IDUSUARIO}" />
 <div id="tabs" class="pestana_principal">
   <ul>
     <li ><a href="#Monitoreo">Monitoreo</a></li>
@@ -47,7 +48,7 @@
 	       <a href="#" id="enlaceMisUnidades" rel="1">Unidades Disponibles</a>
 	     </div>
 	     <div id="main_view" class="main_view">
-	         <div id="mon_search" style="padding: 5px;position: relative;width: auto;">
+	        <div id="mon_search" style="padding: 5px;position: relative;width: auto;border-bottom:1px solid #CCC;">
             <label for="tags">Buscar: </label><input id="tags" />
             <a href="#" id="btnUltimaPosicion" rel="2" class="btnSlider ui-state-default ui-corner-all">&Uacute;ltima Posicion</a>
           </div><!--fin div search-->

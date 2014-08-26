@@ -1,41 +1,68 @@
 /* Funciones del archivo Javascript */
+var cargadorInicial=0;
 /*
  *@name 	Funcion para hacer las peticiones ajax
  *@author	Gerardo Lara
- *@date		6 - Mayo - 2014
+ *@date		26 - Agosto - 2014
 */
-var cargadorInicial=0;
-function ajaxAppPlataforma(accion,url,parametros,metodo){
-    $.ajax({
-	async:true,
-	type: metodo,
-	dataType: "html",
-	contentType: "application/x-www-form-urlencoded",
-	url:url,
-	data:parametros,
-	beforeSend:function(){ 
-	    $("#cargador2").show(); 
-	},
-	success:function(datos){ 
-	    $("#cargador2").hide();
-	    controladorAcciones(accion,datos);
-	},
-	timeout:90000000,
-	error:function() {
-	    $("#cargadorGeneral").hide();
-	    $("#error").show();
-	    $("#error_mensaje").html('Ocurrio un error al procesar la solicitud.');
-	}
-    });
+function ajaxMonitoreo(accion,c,parametros,divCarga,divResultado,tipoPeticion){
+	$.ajax({
+		url: "index.php?m=mMonitoreo4&c="+c,
+		type: tipoPeticion,
+		data: parametros,
+		beforeSend:function(){ 
+			$("#"+divCarga).show().html("Procesando Informacion ..."); 
+		},
+		success: function(data) {
+			//$("#"+divResultado).html(data);
+			controladorAcciones(accion,data,divResultado);
+		},
+		timeout:90000000,
+		error:function() {
+		    $("#cargadorGeneral").hide();
+		    $("#error").show();
+		    $("#error_mensaje").html('Ocurrio un error al procesar la solicitud.');
+		}
+	});
 }
+
+
+
+/*function ajaxAppPlataforma(accion,url,parametros,metodo){
+    $.ajax({
+		async:true,
+		type: metodo,
+		dataType: "html",
+		contentType: "application/x-www-form-urlencoded",
+		url:url,
+		data:parametros,
+		beforeSend:function(){ 
+		    $("#cargador2").show(); 
+		},
+		success:function(datos){ 
+		    $("#cargador2").hide();
+		    controladorAcciones(accion,datos);
+		},
+		timeout:90000000,
+		error:function() {
+		    $("#cargadorGeneral").hide();
+		    $("#error").show();
+		    $("#error_mensaje").html('Ocurrio un error al procesar la solicitud.');
+		}
+    });
+}*/
+
 /*
  *@name 	Funcion para cargar los grupos de la base de datos
  *@author	Gerardo Lara
  *@date		6 - Mayo - 2014
 */
 function cargarGrupos(){
-    url="./index.php?m=mMonitoreo&c=mGetGrupos";
-    ajaxAppPlataforma("dibujaGrupos",url,"","POST");    
+	usuarioId=$("#usuarioId").val();
+	parametros="action=cargarGrupos&idUsuario="+usuarioId;
+	ajaxMonitoreo("cargarGrupos","controlador",parametros,"mon_menu_acordeon","mon_menu_acordeon","POST");
+    //url="./index.php?m=mMonitoreo4&c=mGetGrupos";
+    //ajaxAppPlataforma("dibujaGrupos",url,"","POST");
 }
 /*
  *@name 	Funcion controlar las acciones dependiendo de la accion pedida
@@ -47,8 +74,16 @@ function controladorAcciones(accion,datos){
 		case "dibujaGrupos":
 	    	dibujaAcordeonGrupos(accion,datos);
 		break;
+		case "cargarGrupos":
+			$("#mon_menu_acordeon").show().html(datos);
+		break;
     }
 }
+/*
+ *@name 	Funcion para dibujar el acordeon de las unidades
+ *@author	Gerardo Lara
+ *@date		6 - Mayo - 2014
+*/
 function dibujaAcordeonGrupos(accion,datos){
 	try{
 		idGrupo="";

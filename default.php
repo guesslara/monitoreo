@@ -12,7 +12,7 @@
 	$tpl->set_filenames(array('default'=>'default'));
 		
 	$idProfile = $userAdmin->user_info['ID_PROFILE'];
-        /*echo "<pre>";
+    /*echo "<pre>";
 	print_r($userAdmin);
 	echo "</pre>";*/
 	$validate  = $dbf->getRow('ADM_USUARIOS_SUPER',' ID_USUARIO = '.$userAdmin->user_info['ID_USUARIO']);
@@ -28,7 +28,8 @@
 		'USER'			=> $userAdmin->user_info['NOMBRE_COMPLETO'],
 		'APIKEY'		=> $config['keyapi'],
 		'S_ADMIN'		=> $s_admin,
-        'REPORTS'       => $aReports 
+        'REPORTS'       => $aReports,
+        'IDUSUARIO'		=> $userAdmin->user_info["ID_USUARIO"] 
 	));
 	
 	$tpl->pparse('default');
