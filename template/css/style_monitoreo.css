@@ -1,0 +1,436 @@
+  body,document,html{margin:0px;}
+  /* force a height so the tabs don't jump as content height changes */
+  #tabs .tabs-spacer { float: left; height: 200px; }
+  .tabs-bottom .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
+  .tabs-bottom .ui-tabs-nav li { top: auto; bottom: 0; margin: 0 .2em 1px 0; border-bottom: auto; border-top: 0; }
+  .tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
+  .ui-autocomplete {  	
+    max-height: 50%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  .mon_div_acordeon{
+      position: relative
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 99%;
+      margin: 2px;
+      /*border: 1px solid #ff0000;*/
+  }
+ 
+  .menu_monitoreo{width:28%; height:100%; float:left; }
+
+  /*.pestana_monitoreo{width:71%; height:100%; float:right;  border:1px solid #A6C9E2;}*/
+  .pestana_monitoreo{width:100%; height:100%; border:1px solid #A6C9E2;}
+  .div_unit_info{
+    height: 250px;
+    overflow-x:hidden;
+    overflow:hidden;
+    border: 1px solid #ff0000;
+  }
+  /*
+   *Estilos necesarios para el slider en las capas
+  */
+.main_view {
+	/*border: 1px solid #ff0000;*/
+	height: 58%;
+	width: 99%;
+}
+.window {
+	overflow: hidden; /*--Hides anything outside of the set width/height--*/
+	/*border: 1px solid blue;*/
+	position: relative;
+	width: 99.2%;
+}
+.image_reel {
+	/*border: 1px solid #04B404;*/
+	position: relative;
+	top: 0; left: 0;
+}
+.divContenedorSlider{/*estilos de las capas del viewer*/
+	margin-top: 1px;
+	margin-left: 1px;
+	width: 49.5%;
+	float: left;
+	background: #FFF;
+	/*border: 1px solid #ff0000;*/
+	position: relative;
+}
+.divMenu{
+	/*border: 0px solid #CCC;*/
+	height: 20px;
+	/*background: #F0F0F0;*/
+	padding: 3px;
+	text-align: center;
+}
+.divMenu a {
+  font-family: Verdana;
+  color: #666;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-left: 2px;
+  text-decoration: none;
+}
+.divMenu a:hover{
+  /*font-weight:bold;*/
+}
+
+#contenedorSlider{
+  overflow: hidden;
+  position: absolute;
+  width: 27.8%;
+  z-index: 1;
+  background: #FFF;
+  margin: 0px;
+  left: 5px;
+  -webkit-box-shadow: 1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+}
+
+#contenedorSliderAnterior{
+  overflow: hidden;
+  position: absolute;
+  width: 27.8%;
+  z-index: 999;
+  background: #FFF;
+  margin: 9px 6px 6px 8px;
+  box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.8);
+  left: -395px;
+}
+
+#mon_div_timer{
+  border: 1px solid #CCC;
+  width: 99%;
+  background: #FAFAFA;
+  height: 34px;
+  padding: 5px;
+}
+
+#divUltimasPosiciones{
+  border: 1px solid #A9D0F5;
+  height: 230px;
+  width: 98.7%;
+  overflow: auto;
+  display: none;
+  position: absolute;
+  z-index: 2;
+  bottom: 6px;
+  background: #FFF;
+}
+
+#btnMinimizarUP{
+  background: #FFF;
+  position: absolute;
+  height: 10px;
+  left: 50%;
+  padding: 3px;
+  bottom: 238px;
+  margin-left: -7.5px;
+  width: 33px;
+  display: none;
+  -webkit-box-shadow: 1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  z-index: 3;
+}
+#btnMinimizarUP:hover{
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+#btnOcultar{
+  float: right;
+}
+#btnOcultar:hover{
+  background: #FFF;
+  cursor: pointer;
+}
+
+.btnSlider{
+  color:#000;
+  border: 1px solid #000;
+  padding: 4px;
+  float: right;
+  text-decoration: none;
+}
+.btnSlider:hover{background: #CCC;}
+
+#btnCejillaOcultar{
+  height: 25px;
+  width: 20px;
+  color: #FFF;
+  background: #f0f0f0;
+  position: absolute;
+  z-index: 1000;
+  top: 39px;
+  left: 28.3%;
+  -webkit-box-shadow: 1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+}
+#btnCejillaOcultar:hover{
+  background: #FFF;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  cursor: pointer;
+}
+/*estilos para el acordeon*/
+.espacioTitulo{
+  margin-left:18px;
+}
+.listadoUnidadesTodas{
+  border-bottom:1px solid #CEE3F6;
+  height:15px;
+  padding:5px;
+  text-align: left;
+  background: #fff;
+}
+.listadoUnidadesTodas:hover{
+  background: #CEE3F6;
+  cursor: pointer;
+}
+.textoTodas{
+  margin-left: 120px;
+  font-size: 12px;
+  font-weight: bold;
+  /*border: 1px solid #ff0000;*/
+}
+.listadoUnidades{
+  border-bottom:1px solid #f0f0f0;
+  font-size:10px;
+  height:19px;
+  padding:4px;
+  margin: 3px 3px 3px 10px;
+}
+.listadoUnidades:hover{
+  background: #EFF5FB;
+  cursor: pointer;
+}
+.listadoInfoUnidades{
+  margin-left: 15px;
+}
+.textoTablaUP{
+  font-size: 10px;
+  text-align: center;
+}
+.enlaceFuncion{
+  color: blue;
+}
+.enlaceFuncion:hover{
+  cursor: pointer;
+}
+.verUbicacion{
+  text-decoration: none;
+  color: blue;
+}
+.verUbicacion:hover{
+  cursor: pointer;
+}
+.tablaUP{
+  background: #FFF;
+  width: 100%;
+  /*border: 1px solid #ff0000;*/
+  text-align: center;
+}
+.tablaUP tr{
+  height: 15px;
+  padding: 5px;
+  background: #FFF;
+  border-bottom: 1px solid #f0f0f0;
+}
+.tablaUP tr td{
+  height: 15px;
+  padding: 5px;
+  font-size: 10px;
+}
+.registrosUP{
+  /*background: #FFF;*/
+}
+.registrosUP:hover{
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#cambiarActualizacion{
+  top: 156px;
+	height: 60px;
+	position: absolute;
+	right: 15px;
+	width: 170px;
+	color: #000;
+	font-weight:bold;
+	background: #FFF;
+	padding: 5px;
+	box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);
+	display: none;
+}
+
+.infoUnidadGlobo{
+  height:240px;
+  width:400px;
+  margin: 3px 3px 3px 3px;
+}
+.infoUnidadGlobo div{
+  border-bottom:1px solid blue;
+  font-size:12px;
+  font-weight:bold;
+  color:#666;
+}
+#tblinfoUnidadGlobo{
+  font-size:10px;
+}
+.estiloTituloTablaInfoUnidad{
+  height:15px;padding:5px;color:#666;font-weight:bold;
+}
+
+#divEngraneActualiza{
+  position: absolute;
+  width: 23px;
+  height: 21px;
+  top: 130px;
+  right: 138px;
+  background: #FFF;
+  padding: 2px;
+}
+#divEngraneActualiza:hover{
+  background: #F0F0F0;cursor: pointer;
+}
+/*estilos para los mensajes de error*/
+#error{
+  display: none;
+  position: absolute;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: url(../../../../public/images/desv.png) repeat;
+}
+.estilosDivMensajeError{
+  position: absolute;
+  width: 700px;
+  height: 100px;
+  padding: 5px;
+  left: 50%;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: -350px;
+  border: 1px solid #FE2E2E;
+  background: #F6CECE;
+}
+.contenedorError{
+  border: 0px solid #CCC;
+  height: 98px;
+  text-align:right;
+}
+#error_imagen{
+  float: left;
+  border: 0px solid #FFF;
+  width: 50px;
+  margin: 20px 5px 5px 5px;
+  height: 50px;
+  background:url(../../../../public/images/warning4.png) no-repeat center;
+}
+#error_mensaje{
+  float: left;
+  border: 0px solid #FFF;
+  width: 600px;
+  margin: 15px 5px 13px 5px;
+  height: 40px;
+  padding: 5px;
+  font-size: 12px;
+  color: #FE2E2E;
+  overflow:auto;
+  text-align: left;
+}
+#btnCerrarVentanaError{
+  text-decoration:none;
+  border:1px solid #666;
+  height:15px;
+  padding:5px; 
+  color:#000;
+  background:#FFF;
+  font-weight:bold;
+  margin-top:5px;
+  margin-right:23px;
+  width:200px;
+}
+#enlaceGenerarTicket{
+  text-decoration:none;
+  border:1px solid #666;
+  height:15px;
+  padding:5px; 
+  color:#000;
+  background:#FFF;
+  font-weight:bold;
+  margin-top:5px;
+  margin-right:5px;
+  width:200px;
+}
+#enlaceCerrarSesion{
+  text-decoration:none;
+  border:1px solid #666;
+  height:15px;
+  padding:5px; 
+  color:#000;
+  background:#FFF;
+  font-weight:bold;
+  margin-top:5px;
+  margin-right:5px;
+  width:200px;
+  display: none;
+}
+/*fin estilos para los mensajes de error*/
+/*cargadores*/
+#cargador2{
+  display: none;
+  position: absolute;
+  z-index: 999;
+  width: 200px;
+  height: 35px;
+  top: 40px;
+  background: #F0F0F0;
+  left: 50%;
+  margin-left: -100px;
+  padding: 5px;
+  text-align: center;
+  font-size: 12px;
+  color:#666;
+  box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);
+}
+#cargadorGeneral{
+  display: none;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: url(../../../../public/images/desv.png) repeat;
+}
+.contenedorCargadorGeneral{
+  position: absolute;
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+  left: 50%;
+  top: 50%;
+  margin-left: -100px;
+  margin-top: -15px;
+  border: 1px solid #CCC;
+  background: #FFF;
+  color: #000;
+}
+.imgCargadorGral{
+  float:left;
+}
+.textoCargadorGral{
+  float:left;
+  margin:10px 5px 5px 5px;
+}
+/*fin estilos cargadores*/
+
+/*tags buscador*/
+#tags{
+  width:47%;
+}

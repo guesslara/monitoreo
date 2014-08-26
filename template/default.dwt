@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
+<script type="text/javascript" src="public/js/ui/jquery.js"></script>
+<script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
+<script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
+<script type="text/javascript" src="public/js/jquery.timer.js"></script>
+<script type="text/javascript" src="public/libs/jtables/jtables.js"></script>
+<script type="text/javascript" src="{PATH}/js/scripts.js"></script>
+<script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
+<script type="text/javascript" src="{PATH}/js/scripts1.js"></script>
+<script type="text/javascript" src="{PATH}/js/scripts2.js"></script>
+<!--<script type="text/javascript" src="{PATH}/js/funcionesMapas.js"></script>-->
+<link rel="stylesheet" type="text/css" media="screen" href="public/libs/phpgridv1.5.2/lib/js/jqgrid/css/ui.jqgrid.css">
+<script type="text/javascript" src="public/js/colorpicker.js"></script>
+<script type="text/javascript" src="public/js/ui/jquery.numeric.js"></script>
+<script  src="public/js/OpenLayers-2.13.1/OpenLayers.js" ></script>
+<link type="text/css" href="{PATH}/css/style_monitoreo.css" rel="stylesheet" />
+<link type="text/css" href="public/css/jqueryUIX.css" rel="stylesheet" />
+<link type="text/css" href="public/css/estiloX.css" rel="stylesheet"/>
+<link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
+<link type="text/css" href="./public/libs/jtables/jtables.css" rel="stylesheet"/>
+<!--
+<script type="text/javascript" src="public/libs/phpgrid/js/jqgrid/js/i18n/grid.locale-es.js"></script>
+<script type="text/javascript" src="public/libs/phpgrid/js/jqgrid/js/jquery.jqGrid.min.js"></script>
+-->
+<script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
+<script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
+
+</head>
+<body onload="init();">
+<div id="tabs" class="pestana_principal">
+  <ul>
+    <li ><a href="#Monitoreo">Monitoreo</a></li>
+    <li ><a href="#Admon">Administraci&oacute;n</a></li>
+    <li ><a href="#Report">Reportes</a></li>
+    <li class="{REPORTS}" ><a href="#DashBoard">DashBoard</a></li>
+  </ul>
+  <div id="Monitoreo" class="pestana">
+    <!--Informacion de las unidades-->
+    <div id="contenedorSlider">
+	     <div class="divMenu">	    
+	       <a href="#" id="enlaceMisUnidades" rel="1">Unidades Disponibles</a>
+	     </div>
+	     <div id="main_view" class="main_view">
+	         <div id="mon_search" style="padding: 5px;position: relative;width: auto;">
+            <label for="tags">Buscar: </label><input id="tags" />
+            <a href="#" id="btnUltimaPosicion" rel="2" class="btnSlider ui-state-default ui-corner-all">&Uacute;ltima Posicion</a>
+          </div><!--fin div search-->
+          <div id="mon_menu_acordeon" class="mon_div_acordeon"></div><!--acordeon de las unidades-->
+	     </div><!--Fin del div main_view-->
+    </div><!--fin contenedor Slider-->
+    <!--Div Pestaña-->
+    <div id="btnCejillaOcultar" title="Dar clic para ocultar la barra de unidades">
+      <img src="./public/images/ocultar2.png" border="0" style="margin: 7px 0px 0px 2px;" />
+    </div>
+    <!--fin Div Pestaña-->
+    <!--Fin Informacion de las unidades-->
+    <!--Div Mapa-->
+    <div id="mon_content" class="pestana_monitoreo"></div>
+    <!--fin del Div Mapa-->
+    <div id="btnMinimizarUP" title="Minimizar Panel de Ultimas Posiciones"><img src="./public/images/minimizar2.png" border="0" /></div>
+    <!--Div Ultimas Posiciones-->
+    <div id="divUltimasPosiciones" class="drsElement">
+	<table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
+	  <thead>
+	    <tr>
+	      <td colspan="14" class="fg-toolbar ui-widget-header ui-corner-tñ ui-corner tr">&Uacute;ltimas Posiciones</td>
+	    </tr>
+	    <tr>
+	      <th class="ui-state-default" colspan="5">Info</th>
+	      <th class="ui-state-default">Unidad</th>
+	      <th class="ui-state-default">Nivel de Bateria</th>
+	      <th class="ui-state-default">Evento</th>
+	      <th class="ui-state-default">Tipo Localizaci&oacute;n</th>
+	      <th class="ui-state-default">Fecha</th>
+	      <th class="ui-state-default">Velocidad</th>
+	      <th class="ui-state-default">PDI Cercano</th>
+	      <th class="ui-state-default">Direcci&oacute;n</th>
+        <th class="ui-state-default">Coordenadas</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+
+	  </tbody>
+	</table>
+    </div>
+    <!--Fin Div Ultimas Posiciones-->
+    <!--Div Geocercas-->
+    <div id="mon_Geocercas" class="mon_div_geos">
+	    <!--<input type="checkbox" name="mon_chk_g" id="mon_chk_g">GeoPuntos-->
+	    <input type="checkbox" name="mon_chk_c" id="mon_chk_c" />GeoCercas
+	    <div id="gral_button_events" class="ui-state-default ui-corner-all mon-close-evts" style="margin-top: 29px;width:100px;">
+		    <span class="ui-icon ui-icon-alert float_left"></span>
+		    <span class="gral_text" style="width: 80px;">Ult. Alertas</span>
+	    </div>
+    </div>
+    <!--Fin Div Geocercas-->
+    <!--Div tiempo para actualizar-->
+    <div id="mon_TiempoActualizar"  class="mon_div_time_lapse">
+      <span>Actualizar en: <span id="mon_time">00:00</span></span>
+    </div>
+    <div id="divEngraneActualiza" title="Ajustar el Tiempo de Actualizaci&oacute;n"><img src="./public/images/icon-info.png" width="18" height="18" border="0" /></div>
+    <div id="cambiarActualizacion">Elija el tiempo para actualizar:
+      <select id="mon_sel_time" style="margin:5px 5px 5px 5px;">
+	  <option value="10000">10</option>
+	  <option value="20000">20</option>
+	  <option value="30000">30</option>
+	  <option value="60000">60</option>
+	  <option value="120000" selected="selected">120</option>
+      </select> segs.
+      <div style="text-align: right;">
+        <a href="#" id="enlaceCerrarAjusteTiempo" title="Cerrar">Cerrar</a>
+      </div>
+    </div>
+    <!--Div tiempo para actualizar-->
+  </div><!--Monitoreo-->
+  <div id="Admon"  class="pestana"></div><!--Admon-->
+  <div id="Report" class="pestana"></div><!--Report-->
+  <div id="DashBoard" class="pestana_dashboard"></div><!--DashBoard-->
+
+
+
+  
+  <!--Texto de Usuario-->
+  <div class="mon-user-info">
+	  <span><b>Bienvenido(a) : {USER} - <blink>TEST</blink></b></span>
+  </div>
+  <!--Fin Texto de Usuario-->
+
+  <div id="cargadorGeneral">
+    <div class="contenedorCargadorGeneral">
+      <div class="imgCargadorGral"><img src='./public/images/mundoM.gif' height="32" width="32" border='0' /></div>
+      <div class="textoCargadorGral">Actualizando informaci&oacute;n...</div>
+    </div>
+  </div>
+  <div id="cargador2">
+    <div class="imgCargadorGral"><img src='./public/images/mundoM.gif' height="32" width="32" border='0' /></div>
+    <div class="textoCargadorGral">Actualizando...</div>
+  </div>
+  <div id="error">
+    <div class="estilosDivMensajeError">
+      <div class="contenedorError">
+	       <div id="error_imagen"></div>
+	       <div id="error_mensaje" style=""></div>
+          <a href="#" id="enlaceGenerarTicket" title="Generar Ticket de Servicio">Generar Ticket de Servicio</a>
+          <a id="btnCerrarVentanaError" href="#" style="">Cerrar</a>
+          <a id="enlaceCerrarSesion" href="#" style="">Cerrar</a>
+      </div>
+    </div>
+  </div>
+  <!--Botones Superiores-->
+  <div id="gral_button_soporte" class="ui-state-default ui-corner-all gral_button_soporte">
+    <span class="ui-icon  ui-icon-gear float_left"></span>
+    <span class="gral_text">Soporte</span>
+  </div>
+  
+  <div id="gral_button_manual" class="ui-state-default ui-corner-all gral_button_manual">
+    <span class="ui-icon  ui-icon-folder-collapsed float_left"></span>
+    <span class="gral_text">Manual</span>
+  </div>
+  
+  <div id="gral_button_admin" class="ui-state-default ui-corner-all gral_button_admin {S_ADMIN}">
+    <span class="ui-icon ui-icon-gear float_left"></span>
+    <span class="gral_text">Administración</span>
+  </div>
+  
+  <div id="gral_button_close" class="ui-state-default ui-corner-all mon-close-icon">
+    <span class="ui-icon ui-icon-circle-close float_left"></span>
+    <span class="gral_text">Cerrar Sesión</span>
+  </div>
+  <!--Botones Superiores-->
+</div><!--tabs-->
+
+<!--------Dialogs-->
+  <div id="divAviso" style="display: none;font-family: Verdana;">
+    <p><strong>Bienvenido(a) : {USER}</strong></p>
+    <p align="justify">Ahora puedes enviar Tickets de Servicio sobre cualquier situación que exista en la Plataforma.</p>
+    <p align="justify">Solo haz clic en el bot&oacute;n Soporte ubicado en la parte Superior, llena todos los campos y nos pondremos en contacto contigo a la brevedad.</p>
+    <p align="justify">As&iacute; mismo podr&aacute;s dar seguimiento a tus tickets mediante el siguiente enlace:</p>
+    <p align="center">
+      <a href="http://reportenet.2gps.net" target="_blank" style="color: blue;">Seguimiento a Tickets de Servicio</a>&nbsp;&nbsp;-&nbsp;&nbsp;
+      <a href="http://reportenet.2gps.net/manuales/manualUsuarioTickets.pdf" target="_blank" style="color: blue;">Descargar Manual de Usuario</a>
+    </p>
+    <p>&nbsp;</p>
+    <p align="center">Tu opini&oacute;n es muy importante para nosotros.</p>
+    <p align="center" style="font-weight: bold;font-size: 14px;">Equipo de Soporte ALG</p>
+    <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>
+  </div>
+  <div id="mensajesTickets" style="display: none;"><p style="font-size: 12px;">Cierre la ventana de <strong>Soporte</strong> antes de enviar otro Ticket.</p></div>
+  <div id="dialog_message" title="&iexcl;Aviso!"></div>
+  <div id="mon_dialog"></div>
+  <div id="mon_dialogAll"></div>
+</body>
+</html>

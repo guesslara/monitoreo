@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Some Title</title>
+<style>
+table {
+border-collapse : collapse;
+position : absolute;
+height : 100%;
+}
+
+td, th {
+background-color: #aaaaaa;
+border-right : 1px solid #ffffff;
+color : #ffffff;
+width : 100px;
+text-align : center;
+}
+
+td.locked_left, th.locked_left {
+background-color: #88ff88;
+font-weight : bold;
+border-left : 1px solid #ffffff;
+}
+
+#table_container_left {
+width : 190px;
+height : 113px;
+position : relative;
+float : left;
+overflow : hidden;
+}
+
+#table_container_right {
+width : 150px;
+height : 128px;
+overflow : scroll;
+float : left;
+position : relative;
+}
+
+</style>
+<script type="text/javascript">
+function initScroll() {
+var leftDiv = document.getElementById('table_container_left');
+var rightDiv = document.getElementById('table_container_right');
+rightDiv.onscroll = function() {
+leftDiv.scrollTop = this.scrollTop;
+};
+}
+</script>
+</head>
+<body on_load="initScroll();">
+<div id='table_container_left'>
+<table id="left_table">
+<thead>
+<tr>
+<th class='locked_left'>Number</th>
+<th class='locked_left'>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class='locked_left'>1</td>
+<td class='locked_left'>one</td>
+</tr>
+<tr>
+<td class='locked_left'>2</td>
+<td class='locked_left'>two</td>
+</tr>
+<tr>
+<td class='locked_left'>3</td>
+<td class='locked_left'>three</td>
+</tr>
+<tr>
+<td class='locked_left'>4</td>
+<td class='locked_left'>four</td>
+</tr>
+<tr>
+<td class='locked_left'>5</td>
+<td class='locked_left'>five</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id='table_container_right'>
+<table id="right_table">
+<thead>
+<tr>
+<th>French </th>
+<th>German </th>
+<th>Spanish</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>un</td>
+<td>eins</td>
+<td>one-es</td>
+</tr>
+<tr>
+<td>deux</td>
+<td>zwei</td>
+<td>two-es</td>
+</tr>
+<tr>
+<td>trois</td>
+<td>drei</td>
+<td>three-es</td>
+</tr>
+<tr>
+<td>quatre</td>
+<td>vier</td>
+<td>four-es</td>
+</tr>
+<tr>
+<td>cinq</td>
+<td>f�nf</td>
+<td>five-es</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

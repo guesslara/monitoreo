@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{PAGE_TITLE}</title>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
+<script type="text/javascript" src="public/js/ui/jquery.js"></script>
+<script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
+<script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
+<script type="text/javascript" src="public/js/jquery.timer.js"></script>
+<script type="text/javascript" src="public/libs/jtables/jtables.js"></script>
+<script type="text/javascript" src="{PATH}/js/scripts.js"></script>
+<script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
+<script type="text/javascript" src="public/js/colorpicker.js"></script>
+<script type="text/javascript" src="public/js/ui/jquery.numeric.js"></script>
+<script  src="public/js/OpenLayers-2.13.1/OpenLayers.js" ></script>
+<link type="text/css" href="{PATH}/css/style_monitoreo.css" rel="stylesheet" />
+<link type="text/css" href="public/css/jqueryUI.css" rel="stylesheet" />
+<link type="text/css" href="public/css/estilo.css" rel="stylesheet"/>
+<link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
+<link type="text/css" href="./public/libs/jtables/jtables.css" rel="stylesheet"/>
+
+</head>
+<body onload="init();">
+<div id="tabs" class="pestana_principal">
+  <ul>
+    <li ><a href="#Monitoreo">Monitoreo</a></li>
+    <li ><a href="#Admon">Administraci&oacute;n</a></li>
+    <li ><a href="#Report">Reportes</a></li>
+    <li class="{REPORTS}" ><a href="#DashBoard">DashBoard</a></li>
+  </ul>
+  <div id="Monitoreo" class="pestana">
+    <div id="mon_menu" class="menu_monitoreo">
+      
+	  
+	  <div id="contenedorSlider">
+		<div class="divMenu">		
+			<a href="#" rel="1" style="color:#000;">1</a>
+			<a href="#" rel="2" style="color:#000;">2</a>
+			<a href="#" rel="3" style="color:#000;">3</a>
+		</div>
+		<div id="main_view" class="main_view">            
+			<div id="window" class="window">
+				<div class="image_reel">
+					<!--<div id="divContenedor1" class="divContenedor1">Capa 1</div>-->
+					 <div id="mon_tabs_1" class="divContenedor1">
+					    <!--<span id="mon_search">-->
+						    <!--<span class="ui-widget divMenu" style="border: 1px solid #ff0000; width: 96%;height: 20px;padding: 5px;">-->
+						      <label for="tags">Buscar: </label><input id="tags" />
+						      
+						    <!--</span>-->
+					    <!--</span>		-->
+					  <span id="mon_menu_acordeon" class="mon_div_acordeon"></span>
+					</div>
+					<!--<div id="divContenedor2" class="divContenedor2">Capa 2</div>-->
+					 <!-- Tab muestra acordeon de unidades -->
+					<div id="mon_tabs-2" class="divContenedor2">
+					      <!--<div id="mon_div_timer" class="invisible" style="border: 1px solid #CCC;background: #FAFAFA;height: 34px;padding: 5px;">
+						      
+						      <div class="divMenu" style="width: 96%;height: 20px;padding: 5px;">
+							Tiempo Actualización: 
+							<select id="mon_sel_time">
+								      <option value="10000">10</option>
+								      <option value="20000">20</option>
+								      <option value="30000">30</option>
+								      <option value="60000">60</option>
+								      <option value="120000" selected >120</option>
+							</select> segs.
+							
+						      </div>
+					      </div>
+					      <div id="mon_tabs_select"></div>-->	
+					</div>
+					<div id="divContenedor3" class="divContenedor3">Capa 3</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	  
+	  
+	  <!-- Tab muestra acordeon de unidades -->
+	  
+	 
+
+
+</div><!--mon_menu-->
+
+<!--Div Mapa-->
+<div id="mon_content" class="pestana_monitoreo"></div>
+<!--fin del Div Mapa-->
+
+<div id="mon_Geocercas" class="ui-widget-header mon_div_geos">
+	<!--<input type="checkbox" name="mon_chk_g" id="mon_chk_g">GeoPuntos-->
+	<input type="checkbox" name="mon_chk_c" id="mon_chk_c" />GeoCercas
+	<div id="gral_button_events" class="ui-state-default ui-corner-all mon-close-evts">
+		<span class="ui-icon ui-icon-alert float_left"></span>
+		<span class="gral_text">Ult. Alertas</span>
+	</div>
+</div>
+<div id="mon_TiempoActualizar"  class="ui-widget-header mon_div_time_lapse">
+	<span> Tiempo para Actualizar: <span id="mon_time">00:00</span></span>
+	
+</div>
+
+
+</div><!--Monitoreo-->
+<div id="Admon"  class="pestana"></div><!--Admon-->
+<div id="Report" class="pestana"></div><!--Report-->
+<div id="DashBoard" class="pestana_dashboard"></div><!--DashBoard-->
+
+
+
+<!--<div id="Ajuste" class="pestana"></div>Ajuste-->
+<div class="mon-user-info">
+	<span><b>Bienvenido(a) : {USER} - <blink>TEST</blink></b></span>
+</div>
+
+<div id="cargadorGeneral" style="position: absolute;z-index: 999;width: 100%;height: 100%;top: 0;background: url(./public/images/desv.png) repeat">
+  <div style="position: absolute;width: 150px;height: 20px;padding: 10px;left: 50%;top: 50%;margin-left: -75px;margin-top: -10px;border: 1px solid #CCC;background: #FFF;color: #000;">
+    Cargando...
+  </div>
+</div>
+
+  <div id="gral_button_soporte" class="ui-state-default ui-corner-all gral_button_soporte">
+	  <span class="ui-icon  ui-icon-gear float_left"></span>
+	  <span class="gral_text">Soporte</span>
+  </div>
+  
+  <div id="gral_button_manual" class="ui-state-default ui-corner-all gral_button_manual">
+	  <span class="ui-icon  ui-icon-folder-collapsed float_left"></span>
+	  <span class="gral_text">Manual</span>
+  </div>
+  
+  <div id="gral_button_admin" class="ui-state-default ui-corner-all gral_button_admin {S_ADMIN}">
+	  <span class="ui-icon ui-icon-gear float_left"></span>
+	  <span class="gral_text">Administración</span>
+  </div>
+  
+  <div id="gral_button_close" class="ui-state-default ui-corner-all mon-close-icon">
+	  <span class="ui-icon ui-icon-circle-close float_left"></span>
+	  <span class="gral_text">Cerrar Sesión</span>
+  </div>
+
+</div><!--tabs-->
+
+
+
+<!--------Dialogs-->
+<div id="divAviso" style="display: none;font-family: Verdana;">
+  <p><strong>Bienvenido(a) : {USER}</strong></p>
+  <p align="justify">Ahora puedes enviar Tickets de Servicio sobre cualquier situación que exista en la Plataforma.</p>
+  <p align="justify">Solo haz clic en el bot&oacute;n Soporte ubicado en la parte Superior, llena todos los campos y nos pondremos en contacto contigo a la brevedad.</p>
+  <p align="justify">As&iacute; mismo podr&aacute;s dar seguimiento a tus tickets mediante el siguiente enlace:</p>
+  <p align="center">
+    <a href="http://reportenet.2gps.net" target="_blank" style="color: blue;">Seguimiento a Tickets de Servicio</a>&nbsp;&nbsp;-&nbsp;&nbsp;
+    <a href="http://reportenet.2gps.net/manuales/manualUsuarioTickets.pdf" target="_blank" style="color: blue;">Descargar Manual de Usuario</a>
+  </p>
+  <p>&nbsp;</p>
+  <p align="center">Tu opini&oacute;n es muy importante para nosotros.</p>
+  <p align="center" style="font-weight: bold;font-size: 14px;">Equipo de Soporte ALG</p>
+  <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>
+</div>
+<div id="mensajesTickets" style="display: none;"><p style="font-size: 12px;">Cierre la ventana de <strong>Soporte</strong> antes de enviar otro Ticket.</p></div>
+<div id="dialog_message" title="&iexcl;Aviso!"></div>
+<div id="mon_dialog"></div>
+<div id="mon_dialogAll"></div>
+</body>
+</html>

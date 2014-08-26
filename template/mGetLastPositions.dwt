@@ -1,0 +1,20 @@
+<div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="tbl_ultimasPosiciones">
+        <thead>
+            <tr>
+                <th>Unidad</th>
+                <th>Nivel de Bateria</th>
+                <th>Evento</th>
+                <th>Fecha</th>
+                <th>Velocidad</th>
+                <th>PDI cercano</th>
+                <th>Direcci&oacute;n</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>

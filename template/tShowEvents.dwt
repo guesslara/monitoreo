@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Ultimos Eventos</title>
+<script type="text/javascript" src="public/js/ui/jquery.js"></script>
+<script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
+<script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
+<script type="text/javascript" src="public/js/jquery.timer.js"></script>
+<script type="text/javascript" src="public/libs/jtables/jtables.js"></script>
+<script type="text/javascript" src="{PATH}/js/events.js"></script>
+<script type="text/javascript" src="public/js/colorpicker.js"></script>
+<script type="text/javascript" src="public/js/ui/jquery.numeric.js"></script>
+
+<link type="text/css" href="{PATH}/css/style_monitoreo.css" rel="stylesheet" />
+<link type="text/css" href="public/css/jqueryUI.css" rel="stylesheet" />
+<link type="text/css" href="public/css/estilo.css" rel="stylesheet"/>
+<link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
+<link type="text/css" href="public/libs/jtables/jtables.css"   rel="stylesheet"/>
+</head>
+<script>
+  alerts_data = [
+   {DATA}
+  ];  
+</script>
+<body>
+<div style="width:98%; height:98%;">
+  <audio id="sAlerta" src="public/sounds/ALARM.WAV" type="audio/wav"></audio>
+  <table cellpadding="0" cellspacing="0" border="0" class="display" id="grp_table">
+	<thead>
+        <tr>
+            <th colspan="4">
+				<div style="width:85%; float:left;">
+					<h3>Eventos</h3></div>
+        				<div style="width:11%;  float:right;">
+							<button id="evts_cancel" onClick="">Silenciar</button>
+				</div>
+            </th> 
+        </tr>
+	    <tr>
+	      <th>Unidad</th>
+	      <th>Fecha</th>
+	      <th>Evento</th>
+	      <th>Dirección</th>          
+	    </tr>
+    </thead>
+    <tbody></tbody>
+  </table> 
+</div>
+<div id="grp_dialog" > </div>
+</body>
+</html>

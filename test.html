@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>...::Test::...</title>
+<script type="text/javascript" src="../../public/js/jquery.min.js"></script>
+<style type="text/css">
+body,html,document{
+	margin: 5;
+	height: 100%;
+	overflow: hidden;
+}
+.main_view {
+	border: 1px solid #ff0000;
+	margin: 5px;
+	height: 92%;
+}
+.window {
+	overflow: hidden; /*--Hides anything outside of the set width/height--*/
+	border: 1px solid blue;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.image_reel {
+	position: relative;
+	top: 0; left: 0;
+}
+/*
+.image_reel div {
+	float: left;
+}
+*/
+.divContenedorSlider{height:590px;background: blue;width: 33.33%;float: left;}/*background:#FFF;*/
+
+.divMenu{
+	border: 1px solid #ff0000;
+	height: 20px;
+	padding: 5px;
+	margin: 5px;
+}
+.divMenu a.active {
+	font-weight: bold;
+	background: #000; /*#920000*/
+	border: 1px solid #CCC;
+	color:#FFFFFF;
+}
+.divMenu a:hover{
+	font-weight:bold;
+}
+
+#contenedorSlider{overflow: hidden; border: 1px solid #000;height: auto;position: absolute;height: 97.5%;width: 99%;}
+</style>
+<script type='text/javascript'>
+$(document).ready(function() {
+	inicial();
+	//obtiene el tamaño de los divs, cuantos existen determina el tamaño del carrete de divs
+	var imageWidth = $(".window").width();
+	//var imageSum = $(".image_reel div").size();
+	var imageSum = $(".divContenedorSlider").size();
+	var imageReelWidth = imageWidth * imageSum;
+	
+	//Ajusta el carrete de divs a su nuevo tamaño
+	$(".image_reel").css({'width' : imageReelWidth});
+	
+	//Funcion para el slider
+	rotate = function(){
+		var triggerID;
+		/*if(inicio){
+			triggerID = divInicial - 1;
+			inicio=false;
+		}else{*/
+			triggerID = $active.attr("rel") - 1; //obtiene el numero de veces del slider
+		//}
+		
+		var image_reelPosition = triggerID * imageWidth; //determina la distancia que el carrete necesita para moverse
+		//animacion de los divs
+		$(".image_reel").animate({ 
+			left: -image_reelPosition
+		}, 500 );
+	};
+	
+	//On Click
+	$(".divMenu a").click(function() {	
+		$active = $(this); //Activate the clicked paging
+		rotate(); //Trigger rotation immediately
+		return false; //Prevent browser jump to link anchor
+	});	
+	
+	//se colocar el div Inicial para el arrastre de forma contraria 
+	var inicio=false;
+	//divInicial = 2; //Div Inicial
+	//rotate(); //se llama a la rotacion del div
+	
+});
+
+	function inicial(){
+		anchoDoc=$(document).width();
+		altoDoc=$(document).height();
+		
+		$("#divContenedorSlider").css('height',(altoDoc-55)+"px");
+		/*$("#divContenedor2").css('height',(altoDoc-55)+"px");
+		$("#divContenedor3").css('height',(altoDoc-55)+"px");*/
+	}
+	
+	window.onresize=inicial;
+</script>
+
+</head>
+<body>
+	
+	<div id="contenedorSlider">
+		<div class="divMenu">		
+			<a href="#" rel="1" style="color:#000;">1</a>
+			<a href="#" rel="2" style="color:#000;">2</a>
+			<a href="#" rel="3" style="color:#000;">3</a>
+		</div>
+		<div id="main_view" class="main_view">            
+			<div id="window" class="window">
+				<div class="image_reel">
+					<div id="divContenedor1" class="divContenedorSlider">
+						<div style="border: 3px solid #000;position: relative;width: 50%;margin: 5px;">&nbsp;</div>
+					</div>
+					<div id="divContenedor2" class="divContenedorSlider">Capa 2</div>
+					<div id="divContenedor3" class="divContenedorSlider">Capa 3</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
