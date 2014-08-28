@@ -34,6 +34,7 @@ class monitoreo{
    		return $objBd;
    	}
    	public function cargarUltimasPosiciones($filtro,$idUsuario,$idCliente){
+   		$strUltimasPosiciones="";
    		$arrayUnidades=explode(",",$filtro);
    		echo "<pre>";
    		print_r($arrayUnidades);
@@ -49,7 +50,9 @@ class monitoreo{
    		print_r($ultimasPosiciones);
    		echo "</pre>";
    		//se recorre el array obtenido para verificar que la latiud y longitud sean diferentes a 0
+   		$idUnidadesRespuesta=array();
    		for($i=0;$i<count($ultimasPosiciones);$i++){
+   			$idUnidadesRespuesta[]=$ultimasPosiciones[$i][0];
    			//inicia proceso de localizacion alternativa
    			if($ultimasPosiciones[$i][6] != "0.000000" && $ultimasPosiciones[$i][7] != "0.000000" && $ultimasPosiciones[$i][19] !="NULL" && $ultimasPosiciones[$i][19] !="0"){                                
             	$direccion1 = $cPositions->direccion_no_format($ultimasPosiciones[$i][6],$ultimasPosiciones[$i][7]);
@@ -80,8 +83,17 @@ class monitoreo{
                 $buscarPDI=true;                    
             }
             //termina el proceso de localizacion alternativa
-            
+            ($strUltimasPosiciones=="") ? $strUltimasPosiciones=implode(",", $ultimasPosiciones[$i]) : $strUltimasPosiciones.=implode("||",$ultimasPosiciones[$i]);
    		}
+   		//comparamos los arrays el de unidades y el de las ultimas posiciones
+        $resultado=array_diff($arrayUnidades, $idUnidadesRespuesta);
+        $resultado=implode(",,", $resultado);
+        echo "<pre>";
+        print_r($resultado);
+        echo "</pre>";
+
+
+        echo $strUltimasPosiciones."||||".$resultado;
    	}
    	/**
 	*@method 		iniciar Conexion con la BD
