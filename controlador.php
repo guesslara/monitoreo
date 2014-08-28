@@ -14,15 +14,14 @@ if($_SERVER["HTTP_REFERER"]==""){
 	$objM=new monitoreo();
 	switch($_POST["action"]){
 		case "cargarGrupos":
-			/*echo "<pre>";
-			print_r($_POST);
-			echo "</pre>";*/
 			$strGrupos=$objM->cargarGrupos($_POST["idUsuario"]);
-			echo "<br>".$strGrupos;
-			$strGrupos=explode("|",$strGrupos);
+			echo $strGrupos;
+		break;
+		case "cargarUltimasPosiciones":
 			echo "<pre>";
-			print_r($strGrupos);
+			print_r($_POST);
 			echo "</pre>";
+			$objM->cargarUltimasPosiciones($_POST["filtro"],$_POST["idUsuario"],$_POST["clienteId"]);
 		break;
 	}
 }

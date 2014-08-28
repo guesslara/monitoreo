@@ -152,7 +152,7 @@ $(document).ready(
 			if(array_selected.length == 0){
 				alert("Seleccione una unidad para mostrar su ultima posicion");
 			}else{
-				actualizaUltimasPosiciones();
+				cargarUltimasPosiciones();
 			}
 		})
 		
@@ -160,12 +160,6 @@ $(document).ready(
 			$("#btnUltimasPosiciones").show();
 			$("#mostrarMapa").hide();
 		})
-		
-		/*$("#enlaceMonitoreo").click(function(){
-			$("#contenedorSlider").animate({ 
-				left: 8
-			}, 100 );
-		})*/
 		
 		$("#btnCejillaOcultar").click(function(){//btnOcultar
 			animarBarraUnidades();	
@@ -235,14 +229,17 @@ $(document).ready(
 function init(){
 	try{
 		//onload_map();//cargar el mapa
-		mostrarMapa();
+		//mostrarMapa();
 		//tabAd();//tab administracion
 		//tabRe();//tab reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
 		cargarGrupos();//carga de grupos
-		mon_arreglo_carga();//funcion principal
+		//cargarUltimasPosiciones();
+		//mon_arreglo_carga();//funcion principal
+
+
 	}catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Error al cargarse las dependencias.');

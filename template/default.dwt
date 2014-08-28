@@ -34,6 +34,7 @@
 </head>
 <body onload="init();">
 <input type="hidden" id="usuarioId" value="{IDUSUARIO}" />
+<input type="hidden" id="usuarioCliente" value="{IDCLIENTE}" />
 <div id="tabs" class="pestana_principal">
   <ul>
     <li ><a href="#Monitoreo">Monitoreo</a></li>

@@ -29,7 +29,8 @@
 		'APIKEY'		=> $config['keyapi'],
 		'S_ADMIN'		=> $s_admin,
         'REPORTS'       => $aReports,
-        'IDUSUARIO'		=> $userAdmin->user_info["ID_USUARIO"] 
+        'IDUSUARIO'		=> $userAdmin->user_info["ID_USUARIO"],
+        'IDCLIENTE'		=> $userAdmin->user_info["ID_CLIENTE"]
 	));
 	
 	$tpl->pparse('default');

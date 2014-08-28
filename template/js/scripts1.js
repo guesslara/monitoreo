@@ -25,8 +25,41 @@ function ajaxMonitoreo(accion,c,parametros,divCarga,divResultado,tipoPeticion){
 		}
 	});
 }
-
-
+/*
+ *@name 	Funcion controlar las acciones dependiendo de la accion pedida
+ *@author	Gerardo Lara
+ *@date		6 - Mayo - 2014
+*/
+function controladorAcciones(accion,datos,divResultado){
+    switch(accion){
+		case "dibujaGrupos":
+	    	dibujaAcordeonGrupos(accion,datos);
+		break;
+		case "cargarGrupos":
+			$("#mon_menu_acordeon").show().html("");
+			dibujaAcordeonGrupos("",datos);
+		break;
+		case "cargarUltimasPosiciones":
+			$("#mon_content").show().html(datos);
+		break;
+    }
+}
+/*
+ *@name 	Funcion para cargar las ultimas posiciones de las unidades
+ *@author	Gerardo Lara
+ *@date		27 - Agosto -2014
+*/
+function cargarUltimasPosiciones(){
+	usuarioId=$("#usuarioId").val();
+	clienteId=$("#usuarioCliente").val();
+	console.log(array_selected);
+	unidades="";
+	for(i=0;i<array_selected.length;i++){
+		(unidades=="") ? unidades=array_selected[i] : unidades+=","+array_selected[i];
+	}
+	parametros="action=cargarUltimasPosiciones&filtro="+unidades+"&idUsuario="+usuarioId+"&clienteId="+clienteId;
+	ajaxMonitoreo("cargarUltimasPosiciones","controlador",parametros,"mon_content","mon_content","POST");
+}
 
 /*function ajaxAppPlataforma(accion,url,parametros,metodo){
     $.ajax({
@@ -63,21 +96,6 @@ function cargarGrupos(){
 	ajaxMonitoreo("cargarGrupos","controlador",parametros,"mon_menu_acordeon","mon_menu_acordeon","POST");
     //url="./index.php?m=mMonitoreo4&c=mGetGrupos";
     //ajaxAppPlataforma("dibujaGrupos",url,"","POST");
-}
-/*
- *@name 	Funcion controlar las acciones dependiendo de la accion pedida
- *@author	Gerardo Lara
- *@date		6 - Mayo - 2014
-*/
-function controladorAcciones(accion,datos){
-    switch(accion){
-		case "dibujaGrupos":
-	    	dibujaAcordeonGrupos(accion,datos);
-		break;
-		case "cargarGrupos":
-			$("#mon_menu_acordeon").show().html(datos);
-		break;
-    }
 }
 /*
  *@name 	Funcion para dibujar el acordeon de las unidades
@@ -213,10 +231,6 @@ var mon_arrayObjetosPosiciones=Array();
 var latAnterior="";
 var lonAnterior="";
 function mostrarultimasPosiciones(bandera,idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,marker,servidor,instancia){
-    //console.log(marker);
-    //console.log(marker.position);
-    //console.log("Latitud "+marker.position.k);
-    //console.log("Longitd "+marker.position.A);
     verificarExistenciaArrayPosiciones(idUnidad,lat,lon);
     
     direccion=direccion.replace(/\s/g,' ');
@@ -250,42 +264,6 @@ function mostrarultimasPosiciones(bandera,idUnidad,unidad,nivelBateria,evento,fe
 	    filaTr+="<td>"+parseFloat(lat)+","+parseFloat(lon)+"</td></tr>";
 	    $("#tablaX").append(filaTr);
 	    contador+=1;
-	}
-}
-
-function verificarExistenciaArrayPosiciones(idUnidad,lat,lon){
-    //se crea el objeto con las caracteristicas y se inserta en el array
-    /*var objetoMarker= new Object();
-    objetoMarker.contador=contadorPosiciones;
-	objetoMarker.idUnidad=idUnidad;
-	objetoMarker.latitud=lat;
-	objetoMarker.longitud=lon;
-	mon_arrayObjetosPosiciones.push(objetoMarker); 
-	*/
-	/*strNvaVariable="idUnidad"+idUnidad;//se crea la nueva variable
-	valoresUPosiciones=lat+"|"+lon;//valores con los datos
-	
-	if(typeof(strNvaVariable) != "undefined"){ 
-		//alert("si existe");
-		strNvaVariable.push(valoresUPosiciones);//se insertan los valores dentro del array	 
-	}else{ 
-		//alert("no existe");
-		var strNvaVariable= new Array();//Variable obj3 no definida
-    	strNvaVariable.push(valoresUPosiciones);//se inserta el valor en el array
-	}
-
-	console.log(strNvaVariable);*/
-}
-
-function mostrarUltimasCincoPosiciones(idUnidad){
-	console.log(idUnidad);
-	console.log("Total de Posiciones en el arreglo: "+mon_arrayObjetosPosiciones.length);
-	mon_arrayObjetosPosiciones.sort();
-	for(i=0;i<mon_arrayObjetosPosiciones.length;i++){
-		if(mon_arrayObjetosPosiciones[i].idUnidad==idUnidad){
-			console.log("Latitud: "+mon_arrayObjetosPosiciones[i].latitud);
-			console.log("Longitud: "+mon_arrayObjetosPosiciones[i].longitud);
-		}
 	}
 }
 
