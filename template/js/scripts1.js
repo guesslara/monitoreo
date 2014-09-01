@@ -40,7 +40,8 @@ function controladorAcciones(accion,datos,divResultado){
 			dibujaAcordeonGrupos("",datos);
 		break;
 		case "cargarUltimasPosiciones":
-			$("#mon_content").show().html(datos);
+			//$("#mon_content").show().html(datos);
+			evaluarCadenaUnidades(datos);
 		break;
     }
 }
@@ -446,5 +447,29 @@ function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pd
 		$("#error_mensaje").html('Ocurrio un error al intentar dibujar la Posicion de la unidad seleccionada.');
 		onload_map();
 		mon_build_puntos(1);
+	}
+}
+var array_posiciones=new Array();
+var array_temporal=new Array();
+function evaluarCadenaUnidades(strUnidadesCompleto){
+	$("#mon_content").show().html(strUnidadesCompleto);
+	//se hacen las verificaciones
+	array_datos=strUnidadesCompleto.split("|||||");
+	if(array_posiciones.length != 0){
+		array_posiciones.length=0;//se vacia el array posiciones
+	}
+	array_temporal=array_datos.slice();//se copia el contenido a array_temporal
+	array_posiciones=array_temporal.slice();//se copia a array_posiciones
+	array_temporal.length=0;//se vacia array_temporal
+	array_datos.length=0;//se vacia array_datos
+	//se llama a la funcion para imprimir las ultimas posiciones
+	dibujarUltimasPosiciones(array_posiciones);
+}
+function dibujarUltimasPosiciones(array_posiciones){
+	console.log(array_posiciones);
+	//se recorre el array_posiciones y se extrae la informacion
+	for(i=0;i<array_posiciones.length;i++){
+		var datosUnidad=array_posiciones[i].split(",");
+		console.log(datosUnidad);
 	}
 }

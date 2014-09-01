@@ -18,10 +18,11 @@ if($_SERVER["HTTP_REFERER"]==""){
 			echo $strGrupos;
 		break;
 		case "cargarUltimasPosiciones":
-			echo "<pre>";
+			/*echo "<pre>";
 			print_r($_POST);
-			echo "</pre>";
-			$objM->cargarUltimasPosiciones($_POST["filtro"],$_POST["idUsuario"],$_POST["clienteId"]);
+			echo "</pre>";*/
+			$res=$objM->cargarUltimasPosiciones($_POST["filtro"],$_POST["idUsuario"],$_POST["clienteId"]);
+			echo $res;
 		break;
 	}
 }
