@@ -92,7 +92,7 @@ class monitoreo{
       //print_r($resultado);
       //echo "</pre>";
       //return $strUltimasPosiciones."||||".$resultado;
-      return $strUltimasPosiciones;
+      return $strUltimasPosiciones."????".$resultado;
    	}
    	/**
   	*@method 		iniciar Conexion con la BD

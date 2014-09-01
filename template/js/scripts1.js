@@ -219,55 +219,6 @@ function seleccionarTodas(grupo,bandera){
 	$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',0)");//cambia la bandera de la funcion
     }
 }
-/*
- *@name 	Funcion para buscar las ultimas posiciones
- *@author	Gerardo Lara
- *@date		18 - Abril - 2014
-*/
-var clase="even";
-/*VARIABLE TEMPORAL CREADA*/
-var contador=0;
-/*FIN VARIABLE TEMPORAL*/
-var mon_arrayObjetosPosiciones=Array();
-var latAnterior="";
-var lonAnterior="";
-function mostrarultimasPosiciones(bandera,idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,marker,servidor,instancia){
-    verificarExistenciaArrayPosiciones(idUnidad,lat,lon);
-    
-    direccion=direccion.replace(/\s/g,' ');
-    if (nivelBateria=="Sin Datos") {
-		nivelBateria="0 %";	
-    }else{
-		nivelBateria=nivelBateria+" %";	
-    }    
-    idTr="posicionTr_"+idUnidad;
-    $("#"+idTr).remove();//eliminamos la fila
-    
-	if($("#"+idTr).length==0){
-	    var filaTr="<tr id='"+idTr+"' class='registrosUP'>";
-	    filaTr+="<td><img src='"+image+"' width='20' height='20' border='0' /></td>";
-	    filaTr+="<td><img "+colorImage+"' border='0' /></td>";
-	    filaTr+="<td><img "+typeLoc+"'/></td>";
-	    filaTr+="<td class='enlaceFuncion'><span title='Enviar Comandos a la unidad' onclick='mon_get_info(\""+comandos+"\",\""+imei+"\",\""+idUnidad+"\",\""+servidor+"\",\""+instancia+"\")'><img src='./public/images/icon-commands.png' border='0' /></span></td>";
-	    filaTr+="<td class='enlaceFuncion'><a href='#' onclick='mostrarUltimasCincoPosiciones(\""+idUnidad+"\")'>5</a></td>";
-	    if (evento=="0") {
-			filaTr+="<td>"+unidad+" C="+contador+"</td>";
-	    }else{
-			filaTr+="<td><a onclick='mon_center_map(\""+idUnidad+"\",\""+stringLoc+"\",\""+unidad+"\",\""+imei+"\",\""+evento+"\",\""+fecha+"\",\""+velocidad+"\",\""+pdi+"\",\""+lat+"\",\""+lon+"\",\""+nivelBateria+"\",\""+direccion+"\",\""+idTr+"\")' title='Ver Ubicacion' class='verUbicacion' style='color:blue;'>"+unidad+" C="+contador+"</a></td>";		
-	    }	    
-	    filaTr+="<td>"+nivelBateria+"</td>";
-	    filaTr+="<td>"+evento+"</td>";
-	    filaTr+="<td>"+stringLoc+"</td>";
-	    filaTr+="<td>"+fecha+"</td>";
-	    filaTr+="<td>"+velocidad+"</td>";
-	    filaTr+="<td>"+pdi+"</td>";
-	    filaTr+="<td>"+direccion+"</td>";
-	    filaTr+="<td>"+parseFloat(lat)+","+parseFloat(lon)+"</td></tr>";
-	    $("#tablaX").append(filaTr);
-	    contador+=1;
-	}
-}
-
 function add_info_marker(marker,content){	
     google.maps.event.addListener(marker, 'click',function() {
 	if(infowindow){
@@ -355,9 +306,6 @@ function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comando
     }
     $("#mon_dialog").dialog('open');
 }
-/***********************************************/
-/*VARIABLE PARA HACER EL SEGUIMIENTO POR UNIDAD*/
-/***********************************************/
 function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pdi,lat,lon,nivelBateria,direccion,idTr){
 	try{
 		$("#tablaX tr").css("background","#FFF");
@@ -449,27 +397,270 @@ function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pd
 		mon_build_puntos(1);
 	}
 }
+var array_datos=new Array();
 var array_posiciones=new Array();
 var array_temporal=new Array();
+/*
+ *@name 	Funcion para evaluar la cadena obtenida de la consulta
+ *@param	strUnidadesCompleto
+ *@author	Gerardo Lara
+ *@date		30 - Agosto - 2014
+*/
 function evaluarCadenaUnidades(strUnidadesCompleto){
 	$("#mon_content").show().html(strUnidadesCompleto);
-	//se hacen las verificaciones
-	array_datos=strUnidadesCompleto.split("|||||");
+	//se separan las unidades con datos de las que no se encontraron datos
+	strUnidadesCompleto=strUnidadesCompleto.split("????");
 	if(array_posiciones.length != 0){
 		array_posiciones.length=0;//se vacia el array posiciones
 	}
+	array_datos=strUnidadesCompleto[0].split("|||||");
 	array_temporal=array_datos.slice();//se copia el contenido a array_temporal
 	array_posiciones=array_temporal.slice();//se copia a array_posiciones
 	array_temporal.length=0;//se vacia array_temporal
 	array_datos.length=0;//se vacia array_datos
-	//se llama a la funcion para imprimir las ultimas posiciones
-	dibujarUltimasPosiciones(array_posiciones);
+	//console.log("Unidades sin loalizar "+strUnidadesCompleto[1]);
+	//se llama a la funcion para recorrer el array ultimas posiciones
+	dibujarUltimasPosiciones(array_posiciones,strUnidadesCompleto[1]);
 }
-function dibujarUltimasPosiciones(array_posiciones){
-	console.log(array_posiciones);
-	//se recorre el array_posiciones y se extrae la informacion
-	for(i=0;i<array_posiciones.length;i++){
-		var datosUnidad=array_posiciones[i].split(",");
-		console.log(datosUnidad);
+/*
+ *@name 	Funcion para dibujar evaluar las ultimas posiciones
+ *@param	array_posiciones
+ *@author	Gerardo Lara
+ *@date		30 - Agosto - 2014
+*/
+function dibujarUltimasPosiciones(array_posiciones,nodisponibles){
+	//se verifica que array_posiciones no este vacio
+	if(array_posiciones != ""){
+		//se recorre el array_posiciones y se extrae la informacion
+		for(i=0;i<array_posiciones.length;i++){
+			var datosUnidad=array_posiciones[i].split(",");
+			
+			var texto="<pre>[0]=> "+datosUnidad[0]+"<br>"+
+			"[1]=> "+datosUnidad[1]+"<br>"+
+			"[2]=> "+datosUnidad[2]+"<br>"+
+			"[3]=> "+datosUnidad[3]+"<br>"+
+			"[4]=> "+datosUnidad[4]+"<br>"+
+			"[5]=> "+datosUnidad[5]+"<br>"+
+			"[6]=> "+datosUnidad[6]+"<br>"+
+			"[7]=> "+datosUnidad[7]+"<br>"+
+			"[8]=> "+datosUnidad[8]+"<br>"+
+			"[9]=> "+datosUnidad[9]+"<br>"+
+			"[10]=> "+datosUnidad[10]+"<br>"+
+			"[11]=> "+datosUnidad[11]+"<br>"+
+			"[12]=> "+datosUnidad[12]+"<br>"+
+			"[13]=> "+datosUnidad[13]+"<br>"+
+			"[14]=> "+datosUnidad[14]+"<br>"+
+			"[15]=> "+datosUnidad[15]+"<br>"+
+			"[16]=> "+datosUnidad[16]+"<br>"+
+			"[17]=> "+datosUnidad[17]+"<br>"+
+			"[18]=> "+datosUnidad[18]+"<br>"+
+			"[19]=> "+datosUnidad[19]+"<br>"+
+			"[20]=> "+datosUnidad[20]+"<br>"+
+			"[21]=> "+datosUnidad[21]+"<br>"+
+			"[22]=> "+datosUnidad[22]+"<br>"+
+			"[23]=> "+datosUnidad[23]+"<br>"+
+			"[24]=> "+datosUnidad[24]+"<br>"+
+			"[25]=> "+datosUnidad[25]+"<br></pre>";
+			$("#mon_content").append(texto);
+			//se separan los valores del array
+			var id 					= datosUnidad[0];
+			var fecha				= datosUnidad[3];
+		    var evt 				= datosUnidad[5];
+		    var estatus				= datosUnidad[10];
+		    var colstus				= datosUnidad[11];
+		    var pdi 				= datosUnidad[14];
+		    var vel 				= datosUnidad[4];
+		    var dire 				= datosUnidad[15];
+		    var priory 				= datosUnidad[2];
+		    var lat 				= parseFloat(datosUnidad[6]);
+		    var lon 				= parseFloat(datosUnidad[7]);
+		    var dunit 				= datosUnidad[1];
+		    //var icons 			= datosUnidad[12];
+		    var angulo 				= datosUnidad[9];
+		    var colprio 			= datosUnidad[8];
+		    var blockMotor 			= datosUnidad[12];
+		    var type    			= datosUnidad[20];
+		    var battery  			= datosUnidad[13];
+		    var type_loc 			= datosUnidad[19];
+		    var distancia			= datosUnidad[16];
+		    var radioLbs 			= 0;
+		    var image 				= '';
+		    var colorImage 			= '';
+		    var textoMensaje 		= '';
+		    var otrosCampos			= '';
+		    var typeLoc  			= '';
+		    var stringLoc			= '';
+		    var codTypeEquipment	= datosUnidad[21];
+		    var comandos			= datosUnidad[22];
+		    var imei				= datosUnidad[23];
+		    var servidor			= datosUnidad[24];
+		    var instancia			= datosUnidad[25];
+		    //se procesan los datos
+		    if(type=='V'){
+				if(blockMotor!=1 ){
+			    	if(vel<5 && priory==0){
+						image = 'public/images/geo_icons/car_red.png';
+						colorImage = "width:12px;' src='public/images/geo_icons/circle_red.png";	
+			    	}else if(vel>5 && priory==0){
+			        	image = 'public/images/geo_icons/car_green.png';	
+			        	colorImage = "width:12px;' src='public/images/geo_icons/circle_green.png";
+			    	}else  if(priory==1){
+			        	image = 'public/images/geo_icons/car_orange.png';	
+			        	colorImage = "width:12px;' src='public/images/geo_icons/circle_orange.png";
+			    	}	
+				}else{
+			    	image = 'public/images/car_gray.png';	
+			    	colorImage = "width:12px;' public/images/circle_gray.png";
+			    	textoMensaje = 'MOTOR BLOQUEADO - ';
+				}
+				otrosCampos= '<tr><td align="left">Velocidad:</td><td align="left">'	+ vel	+' Km/h.</td></tr>'+
+				'<tr><td align="left">Estado:</td><td align="left">'   	+ estatus	+'</td></tr>';
+		    }else{
+				if(!isNaN(battery)){
+			    	if(battery < 34){
+						image = 'public/images/geo_icons/phone_red.png';
+						colorImage = "width=10px;' src='public/images/geo_icons/battery_low.png";	
+			    	}else if(battery>33 && battery < 67){
+						image = 'public/images/geo_icons/phone_orange.png';
+						colorImage = "width=10px;' src='public/images/geo_icons/battery_medium.png";	
+			    	}else if(battery>66){						
+			        	image = 'public/images/geo_icons/phone_green.png';
+						colorImage = "width=10px;' src='public/images/geo_icons/battery.png";	
+			    	}
+				}else{
+			    	image = 'public/images/geo_icons/phone_red.png';
+			    	colorImage = "width=10px;' src='public/images/geo_icons/battery_low.png";	
+				}
+				otrosCampos= '<tr><td align="left">Nivel de Bateria:</td><td align="left">'	+ battery	+'% </td></tr>';
+			}//fin if evaluacion de type
+
+			if(type_loc == 1){
+				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_gps.png";		
+				stringLoc = 'GPS';
+				//radioLbs = 50;	
+		    }else if(type_loc == 2){
+				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_wifi.png";	
+				radioLbs = 50;
+				stringLoc = 'WIFI';
+		    }else if(type_loc == 3){
+				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_gci.png";	
+				radioLbs = 200;
+				stringLoc = 'GCI';
+		    }else if(type_loc == 4){	
+				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_lai.png";	
+				radioLbs = 1000;
+				stringLoc = 'LAI';
+		    }else if(type_loc == 5){
+				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_net.png";	
+				radioLbs = parseInt(pdi) ;
+				stringLoc = 'NETWORK';
+		    }else{
+				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_problem.png";
+				stringLoc = 'NO LOCALIZADO';
+		    }//fin evaluacion type-loc
+		    //ebentos para el mapa
+		    /*
+		    if(lat!=0 && lon !=0){
+				marker = new google.maps.Marker({
+					map: map,
+					position: new google.maps.LatLng(lat,lon),
+					title: 	dunit,
+					icon: 	image,
+				});
+				markers.push(marker);
+				
+				add_info_marker(marker,mon_datosUnidad(stringLoc,dunit,imei,"",evt,fecha,dire,distancia,type));
+			
+				if(type_loc > 0 && type_loc < 6){
+			    	var populationOptions = {
+					    strokeColor: '#0026FF',
+					    strokeOpacity: 0.5,
+					    strokeWeight: 2,
+					    fillColor: '#546EFF',
+					    fillOpacity: 0.10,
+					    map: map,
+					    center: new google.maps.LatLng(lat,lon),
+						radius: radioLbs
+					};
+					var cityCircle = new google.maps.Circle(populationOptions);	
+			    	arraygeos.push(cityCircle);				    	
+				};				
+		    }
+		    google.maps.event.addDomListener(window, 'load');
+		    */
+		    if (comandos=="") {
+				comandos="S/C";
+			}
+		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia);
+		}//fin for array_posiciones
+	}//fin if verificacion array_posiciones
+
+	var array_nodisponibles=nodisponibles.split(",,");
+
+
+	var texto1="<br>Longitud de unidades sin localizar: "+array_nodisponibles.length+"<br>";
+	$("#mon_content").append(texto1);
+
+	if(array_nodisponibles==""){
+		for(var j=0;j<array_nodisponibles.length;j++){
+			var texto2="<br><br><br>"+array_nodisponibles[j]+"<br>";	
+			$("#mon_content").append(texto2);
+			//se extrae informacion de la unidad para mostrarla en la tabla
+			divUnidadGrupo="#div_"+array_nodisponibles[j];
+			console.log("divUnidadGrupo: "+divUnidadGrupo);
+			if ($(divUnidadGrupo).length){
+			    dunit=$(divUnidadGrupo+" .listadoInfoUnidades").text();
+			}
+			mostrarultimasPosiciones(array_nodisponibles[j],dunit,"Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos");			
+		}
+	}
+
+	//se vacia el array posiciones
+	array_posiciones.length=0;
+	//se vacia el array no_disponibles
+	array_nodisponibles.length=0;
+}
+/*
+ *@name 	Funcion para pintar las ultimas posiciones en el mapa y en la tabal
+ *@author	Gerardo Lara
+ *@date		18 - Abril - 2014 - Elaborado
+ *@date		 1 - Septiembre - 2014 - Modificado
+*/
+var clase="even";
+/*VARIABLE TEMPORAL CREADA*/
+var contador=0;
+/*FIN VARIABLE TEMPORAL*/
+function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia){
+    direccion=direccion.replace(/\s/g,' ');
+    if (nivelBateria=="Sin Datos") {
+		nivelBateria="0 %";	
+    }else{
+		nivelBateria=nivelBateria+" %";	
+    }    
+    idTr="posicionTr_"+idUnidad;
+    $("#"+idTr).remove();//eliminamos la fila
+    
+	if($("#"+idTr).length==0){
+	    var filaTr="<tr id='"+idTr+"' class='registrosUP'>";
+	    filaTr+="<td><img src='"+image+"' width='20' height='20' border='0' /></td>";
+	    filaTr+="<td><img "+colorImage+"' border='0' /></td>";
+	    filaTr+="<td><img "+typeLoc+"'/></td>";
+	    filaTr+="<td class='enlaceFuncion'><span title='Enviar Comandos a la unidad' onclick='mon_get_info(\""+comandos+"\",\""+imei+"\",\""+idUnidad+"\",\""+servidor+"\",\""+instancia+"\")'><img src='./public/images/icon-commands.png' border='0' /></span></td>";
+	    filaTr+="<td class='enlaceFuncion'><a href='#' onclick='mostrarUltimasCincoPosiciones(\""+idUnidad+"\")'>5</a></td>";
+	    if (evento=="0") {
+			filaTr+="<td>"+unidad+" C="+contador+"</td>";
+	    }else{
+			filaTr+="<td><a onclick='mon_center_map(\""+idUnidad+"\",\""+stringLoc+"\",\""+unidad+"\",\""+imei+"\",\""+evento+"\",\""+fecha+"\",\""+velocidad+"\",\""+pdi+"\",\""+lat+"\",\""+lon+"\",\""+nivelBateria+"\",\""+direccion+"\",\""+idTr+"\")' title='Ver Ubicacion' class='verUbicacion' style='color:blue;'>"+unidad+" C="+contador+"</a></td>";		
+	    }	    
+	    filaTr+="<td>"+nivelBateria+"</td>";
+	    filaTr+="<td>"+evento+"</td>";
+	    filaTr+="<td>"+stringLoc+"</td>";
+	    filaTr+="<td>"+fecha+"</td>";
+	    filaTr+="<td>"+velocidad+"</td>";
+	    filaTr+="<td>"+pdi+"</td>";
+	    filaTr+="<td>"+direccion+"</td>";
+	    filaTr+="<td>"+parseFloat(lat)+","+parseFloat(lon)+"</td></tr>";
+	    $("#tablaX").append(filaTr);
+	    contador+=1;
 	}
 }

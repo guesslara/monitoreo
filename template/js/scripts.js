@@ -22,12 +22,6 @@ $(document).ready(
         	}
 		
 		});
-		
-		$( "#tabs" ).tabs({
-			beforeActivate: function (event, ui) {
-				alert("Mensaje");
-			}
-		});
 	
 		//Dialog mensajes		
 		$( "#dialog_message" ).dialog({
@@ -152,6 +146,7 @@ $(document).ready(
 			if(array_selected.length == 0){
 				alert("Seleccione una unidad para mostrar su ultima posicion");
 			}else{
+				enviarAUP();
 				cargarUltimasPosiciones();
 			}
 		})
