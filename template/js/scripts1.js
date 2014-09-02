@@ -407,20 +407,18 @@ var array_temporal=new Array();
  *@date		30 - Agosto - 2014
 */
 function evaluarCadenaUnidades(strUnidadesCompleto){
-	$("#mon_content").show().html(strUnidadesCompleto);
+	//$("#mon_content").show().html(strUnidadesCompleto);
 	//se separan las unidades con datos de las que no se encontraron datos
-	strUnidadesCompleto=strUnidadesCompleto.split("????");
 	if(array_posiciones.length != 0){
 		array_posiciones.length=0;//se vacia el array posiciones
 	}
-	array_datos=strUnidadesCompleto[0].split("|||||");
+	array_datos=strUnidadesCompleto.split("|||||");
 	array_temporal=array_datos.slice();//se copia el contenido a array_temporal
 	array_posiciones=array_temporal.slice();//se copia a array_posiciones
 	array_temporal.length=0;//se vacia array_temporal
 	array_datos.length=0;//se vacia array_datos
-	//console.log("Unidades sin loalizar "+strUnidadesCompleto[1]);
 	//se llama a la funcion para recorrer el array ultimas posiciones
-	dibujarUltimasPosiciones(array_posiciones,strUnidadesCompleto[1]);
+	dibujarUltimasPosiciones(array_posiciones);
 }
 /*
  *@name 	Funcion para dibujar evaluar las ultimas posiciones
@@ -428,13 +426,13 @@ function evaluarCadenaUnidades(strUnidadesCompleto){
  *@author	Gerardo Lara
  *@date		30 - Agosto - 2014
 */
-function dibujarUltimasPosiciones(array_posiciones,nodisponibles){
+function dibujarUltimasPosiciones(array_posiciones){
 	//se verifica que array_posiciones no este vacio
 	if(array_posiciones != ""){
 		//se recorre el array_posiciones y se extrae la informacion
 		for(i=0;i<array_posiciones.length;i++){
 			var datosUnidad=array_posiciones[i].split(",");
-			
+			console.log("Longitud del arreglo a pintar: "+datosUnidad.length)
 			var texto="<pre>[0]=> "+datosUnidad[0]+"<br>"+
 			"[1]=> "+datosUnidad[1]+"<br>"+
 			"[2]=> "+datosUnidad[2]+"<br>"+
@@ -462,6 +460,7 @@ function dibujarUltimasPosiciones(array_posiciones,nodisponibles){
 			"[24]=> "+datosUnidad[24]+"<br>"+
 			"[25]=> "+datosUnidad[25]+"<br></pre>";
 			$("#mon_content").append(texto);
+
 			//se separan los valores del array
 			var id 					= datosUnidad[0];
 			var fecha				= datosUnidad[3];
@@ -558,7 +557,7 @@ function dibujarUltimasPosiciones(array_posiciones,nodisponibles){
 				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_problem.png";
 				stringLoc = 'NO LOCALIZADO';
 		    }//fin evaluacion type-loc
-		    //ebentos para el mapa
+		    //eventos para el mapa
 		    /*
 		    if(lat!=0 && lon !=0){
 				marker = new google.maps.Marker({
@@ -591,34 +590,17 @@ function dibujarUltimasPosiciones(array_posiciones,nodisponibles){
 		    if (comandos=="") {
 				comandos="S/C";
 			}
+
+			var divUnidadGrupo="#div_"+id;
+			if ($(divUnidadGrupo).length){
+				dunit=$(divUnidadGrupo+" .listadoInfoUnidades").text();
+			}
 		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia);
 		}//fin for array_posiciones
 	}//fin if verificacion array_posiciones
 
-	var array_nodisponibles=nodisponibles.split(",,");
-
-
-	var texto1="<br>Longitud de unidades sin localizar: "+array_nodisponibles.length+"<br>";
-	$("#mon_content").append(texto1);
-
-	if(array_nodisponibles==""){
-		for(var j=0;j<array_nodisponibles.length;j++){
-			var texto2="<br><br><br>"+array_nodisponibles[j]+"<br>";	
-			$("#mon_content").append(texto2);
-			//se extrae informacion de la unidad para mostrarla en la tabla
-			divUnidadGrupo="#div_"+array_nodisponibles[j];
-			console.log("divUnidadGrupo: "+divUnidadGrupo);
-			if ($(divUnidadGrupo).length){
-			    dunit=$(divUnidadGrupo+" .listadoInfoUnidades").text();
-			}
-			mostrarultimasPosiciones(array_nodisponibles[j],dunit,"Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos","Sin Datos");			
-		}
-	}
-
 	//se vacia el array posiciones
 	array_posiciones.length=0;
-	//se vacia el array no_disponibles
-	array_nodisponibles.length=0;
 }
 /*
  *@name 	Funcion para pintar las ultimas posiciones en el mapa y en la tabal

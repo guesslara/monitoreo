@@ -108,7 +108,8 @@ function mon_refresh_units(){
 			//mon_load_units();
 			mon_refresh_units();
 			console.log("actualizarPosiciones - monitoreo.js linea 139");//se debe mandar a la funcion para actualizar las posiciones
-			mon_arreglo_carga();
+			//mon_arreglo_carga();
+			cargarUltimasPosiciones();
 			//actualizaUltimasPosiciones();
 		}
 	});

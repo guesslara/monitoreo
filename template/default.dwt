@@ -13,7 +13,6 @@
 <script type="text/javascript" src="{PATH}/js/scripts.js"></script>
 <script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
 <script type="text/javascript" src="{PATH}/js/scripts1.js"></script>
-<script type="text/javascript" src="{PATH}/js/scripts2.js"></script>
 <script type="text/javascript" src="{PATH}/js/funcionesMapas.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="public/libs/phpgridv1.5.2/lib/js/jqgrid/css/ui.jqgrid.css">
 <script type="text/javascript" src="public/js/colorpicker.js"></script>
