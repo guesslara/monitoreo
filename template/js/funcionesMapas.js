@@ -1,3 +1,4 @@
+var infoWindow='';
 /*
 *Funciones para el manejo de los mapas
 */
@@ -14,20 +15,25 @@ function mostrarMapa(){
 		});			
     
 		google.maps.event.addListener(map, 'idle', showM);
-    
-		//mon_init();
-    
-		/*$('#mon_chk_g').change(function() {
-		    mon_draw_table()
-		});*/
-    
-		/*$('#mon_chk_c').change(function() {
-	    	mon_draw_table()
-		});*/
-
 		google.maps.event.trigger(map, 'resize');
     }catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
     }
+}
+
+function add_info_marker(marker,content){	
+    google.maps.event.addListener(marker, 'click',function() {
+	if(infowindow){
+	    infoWindow.close();
+	    infowindow.setMap(null);
+	}
+	var marker = this;
+	var latLng = marker.getPosition();
+	infoWindow.setContent(content);
+	infoWindow.open(map, marker);
+	map.setZoom(18);
+	map.setCenter(latLng); 
+	map.panTo(latLng);     
+    });
 }

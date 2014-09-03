@@ -64,7 +64,7 @@
     <div id="btnMinimizarUP" title="Minimizar Panel de Ultimas Posiciones"><img src="./public/images/minimizar2.png" border="0" /></div>
     <!--Div Ultimas Posiciones-->
     <div id="divUltimasPosiciones">
-      	<!--<table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
+      	<table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
       	  <thead>
       	    <tr>
       	      <td colspan="14" class="fg-toolbar ui-widget-header ui-corner-tñ ui-corner tr">&Uacute;ltimas Posiciones</td>
@@ -85,7 +85,7 @@
       	  <tbody>
 
       	  </tbody>
-      	</table>-->
+      	</table>
     </div>
     <!--Fin Div Ultimas Posiciones-->
     <!--Div Geocercas-->

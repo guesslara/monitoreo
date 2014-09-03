@@ -69,28 +69,28 @@ function showM(){
 	drawGeos();	
 }
 
-function mon_search_unidad(buscar,draw){
-	//alert(buscar);
+// function mon_search_unidad(buscar,draw){
+// 	//alert(buscar);
 	
-	var existe = jQuery.inArray(buscar, array_selected);
-	var arraygroup = buscar.split('|');
-	if(existe<0){
-		array_selected.push(buscar);		
-		//$("#div_unit_"+arraygroup[2]).addClass("unit-selected");
-		$("#mon_acordeon_icon_"+arraygroup[2]).removeClass('icon_unit_unselected').addClass('icon_unit_selected');
-		/*mon_draw_table();*/
-	}else{
-		//$("#div_unit_"+arraygroup[2]).removeClass('unit-selected');
-		$("#mon_acordeon_icon_"+arraygroup[2]).removeClass('icon_unit_selected').addClass('icon_unit_unselected');
-		array_selected.splice(existe,1);
-		buscar="quitarElemento";
-	}
-	if(draw){
-		mon_draw_table();
-	}
+// 	var existe = jQuery.inArray(buscar, array_selected);
+// 	var arraygroup = buscar.split('|');
+// 	if(existe<0){
+// 		array_selected.push(buscar);		
+// 		//$("#div_unit_"+arraygroup[2]).addClass("unit-selected");
+// 		$("#mon_acordeon_icon_"+arraygroup[2]).removeClass('icon_unit_unselected').addClass('icon_unit_selected');
+// 		/*mon_draw_table();*/
+// 	}else{
+// 		//$("#div_unit_"+arraygroup[2]).removeClass('unit-selected');
+// 		$("#mon_acordeon_icon_"+arraygroup[2]).removeClass('icon_unit_selected').addClass('icon_unit_unselected');
+// 		array_selected.splice(existe,1);
+// 		buscar="quitarElemento";
+// 	}
+// 	if(draw){
+// 		mon_draw_table();
+// 	}
 	
-	mostrarultimasPosiciones(buscar,arraygroup[2]);
-}
+// 	mostrarultimasPosiciones(buscar,arraygroup[2]);
+// }
 
 function mon_refresh_units(){
     /****************************************************************************************************************/
@@ -149,19 +149,19 @@ function checkTime(i){
 	return i;
 }
 
-function mon_refresh_selected(){
-	for(var i=0;i<arrayunits.length;i++){
-		var units_info = arrayunits[i].split('|');
-		for(var u=0;u<array_selected.length;u++){
-			var units_selected = array_selected[u].split('|');
-			if(units_info[2] == units_selected[2]){
-				array_selected[u] = arrayunits[i];
-			}
-		}
-	}
-	mon_draw_table();
-	actualizaUltimasPosiciones();
-}
+// function mon_refresh_selected(){
+// 	for(var i=0;i<arrayunits.length;i++){
+// 		var units_info = arrayunits[i].split('|');
+// 		for(var u=0;u<array_selected.length;u++){
+// 			var units_selected = array_selected[u].split('|');
+// 			if(units_info[2] == units_selected[2]){
+// 				array_selected[u] = arrayunits[i];
+// 			}
+// 		}
+// 	}
+// 	mon_draw_table();
+// 	actualizaUltimasPosiciones();
+// }
 
 function mon_send_command(){
 	if($("#mon_dialog").html()!='<h2>Esta unidad no tiene asignados comandos</h2>'){

@@ -4,7 +4,6 @@ var banderaUltimaPosicion=0;
 var barraUP=1;
 var focusVentanas=2;
 $(document).ready(
-	
 	function(){
 		//pestañas
 		$( "#tabs" ).tabs({ 
@@ -21,8 +20,7 @@ $(document).ready(
 			}			
         	}
 		
-		});
-	
+		});	
 		//Dialog mensajes		
 		$( "#dialog_message" ).dialog({
 			autoOpen:false,
@@ -46,7 +44,6 @@ $(document).ready(
 				}
 			}
 		});		
-
 
 		$( "#mon_dialogAll" ).dialog({
 			autoOpen:false,
@@ -100,21 +97,13 @@ $(document).ready(
 			cursorAt: { top: 56, left: 56 }
 		});
 
-		$("#btnUltimasPosiciones").click(function (){
-			//mostrarultimasPosiciones();
-			$active = $(this); //Activate the clicked paging
-			rotate(); //Trigger rotation immediately
-			$("#btnUltimasPosiciones").hide();
-			$("#mostrarMapa").show();
-			return false; //Prevent browser jump to link anchor
-		})
-		
 		$("#btnUltimaPosicion").click(function(){
 			if(array_selected.length == 0){
 				alert("Seleccione una unidad para mostrar su ultima posicion");
 			}else{
 				enviarAUP();
 				cargarUltimasPosiciones();
+				mon_refresh_units();//se inicia el contador para el refresco de las unidades
 			}
 		})
 		
@@ -193,17 +182,13 @@ $(document).ready(
 function init(){
 	try{
 		//onload_map();//cargar el mapa
-		//mostrarMapa();
-		//tabAd();//tab administracion
-		//tabRe();//tab reportes
+		mostrarMapa();
+		tabAd();//tab administracion
+		tabRe();//tab reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
 		cargarGrupos();//carga de grupos
-		//cargarUltimasPosiciones();
-		//mon_arreglo_carga();//funcion principal
-
-
 	}catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Error al cargarse las dependencias.');
@@ -218,16 +203,6 @@ function actualizaUltimasPosiciones(){
 		mon_build_puntos(0);
 	}
 	enviarAUP();//funcion para mostrar el div
-/*    
-    $('#tablaX tbody tr').each(function() {
-	$(this).remove();
-    });
-    //datosUnidades=array_selected.split("|");
-    for(i=0;i<array_selected.length;i++){
-	//alert(array_selected[i]);
-	mostrarultimasPosiciones(array_selected[i],"");
-    }
-*/  
 }
 function enviarAUP(){
 	$("#divUltimasPosiciones").show();//se muestra el div con las uposiciones

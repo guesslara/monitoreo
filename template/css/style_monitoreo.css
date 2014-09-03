@@ -115,7 +115,7 @@
   height: 230px;
   width: 98.7%;
   /*overflow: auto;*/
-  display: block;
+  display: none;
   position: absolute;
   z-index: 2;
   bottom: 6px;
@@ -258,7 +258,7 @@
   top: 156px;
 	height: 60px;
 	position: absolute;
-	right: 15px;
+	right: 25px;
 	width: 170px;
 	color: #000;
 	font-weight:bold;
@@ -291,7 +291,7 @@
   width: 23px;
   height: 21px;
   top: 130px;
-  right: 138px;
+  right: 145px;
   background: #FFF;
   padding: 2px;
 }
@@ -430,8 +430,34 @@
   margin:10px 5px 5px 5px;
 }
 /*fin estilos cargadores*/
-
 /*tags buscador*/
 #tags{
   width:47%;
 }
+/*div geocercas*/
+.mon_div_geos{
+  top: 70px;
+  height: 53px;
+  position: absolute;
+  right: 25px;
+  width: 123px;
+  color: #000;
+  font-weight:bold;
+  /*border: 1px solid #000;*/
+  background: #fff;
+  box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);
+}
+/*Timer - Contador*/
+.mon_div_time_lapse{
+  top: 130px;
+  height: 15px;
+  position: absolute;
+  right: 25px;
+  width: 113px;
+  color: white;
+  font-weight:bold;
+  background: #FFF;
+  padding: 5px;
+  box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);
+}
+.mon_div_time_lapse span {color: #000;}

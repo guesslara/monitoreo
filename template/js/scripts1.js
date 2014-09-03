@@ -14,12 +14,12 @@ function ajaxMonitoreo(accion,c,parametros,divCarga,divResultado,tipoPeticion){
 			$("#"+divCarga).show().html("Procesando Informacion ..."); 
 		},
 		success: function(data) {
-			//$("#"+divResultado).html(data);
+			$("#"+divCarga).hide();
 			controladorAcciones(accion,data,divResultado);
 		},
 		timeout:90000000,
 		error:function() {
-		    $("#cargadorGeneral").hide();
+		    $("#"+divCarga).hide();
 		    $("#error").show();
 		    $("#error_mensaje").html('Ocurrio un error al procesar la solicitud.');
 		}
@@ -40,7 +40,7 @@ function controladorAcciones(accion,datos,divResultado){
 			dibujaAcordeonGrupos("",datos);
 		break;
 		case "cargarUltimasPosiciones":
-			//$("#mon_content").show().html(datos);
+			//$("#"+divResultado).hide();
 			evaluarCadenaUnidades(datos);
 		break;
     }
@@ -59,7 +59,7 @@ function cargarUltimasPosiciones(){
 		(unidades=="") ? unidades=array_selected[i] : unidades+=","+array_selected[i];
 	}
 	parametros="action=cargarUltimasPosiciones&filtro="+unidades+"&idUsuario="+usuarioId+"&clienteId="+clienteId;
-	ajaxMonitoreo("cargarUltimasPosiciones","controlador",parametros,"mon_content","mon_content","POST");
+	ajaxMonitoreo("cargarUltimasPosiciones","controlador",parametros,"cargador2","mon_content","POST");
 }
 
 /*function ajaxAppPlataforma(accion,url,parametros,metodo){
@@ -170,7 +170,6 @@ function seleccionarUnidad(idUnidad,bandera) {
 	    if(idABorrar == -1){//no existe en el array
 			array_selected.push(idUnidad);//se agrega el id de la unidad al array llamado array_selected
 			$("#img_"+idUnidad).attr("src","./public/images/tick.png")//cambia la imagen del div
-			mon_refresh_units();//se inicia el contador para el refresco de las unidades
 	    }else{
 			array_selected.splice(idABorrar, 1);//se quita el elemento del array
 			$("#img_"+idUnidad).attr("src","./public/images/ok16.png")//cambia la imagen del div
@@ -179,10 +178,7 @@ function seleccionarUnidad(idUnidad,bandera) {
 			//console.log(idTr);
 		
 			$(idTr).remove();
-			//console.log(markers[idABorrar]);
-			//markers.splice(idABorrar,1);
-			mon_remove_map();
-			mon_build_puntos(0);
+			
 			if (array_selected.length==0) {
 		    	stopTimer();
 			}
@@ -219,21 +215,7 @@ function seleccionarTodas(grupo,bandera){
 	$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',0)");//cambia la bandera de la funcion
     }
 }
-function add_info_marker(marker,content){	
-    google.maps.event.addListener(marker, 'click',function() {
-	if(infowindow){
-	    infoWindow.close();
-	    infowindow.setMap(null);
-	}
-	var marker = this;
-	var latLng = marker.getPosition();
-	infoWindow.setContent(content);
-	infoWindow.open(map, marker);
-	map.setZoom(18);
-	map.setCenter(latLng); 
-	map.panTo(latLng);     
-    });
-}
+
 
 function mon_datosUnidad(stringLoc,dunit,imei,textoMensaje,evt,fecha,direccion,pdi,type){
     var info = '<div class="infoUnidadGlobo">'+
@@ -392,9 +374,7 @@ function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pd
 
     }catch(err){
 		$("#error").show();
-		$("#error_mensaje").html('Ocurrio un error al intentar dibujar la Posicion de la unidad seleccionada.');
-		onload_map();
-		mon_build_puntos(1);
+		$("#error_mensaje").html('Ocurrio un error al intentar dibujar la Posicion de la unidad seleccionada.\n\n'+err.description);
 	}
 }
 var array_datos=new Array();
@@ -432,7 +412,6 @@ function dibujarUltimasPosiciones(array_posiciones){
 		//se recorre el array_posiciones y se extrae la informacion
 		for(i=0;i<array_posiciones.length;i++){
 			var datosUnidad=array_posiciones[i].split(",");
-			console.log("Longitud del arreglo a pintar: "+datosUnidad.length)
 			var texto="<pre>[0]=> "+datosUnidad[0]+"<br>"+
 			"[1]=> "+datosUnidad[1]+"<br>"+
 			"[2]=> "+datosUnidad[2]+"<br>"+
@@ -459,7 +438,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 			"[23]=> "+datosUnidad[23]+"<br>"+
 			"[24]=> "+datosUnidad[24]+"<br>"+
 			"[25]=> "+datosUnidad[25]+"<br></pre>";
-			$("#mon_content").append(texto);
+			//$("#mon_content").append(texto);
 
 			//se separan los valores del array
 			var id 					= datosUnidad[0];
@@ -558,7 +537,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 				stringLoc = 'NO LOCALIZADO';
 		    }//fin evaluacion type-loc
 		    //eventos para el mapa
-		    /*
+		    
 		    if(lat!=0 && lon !=0){
 				marker = new google.maps.Marker({
 					map: map,
@@ -568,7 +547,9 @@ function dibujarUltimasPosiciones(array_posiciones){
 				});
 				markers.push(marker);
 				
-				add_info_marker(marker,mon_datosUnidad(stringLoc,dunit,imei,"",evt,fecha,dire,distancia,type));
+				//add_info_marker(marker,mon_datosUnidad(stringLoc,dunit,imei,"",evt,fecha,dire,distancia,type));
+				idTr="posicionTr_"+id;
+				mon_center_map(id,stringLoc,dunit,imei,evt,fecha,vel,distancia,lat,lon,battery,dire,idTr);
 			
 				if(type_loc > 0 && type_loc < 6){
 			    	var populationOptions = {
@@ -586,7 +567,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 				};				
 		    }
 		    google.maps.event.addDomListener(window, 'load');
-		    */
+		    
 		    if (comandos=="") {
 				comandos="S/C";
 			}
