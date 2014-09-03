@@ -59,33 +59,33 @@
     <!--fin Div Pestaña-->
     <!--Fin Informacion de las unidades-->
     <!--Div Mapa-->
-    <div id="mon_content" class="pestana_monitoreo"></div>
+    <div id="mon_content" class="pestana_monitoreo ui-widget-content"></div>
     <!--fin del Div Mapa-->
     <div id="btnMinimizarUP" title="Minimizar Panel de Ultimas Posiciones"><img src="./public/images/minimizar2.png" border="0" /></div>
     <!--Div Ultimas Posiciones-->
-    <div id="divUltimasPosiciones" class="drsElement">
-	<table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
-	  <thead>
-	    <tr>
-	      <td colspan="14" class="fg-toolbar ui-widget-header ui-corner-tñ ui-corner tr">&Uacute;ltimas Posiciones</td>
-	    </tr>
-	    <tr>
-	      <th class="ui-state-default" colspan="5">Info</th>
-	      <th class="ui-state-default">Unidad</th>
-	      <th class="ui-state-default">Nivel de Bateria</th>
-	      <th class="ui-state-default">Evento</th>
-	      <th class="ui-state-default">Tipo Localizaci&oacute;n</th>
-	      <th class="ui-state-default">Fecha</th>
-	      <th class="ui-state-default">Velocidad</th>
-	      <th class="ui-state-default">PDI Cercano</th>
-	      <th class="ui-state-default">Direcci&oacute;n</th>
-        <th class="ui-state-default">Coordenadas</th>
-	    </tr>
-	  </thead>
-	  <tbody>
+    <div id="divUltimasPosiciones">
+      	<!--<table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
+      	  <thead>
+      	    <tr>
+      	      <td colspan="14" class="fg-toolbar ui-widget-header ui-corner-tñ ui-corner tr">&Uacute;ltimas Posiciones</td>
+      	    </tr>
+      	    <tr>
+      	      <th class="ui-state-default" colspan="5">Info</th>
+      	      <th class="ui-state-default">Unidad</th>
+      	      <th class="ui-state-default">Nivel de Bateria</th>
+      	      <th class="ui-state-default">Evento</th>
+      	      <th class="ui-state-default">Tipo Localizaci&oacute;n</th>
+      	      <th class="ui-state-default">Fecha</th>
+      	      <th class="ui-state-default">Velocidad</th>
+      	      <th class="ui-state-default">PDI Cercano</th>
+      	      <th class="ui-state-default">Direcci&oacute;n</th>
+              <th class="ui-state-default">Coordenadas</th>
+      	    </tr>
+      	  </thead>
+      	  <tbody>
 
-	  </tbody>
-	</table>
+      	  </tbody>
+      	</table>-->
     </div>
     <!--Fin Div Ultimas Posiciones-->
     <!--Div Geocercas-->

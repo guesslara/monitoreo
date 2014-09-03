@@ -91,48 +91,15 @@ $(document).ready(
 			nueva=window.open("index.php?m=mMonitoreo&c=mShowEvents", 'Popup', caracteristicas);
 		});
 		
+		$("#divUltimasPosiciones").resizable({ });
 		
-		/*Modificaciones para la animacion de los divs en monitoreo*/
-		//obtiene el tamaño de los divs, cuantos existen determina el tamaño del carrete de divs
-		var imageWidth = $(".window").width();
-		var imageSum = $(".divContenedorSlider").size();
-		var imageReelWidth = imageWidth * imageSum;
-		
-		//Ajusta el carrete de divs a su nuevo tamaño
-		$(".image_reel").css({'width' : imageReelWidth});
-		
-		//Funcion para el slider
-		rotate = function(){
-			var triggerID;
-			
-			triggerID = $active.attr("rel") - 1; //obtiene el numero de veces del slider
-			var image_reelPosition = triggerID * imageWidth; //determina la distancia que el carrete necesita para moverse
-			if($active.attr("rel")==1){
-				$("#enlaceMisUnidades").html("Unidades Disponibles");
-				$("#enlaceMisUnidades").attr("title","Unidades Disponibles");
-			}
-			//animacion de los divs
-			$(".image_reel").animate({ 
-				left: -image_reelPosition
-			}, 500 );
-		};
-	
-		//On Click
-		$("#contenedorSlider a").click(function() {	
-			//$active = $(this); //Activate the clicked paging
-			//rotate(); //Trigger rotation immediately
-			//return false; //Prevent browser jump to link anchor
-		});	
-		
-		//se colocar el div Inicial para el arrastre de forma contraria 
-		//var inicio=true;
-		//var divInicial = 2; //Div Inicial
-		//rotate(); //se llama a la rotacion del div	
-		/*fin de las modificaciones en monitoreo*/
-		
-		
-		
-		
+		$("#divUltimasPosiciones").draggable({ 
+			containment: "#mon_content", 
+			scroll: false,
+			cursor: "move", 
+			cursorAt: { top: 56, left: 56 }
+		});
+
 		$("#btnUltimasPosiciones").click(function (){
 			//mostrarultimasPosiciones();
 			$active = $(this); //Activate the clicked paging
@@ -217,6 +184,8 @@ $(document).ready(
 		$("#enlaceCerrarSesion").click(function(){
 			window.location.href="index.php?m=login";
 		})
+
+
 	});
 /*
  *funciones a cargar al inicio de la aplicacion
@@ -300,7 +269,7 @@ function animarBarraUnidades(){
 		$("#contenedorSlider").hide("fast");
 		barraUnidades=0;
 	}else if(barraUnidades==0){
-		movIzqC="28.3%";
+		movIzqC="305px";
 		img="ocultar2.png";
 		funcion="animarBarraUnidades(1)";
 		pal="ocultar";
