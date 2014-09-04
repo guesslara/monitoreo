@@ -82,8 +82,8 @@ class monitoreo{
               $new_dir= $functions->codif($direccion1);      
               $buscarPDI=true;                    
           }
-            //termina el proceso de localizacion alternativa
-            ($strUltimasPosiciones=="") ? $strUltimasPosiciones=implode(",", $ultimasPosiciones[$i]) : $strUltimasPosiciones.="|||||".implode(",",$ultimasPosiciones[$i]);
+          //termina el proceso de localizacion alternativa
+          ($strUltimasPosiciones=="") ? $strUltimasPosiciones=implode(",", $ultimasPosiciones[$i]) : $strUltimasPosiciones.="|||||".implode(",",$ultimasPosiciones[$i]);
    		}
    		//comparamos los arrays el de unidades y el de las ultimas posiciones
       $resultado=array_diff($arrayUnidades, $idUnidadesRespuesta);
@@ -96,6 +96,7 @@ class monitoreo{
         }   
       }
       //echo "<br><br><br><br><br><br><br><br><br>";
+      //echo $strUltimasPosiciones;
       return $strUltimasPosiciones;
    	}
    	/**

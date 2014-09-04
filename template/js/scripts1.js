@@ -61,31 +61,6 @@ function cargarUltimasPosiciones(){
 	parametros="action=cargarUltimasPosiciones&filtro="+unidades+"&idUsuario="+usuarioId+"&clienteId="+clienteId;
 	ajaxMonitoreo("cargarUltimasPosiciones","controlador",parametros,"cargador2","mon_content","POST");
 }
-
-/*function ajaxAppPlataforma(accion,url,parametros,metodo){
-    $.ajax({
-		async:true,
-		type: metodo,
-		dataType: "html",
-		contentType: "application/x-www-form-urlencoded",
-		url:url,
-		data:parametros,
-		beforeSend:function(){ 
-		    $("#cargador2").show(); 
-		},
-		success:function(datos){ 
-		    $("#cargador2").hide();
-		    controladorAcciones(accion,datos);
-		},
-		timeout:90000000,
-		error:function() {
-		    $("#cargadorGeneral").hide();
-		    $("#error").show();
-		    $("#error_mensaje").html('Ocurrio un error al procesar la solicitud.');
-		}
-    });
-}*/
-
 /*
  *@name 	Funcion para cargar los grupos de la base de datos
  *@author	Gerardo Lara
@@ -438,6 +413,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 			"[23]=> "+datosUnidad[23]+"<br>"+
 			"[24]=> "+datosUnidad[24]+"<br>"+
 			"[25]=> "+datosUnidad[25]+"<br></pre>";
+			
 			//$("#mon_content").append(texto);
 
 			//se separan los valores del array
@@ -547,9 +523,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 				});
 				markers.push(marker);
 				
-				//add_info_marker(marker,mon_datosUnidad(stringLoc,dunit,imei,"",evt,fecha,dire,distancia,type));
-				idTr="posicionTr_"+id;
-				mon_center_map(id,stringLoc,dunit,imei,evt,fecha,vel,distancia,lat,lon,battery,dire,idTr);
+				add_info_marker(marker,mon_datosUnidad(stringLoc,dunit,imei,"",evt,fecha,dire,distancia,type));
 			
 				if(type_loc > 0 && type_loc < 6){
 			    	var populationOptions = {
@@ -571,11 +545,13 @@ function dibujarUltimasPosiciones(array_posiciones){
 		    if (comandos=="") {
 				comandos="S/C";
 			}
-
-			var divUnidadGrupo="#div_"+id;
-			if ($(divUnidadGrupo).length){
-				dunit=$(divUnidadGrupo+" .listadoInfoUnidades").text();
+			if(dunit=="Sin Datos"){
+				var divUnidadGrupo="#div_"+id;
+				if ($(divUnidadGrupo).length){
+					dunit=$(divUnidadGrupo+" .listadoInfoUnidades").text();
+				}
 			}
+			
 		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia);
 		}//fin for array_posiciones
 	}//fin if verificacion array_posiciones
@@ -609,8 +585,9 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
 	    filaTr+="<td><img "+colorImage+"' border='0' /></td>";
 	    filaTr+="<td><img "+typeLoc+"'/></td>";
 	    filaTr+="<td class='enlaceFuncion'><span title='Enviar Comandos a la unidad' onclick='mon_get_info(\""+comandos+"\",\""+imei+"\",\""+idUnidad+"\",\""+servidor+"\",\""+instancia+"\")'><img src='./public/images/icon-commands.png' border='0' /></span></td>";
-	    filaTr+="<td class='enlaceFuncion'><a href='#' onclick='mostrarUltimasCincoPosiciones(\""+idUnidad+"\")'>5</a></td>";
-	    if (evento=="0") {
+	    //filaTr+="<td class='enlaceFuncion'><a href='#' onclick='mostrarUltimasCincoPosiciones(\""+idUnidad+"\")'>5</a></td>";
+	    filaTr+="<td class='enlaceFuncion'><input type='radio' name='rdbSeguimientoUnidad' onclick='dibujaSeguimiento(\""+idUnidad+"\")' /></td>";
+	    if (evento=="Sin Datos") {
 			filaTr+="<td>"+unidad+" C="+contador+"</td>";
 	    }else{
 			filaTr+="<td><a onclick='mon_center_map(\""+idUnidad+"\",\""+stringLoc+"\",\""+unidad+"\",\""+imei+"\",\""+evento+"\",\""+fecha+"\",\""+velocidad+"\",\""+pdi+"\",\""+lat+"\",\""+lon+"\",\""+nivelBateria+"\",\""+direccion+"\",\""+idTr+"\")' title='Ver Ubicacion' class='verUbicacion' style='color:blue;'>"+unidad+" C="+contador+"</a></td>";		

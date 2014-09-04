@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{PAGE_TITLE}</title>
-
+<!--<meta http-equiv="refresh" content="10" />-->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
 <script type="text/javascript" src="public/js/ui/jquery.js"></script>
@@ -64,28 +64,25 @@
     <div id="btnMinimizarUP" title="Minimizar Panel de Ultimas Posiciones"><img src="./public/images/minimizar2.png" border="0" /></div>
     <!--Div Ultimas Posiciones-->
     <div id="divUltimasPosiciones">
-      	<table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
-      	  <thead>
-      	    <tr>
-      	      <td colspan="14" class="fg-toolbar ui-widget-header ui-corner-tñ ui-corner tr">&Uacute;ltimas Posiciones</td>
-      	    </tr>
-      	    <tr>
-      	      <th class="ui-state-default" colspan="5">Info</th>
-      	      <th class="ui-state-default">Unidad</th>
-      	      <th class="ui-state-default">Nivel de Bateria</th>
-      	      <th class="ui-state-default">Evento</th>
-      	      <th class="ui-state-default">Tipo Localizaci&oacute;n</th>
-      	      <th class="ui-state-default">Fecha</th>
-      	      <th class="ui-state-default">Velocidad</th>
-      	      <th class="ui-state-default">PDI Cercano</th>
-      	      <th class="ui-state-default">Direcci&oacute;n</th>
-              <th class="ui-state-default">Coordenadas</th>
-      	    </tr>
-      	  </thead>
-      	  <tbody>
-
-      	  </tbody>
-      	</table>
+      	<div style="border:1px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
+          &Uacute;ltimas Posiciones
+        </div>
+        <div style="position:relative;border:1px solid #FF0000;height:90%;overflow:auto;">
+            <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
+              <tr>
+                <th class="ui-state-default" colspan="5">Info</th>
+                <th class="ui-state-default">Unidad</th>
+                <th class="ui-state-default">Nivel de Bateria</th>
+                <th class="ui-state-default">Evento</th>
+                <th class="ui-state-default">Tipo Localizaci&oacute;n</th>
+                <th class="ui-state-default">Fecha</th>
+                <th class="ui-state-default">Velocidad</th>
+                <th class="ui-state-default">PDI Cercano</th>
+                <th class="ui-state-default">Direcci&oacute;n</th>
+                <th class="ui-state-default">Coordenadas</th>
+              </tr>
+            </table>
+        </div>
     </div>
     <!--Fin Div Ultimas Posiciones-->
     <!--Div Geocercas-->

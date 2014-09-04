@@ -16,6 +16,7 @@ var monGeoZoom   ;
 var monGeoBnds   ;
 var monMarkers = [];
 var mon_array_autocomplete = Array();
+
 /**
  *@name Funcion para redimensionar los divs
  *@param contenedor Div que se va a definir en la altura
@@ -53,12 +54,7 @@ function redimensionarDivs() {
  */
 window.onresize=redimensionarDivs;
 
-function mon_init(){
-	$("#mon_tabs").tabs();
-    $( ".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *" ).removeClass( "ui-corner-all ui-corner-top" ).addClass( "ui-corner-bottom" );
-    $( ".tabs-bottom .ui-tabs-nav" ).appendTo( ".tabs-bottom" );    
-    infoWindow = new google.maps.InfoWindow;
-}
+
 
 function showM(){
 	var bounds = map.getBounds();

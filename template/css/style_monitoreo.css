@@ -114,12 +114,13 @@
   border: 1px solid #A9D0F5;
   height: 230px;
   width: 98.7%;
-  /*overflow: auto;*/
+  overflow: hidden; 
   display: none;
   position: absolute;
   z-index: 2;
   bottom: 6px;
   background: #FFF;
+  text-align: center;
 }
 
 #btnMinimizarUP{
@@ -235,6 +236,7 @@
   width: 100%;
   /*border: 1px solid #ff0000;*/
   text-align: center;
+  font-size: 8px;
 }
 .tablaUP tr{
   height: 15px;
@@ -245,10 +247,11 @@
 .tablaUP tr td{
   height: 15px;
   padding: 5px;
-  font-size: 10px;
+  font-size: 8px;
 }
 .registrosUP{
   /*background: #FFF;*/
+  font-size: 8px;
 }
 .registrosUP:hover{
   border-bottom: 1px solid #f0f0f0;

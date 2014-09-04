@@ -5,6 +5,8 @@ var barraUP=1;
 var focusVentanas=2;
 $(document).ready(
 	function(){
+		//declaracion del objeto infowindow
+		infoWindow = new google.maps.InfoWindow;
 		//pestañas
 		$( "#tabs" ).tabs({ 
         	select: function(event, ui) { 
@@ -87,16 +89,18 @@ $(document).ready(
   			var caracteristicas = "height=560,width=660,scrollTo,resizable=1,scrollbars=1,location=0";
 			nueva=window.open("index.php?m=mMonitoreo&c=mShowEvents", 'Popup', caracteristicas);
 		});
-		
-		$("#divUltimasPosiciones").resizable({ });
+		/*
+		$("#divUltimasPosiciones").resizable({
+			//containment: "#mon_content"
+		});
 		
 		$("#divUltimasPosiciones").draggable({ 
-			containment: "#mon_content", 
-			scroll: false,
-			cursor: "move", 
-			cursorAt: { top: 56, left: 56 }
+			//containment: "#mon_content", 
+			//scroll: true,
+			cursor: "move"
+			//cursorAt: { top: 56, left: 56 }
 		});
-
+		*/
 		$("#btnUltimaPosicion").click(function(){
 			if(array_selected.length == 0){
 				alert("Seleccione una unidad para mostrar su ultima posicion");
@@ -181,7 +185,6 @@ $(document).ready(
 */
 function init(){
 	try{
-		//onload_map();//cargar el mapa
 		mostrarMapa();
 		tabAd();//tab administracion
 		tabRe();//tab reportes

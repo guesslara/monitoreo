@@ -1,6 +1,4 @@
-
-
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -79,4 +77,82 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div id="map-canvas"></div>
   </body>
 </html>
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+body,html,document{height: 100%;margin: 3px;}      
+
+#sidebar {
+  width: 100%;
+  background: #FF0000;
+  height: 80%;
+}
+#content {
+  width: 100%;
+  background: blue;
+  height: 20%;
+}
+    </style>
+
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    redimensionar();
+
+    $( "#sidebar" ).resizable({      
+      
+    });
+
+    var altoSideBar=0;
+
+
+    
+    $("#sidebar").bind("resize", function (event, ui) {
+      var setHeight   = $("#sidebar").height();
+      var altoContent = $("#content").height();
+      
+      //alert(setWidth);
+      //$('#content').height(altoContent-setHeight);
+      //$("#content").css("height",(altoContent+altoSideBar)+"px")
+      //$('.menu').width(setWidth-6);
+    });
+  });
+
+  function redimensionar(){
+    altoDocumento=$(document).height();
+    $("#contenedorDivs").css("height",(altoDocumento-25)+"px");
+    //$("#sidebar").css("height",(altoDocumento-200)+"px");
+    //$("#content").css("height",(altoDocumento-420)+"px");
+  }
+
+  window.onresize=redimensionar;
+
+</script>
+   
+  </head>
+  <body>
+
+<div id="contenedorDivs" style="width:98%;border:1px solid #000;overflow:auto;position:absolute;">
+  <div id="sidebar"> 
+    <div class="sidebar-menu">
+      <!-- all your sidebar/navigational items go here -->Hola
+    </div>
+  </div>  
+  <div id="content">
+<!-- all your main content goes here -->Contenido
+  </div>
+</div>
+  </body>
+</html>
+
+
 
