@@ -33,6 +33,46 @@ class monitoreo{
    		$objBd=new sql($this->host,$this->port,$this->bname,$this->user,$this->pass);
    		return $objBd;
    	}
+    /**
+    *@method        extrae el nombre de la tabal historico
+    *@description   Obtiene el nombre de la tabla historico del cliente
+    *@paramas
+    */
+    private function extraerNombreTabla($idCliente){
+      $idCliente = (int)$idCliente; 
+      $table_name = '';   
+      if (strlen($idCliente) < 5) {
+          $table_name = str_repeat('0', (5-strlen($idCliente)));
+      }
+      return $table_name . $idCliente;
+    }
+    /**
+    *@method        extae posiciones del historico
+    *@description   Extrae las 10 ultimas posiciones del historico
+    *@paramas
+    */
+    public function extraerPosicionesHistorico($idUnidad,$idUsuario,$clienteId){
+      $objDb=$this->iniciarConexionDb();
+      $objDb->sqlQuery("SET NAMES 'utf8'");
+      $tabla="HIST".$this->extraerNombreTabla($clienteId);
+      $sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE COD_ENTITY='".$idUnidad."' AND GPS_DATETIME LIKE '".date("Y-m-d")."%' ORDER BY GPS_DATETIME DESC LIMIT 0,10";
+      //$sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE COD_ENTITY='".$idUnidad."' AND GPS_DATETIME LIKE '2014-07-05%' ORDER BY GPS_DATETIME DESC LIMIT 0,10";
+      $resH=$objDb->sqlQuery($sqlH);
+      $strHistorico="";
+      while($rowH=$objDb->sqlFetchArray($resH)){
+        if($strHistorico==""){
+          $strHistorico=$rowH["GPS_DATETIME"].",".$rowH["LATITUDE"].",".$rowH["LONGITUDE"];
+        }else{
+          $strHistorico.="|||".$rowH["GPS_DATETIME"].",".$rowH["LATITUDE"].",".$rowH["LONGITUDE"];
+        }
+      }
+      return $strHistorico;
+    }
+    /**
+    *@method        Funcion que carga las ultimas posiciones de la clase c.Positions
+    *@description   Extrae las ultimas posiciones de las unidades pasadas por un array
+    *@paramas
+    */
    	public function cargarUltimasPosiciones($filtro,$idUsuario,$idCliente){
    		$strUltimasPosiciones="";
    		$arrayUnidades=explode(",",$filtro);

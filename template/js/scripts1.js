@@ -43,6 +43,10 @@ function controladorAcciones(accion,datos,divResultado){
 			//$("#"+divResultado).hide();
 			evaluarCadenaUnidades(datos);
 		break;
+		case "pintarUbicaciones":
+			//$("#"+divResultado).show().html(datos);
+			muestraPosicionesHistorico(datos);
+		break;
     }
 }
 /*
@@ -60,6 +64,10 @@ function cargarUltimasPosiciones(){
 	}
 	parametros="action=cargarUltimasPosiciones&filtro="+unidades+"&idUsuario="+usuarioId+"&clienteId="+clienteId;
 	ajaxMonitoreo("cargarUltimasPosiciones","controlador",parametros,"cargador2","mon_content","POST");
+	//se compara el valor de la bandera y se manda a llamar la funcion para actualizar el seguimiento
+	if(banderaSeguimiento){
+		dibujaSeguimiento(unidadSeleccionada);//variable global con el id de la unidad seleccionada
+	}
 }
 /*
  *@name 	Funcion para cargar los grupos de la base de datos
@@ -603,4 +611,15 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
 	    $("#tablaX").append(filaTr);
 	    contador+=1;
 	}
+}
+
+function dibujaSeguimiento(idUnidad){
+	unidadSeleccionada=idUnidad;
+	//se cambia el valor de la bandera para que actualice con las posiciones
+	banderaSeguimiento=true;
+	usuarioId=$("#usuarioId").val();
+	clienteId=$("#usuarioCliente").val();
+	//se envia la peticion para el pintado de los mapas
+	parametros="action=pintarUbicaciones&idUnidad="+idUnidad+"&idUsuario="+usuarioId+"&clienteId="+clienteId;
+	ajaxMonitoreo("pintarUbicaciones","controlador",parametros,"cargador2","mon_content","POST");
 }

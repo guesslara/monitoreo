@@ -64,10 +64,10 @@
     <div id="btnMinimizarUP" title="Minimizar Panel de Ultimas Posiciones"><img src="./public/images/minimizar2.png" border="0" /></div>
     <!--Div Ultimas Posiciones-->
     <div id="divUltimasPosiciones">
-      	<div style="border:1px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
+      	<div style="border:0px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
           &Uacute;ltimas Posiciones
         </div>
-        <div style="position:relative;border:1px solid #FF0000;height:90%;overflow:auto;">
+        <div style="position:relative;border:0px solid #FF0000;height:90%;overflow:auto;">
             <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
               <tr>
                 <th class="ui-state-default" colspan="5">Info</th>

@@ -18,11 +18,16 @@ if($_SERVER["HTTP_REFERER"]==""){
 			echo $strGrupos;
 		break;
 		case "cargarUltimasPosiciones":
+			$res=$objM->cargarUltimasPosiciones($_POST["filtro"],$_POST["idUsuario"],$_POST["clienteId"]);
+			echo $res;
+		break;
+		case "pintarUbicaciones":
 			/*echo "<pre>";
 			print_r($_POST);
 			echo "</pre>";*/
-			$res=$objM->cargarUltimasPosiciones($_POST["filtro"],$_POST["idUsuario"],$_POST["clienteId"]);
-			echo $res;
+			$ubicaciones=$objM->extraerPosicionesHistorico($_POST["idUnidad"],$_POST["idUsuario"],$_POST["clienteId"]);
+			//echo "<br><br>";
+			echo $ubicaciones;
 		break;
 	}
 }

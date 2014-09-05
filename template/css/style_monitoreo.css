@@ -236,7 +236,7 @@
   width: 100%;
   /*border: 1px solid #ff0000;*/
   text-align: center;
-  font-size: 8px;
+  font-size: 9px;
 }
 .tablaUP tr{
   height: 15px;
@@ -247,11 +247,11 @@
 .tablaUP tr td{
   height: 15px;
   padding: 5px;
-  font-size: 8px;
+  font-size: 9px;
 }
 .registrosUP{
   /*background: #FFF;*/
-  font-size: 8px;
+  font-size: 9px;
 }
 .registrosUP:hover{
   border-bottom: 1px solid #f0f0f0;
