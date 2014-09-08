@@ -67,6 +67,7 @@ function cargarUltimasPosiciones(){
 	//se compara el valor de la bandera y se manda a llamar la funcion para actualizar el seguimiento
 	if(banderaSeguimiento){
 		dibujaSeguimiento(unidadSeleccionada);//variable global con el id de la unidad seleccionada
+		pintadoPosiciones=true;
 	}
 }
 /*
@@ -127,7 +128,9 @@ function dibujaAcordeonGrupos(accion,datos){
 	      source: mon_array_autocomplete,
 	      select: function( event, ui ) {      	
 			seleccionarUnidad(ui.item.desc+"",0);
-			actualizaUltimasPosiciones();
+			enviarAUP();
+			cargarUltimasPosiciones();
+			mon_refresh_units();
 	      },open: function () {
 	        $(this).data("autocomplete").menu.element.width(250);
 	    	}
@@ -159,7 +162,7 @@ function seleccionarUnidad(idUnidad,bandera) {
 			//se quita la informacion de la tabla de informacion
 			idTr="#posicionTr_"+idUnidad;
 			//console.log(idTr);
-		
+			mon_remove_map();
 			$(idTr).remove();
 			
 			if (array_selected.length==0) {
@@ -180,22 +183,23 @@ function seleccionarUnidad(idUnidad,bandera) {
 */
 function seleccionarTodas(grupo,bandera){
     $("#"+grupo+" .listadoUnidades").each(function (index) {//se recorren los divs contenidos en cada grupo
-	idE=this.id;//id del elemento que se marcara
-	//console.log(idE);
-	srcImg=$("#"+idE+" img").attr("src");//averiguar el src de la imagen de cada elemento
-	if(srcImg.substring(16)=="ok16.png" && bandera==0){
-	    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
-	}else if(srcImg.substring(16)=="tick.png" && bandera==1){
-	    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
-	}
+		idE=this.id;//id del elemento que se marcara
+		//console.log(idE);
+		srcImg=$("#"+idE+" img").attr("src");//averiguar el src de la imagen de cada elemento
+		if(srcImg.substring(16)=="ok16.png" && bandera==0){
+		    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
+		}else if(srcImg.substring(16)=="tick.png" && bandera==1){
+		    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
+		}
     });
     imagenT=$("#imgT_"+grupo.substring(6)).attr("src");//imagen del div del grupo
     if (imagenT.substring(16)=="ok16.png") {
-	$("#imgT_"+grupo.substring(6)).attr("src","./public/images/tick.png");//cambia la imagen del div
-	$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',1)");//cambia la bandera de la funcion
+		$("#imgT_"+grupo.substring(6)).attr("src","./public/images/tick.png");//cambia la imagen del div
+		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',1)");//cambia la bandera de la funcion
     }else{
-	$("#imgT_"+grupo.substring(6)).attr("src","./public/images/ok16.png");//cambia la imagen del div
-	$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',0)");//cambia la bandera de la funcion
+		$("#imgT_"+grupo.substring(6)).attr("src","./public/images/ok16.png");//cambia la imagen del div
+		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',0)");//cambia la bandera de la funcion
+		mon_remove_map();
     }
 }
 
@@ -393,6 +397,7 @@ function evaluarCadenaUnidades(strUnidadesCompleto){
 function dibujarUltimasPosiciones(array_posiciones){
 	//se verifica que array_posiciones no este vacio
 	if(array_posiciones != ""){
+		mon_remove_map();
 		//se recorre el array_posiciones y se extrae la informacion
 		for(i=0;i<array_posiciones.length;i++){
 			var datosUnidad=array_posiciones[i].split(",");

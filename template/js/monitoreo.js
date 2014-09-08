@@ -21,6 +21,7 @@ var array_latitudes	 = Array();
 var array_longitudes = Array();
 var banderaSeguimiento = false;
 var unidadSeleccionada = 0;
+
 /**
  *@name Funcion para redimensionar los divs
  *@param contenedor Div que se va a definir en la altura

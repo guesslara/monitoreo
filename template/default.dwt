@@ -137,6 +137,7 @@
     <div class="imgCargadorGral"><img src='./public/images/mundoM.gif' height="32" width="32" border='0' /></div>
     <div class="textoCargadorGral">Actualizando...</div>
   </div>
+  <div id="latlng">&nbsp;</div>
   <div id="error">
     <div class="estilosDivMensajeError">
       <div class="contenedorError">

@@ -15,6 +15,9 @@ function mostrarMapa(){
     
 		google.maps.event.addListener(map, 'idle', showM);
 		google.maps.event.trigger(map, 'resize');
+		google.maps.event.addListener(map, 'click', function(event) {
+  			document.getElementById("latlng").innerHTML = event.latLng;		    
+		});
 
     }catch(err){
 		$("#error").show();
@@ -67,32 +70,66 @@ function muestraPosicionesHistorico(posicionesHist){
 	"[8]=> "+array_latitudes[8]+"<br>"+
 	"[9]=> "+array_latitudes[9]+"<br></pre>";*/
 	//$("#mon_content").append(texto3);
+	//flightPath.setMap(null);
 	//posicion del mapa
   	var positon = new google.maps.LatLng(array_latitudes[0],array_longitudes[0]);
-	map.setZoom(18);
+	map.setZoom(16);
 	map.setCenter(positon);	
 	map.panTo(positon);
 	//proceso del dibujo de la linea
 	var flightPlanCoordinates = [
-	    new google.maps.LatLng(array_latitudes[0],array_longitudes[0]),
-	    new google.maps.LatLng(array_latitudes[1],array_longitudes[1]),
-	    new google.maps.LatLng(array_latitudes[2],array_longitudes[2]),
-	    new google.maps.LatLng(array_latitudes[3],array_longitudes[3]),
-	    new google.maps.LatLng(array_latitudes[4],array_longitudes[4]),
-	    new google.maps.LatLng(array_latitudes[5],array_longitudes[5]),
-	    new google.maps.LatLng(array_latitudes[6],array_longitudes[6]),
-	    new google.maps.LatLng(array_latitudes[7],array_longitudes[7]),
+	    new google.maps.LatLng(array_latitudes[9],array_longitudes[9]),
 	    new google.maps.LatLng(array_latitudes[8],array_longitudes[8]),
-	    new google.maps.LatLng(array_latitudes[9],array_longitudes[9])
+	    new google.maps.LatLng(array_latitudes[7],array_longitudes[7]),
+	    new google.maps.LatLng(array_latitudes[6],array_longitudes[6]),
+	    new google.maps.LatLng(array_latitudes[5],array_longitudes[5]),
+	    new google.maps.LatLng(array_latitudes[4],array_longitudes[4]),
+	    new google.maps.LatLng(array_latitudes[3],array_longitudes[3]),
+	    new google.maps.LatLng(array_latitudes[2],array_longitudes[2]),
+	    new google.maps.LatLng(array_latitudes[1],array_longitudes[1]),
+	    new google.maps.LatLng(array_latitudes[0],array_longitudes[0])
   	];
+
+  	var iconsetngs = {
+	    path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+	    strokeColor: '#155B90',
+	    fillColor: '#155B90',
+	    fillOpacity: 1,
+	    strokeWeight: 4        
+	};
+
 	var flightPath = new google.maps.Polyline({
 	    path: flightPlanCoordinates,
 	    geodesic: true,
 	    strokeColor: '#FF0000',
 	    strokeOpacity: 1.0,
-	    strokeWeight: 2
+	    strokeWeight: 2,
+	    icons: [{
+		    icon: iconsetngs,
+		    repeat:'35px',         
+		    offset: '100%'
+		}]
 	});
 
   	flightPath.setMap(map);
+
+  	array_latitudes.length=0;
+  	array_longitudes.length=0;
+}
+
+function mon_remove_map(){
+    if(markers || markers.length>-1){
+	    for (var i = 0; i < markers.length; i++) {
+	      markers[i].setMap(null);
+	    }	
+	    markers = [];
+    }
+
+    if(arraygeos || arraygeos.length>-1){
+	    for (var i = 0; i < arraygeos.length; i++) {
+	      arraygeos[i].setMap(null);
+	    }	
+	    arraygeos = [];
+    }
 }
 

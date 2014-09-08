@@ -193,10 +193,11 @@ function init(){
 
 function actualizaUltimasPosiciones(){
 	if(banderaUltimaPosicion==0){
-		mon_build_puntos(0);
+		//mon_build_puntos(0);
 		banderaUltimaPosicion=1;
 	}else{
-		mon_build_puntos(0);
+		//mon_build_puntos(0);
+		cargarUltimasPosiciones();
 	}
 	enviarAUP();//funcion para mostrar el div
 }
