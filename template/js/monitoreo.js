@@ -163,56 +163,7 @@ function checkTime(i){
 // 	actualizaUltimasPosiciones();
 // }
 
-function mon_send_command(){
-	if($("#mon_dialog").html()!='<h2>Esta unidad no tiene asignados comandos</h2>'){
 
-		var imei    = $("#mon_cmds_imei").val();
-		var command = $("#mon_sel_cmds").val();
-		var comment = $("#mon_cmds_com").val();
-		var unit   = $("#mon_cmds_unit").val();
-		var servidor = $("#mon_cmds_servidor").val();
-		var instancia = $("#mon_cmds_instancia").val();
-
-		if(imei!="" && command>0 && comment!=""){
-		    $.ajax({
-		        url: "index.php?m=mMonitoreo&c=mSetComando",
-		        type: "GET",
-		        dataType : 'json',
-		        data: { data: command,
-		        		imei: imei,
-		        		comment: comment ,
-		        		unit   : unit,
-		        		servidor : servidor,
-		        		instancia : instancia
-		        },
-		        success: function(data) {
-		          var result = data.result; 
-
-		          if(result=='no-data' || result=='problem'){
-		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>El comando no pudo ser enviado.</p>');
-		              $("#dialog_message" ).dialog('open');             	          
-		          }else if(result=='send'){ 
-		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>Comando enviado correctamente.</p>');
-		              $("#dialog_message").dialog('open');
-		              $("#mon_dialog").dialog("close");
-		              setTimeout(mon_load_units(),5000);
-		          }else if(result=='no-perm'){ 
-		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>No tiene permiso para realizar esta acción. <br> Consulte a su administrador.</p>');
-		              $("#dialog_message" ).dialog('open');       
-				  }else if(result=='pending'){ 
-		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>No se puede enviar este comando, ya que existe uno pendiente por enviar.</p>');
-		              $("#dialog_message" ).dialog('open');       
-		          }
-		        }
-		    });
-		}else{
-	      $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>Debe seleccionar un comando y agregar un comentario.</p>');
-	      $("#dialog_message" ).dialog('open');  				
-		}
-	}else{
-		$("#mon_dialog").dialog("close");
-	}
-}
 
 function stopTimer(){
 	if(mon_timer!=null){

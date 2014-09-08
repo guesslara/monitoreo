@@ -89,18 +89,7 @@ $(document).ready(
   			var caracteristicas = "height=560,width=660,scrollTo,resizable=1,scrollbars=1,location=0";
 			nueva=window.open("index.php?m=mMonitoreo&c=mShowEvents", 'Popup', caracteristicas);
 		});
-		/*
-		$("#divUltimasPosiciones").resizable({
-			//containment: "#mon_content"
-		});
 		
-		$("#divUltimasPosiciones").draggable({ 
-			//containment: "#mon_content", 
-			//scroll: true,
-			cursor: "move"
-			//cursorAt: { top: 56, left: 56 }
-		});
-		*/
 		$("#btnUltimaPosicion").click(function(){
 			if(array_selected.length == 0){
 				alert("Seleccione una unidad para mostrar su ultima posicion");
@@ -178,6 +167,10 @@ $(document).ready(
 			window.location.href="index.php?m=login";
 		})
 
+
+		$("#enlaceVentana").click(function(){
+ 			window.open("modules/mMonitoreo4/test4.html", "popupId", "location=no,menubar=no,titlebar=no,resizable=yes,toolbar=no, menubar=no,width=500,height=500");
+		});
 
 	});
 /*

@@ -246,7 +246,8 @@ function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comando
 	listado=valor.split("%%%%");
 	for(var i=0;i<listado.length-1;i++){
 	    values = listado[i].split("%%%");
-	    option = option + '<option value="'+values[1]+'">'+values[0]+'</option>';
+	    option = option + '<option value="'+values[1]+'">'+
+	    values[0]+'</option>';
 	}
 	//se arma la estructura que la va a contener
 	var comandosT="<Table border='0' cellpadding='0' cellspacing='0' width='100%'>";
@@ -622,4 +623,61 @@ function dibujaSeguimiento(idUnidad){
 	//se envia la peticion para el pintado de los mapas
 	parametros="action=pintarUbicaciones&idUnidad="+idUnidad+"&idUsuario="+usuarioId+"&clienteId="+clienteId;
 	ajaxMonitoreo("pintarUbicaciones","controlador",parametros,"cargador2","mon_content","POST");
+}
+
+function mon_send_command(){
+	if($("#mon_dialog").html()!='<h2>Esta unidad no tiene asignados comandos</h2>'){
+
+		var imei    = $("#mon_cmds_imei").val();
+		var command = $("#mon_sel_cmds").val();
+		var comment = $("#mon_cmds_com").val();
+		var unit   = $("#mon_cmds_unit").val();
+		var servidor = $("#mon_cmds_servidor").val();
+		var instancia = $("#mon_cmds_instancia").val();
+
+		if(imei!="" && command>0 && comment!=""){
+		    $.ajax({
+		        url: "index.php?m=mMonitoreo4&c=mSetComando",
+		        type: "GET",
+		        dataType : 'json',
+		        data: { data: command,
+		        		imei: imei,
+		        		comment: comment ,
+		        		unit   : unit,
+		        		servidor : servidor,
+		        		instancia : instancia
+		        },
+				beforeSend:function(){ 
+					$("#mon_dialog").show().html("Procesando Informacion ..."); 
+				},
+		        success: function(data) {
+		          	var result = data.result;
+		          	if(result=='no-data' || result=='problem'){
+		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>El comando no pudo ser enviado.</p>');
+		              $("#dialog_message" ).dialog('open');             	          
+		              $("#mon_dialog").dialog("close");
+		          	}else if(result=='send'){ 
+		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>Comando enviado correctamente.</p>');
+		              $("#dialog_message").dialog('open');
+		              $("#mon_dialog").dialog("close");
+		              /*se manda a actualizar la informacion de las unidades*/
+		              setTimeout(cargarUltimasPosiciones(),5000);
+		          	}else if(result=='no-perm'){ 
+		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>No tiene permiso para realizar esta acción. <br> Consulte a su administrador.</p>');
+		              $("#dialog_message" ).dialog('open');
+		              $("#mon_dialog").dialog("close");       
+				  	}else if(result=='pending'){ 
+		              $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>No se puede enviar este comando, ya que existe uno pendiente por enviar.</p>');
+		              $("#dialog_message" ).dialog('open');       
+		              $("#mon_dialog").dialog("close");
+		          	}
+		        }
+		    });
+		}else{
+	      $('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>Debe seleccionar un comando y agregar un comentario.</p>');
+	      $("#dialog_message" ).dialog('open');  				
+		}
+	}else{
+		$("#mon_dialog").dialog("close");
+	}
 }

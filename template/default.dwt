@@ -65,7 +65,7 @@
     <!--Div Ultimas Posiciones-->
     <div id="divUltimasPosiciones">
       	<div style="border:0px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
-          &Uacute;ltimas Posiciones
+          &Uacute;ltimas Posiciones-<a href="#" id="enlaceVentana">Separar</a>
         </div>
         <div style="position:relative;border:0px solid #FF0000;height:90%;overflow:auto;">
             <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">

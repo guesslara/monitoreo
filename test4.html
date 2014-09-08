@@ -106,11 +106,11 @@ body,html,document{height: 100%;margin: 3px;}
 
 <script type="text/javascript">
   $(document).ready(function() {
-    redimensionar();
+    //redimensionar();
 
-    $( "#sidebar" ).resizable({      
+    //$( "#sidebar" ).resizable({      
       
-    });
+    //});
 
     var altoSideBar=0;
 
@@ -136,21 +136,51 @@ body,html,document{height: 100%;margin: 3px;}
 
   window.onresize=redimensionar;
 
+  function obtenerValor(){
+    array_selected2=window.opener.array_selected.slice();
+    for(var i=0;i<array_selected2.length;i++){
+      $("#testValor").append(array_selected2[i]);
+    }
+  }
+
+
 </script>
    
   </head>
   <body>
-
-<div id="contenedorDivs" style="width:98%;border:1px solid #000;overflow:auto;position:absolute;">
-  <div id="sidebar"> 
-    <div class="sidebar-menu">
-      <!-- all your sidebar/navigational items go here -->Hola
-    </div>
+<input type="button" onclick="obtenerValor()" value="Valor" />
+<div id="testValor"></div>
+<!--<div id="contenedorDivs" style="width:98%;border:1px solid #000;overflow:auto;position:absolute;">-->
+  <!--<div id="sidebar"> 
+    <div class="sidebar-menu">-->
+      <!-- all your sidebar/navigational items go here --><!--Hola-->
+    <!--</div>
   </div>  
-  <div id="content">
-<!-- all your main content goes here -->Contenido
-  </div>
-</div>
+  <div id="content">-->
+<!-- all your main content goes here --><!--Contenido-->
+  <!--</div>
+</div>-->
+<div id="divUltimasPosiciones">
+        <div style="border:0px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
+          &Uacute;ltimas Posiciones
+        </div>
+        <div style="position:relative;border:0px solid #FF0000;height:90%;overflow:auto;">
+            <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaXW" class="tablaUP">
+              <tr>
+                <th class="ui-state-default" colspan="5">Info</th>
+                <th class="ui-state-default">Unidad</th>
+                <th class="ui-state-default">Nivel de Bateria</th>
+                <th class="ui-state-default">Evento</th>
+                <th class="ui-state-default">Tipo Localizaci&oacute;n</th>
+                <th class="ui-state-default">Fecha</th>
+                <th class="ui-state-default">Velocidad</th>
+                <th class="ui-state-default">PDI Cercano</th>
+                <th class="ui-state-default">Direcci&oacute;n</th>
+                <th class="ui-state-default">Coordenadas</th>
+              </tr>
+            </table>
+        </div>
+    </div>
   </body>
 </html>
 
