@@ -94,7 +94,7 @@ function dibujaAcordeonGrupos(accion,datos){
 		title="De clic para activar el seguimiento de la unidad"; title1="De clic para activar todas las unidades";
 		//se procesa el resultado para crear los grupos
 		datos=datos.split("|");
-		acordeon="<div id='mon_acordeon_unidades' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
+		acordeon="<div id='mon_acordeon_unidades' style='border:1px solid #FF0000;height:auto;position:relative;width:99%;'>";
 		for(i=0;i<datos.length;i++){
 			//se descomponen los elementos para la creacion de los grupos
 			grupos=datos[i].split(",");

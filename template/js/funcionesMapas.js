@@ -1,8 +1,15 @@
 /*
 *Funciones para el manejo de los mapas
 */
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+//variable para las cajas de texto
+var variableTxtA="";
+var variableTxtB="";
+var variableRuta=false;
 function mostrarMapa(){
     try{
+    	directionsDisplay = new google.maps.DirectionsRenderer();
 		var mapOptions = {
 	  		zoom: 5,
 	  		center: new google.maps.LatLng(24.5154926,-111.4534356),
@@ -11,18 +18,24 @@ function mostrarMapa(){
 		map = new google.maps.Map(document.getElementById('mon_content'),mapOptions);
 	    google.maps.event.addListener(map, 'click', function() {
 	    	infoWindow.close();
-		});			
-    
+		});    
 		google.maps.event.addListener(map, 'idle', showM);
 		google.maps.event.trigger(map, 'resize');
 		google.maps.event.addListener(map, 'click', function(event) {
-  			document.getElementById("latlng").innerHTML = event.latLng;		    
+  			document.getElementById("latlng").innerHTML = event.latLng;
+  			colocarMarcador(event.latLng,map);
 		});
-
+		directionsDisplay.setMap(map);
     }catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
     }
+}
+
+function colocarMarcador(position,map){
+	if(variableRuta){//
+
+	}
 }
 
 function add_info_marker(marker,content){	
@@ -40,7 +53,9 @@ function add_info_marker(marker,content){
 		map.panTo(latLng);     
     });
 }
-
+/*
+*Funcion para pintar el seguimiento de la unidad
+*/
 function muestraPosicionesHistorico(posicionesHist){
 	posicionesHist=posicionesHist.split("|||");
 	for(i=0;i<posicionesHist.length;i++){
@@ -116,13 +131,16 @@ function muestraPosicionesHistorico(posicionesHist){
   	array_latitudes.length=0;
   	array_longitudes.length=0;
 }
-
+/*
+*Funcion para remover los markers en el mapa
+*/
 function mon_remove_map(){
     if(markers || markers.length>-1){
 	    for (var i = 0; i < markers.length; i++) {
 	      markers[i].setMap(null);
 	    }	
 	    markers = [];
+	    flightPath.setMap(null);
     }
 
     if(arraygeos || arraygeos.length>-1){
@@ -131,5 +149,28 @@ function mon_remove_map(){
 	    }	
 	    arraygeos = [];
     }
+}
+/*
+*Funcion que calcula la ruta
+*/
+function calcularRuta(){
+
+	//var start = new google.maps.LatLng(document.getElementById("puntoDePartida").value);
+	//var end = new google.maps.LatLng(document.getElementById("destinoRuta").value);
+
+	var start = new google.maps.LatLng(19.444126103465166, -99.17892265424598);
+	var end = new google.maps.LatLng(19.41498672016835, -99.13102913007606);
+	
+	var request = {
+		origin:start,
+		destination:end,
+		travelMode: google.maps.TravelMode.DRIVING
+	};
+
+	directionsService.route(request, function(result, status) {
+		if (status == google.maps.DirectionsStatus.OK) {
+	  		directionsDisplay.setDirections(result);
+		}
+	});
 }
 

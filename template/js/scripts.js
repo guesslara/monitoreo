@@ -172,7 +172,9 @@ $(document).ready(
  			window.open("modules/mMonitoreo4/test4.html", "popupId", "location=no,menubar=no,titlebar=no,resizable=yes,toolbar=no, menubar=no,width=500,height=500");
 		});
 
+
 	});
+	
 /*
  *funciones a cargar al inicio de la aplicacion
 */

@@ -26,7 +26,29 @@
 
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
+<style type="text/css">
+  #menuMapa{
+      width:250px;
+      position:absolute;     
+      border:1px solid black;
+      z-index: 9999999; 
+      -moz-box-shadow: 0 0 5px #888;
+      -webkit-box-shadow: 0 0 5px#888;
+      box-shadow: 0 0 5px #888;
+      background: #FFF;
+  }
+  #menuMapa: ul{
+      list-style: none;
+      list-style-type: none;
+      list-style-position: outside;
+  }
 
+  #menuMapa: li{
+      line-height: 30px;
+      font-size: 16px;
+      cursor:pointer;
+  }
+</style>
 </head>
 <body onload="init();">
 <input type="hidden" id="usuarioId" value="{IDUSUARIO}" />
@@ -42,13 +64,18 @@
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
 	     <div class="divMenu">	    
-	       <a href="#" id="enlaceMisUnidades" rel="1">Unidades Disponibles</a>
+	       Unidades Disponibles
 	     </div>
 	     <div id="main_view" class="main_view">
-	        <div id="mon_search" style="padding: 5px;position: relative;width: auto;border-bottom:1px solid #CCC;">
+	        <div id="mon_search" style="padding: 5px;position: relative;width: auto;border:1px solid #CCC;">
             <label for="tags">Buscar: </label><input id="tags" />
-            <a href="#" id="btnUltimaPosicion" rel="2" class="btnSlider ui-state-default ui-corner-all">&Uacute;ltima Posicion</a>
+            <img border="0" src="./public/images/route.png" height="24" width="24" class="imagenRuta" />
+            <a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posicion</a>
           </div><!--fin div search-->
+          <div style="border:1px solid blue;height:50px;padding:5px;width:95%;margin:2px;">
+            <div style="margin:2px;"><input type="text" id="puntoDePartida" placeholder="Punto de partida" /></div>
+            <div style="margin:2px;"><input type="text" id="destinoRuta" onkeyup="calcularRuta()" placeholder="Destino" /></div>
+          </div>
           <div id="mon_menu_acordeon" class="mon_div_acordeon"></div><!--acordeon de las unidades-->
 	     </div><!--Fin del div main_view-->
     </div><!--fin contenedor Slider-->
@@ -65,7 +92,7 @@
     <!--Div Ultimas Posiciones-->
     <div id="divUltimasPosiciones">
       	<div style="border:0px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
-          &Uacute;ltimas Posiciones-<a href="#" id="enlaceVentana">Separar</a>
+          &Uacute;ltimas Posiciones<!---<a href="#" id="enlaceVentana">Separar</a>-->
         </div>
         <div style="position:relative;border:0px solid #FF0000;height:90%;overflow:auto;">
             <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
@@ -171,7 +198,15 @@
   </div>
   <!--Botones Superiores-->
 </div><!--tabs-->
-
+<!--
+<div id="menuMapa">
+  <ul>
+    <li id="copiar">Copiar</li>
+    <li id="mover">Mover</li>
+    <li id="eliminar">Eliminar</li>
+  </ul>
+</div>
+-->
 <!--------Dialogs-->
   <div id="divAviso" style="display: none;font-family: Verdana;">
     <p><strong>Bienvenido(a) : {USER}</strong></p>

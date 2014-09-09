@@ -1,4 +1,7 @@
-  body,document,html{margin:0px;font-family: Verdana, Arial, Serif;}
+  body,document,html{
+    margin:0px;
+    font-family: Verdana, Arial, Serif;
+  }
   /* force a height so the tabs don't jump as content height changes */
   #tabs .tabs-spacer { float: left; height: 200px; }
   .tabs-bottom .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
@@ -158,7 +161,10 @@
   float: right;
   text-decoration: none;
 }
-.btnSlider:hover{background: #CCC;}
+.imagenRuta{
+  float:right;
+  margin-left:5px;
+}
 
 #btnCejillaOcultar{
   height: 25px;
@@ -435,7 +441,7 @@
 /*fin estilos cargadores*/
 /*tags buscador*/
 #tags{
-  width:47%;
+  width:130px;
 }
 /*div geocercas*/
 .mon_div_geos{
@@ -468,13 +474,13 @@
 #latlng{
   display: block;
   position: absolute;
-  z-index: 999;
+  z-index: 999999999;
   padding: 3px;
   width: 192px;
   height: 11px;
   top: 46px;
   background: #FFF;
-  right: 110px;
+  right: 111px;
   margin-left: -100px;
   text-align: center;
   font-size: 8px;
