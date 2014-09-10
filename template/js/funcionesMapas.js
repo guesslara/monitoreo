@@ -1,19 +1,20 @@
 /*
 *Funciones para el manejo de los mapas
 */
-var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
+
 //variable para las cajas de texto
-var variableTxtA="";
-var variableTxtB="";
-var variableRuta=false;
+var variableA=false;
+var variableB=false;
+
 function mostrarMapa(){
     try{
-    	directionsDisplay = new google.maps.DirectionsRenderer();
+    	//directionsDisplay = new google.maps.DirectionsRenderer();
+    	
 		var mapOptions = {
 	  		zoom: 5,
 	  		center: new google.maps.LatLng(24.5154926,-111.4534356),
-	  		mapTypeId: google.maps.MapTypeId.ROADMAP
+	  		mapTypeId: google.maps.MapTypeId.ROADMAP,
+	  		//disableDefaultUI: true
 		};
 		map = new google.maps.Map(document.getElementById('mon_content'),mapOptions);
 	    google.maps.event.addListener(map, 'click', function() {
@@ -23,7 +24,9 @@ function mostrarMapa(){
 		google.maps.event.trigger(map, 'resize');
 		google.maps.event.addListener(map, 'click', function(event) {
   			document.getElementById("latlng").innerHTML = event.latLng;
+
   			colocarMarcador(event.latLng,map);
+
 		});
 		directionsDisplay.setMap(map);
     }catch(err){
@@ -31,11 +34,29 @@ function mostrarMapa(){
 		$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
     }
 }
-
+var markersAB = [];
 function colocarMarcador(position,map){
-	if(variableRuta){//
-
+	if(variableA==true){
+		var marker = new google.maps.Marker({
+			draggable: true,
+	    	position: position,
+	    	map: map
+  		});
+  		map.panTo(position);
+  		markersAB.push(marker);
+  		$("#puntoDePartida").attr("value",position);
 	}
+	if(variableB==true){
+		var marker = new google.maps.Marker({
+			draggable: true,
+	    	position: position,
+	    	map: map
+  		});
+  		map.panTo(position);
+  		$("#destinoRuta").attr("value",position);
+  		markersAB.push(marker);
+	}
+	
 }
 
 function add_info_marker(marker,content){	
@@ -150,16 +171,35 @@ function mon_remove_map(){
 	    arraygeos = [];
     }
 }
+
 /*
 *Funcion que calcula la ruta
 */
+var rendererOptions = {
+  draggable: true
+};
+var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
+var directionsService = new google.maps.DirectionsService();
 function calcularRuta(){
+	
+	
 
-	//var start = new google.maps.LatLng(document.getElementById("puntoDePartida").value);
-	//var end = new google.maps.LatLng(document.getElementById("destinoRuta").value);
+	var start = document.getElementById("puntoDePartida").value;
+	var end   = document.getElementById("destinoRuta").value;
 
-	var start = new google.maps.LatLng(19.444126103465166, -99.17892265424598);
-	var end = new google.maps.LatLng(19.41498672016835, -99.13102913007606);
+
+
+	//var start = new google.maps.LatLng(19.444126103465166, -99.17892265424598);
+	//var end = new google.maps.LatLng(19.41498672016835, -99.13102913007606);
+	
+	//inicio = document.getElementById("puntoDePartida").value.split(",");
+	//fin    = document.getElementById("destinoRuta").value.split(",");
+
+	//alert(inicio[0].substring(1));
+	//alert(inicio[1].substring(0,inicio[1].length-1));
+
+	//var start = new google.maps.LatLng(inicio[0].substring(1),inicio[1].substring(0,inicio[1].length-1));
+	//var end = new google.maps.LatLng(fin[0].substring(1),fin[1].substring(0,fin[1].length-1));
 	
 	var request = {
 		origin:start,
@@ -172,5 +212,14 @@ function calcularRuta(){
 	  		directionsDisplay.setDirections(result);
 		}
 	});
+	
+	//variableA=false;	
+	//variableB=false;
+
+}
+
+function clearMarkersAB(){
+	setAllMap(null);
+	markersAB=[];
 }
 

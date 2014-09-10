@@ -172,6 +172,20 @@ $(document).ready(
  			window.open("modules/mMonitoreo4/test4.html", "popupId", "location=no,menubar=no,titlebar=no,resizable=yes,toolbar=no, menubar=no,width=500,height=500");
 		});
 
+		$("#addRuta").click(function(){
+			//se cambia de valor la variable ruta
+			calcularRuta();
+		});
+
+		$("#seleccionPuntoA").click(function(){
+			variableA=true;
+			variableB=false;
+		});
+
+		$("#seleccionPuntoB").click(function(){
+			variableA=false;
+			variableB=true;
+		});
 
 	});
 	

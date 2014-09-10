@@ -4,7 +4,7 @@
 <title>{PAGE_TITLE}</title>
 <!--<meta http-equiv="refresh" content="10" />-->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
+<!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>-->
 <script type="text/javascript" src="public/js/ui/jquery.js"></script>
 <script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
 <script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
@@ -69,12 +69,12 @@
 	     <div id="main_view" class="main_view">
 	        <div id="mon_search" style="padding: 5px;position: relative;width: auto;border:1px solid #CCC;">
             <label for="tags">Buscar: </label><input id="tags" />
-            <img border="0" src="./public/images/route.png" height="24" width="24" class="imagenRuta" />
+            <a href="#" id="addRuta"><img border="0" src="./public/images/route.png" height="24" width="24" class="imagenRuta" /></a>
             <a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posicion</a>
           </div><!--fin div search-->
           <div style="border:1px solid blue;height:50px;padding:5px;width:95%;margin:2px;">
-            <div style="margin:2px;"><input type="text" id="puntoDePartida" placeholder="Punto de partida" /></div>
-            <div style="margin:2px;"><input type="text" id="destinoRuta" onkeyup="calcularRuta()" placeholder="Destino" /></div>
+            <div style="margin:2px;"><a href="#" id="seleccionPuntoA">S</a>&nbsp;&nbsp;<input type="text" id="puntoDePartida" placeholder="Punto de partida" style="width:230px;" /></div>
+            <div style="margin:2px;"><a href="#" id="seleccionPuntoB">S</a>&nbsp;&nbsp;<input type="text" id="destinoRuta" placeholder="Destino" style="width:230px;" /></div>
           </div>
           <div id="mon_menu_acordeon" class="mon_div_acordeon"></div><!--acordeon de las unidades-->
 	     </div><!--Fin del div main_view-->
