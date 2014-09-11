@@ -3,6 +3,7 @@ var tab_active=0;
 var banderaUltimaPosicion=0;
 var barraUP=1;
 var focusVentanas=2;
+var mostrarBtnRutas=false;
 $(document).ready(
 	function(){
 		//declaracion del objeto infowindow
@@ -173,19 +174,23 @@ $(document).ready(
 		});
 
 		$("#addRuta").click(function(){
-			//se cambia de valor la variable ruta
-			calcularRuta();
+			if(mostrarBtnRutas==false){
+				$("#addRuta").attr("title","De clic para cerrar la busqueda de rutas")
+				$("#monitoreoRutas").show();
+				$("#puntoDePartida").attr("value","");
+				$("#destinoRuta").attr("value","");
+				$("#puntoDePartida").focus();
+				mostrarBtnRutas=true;
+			}else{
+				$("#addRuta").attr("title","Buscar rutas")
+				$("#monitoreoRutas").hide();
+				mostrarBtnRutas=false;
+			}
 		});
 
-		$("#seleccionPuntoA").click(function(){
-			variableA=true;
-			variableB=false;
-		});
-
-		$("#seleccionPuntoB").click(function(){
-			variableA=false;
-			variableB=true;
-		});
+		$("#btnMostrarRuta").click(function(){
+			verificaDatos();
+		})
 
 	});
 	

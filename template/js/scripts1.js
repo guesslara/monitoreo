@@ -94,7 +94,7 @@ function dibujaAcordeonGrupos(accion,datos){
 		title="De clic para activar el seguimiento de la unidad"; title1="De clic para activar todas las unidades";
 		//se procesa el resultado para crear los grupos
 		datos=datos.split("|");
-		acordeon="<div id='mon_acordeon_unidades' style='border:1px solid #FF0000;height:auto;position:relative;width:99%;'>";
+		acordeon="<div id='mon_acordeon_unidades' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
 		for(i=0;i<datos.length;i++){
 			//se descomponen los elementos para la creacion de los grupos
 			grupos=datos[i].split(",");
@@ -584,6 +584,8 @@ var clase="even";
 var contador=0;
 /*FIN VARIABLE TEMPORAL*/
 function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia){
+    //se recupera si se hara el seguimiento
+    seguimiento=$("#seguimiento").val();
     direccion=direccion.replace(/\s/g,' ');
     if (nivelBateria=="Sin Datos") {
 		nivelBateria="0 %";	
@@ -599,8 +601,11 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
 	    filaTr+="<td><img "+colorImage+"' border='0' /></td>";
 	    filaTr+="<td><img "+typeLoc+"'/></td>";
 	    filaTr+="<td class='enlaceFuncion'><span title='Enviar Comandos a la unidad' onclick='mon_get_info(\""+comandos+"\",\""+imei+"\",\""+idUnidad+"\",\""+servidor+"\",\""+instancia+"\")'><img src='./public/images/icon-commands.png' border='0' /></span></td>";
-	    //filaTr+="<td class='enlaceFuncion'><a href='#' onclick='mostrarUltimasCincoPosiciones(\""+idUnidad+"\")'>5</a></td>";
-	    filaTr+="<td class='enlaceFuncion'><input type='radio' name='rdbSeguimientoUnidad' onclick='dibujaSeguimiento(\""+idUnidad+"\")' /></td>";
+	    if(seguimiento=="Y"){
+			filaTr+="<td class='enlaceFuncion'><input type='radio' name='rdbSeguimientoUnidad' onclick='dibujaSeguimiento(\""+idUnidad+"\")' /></td>";
+	    }else if(seguimiento=="N"){
+			filaTr+="<td class='enlaceFuncion'>&nbsp;</td>";
+	    }
 	    if (evento=="Sin Datos") {
 			filaTr+="<td>"+unidad+" C="+contador+"</td>";
 	    }else{
@@ -684,5 +689,16 @@ function mon_send_command(){
 		}
 	}else{
 		$("#mon_dialog").dialog("close");
+	}
+}
+
+function verificaDatos(){
+	var puntoA = document.getElementById("puntoDePartida").value;
+	var puntoB = document.getElementById("destinoRuta").value;
+	if(puntoA=="" || puntoB==""){
+		$("#dialog_message").html("Verifique que el punto de Origen(A) y destino(B) no esten vacios.");
+		$("#dialog_message").dialog("open");
+	}else{
+		calcularRuta(puntoA,puntoB);	
 	}
 }

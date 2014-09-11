@@ -53,6 +53,7 @@
 <body onload="init();">
 <input type="hidden" id="usuarioId" value="{IDUSUARIO}" />
 <input type="hidden" id="usuarioCliente" value="{IDCLIENTE}" />
+<input type="hidden" id="seguimiento" value="{SEGUIMIENTO}" />
 <div id="tabs" class="pestana_principal">
   <ul>
     <li ><a href="#Monitoreo">Monitoreo</a></li>
@@ -67,15 +68,16 @@
 	       Unidades Disponibles
 	     </div>
 	     <div id="main_view" class="main_view">
-	        <div id="mon_search" style="padding: 5px;position: relative;width: auto;border:1px solid #CCC;">
+	        <div id="mon_search">
             <label for="tags">Buscar: </label><input id="tags" />
-            <a href="#" id="addRuta"><img border="0" src="./public/images/route.png" height="24" width="24" class="imagenRuta" /></a>
+            <a href="#" id="addRuta" style="{RUTA}" title="Buscar rutas"><img border="0" src="./public/images/route.png" height="24" width="24" class="imagenRuta" /></a>
             <a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posicion</a>
           </div><!--fin div search-->
-          <div style="border:1px solid blue;height:50px;padding:5px;width:95%;margin:2px;">
-            <div style="margin:2px;"><a href="#" id="seleccionPuntoA">S</a>&nbsp;&nbsp;<input type="text" id="puntoDePartida" placeholder="Punto de partida" style="width:230px;" /></div>
-            <div style="margin:2px;"><a href="#" id="seleccionPuntoB">S</a>&nbsp;&nbsp;<input type="text" id="destinoRuta" placeholder="Destino" style="width:230px;" /></div>
-          </div>
+          <div id="monitoreoRutas">
+            <div style="margin:2px;"><strong>A:</strong><input type="text" id="puntoDePartida" title="Indique el punto de partida de la ruta" placeholder="Punto de partida" style="width:230px;margin-left:3px;" /></div>
+            <div style="margin:2px;"><strong>B:</strong><input type="text" id="destinoRuta" title="Indique el destino de la ruta" placeholder="Destino" style="width:230px;margin-left:5px;" /></div>
+            <a href="#" id="btnMostrarRuta" class="btnSlider ui-state-default ui-corner-all" style="margin-top:3px;" title="Mostrar Ruta">Mostrar Ruta</a>
+          </div><!--fin div monitoreo de rutas-->
           <div id="mon_menu_acordeon" class="mon_div_acordeon"></div><!--acordeon de las unidades-->
 	     </div><!--Fin del div main_view-->
     </div><!--fin contenedor Slider-->
@@ -150,7 +152,7 @@
   
   <!--Texto de Usuario-->
   <div class="mon-user-info">
-	  <span><b>Bienvenido(a) : {USER} - <blink>TEST</blink></b></span>
+	  <span><b>Bienvenido(a) : {USER}</b></span>
   </div>
   <!--Fin Texto de Usuario-->
 
@@ -170,7 +172,7 @@
       <div class="contenedorError">
 	       <div id="error_imagen"></div>
 	       <div id="error_mensaje" style=""></div>
-          <a href="#" id="enlaceGenerarTicket" title="Generar Ticket de Servicio">Generar Ticket de Servicio</a>
+          <!--<a href="#" id="enlaceGenerarTicket" title="Generar Ticket de Servicio">Generar Ticket de Servicio</a>-->
           <a id="btnCerrarVentanaError" href="#" style="">Cerrar</a>
           <a id="enlaceCerrarSesion" href="#" style="">Cerrar</a>
       </div>

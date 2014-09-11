@@ -1,11 +1,9 @@
 /*
 *Funciones para el manejo de los mapas
 */
-
-//variable para las cajas de texto
-var variableA=false;
-var variableB=false;
-
+var rendererOptions = { draggable: true };
+var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
+var directionsService = new google.maps.DirectionsService();
 function mostrarMapa(){
     try{
     	//directionsDisplay = new google.maps.DirectionsRenderer();
@@ -24,39 +22,12 @@ function mostrarMapa(){
 		google.maps.event.trigger(map, 'resize');
 		google.maps.event.addListener(map, 'click', function(event) {
   			document.getElementById("latlng").innerHTML = event.latLng;
-
-  			colocarMarcador(event.latLng,map);
-
 		});
 		directionsDisplay.setMap(map);
     }catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
     }
-}
-var markersAB = [];
-function colocarMarcador(position,map){
-	if(variableA==true){
-		var marker = new google.maps.Marker({
-			draggable: true,
-	    	position: position,
-	    	map: map
-  		});
-  		map.panTo(position);
-  		markersAB.push(marker);
-  		$("#puntoDePartida").attr("value",position);
-	}
-	if(variableB==true){
-		var marker = new google.maps.Marker({
-			draggable: true,
-	    	position: position,
-	    	map: map
-  		});
-  		map.panTo(position);
-  		$("#destinoRuta").attr("value",position);
-  		markersAB.push(marker);
-	}
-	
 }
 
 function add_info_marker(marker,content){	
@@ -78,79 +49,104 @@ function add_info_marker(marker,content){
 *Funcion para pintar el seguimiento de la unidad
 */
 function muestraPosicionesHistorico(posicionesHist){
-	posicionesHist=posicionesHist.split("|||");
-	for(i=0;i<posicionesHist.length;i++){
-		ubicaciones=posicionesHist[i].split(",");
-		array_latitudes[i]  = parseFloat(ubicaciones[1]);
-		array_longitudes[i] = parseFloat(ubicaciones[2]);
-	}
-	/*texto2="<pre>[0]=> "+array_longitudes[0]+"<br>"+
-	"[1]=> "+array_longitudes[1]+"<br>"+
-	"[2]=> "+array_longitudes[2]+"<br>"+
-	"[3]=> "+array_longitudes[3]+"<br>"+
-	"[4]=> "+array_longitudes[4]+"<br>"+
-	"[5]=> "+array_longitudes[5]+"<br>"+
-	"[6]=> "+array_longitudes[6]+"<br>"+
-	"[7]=> "+array_longitudes[7]+"<br>"+
-	"[8]=> "+array_longitudes[8]+"<br>"+
-	"[9]=> "+array_longitudes[9]+"<br></pre>";
-	//$("#mon_content").append(texto2);
-	texto3="<pre>[0]=> "+array_latitudes[0]+"<br>"+
-	"[1]=> "+array_latitudes[1]+"<br>"+
-	"[2]=> "+array_latitudes[2]+"<br>"+
-	"[3]=> "+array_latitudes[3]+"<br>"+
-	"[4]=> "+array_latitudes[4]+"<br>"+
-	"[5]=> "+array_latitudes[5]+"<br>"+
-	"[6]=> "+array_latitudes[6]+"<br>"+
-	"[7]=> "+array_latitudes[7]+"<br>"+
-	"[8]=> "+array_latitudes[8]+"<br>"+
-	"[9]=> "+array_latitudes[9]+"<br></pre>";*/
-	//$("#mon_content").append(texto3);
-	//flightPath.setMap(null);
-	//posicion del mapa
-  	var positon = new google.maps.LatLng(array_latitudes[0],array_longitudes[0]);
-	map.setZoom(16);
-	map.setCenter(positon);	
-	map.panTo(positon);
-	//proceso del dibujo de la linea
-	var flightPlanCoordinates = [
-	    new google.maps.LatLng(array_latitudes[9],array_longitudes[9]),
-	    new google.maps.LatLng(array_latitudes[8],array_longitudes[8]),
-	    new google.maps.LatLng(array_latitudes[7],array_longitudes[7]),
-	    new google.maps.LatLng(array_latitudes[6],array_longitudes[6]),
-	    new google.maps.LatLng(array_latitudes[5],array_longitudes[5]),
-	    new google.maps.LatLng(array_latitudes[4],array_longitudes[4]),
-	    new google.maps.LatLng(array_latitudes[3],array_longitudes[3]),
-	    new google.maps.LatLng(array_latitudes[2],array_longitudes[2]),
-	    new google.maps.LatLng(array_latitudes[1],array_longitudes[1]),
-	    new google.maps.LatLng(array_latitudes[0],array_longitudes[0])
-  	];
+	try{
+		if(posicionesHist != 0){
+			posicionesHist=posicionesHist.split("|||");
+			for(i=0;i<posicionesHist.length;i++){
+				ubicaciones=posicionesHist[i].split(",");
+				array_latitudes[i]  = parseFloat(ubicaciones[1]);
+				array_longitudes[i] = parseFloat(ubicaciones[2]);
+			}
+			/*texto2="<pre>[0]=> "+array_longitudes[0]+"<br>"+
+			"[1]=> "+array_longitudes[1]+"<br>"+
+			"[2]=> "+array_longitudes[2]+"<br>"+
+			"[3]=> "+array_longitudes[3]+"<br>"+
+			"[4]=> "+array_longitudes[4]+"<br>"+
+			"[5]=> "+array_longitudes[5]+"<br>"+
+			"[6]=> "+array_longitudes[6]+"<br>"+
+			"[7]=> "+array_longitudes[7]+"<br>"+
+			"[8]=> "+array_longitudes[8]+"<br>"+
+			"[9]=> "+array_longitudes[9]+"<br></pre>";
+			//$("#mon_content").append(texto2);
+			texto3="<pre>[0]=> "+array_latitudes[0]+"<br>"+
+			"[1]=> "+array_latitudes[1]+"<br>"+
+			"[2]=> "+array_latitudes[2]+"<br>"+
+			"[3]=> "+array_latitudes[3]+"<br>"+
+			"[4]=> "+array_latitudes[4]+"<br>"+
+			"[5]=> "+array_latitudes[5]+"<br>"+
+			"[6]=> "+array_latitudes[6]+"<br>"+
+			"[7]=> "+array_latitudes[7]+"<br>"+
+			"[8]=> "+array_latitudes[8]+"<br>"+
+			"[9]=> "+array_latitudes[9]+"<br></pre>";*/
+			//$("#mon_content").append(texto3);
+			//flightPath.setMap(null);
+			//posicion del mapa
+		  	var positon = new google.maps.LatLng(array_latitudes[0],array_longitudes[0]);
+			map.setZoom(16);
+			map.setCenter(positon);	
+			map.panTo(positon);
+			//proceso del dibujo de la linea
+			strCoordenadas="";
+			var flightPlanCoordinates = [];
 
-  	var iconsetngs = {
-	    path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-	    strokeColor: '#155B90',
-	    fillColor: '#155B90',
-	    fillOpacity: 1,
-	    strokeWeight: 4        
-	};
+			for(i=array_latitudes.length;i>=0;i--){
+				if(flightPlanCoordinates.length==0){
+					flightPlanCoordinates = new google.maps.LatLng(array_latitudes[i],array_longitudes[i]);
+				}else{
+					flightPlanCoordinates = flightPlanCoordinates + "," + new google.maps.LatLng(array_latitudes[i],array_longitudes[i]);
+				}
 
-	var flightPath = new google.maps.Polyline({
-	    path: flightPlanCoordinates,
-	    geodesic: true,
-	    strokeColor: '#FF0000',
-	    strokeOpacity: 1.0,
-	    strokeWeight: 2,
-	    icons: [{
-		    icon: iconsetngs,
-		    repeat:'35px',         
-		    offset: '100%'
-		}]
-	});
+				
+			}
 
-  	flightPath.setMap(map);
+			/*
+			var flightPlanCoordinates = [
+			    new google.maps.LatLng(array_latitudes[9],array_longitudes[9]),
+			    new google.maps.LatLng(array_latitudes[8],array_longitudes[8]),
+			    new google.maps.LatLng(array_latitudes[7],array_longitudes[7]),
+			    new google.maps.LatLng(array_latitudes[6],array_longitudes[6]),
+			    new google.maps.LatLng(array_latitudes[5],array_longitudes[5]),
+			    new google.maps.LatLng(array_latitudes[4],array_longitudes[4]),
+			    new google.maps.LatLng(array_latitudes[3],array_longitudes[3]),
+			    new google.maps.LatLng(array_latitudes[2],array_longitudes[2]),
+			    new google.maps.LatLng(array_latitudes[1],array_longitudes[1]),
+			    new google.maps.LatLng(array_latitudes[0],array_longitudes[0])
+		  	];
+		  	*/
 
-  	array_latitudes.length=0;
-  	array_longitudes.length=0;
+		  	var iconsetngs = {
+			    path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+			    strokeColor: '#155B90',
+			    fillColor: '#155B90',
+			    fillOpacity: 1,
+			    strokeWeight: 4        
+			};
+
+			var flightPath = new google.maps.Polyline({
+			    path: flightPlanCoordinates,
+			    geodesic: true,
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+			    strokeWeight: 2,
+			    icons: [{
+				    icon: iconsetngs,
+				    repeat:'35px',         
+				    offset: '100%'
+				}]
+			});
+
+		  	flightPath.setMap(map);
+
+		  	array_latitudes.length=0;
+		  	array_longitudes.length=0;
+		}else{
+			$("#dialog_message").html("No hay posiciones para mostrar en el dia de hoy.");
+			$("#dialog_message").dialog("open");
+		}
+  	}catch(err){
+		$("#error").show();
+		$("#error_mensaje").html('Ocurrio un error en el pintado de trayectoria.');
+    }
 }
 /*
 *Funcion para remover los markers en el mapa
@@ -174,54 +170,42 @@ function mon_remove_map(){
 /*
 *Funcion que calcula la ruta
 */
-var rendererOptions = {
-  draggable: true
-};
-var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
-var directionsService = new google.maps.DirectionsService();
-function calcularRuta(){
-	
-	var trafficLayer = new google.maps.TrafficLayer();
-  	trafficLayer.setMap(map);
-
-	var start = document.getElementById("puntoDePartida").value;
-	var end   = document.getElementById("destinoRuta").value;
-
-
-
-	//var start = new google.maps.LatLng(19.444126103465166, -99.17892265424598);
-	//var end = new google.maps.LatLng(19.41498672016835, -99.13102913007606);
-	
-	//inicio = document.getElementById("puntoDePartida").value.split(",");
-	//fin    = document.getElementById("destinoRuta").value.split(",");
-
-	//alert(inicio[0].substring(1));
-	//alert(inicio[1].substring(0,inicio[1].length-1));
-
-	//var start = new google.maps.LatLng(inicio[0].substring(1),inicio[1].substring(0,inicio[1].length-1));
-	//var end = new google.maps.LatLng(fin[0].substring(1),fin[1].substring(0,fin[1].length-1));
-	
-	var request = {
-		origin:start,
-		destination:end,
-		travelMode: google.maps.TravelMode.DRIVING,
-		unitSystem: google.maps.UnitSystem.METRIC,
-		region: "Mexico"
-	};
-
-	directionsService.route(request, function(result, status) {
-		if (status == google.maps.DirectionsStatus.OK) {
-	  		directionsDisplay.setDirections(result);
-		}
-	});
-	
-	//variableA=false;	
-	//variableB=false;
-
+function calcularRuta(puntoA,puntoB){
+	try{	
+		var trafficLayer = new google.maps.TrafficLayer();
+	  	trafficLayer.setMap(map);
+		var request = {
+			origin:puntoA,
+			destination:puntoB,
+			travelMode: google.maps.TravelMode.DRIVING,
+			unitSystem: google.maps.UnitSystem.METRIC,
+			region: "Mexico"
+		};
+		directionsService.route(request, function(result, status) {
+			if (status == google.maps.DirectionsStatus.OK) {
+		  		directionsDisplay.setDirections(result);
+			}else if(status == google.maps.DirectionsStatus.NOT_FOUND){
+				//revisar los puntos de origen y/o destino
+				$("#dialog_message").html("Favor de revisar los puntos de Origen(A) y/o destino(B).");
+				$("#dialog_message").dialog("open");
+			}else if(status == google.maps.DirectionsStatus.ZERO_RESULTS){
+				//revisar los puntos de origen y/o destino
+				$("#dialog_message").html("La búsqueda de Rutas no obtuvo ningun resultado.");
+				$("#dialog_message").dialog("open");
+			}else if(status == google.maps.DirectionsStatus.INVALID_REQUEST){
+				//revisar los puntos de origen y/o destino
+				$("#dialog_message").html("Verifique que el punto de Origen(A) y destino(B) no esten vacios.");
+				$("#dialog_message").dialog("open");
+			}else if(status == google.maps.DirectionsStatus.UNKNOWN_ERROR){
+				//revisar los puntos de origen y/o destino
+				$("#dialog_message").html("Ocurrio un error desconocido, intenet de nuevo la petición de la ruta.");
+				$("#dialog_message").dialog("open");
+			}
+		});
+	}catch(err){
+		$("#error").show();
+		$("#error_mensaje").html('Ocurrio un error al pintra la Ruta especificada.');
+    }
 }
 
-function clearMarkersAB(){
-	setAllMap(null);
-	markersAB=[];
-}
 

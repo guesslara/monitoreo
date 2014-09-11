@@ -55,16 +55,20 @@ class monitoreo{
       $objDb=$this->iniciarConexionDb();
       $objDb->sqlQuery("SET NAMES 'utf8'");
       $tabla="HIST".$this->extraerNombreTabla($clienteId);
-      $sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE COD_ENTITY='".$idUnidad."' AND GPS_DATETIME LIKE '".date("Y-m-d")."%' ORDER BY GPS_DATETIME DESC LIMIT 0,10";
-      //$sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE COD_ENTITY='".$idUnidad."' AND GPS_DATETIME LIKE '2014-07-05%' ORDER BY GPS_DATETIME DESC LIMIT 0,10";
+      $sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE GPS_DATETIME BETWEEN '".date("Y-m-d")." 00:00:00' AND '".date("Y-m-d")." 23:59:59' AND COD_ENTITY=".$idUnidad."";      
       $resH=$objDb->sqlQuery($sqlH);
       $strHistorico="";
-      while($rowH=$objDb->sqlFetchArray($resH)){
-        if($strHistorico==""){
-          $strHistorico=$rowH["GPS_DATETIME"].",".$rowH["LATITUDE"].",".$rowH["LONGITUDE"];
-        }else{
-          $strHistorico.="|||".$rowH["GPS_DATETIME"].",".$rowH["LATITUDE"].",".$rowH["LONGITUDE"];
-        }
+      $numRegistros=$objDb->sqlEnumRows($resH);
+      if($numRegistros==0){
+        $strHistorico=0;
+      }else{
+        while($rowH=$objDb->sqlFetchArray($resH)){
+          if($strHistorico==""){
+            $strHistorico=$rowH["GPS_DATETIME"].",".$rowH["LATITUDE"].",".$rowH["LONGITUDE"];
+          }else{
+            $strHistorico.="|||".$rowH["GPS_DATETIME"].",".$rowH["LATITUDE"].",".$rowH["LONGITUDE"];
+          }
+        }  
       }
       return $strHistorico;
     }
