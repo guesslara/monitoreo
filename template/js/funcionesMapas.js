@@ -161,7 +161,6 @@ function mon_remove_map(){
 	      markers[i].setMap(null);
 	    }	
 	    markers = [];
-	    flightPath.setMap(null);
     }
 
     if(arraygeos || arraygeos.length>-1){
@@ -182,7 +181,8 @@ var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
 var directionsService = new google.maps.DirectionsService();
 function calcularRuta(){
 	
-	
+	var trafficLayer = new google.maps.TrafficLayer();
+  	trafficLayer.setMap(map);
 
 	var start = document.getElementById("puntoDePartida").value;
 	var end   = document.getElementById("destinoRuta").value;
@@ -204,7 +204,9 @@ function calcularRuta(){
 	var request = {
 		origin:start,
 		destination:end,
-		travelMode: google.maps.TravelMode.DRIVING
+		travelMode: google.maps.TravelMode.DRIVING,
+		unitSystem: google.maps.UnitSystem.METRIC,
+		region: "Mexico"
 	};
 
 	directionsService.route(request, function(result, status) {
