@@ -80,23 +80,18 @@ function muestraPosicionesHistorico(posicionesHist){
 			"[9]=> "+array_latitudes[9]+"<br></pre>";*/
 			//$("#mon_content").append(texto3);
 			//flightPath.setMap(null);
+
 			//posicion del mapa
 		  	var positon = new google.maps.LatLng(array_latitudes[0],array_longitudes[0]);
 			map.setZoom(16);
 			map.setCenter(positon);	
 			map.panTo(positon);
+			
 			//proceso del dibujo de la linea
-			strCoordenadas="";
 			var flightPlanCoordinates = [];
-
-			for(i=array_latitudes.length;i>=0;i--){
-				if(flightPlanCoordinates.length==0){
-					flightPlanCoordinates = new google.maps.LatLng(array_latitudes[i],array_longitudes[i]);
-				}else{
-					flightPlanCoordinates = flightPlanCoordinates + "," + new google.maps.LatLng(array_latitudes[i],array_longitudes[i]);
-				}
-
-				
+			
+			for(i=0;i<posicionesHist.length;i++){
+				flightPlanCoordinates[i]=new google.maps.LatLng(array_latitudes[i],array_longitudes[i]);
 			}
 
 			/*
@@ -113,7 +108,7 @@ function muestraPosicionesHistorico(posicionesHist){
 			    new google.maps.LatLng(array_latitudes[0],array_longitudes[0])
 		  	];
 		  	*/
-
+		  	
 		  	var iconsetngs = {
 			    path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
 			    strokeColor: '#155B90',
@@ -136,14 +131,16 @@ function muestraPosicionesHistorico(posicionesHist){
 			});
 
 		  	flightPath.setMap(map);
-
+			
 		  	array_latitudes.length=0;
 		  	array_longitudes.length=0;
 		}else{
+			banderaSeguimiento=false;
 			$("#dialog_message").html("No hay posiciones para mostrar en el dia de hoy.");
 			$("#dialog_message").dialog("open");
 		}
   	}catch(err){
+  		banderaSeguimiento=false;
 		$("#error").show();
 		$("#error_mensaje").html('Ocurrio un error en el pintado de trayectoria.');
     }
