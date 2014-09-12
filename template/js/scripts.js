@@ -190,7 +190,21 @@ $(document).ready(
 
 		$("#btnMostrarRuta").click(function(){
 			verificaDatos();
-		})
+		});
+
+		$( "#mensajeMejoras" ).dialog({
+			autoOpen:false,
+			modal: false,
+			width: 500,
+			height: 520,
+			modal: true,
+			buttons: {
+				Aceptar: function() {
+					$("#mensajeMejoras" ).dialog( "close" );
+
+				}
+			}
+		});
 
 	});
 	
@@ -206,6 +220,10 @@ function init(){
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
 		cargarGrupos();//carga de grupos
+		mostrarMensaje=$("#seguimiento").val();
+		if(mostrarMensaje=="Y"){
+			$( "#mensajeMejoras" ).dialog("open");
+		}
 	}catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Error al cargarse las dependencias.');

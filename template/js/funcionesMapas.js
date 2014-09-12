@@ -48,10 +48,19 @@ function add_info_marker(marker,content){
 /*
 *Funcion para pintar el seguimiento de la unidad
 */
+var flightPlanCoordinates = [];
+var flightPath;
 function muestraPosicionesHistorico(posicionesHist){
 	try{
 		if(posicionesHist != 0){
+
+			if(flightPlanCoordinates.length!=0){
+				flightPlanCoordinates.length=0;
+				flightPath.setMap(null);
+			}
+
 			posicionesHist=posicionesHist.split("|||");
+			posicionesHist.reverse();
 			for(i=0;i<posicionesHist.length;i++){
 				ubicaciones=posicionesHist[i].split(",");
 				array_latitudes[i]  = parseFloat(ubicaciones[1]);
@@ -79,16 +88,16 @@ function muestraPosicionesHistorico(posicionesHist){
 			"[8]=> "+array_latitudes[8]+"<br>"+
 			"[9]=> "+array_latitudes[9]+"<br></pre>";*/
 			//$("#mon_content").append(texto3);
+			
 			//flightPath.setMap(null);
 
 			//posicion del mapa
-		  	var positon = new google.maps.LatLng(array_latitudes[0],array_longitudes[0]);
+		  	var positon = new google.maps.LatLng(array_latitudes[(posicionesHist.length-1)],array_longitudes[(posicionesHist.length-1)]);
 			map.setZoom(16);
 			map.setCenter(positon);	
 			map.panTo(positon);
 			
 			//proceso del dibujo de la linea
-			var flightPlanCoordinates = [];
 			
 			for(i=0;i<posicionesHist.length;i++){
 				flightPlanCoordinates[i]=new google.maps.LatLng(array_latitudes[i],array_longitudes[i]);
@@ -117,7 +126,7 @@ function muestraPosicionesHistorico(posicionesHist){
 			    strokeWeight: 4        
 			};
 
-			var flightPath = new google.maps.Polyline({
+			flightPath = new google.maps.Polyline({
 			    path: flightPlanCoordinates,
 			    geodesic: true,
 			    strokeColor: '#FF0000',

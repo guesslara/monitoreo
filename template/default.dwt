@@ -71,7 +71,7 @@
 	        <div id="mon_search">
             <label for="tags">Buscar: </label><input id="tags" />
             <a href="#" id="addRuta" style="{RUTA}" title="Buscar rutas"><img border="0" src="./public/images/route.png" height="24" width="24" class="imagenRuta" /></a>
-            <a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posicion</a>
+            <a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posici&oacute;n</a>
           </div><!--fin div search-->
           <div id="monitoreoRutas">
             <div style="margin:2px;"><strong>A:</strong><input type="text" id="puntoDePartida" title="Indique el punto de partida de la ruta" placeholder="Punto de partida" style="width:230px;margin-left:3px;" /></div>
@@ -211,7 +211,7 @@
 -->
 <!--------Dialogs-->
   <div id="divAviso" style="display: none;font-family: Verdana;">
-    <p><strong>Bienvenido(a) : {USER}</strong></p>
+    <!--<p><strong>Bienvenido(a) : {USER}</strong></p>
     <p align="justify">Ahora puedes enviar Tickets de Servicio sobre cualquier situación que exista en la Plataforma.</p>
     <p align="justify">Solo haz clic en el bot&oacute;n Soporte ubicado en la parte Superior, llena todos los campos y nos pondremos en contacto contigo a la brevedad.</p>
     <p align="justify">As&iacute; mismo podr&aacute;s dar seguimiento a tus tickets mediante el siguiente enlace:</p>
@@ -222,7 +222,23 @@
     <p>&nbsp;</p>
     <p align="center">Tu opini&oacute;n es muy importante para nosotros.</p>
     <p align="center" style="font-weight: bold;font-size: 14px;">Equipo de Soporte ALG</p>
+    <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>-->
+  </div>
+  <div id="mensajeMejoras" title="Aviso">
+    <p align="justify" style="font-size: 16px;color: skyblue;">Bienvenid@....</p>
+    <hr style="background:#CCC;">
+    <p align="justify">Se han agregado varias funciones en el m&oacute;dulo:</p>
+    <p align="justify">Se mejoro la carga de Unidades y Grupos.</p>
+    <p align="justify"><img src="{PATH}/images/latitudLongitud.png" border="0" /></p>
+    <p align="justify">Con solo dar un click en el mapa, se colocarán las latitudes y longitudes.</p>
+    <p align="justify"><img src="{PATH}/images/botonRutas.png" border="0" /></p>
+    <p align="justify">Botón Rutas: Dando click en este botón aparecerá una opción para buscar una ruta eligiendo un punto de Origen(A) y uno de Destino(B).</p>
+    <p align="justify"><img src="{PATH}/images/opcionesUnidad.png" border="0" /></p>
+    <p align="justify">Botón seguimiento: Dentro de las opciones de la unidad, ahora aparece una opción más, que al ser presionado mostrará una línea en el seguimiento de la unidad en el mapa.</p><br>
+    <p align="center" style="font-weight: bold;font-size: 14px;">Equipo ALG - Movilizandome</p>
     <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>
+    <p align="justify"></p>
+    <p align="justify"></p>
   </div>
   <div id="mensajesTickets" style="display: none;"><p style="font-size: 12px;">Cierre la ventana de <strong>Soporte</strong> antes de enviar otro Ticket.</p></div>
   <div id="dialog_message" title="&iexcl;Aviso!"></div>
