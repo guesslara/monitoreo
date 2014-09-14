@@ -131,8 +131,6 @@
     <div id="divEngraneActualiza" title="Ajustar el Tiempo de Actualizaci&oacute;n"><img src="./public/images/icon-info.png" width="18" height="18" border="0" /></div>
     <div id="cambiarActualizacion">Elija el tiempo para actualizar:
       <select id="mon_sel_time" style="margin:5px 5px 5px 5px;">
-	  <option value="10000">10</option>
-	  <option value="20000">20</option>
 	  <option value="30000">30</option>
 	  <option value="60000">60</option>
 	  <option value="120000" selected="selected">120</option>
