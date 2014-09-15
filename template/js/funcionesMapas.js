@@ -12,6 +12,7 @@ function mostrarMapa(){
 	  		zoom: 5,
 	  		center: new google.maps.LatLng(24.5154926,-111.4534356),
 	  		mapTypeId: google.maps.MapTypeId.ROADMAP,
+	  		panControl: false
 		};
 		map = new google.maps.Map(document.getElementById('mon_content'),mapOptions);
 	    google.maps.event.addListener(map, 'click', function() {

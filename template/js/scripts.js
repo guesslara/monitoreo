@@ -222,7 +222,7 @@ function init(){
 		cargarGrupos();//carga de grupos
 		mostrarMensaje=$("#seguimiento").val();
 		if(mostrarMensaje=="Y"){
-			$( "#mensajeMejoras" ).dialog("open");
+			//$( "#mensajeMejoras" ).dialog("open");
 		}
 	}catch(err){
 		$("#error").show();

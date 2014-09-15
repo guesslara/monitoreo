@@ -117,6 +117,33 @@
     </div>
     <!--Div tiempo para actualizar-->
     <div id="latlng">&nbsp;</div>
+
+    <div id="mostrarInfoAdicionalLatLon">
+      <div class="historialLatLon">Historial</div>
+      <div class="historialInfo">
+          <div class="infoLatLon">15:50:42 => 28.260844, -102.615737</div><!--28.260844114804843, -102.61573791503906-->
+          <div class="infoLatLon">15:48:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:46:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:43:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:40:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:38:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:36:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:34:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:32:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:30:42 => 28.260844, -102.615737</div>
+
+          <!--<div class="infoLatLon">15:28:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:26:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:24:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:22:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:20:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:18:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:16:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:14:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:12:42 => 28.260844, -102.615737</div>
+          <div class="infoLatLon">15:10:42 => 28.260844, -102.615737</div>-->
+      </div>
+    </div>
   </div><!--Monitoreo-->
   <div id="Admon"  class="pestana"></div><!--Admon-->
   <div id="Report" class="pestana"></div><!--Report-->
@@ -154,28 +181,15 @@
     </div>
   </div>
   <!--Botones Superiores-->
-  <div id="gral_button_soporte" class="ui-state-default ui-corner-all gral_button_soporte">
-    <span class="ui-icon  ui-icon-gear float_left"></span>
-    <span class="gral_text">Soporte</span>
-  </div>
-  
-  <div id="gral_button_manual" class="ui-state-default ui-corner-all gral_button_manual">
-    <span class="ui-icon  ui-icon-folder-collapsed float_left"></span>
-    <span class="gral_text">Manual</span>
-  </div>
-  
-  <div id="gral_button_admin" class="ui-state-default ui-corner-all gral_button_admin {S_ADMIN}">
-    <span class="ui-icon ui-icon-gear float_left"></span>
-    <span class="gral_text">Administración</span>
-  </div>
-  
-  <div id="gral_button_close" class="ui-state-default ui-corner-all mon-close-icon">
-    <span class="ui-icon ui-icon-circle-close float_left"></span>
-    <span class="gral_text">Cerrar Sesión</span>
+  <div id="toolbar" class="ui-corner-all">
+      <button id="gral_button_close" class="btnInfo ui-state-default ui-corner-all" title="Cerrar Sesión"><span class="ui-icon ui-icon-circle-close float_left"></span>Cerrar Sesión</button>
+      <button id="gral_button_admin" class="btnInfo ui-state-default ui-corner-all" title="Administración"><span class="ui-icon ui-icon-gear float_left"></span>Administración</button>
+      <button id="gral_button_manual" class="btnInfo ui-state-default ui-corner-all" title="Manual"><span class="ui-icon  ui-icon-folder-collapsed float_left"></span>Manual</button>
+      <button id="gral_button_soporte" class="btnInfo ui-state-default ui-corner-all" title="Soporte"><span class="ui-icon  ui-icon-gear float_left"></span>Soporte</button>
   </div>
   <!--Botones Superiores-->
 </div><!--tabs-->
-<!--------Dialogs-->
+<!--Dialogs-->
   <div id="divAviso" style="display: none;font-family: Verdana;">
     <!--<p><strong>Bienvenido(a) : {USER}</strong></p>
     <p align="justify">Ahora puedes enviar Tickets de Servicio sobre cualquier situación que exista en la Plataforma.</p>

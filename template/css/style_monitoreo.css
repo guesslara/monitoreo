@@ -276,7 +276,7 @@
   top: 156px;
 	height: 60px;
 	position: absolute;
-	right: 25px;
+	right: 15px;
 	width: 170px;
 	color: #000;
 	font-weight:bold;
@@ -284,6 +284,7 @@
 	padding: 5px;
 	box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);
 	display: none;
+  z-index: 9999;
 }
 
 .infoUnidadGlobo{
@@ -309,7 +310,7 @@
   width: 23px;
   height: 21px;
   top: 130px;
-  right: 138px;
+  right: 168px;
   background: #FFF;
   padding: 2px;
 }
@@ -458,8 +459,8 @@
   top: 70px;
   height: 53px;
   position: absolute;
-  right: 25px;
-  width: 123px;
+  right: 15px;
+  width: 150px;
   color: #000;
   font-weight:bold;
   /*border: 1px solid #000;*/
@@ -472,7 +473,7 @@
   height: 15px;
   position: absolute;
   right: 15px;
-  width: 113px;
+  width: 142px;
   color: white;
   font-weight:bold;
   background: #FFF;
@@ -506,3 +507,55 @@
   margin:2px;
   display: none;
 }
+/*botones deinformacion*/
+.btnInfo{
+  color:#000;
+  border: 1px solid #000;
+  padding: 4px;
+  float: right;
+  text-decoration: none;
+  margin-top: -1.7px;
+}
+#toolbar {
+  position: absolute;
+  padding: 4px;
+  display: inline-block;
+  z-index: 999;
+  top: 2.7px;
+  right: 2px;
+}
+#mostrarInfoAdicionalLatLon{
+  border:0px solid #000;
+  position:absolute;
+  width:180px;
+  height:180px;
+  top:160px;
+  right:15px;
+  z-index:999;
+  box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);
+  /*background-image: url(../../../../public/images/desv.png) repeat;*/
+  /*background: url(../../../../public/images/desv.png) repeat;*/
+  background-color: rgba(255,255,255,0.5);
+}
+.infoLatLon{
+  font-size: 8px;
+  border-bottom: 1px solid #CCC;
+  padding: 3px;
+}
+.infoLatLon:hover{
+  background: #FFF;
+  cursor: pointer;
+}
+.historialInfo{
+  height: 170px;
+  overflow-y:auto;
+}
+.historialLatLon{
+  height: 10px;
+  text-align: center;
+  border-bottom: 1px solid #FFF;
+  background: #FFF;
+  font-size: 9px;
+  font-weight: bold;
+}
+
