@@ -155,10 +155,13 @@ function seleccionarUnidad(idUnidad,bandera) {
 	    idABorrar = array_selected.indexOf(idUnidad);//se busca el id de la unidad en el array
 	    if(idABorrar == -1){//no existe en el array
 			array_selected.push(idUnidad);//se agrega el id de la unidad al array llamado array_selected
-			$("#img_"+idUnidad).attr("src","./public/images/tick.png")//cambia la imagen del div
+			//se buscan los elementos concordantes
+			$("#mon_acordeon_unidades").find("#img_"+idUnidad).attr("src","./public/images/tick.png")//cambia la imagen del div
+			//$("#img_"+idUnidad).attr("src","./public/images/tick.png")//cambia la imagen del div
 	    }else{
 			array_selected.splice(idABorrar, 1);//se quita el elemento del array
-			$("#img_"+idUnidad).attr("src","./public/images/ok16.png")//cambia la imagen del div
+			$("#mon_acordeon_unidades").find("#img_"+idUnidad).attr("src","./public/images/ok16.png")//cambia la imagen del div
+			//$("#img_"+idUnidad).attr("src","./public/images/ok16.png")//cambia la imagen del div
 			//se quita la informacion de la tabla de informacion
 			idTr="#posicionTr_"+idUnidad;
 			//console.log(idTr);
