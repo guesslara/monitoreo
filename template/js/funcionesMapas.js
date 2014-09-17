@@ -21,13 +21,23 @@ function mostrarMapa(){
 		google.maps.event.addListener(map, 'idle', showM);
 		google.maps.event.trigger(map, 'resize');
 		google.maps.event.addListener(map, 'click', function(event) {
-  			document.getElementById("latlng").innerHTML = event.latLng;
+  			//document.getElementById("latlng").innerHTML = event.latLng;
+  			colocarLatLon(event.latLng);
 		});
 		directionsDisplay.setMap(map);
     }catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
     }
+}
+var strLat;
+function colocarLatLon(latLng){
+	strLat=latLng.toString();
+	strLat=strLat.split(",");
+	//se envia el valor a los divs
+	document.getElementById("divLatitud").innerHTML = strLat[0].substring(1);
+	document.getElementById("divLongitud").innerHTML = strLat[1].substring(0,(strLat[1].length-1));
+	strLat.length=0;
 }
 
 function add_info_marker(marker,content){	

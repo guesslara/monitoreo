@@ -91,59 +91,82 @@
     </div>
     <!--Fin Div Ultimas Posiciones-->
     <!--Div Geocercas-->
-    <div id="mon_Geocercas" class="mon_div_geos">
-	    <!--<input type="checkbox" name="mon_chk_g" id="mon_chk_g">GeoPuntos-->
+    <!--<div id="mon_Geocercas" class="mon_div_geos">
 	    <input type="checkbox" name="mon_chk_c" id="mon_chk_c" />GeoCercas
 	    <div id="gral_button_events" class="ui-state-default ui-corner-all mon-close-evts" style="margin-top: 29px;width:100px;">
 		    <span class="ui-icon ui-icon-alert float_left"></span>
 		    <span class="gral_text" style="width: 80px;">Ult. Alertas</span>
 	    </div>
-    </div>
+    </div>-->
     <!--Fin Div Geocercas-->
-    <!--Div tiempo para actualizar-->
-    <div id="mon_TiempoActualizar"  class="mon_div_time_lapse">
-      <span>Actualizar en: <span id="mon_time">00:00</span></span>
-    </div>
-    <div id="divEngraneActualiza" title="Ajustar el Tiempo de Actualizaci&oacute;n"><img src="./public/images/icon-info.png" width="18" height="18" border="0" /></div>
-    <div id="cambiarActualizacion">Elija el tiempo para actualizar:
-      <select id="mon_sel_time" style="margin:5px 5px 5px 5px;">
-	  <option value="30000">30</option>
-	  <option value="60000">60</option>
-	  <option value="120000" selected="selected">120</option>
-      </select> segs.
-      <div style="text-align: right;">
-        <a href="#" id="enlaceCerrarAjusteTiempo" title="Cerrar">Cerrar</a>
-      </div>
-    </div>
-    <!--Div tiempo para actualizar-->
-    <div id="latlng">&nbsp;</div>
+    
+    <!--<div id="latlng">&nbsp;</div>-->
 
-    <div id="mostrarInfoAdicionalLatLon">
-      <div class="historialLatLon">Historial</div>
-      <div class="historialInfo">
-          <div class="infoLatLon">15:50:42 => 28.260844, -102.615737</div><!--28.260844114804843, -102.61573791503906-->
-          <div class="infoLatLon">15:48:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:46:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:43:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:40:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:38:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:36:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:34:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:32:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:30:42 => 28.260844, -102.615737</div>
+    
 
-          <!--<div class="infoLatLon">15:28:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:26:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:24:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:22:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:20:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:18:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:16:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:14:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:12:42 => 28.260844, -102.615737</div>
-          <div class="infoLatLon">15:10:42 => 28.260844, -102.615737</div>-->
+    <div id="barraMonitoreo">
+
+      <div style="border:1px solid #FF0000;padding:5px;width:157px;margin:5px;overflow:hidden;height:35px;">
+        <div style="float:left;width:23px;border:1px solid #FF0000;">Lat:</div><div id="divLatitud" class="estiloLatLon">Latitud</div>
+        <div style="float:left;border:1px solid #FF0000;">Lon:</div><div id="divLongitud" class="estiloLatLon">Longitud</div>
       </div>
+
+      
+      <div style="border:1px solid #FF0000;padding:1px;width:165px;margin:5px;">
+        <input type="checkbox" name="mon_chk_c" id="mon_chk_c" />GeoCercas
+      </div>
+
+      <div style="border:1px solid #FF0000;padding:5px;width:157px;margin:5px;">
+        <a href="#" id="gral_button_events" class="btnUAlertas ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U. Alertas</a>
+      </div>
+
+      <!--Div tiempo para actualizar-->
+      <div id="mon_TiempoActualizar"  class="mon_div_time_lapse">
+        <span>Actualizar en: <span id="mon_time">00:00</span></span>
+      </div>
+      <div id="divEngraneActualiza" title="Ajustar el Tiempo de Actualizaci&oacute;n"><img src="./public/images/icon-info.png" width="18" height="18" border="0" /></div>
+      <div id="cambiarActualizacion">Elija el tiempo para actualizar:
+        <select id="mon_sel_time" style="margin:5px 5px 5px 5px;">
+          <option value="30000">30</option>
+          <option value="60000">60</option>
+          <option value="120000" selected="selected">120</option>
+        </select> segs.
+        <div style="text-align: right;">
+          <a href="#" id="enlaceCerrarAjusteTiempo" title="Cerrar">Cerrar</a>
+        </div>
+      </div>
+      <!--Div tiempo para actualizar-->
+
+      <div id="mostrarInfoAdicionalLatLon">
+        <div class="historialLatLon">Historial</div>
+        <div class="historialInfo">
+            <div class="infoLatLon">15:50:42 => 28.260844, -102.615737</div><!--28.260844114804843, -102.61573791503906-->
+            <div class="infoLatLon">15:48:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:46:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:43:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:40:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:38:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:36:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:34:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:32:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:30:42 => 28.260844, -102.615737</div>
+
+            <!--<div class="infoLatLon">15:28:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:26:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:24:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:22:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:20:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:18:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:16:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:14:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:12:42 => 28.260844, -102.615737</div>
+            <div class="infoLatLon">15:10:42 => 28.260844, -102.615737</div>-->
+        </div>
+      </div>
+
     </div>
+
+
   </div><!--Monitoreo-->
   <div id="Admon"  class="pestana"></div><!--Admon-->
   <div id="Report" class="pestana"></div><!--Report-->
