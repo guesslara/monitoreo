@@ -206,6 +206,20 @@ $(document).ready(
 			}
 		});
 
+		$("#btnActualizaTiempo").button({
+ 			icons: {
+				primary: "ui-icon-triangle-1-s"
+				//secondary: "ui-icon-triangle-1-s"
+				//primary: "ui-icon-triangle-1-s"
+			},
+			text: false
+		});
+
+		$("#btnActualizaTiempo").click(function(){
+			$("#cambiarActualizacion").fadeIn("slow");
+		});
+
+		$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
 	
 /*

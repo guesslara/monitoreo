@@ -12,7 +12,11 @@ function mostrarMapa(){
 	  		zoom: 5,
 	  		center: new google.maps.LatLng(24.5154926,-111.4534356),
 	  		mapTypeId: google.maps.MapTypeId.ROADMAP,
-	  		panControl: false
+	  		panControl: false,
+	  		mapTypeControlOptions: {
+        		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        		position: google.maps.ControlPosition.TOP_LEFT
+    		}
 		};
 		map = new google.maps.Map(document.getElementById('mon_content'),mapOptions);
 	    google.maps.event.addListener(map, 'click', function() {
@@ -71,6 +75,10 @@ function muestraPosicionesHistorico(posicionesHist){
 				ubicaciones=posicionesHist[i].split(",");
 				array_latitudes[i]  = parseFloat(ubicaciones[1]);
 				array_longitudes[i] = parseFloat(ubicaciones[2]);
+				//se mandan las posiciones a la tabla del historial
+				strHistorial="<div title='De click para conocer su ubicación' class='infoLatLon'>"+ubicaciones[0].substring(11)+" = "+ubicaciones[1]+" "+ubicaciones[2]+"</div>";
+				$("#historialInfo").append(strHistorial);
+				strHistorial="";
 			}
 			//posicion del mapa
 		  	var positon = new google.maps.LatLng(array_latitudes[(posicionesHist.length-1)],array_longitudes[(posicionesHist.length-1)]);

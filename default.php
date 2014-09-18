@@ -26,6 +26,7 @@
     $resAdicional=$db->sqlQuery($sqlAdicional);
     $rowAdicional=$db->sqlFetchArray($resAdicional);
     $ruta="display:none;";
+    $hRuta="display:none";
     $seguimiento="N";
 
     if($rowAdicional["MONITOREO_RUTAS"]==1){
@@ -34,6 +35,7 @@
 
 	if($rowAdicional["MONITOREO_SEGUIMIENTO"]==1){
 		$seguimiento="Y";
+		$hRuta="display:block;";
     }
     
 	$tpl->assign_vars(array(
@@ -47,7 +49,8 @@
         'IDUSUARIO'		=> $userAdmin->user_info["ID_USUARIO"],
         'IDCLIENTE'		=> $userAdmin->user_info["ID_CLIENTE"],
         'RUTA'			=> $ruta,
-        'SEGUIMIENTO'	=> $seguimiento
+        'SEGUIMIENTO'	=> $seguimiento,
+        'HISTORIAL'		=> $hRuta
 	));
 	
 	$tpl->pparse('default');
