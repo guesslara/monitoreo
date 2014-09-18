@@ -55,8 +55,13 @@ class monitoreo{
       $objDb=$this->iniciarConexionDb();
       $objDb->sqlQuery("SET NAMES 'utf8'");
       $tabla="HIST".$this->extraerNombreTabla($clienteId);
-      $sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE GPS_DATETIME BETWEEN '".date("Y-m-d")." 00:00:00' AND '".date("Y-m-d")." 23:59:59' AND COD_ENTITY=".$idUnidad." ORDER BY GPS_DATETIME ASC LIMIT 0,10";
+      //$sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE GPS_DATETIME BETWEEN '".date("Y-m-d")." 00:00:00' AND '".date("Y-m-d")." 23:59:59' AND COD_ENTITY=".$idUnidad." ORDER BY GPS_DATETIME ASC LIMIT 0,10";
       //$sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE GPS_DATETIME BETWEEN '2014-05-27 00:00:00' AND '2014-05-27 23:59:59' AND COD_ENTITY=".$idUnidad." ORDER BY GPS_DATETIME ASC LIMIT 0,10";
+      $sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE 
+        FROM ".$tabla." 
+        WHERE GPS_DATETIME LIKE '".date("Y-m-d")."%' AND COD_ENTITY='".$idUnidad."'
+        ORDER BY GPS_DATETIME DESC
+        LIMIT 10";
       $resH=$objDb->sqlQuery($sqlH);
       $strHistorico="";
       $numRegistros=$objDb->sqlEnumRows($resH);
