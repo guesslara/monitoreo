@@ -18,7 +18,7 @@
 <script  src="public/js/OpenLayers-2.13.1/OpenLayers.js" ></script>
 <link type="text/css" href="{PATH}/css/style_monitoreo.css" rel="stylesheet" />
 <link type="text/css" href="public/css/jqueryUIX.css" rel="stylesheet" />
-<link type="text/css" href="public/css/estiloX.css" rel="stylesheet"/>
+<link type="text/css" href="public/css/estiloX2.css" rel="stylesheet"/>
 <link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
 <link type="text/css" href="./public/libs/jtables/jtables.css" rel="stylesheet"/>
 
