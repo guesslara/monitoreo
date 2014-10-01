@@ -44,14 +44,42 @@ function redimensionarDivs() {
     $("#contenedorSlider").css("height",(altoContenedor-44)+"px");
     $("#main_view").css("height",(altoContenedor-73)+"px");
     $("#window").css("height",(altoContenedor-75)+"px");
-    //Se verifica la existencia del tab de itinerarios para su manejo
-    if ($("#tabs-lp").length){
- 		$("#tabs-lp").css("height",(altoContenedor-50)+"px");
- 		$("#tabs-01").css("height",(altoContenedor-93)+"px");
- 		$("#tabs-02").css("height",(altoContenedor-93)+"px");
- 		$("#tabs-03").css("height",(altoContenedor-93)+"px");
- 		$("#tabs-05").css("height",(altoContenedor-93)+"px");
-	}
+    //Se verifica la existencia del tab de alertas
+    if($("#tabsAlertas").length){
+		$("#tabsAlertas").css("height",(altoContenedor-51)+"px");
+		$("#tabAlertasVigentes, #tabAlertasActivas, #tabAlertasInactivas").css("height",(altoContenedor-98)+"px");
+		if($("#gbox_alertasvigentes,#gbox_alertasactivas").length){
+			//grid alertas vigentes
+			$("#gbox_alertasvigentes").css("height",(altoContenedor-129)+"px");
+			$("#gbox_alertasvigentes").css("width","100%");
+			$("#gview_alertasvigentes").css("height",(altoContenedor-155)+"px");
+			$("#gview_alertasvigentes").css("width","100%");
+			$("#alertasvigentes_pager").css("width","100%");
+			//grid alertas activas
+			$("#gbox_alertasactivas").css("height",(altoContenedor-129)+"px");
+			$("#gbox_alertasactivas").css("width","100%");
+			$("#gview_alertasactivas").css("height",(altoContenedor-155)+"px");
+			$("#gview_alertasactivas").css("width","100%");
+			$("#alertasactivas_pager").css("width","100%");
+			//grid alertas inactivas
+			$("#gbox_alertasinactivas").css("height",(altoContenedor-129)+"px");
+			$("#gbox_alertasinactivas").css("width","100%");
+			$("#gview_alertasinactivas").css("height",(altoContenedor-155)+"px");
+			$("#gview_alertasinactivas").css("width","100%");
+			$("#alertasinactivas_pager").css("width","100%");
+			//scroll de registros
+			$(".ui-jqgrid-bdiv").css("width","100%");
+			$(".ui-jqgrid-bdiv").css("height",(altoContenedor-184)+"px");	
+			//header del grid
+			$(".ui-jqgrid-hbox").css("width","100%");
+			$(".ui-jqgrid-hdiv").css("width","100%");
+			//tabs auxiliares
+			$("#tabVigentes, #tabActivas, #tabInactivas").css("width","100%");
+			$("#tabActivas").css("height",(altoContenedor-125)+"px");
+			$("#tabInactivas").css("height",(altoContenedor-125)+"px");
+		}
+    }
+    
 }
 /**
  *@description Cada ves que se redimensiona la ventana del navegador se manda a llamar la funcion que redimensiona todos

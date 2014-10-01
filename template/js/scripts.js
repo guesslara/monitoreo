@@ -219,7 +219,7 @@ $(document).ready(
 			$("#cambiarActualizacion").fadeIn("slow");
 		});
 
-		$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
+		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
 	
 /*
