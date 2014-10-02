@@ -42,6 +42,9 @@ $(document).ready(
 			resizable: false,
 			title: "Envio de Comandos",
 			buttons: {
+				Cancelar: function(){
+					$( "#mon_dialog" ).dialog("close");
+				},
 				Enviar: function() {
 					mon_send_command()
 				}

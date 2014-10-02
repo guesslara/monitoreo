@@ -1,0 +1,21 @@
+<Table border='0' cellpadding='0' cellspacing='0' width='100%'>
+	<tr>
+		<td style='height:15px;padding:5px;'>Comandos:</td>
+		<td>
+			<select class='caja_txt' id='mon_sel_cmds'>
+				<option value="" selected="selected">Seleccione comando...</option>
+			<!-- BEGIN listadoComandos -->
+				<option value="{listadoComandos.VALUE}">{listadoComandos.DESCRIPCION}</option>
+			<!-- END listadoComandos -->
+			<select>
+		</td>
+	</tr>
+	<tr>
+		<td valign='top'>Comentarios:</td>
+		<td><textarea  id='mon_cmds_com' class='caja_txt_a' /></td>
+	</tr>
+</table>
+<input type='hidden' id='mon_cmds_imei' value='{IMEI}' />
+<input type='hidden' id='mon_cmds_unit' value='{IDUNIDAD}' />
+<input type='hidden' id='mon_cmds_servidor' value='{SERVIDOR}' />
+<input type='hidden' id='mon_cmds_instancia' value='{INSTANCIA}' />

@@ -47,7 +47,37 @@ class monitoreo{
       return $table_name . $idCliente;
     }
     /**
-    *@method        extae posiciones del historico
+    *@method        extrae los comandos para el tipo de unidad
+    *@description   Extrae los comandos para la unidad
+    *@paramas
+    */
+    public function extraerComandosUnidad($idUsuario,$clienteId,$idTipoEquipo){
+      $cmdsR="";
+      $objDb=$this->iniciarConexionDb();
+      $objDb->sqlQuery("SET NAMES 'utf8'");
+      $sql_cmds="SELECT F.DESCRIPCION,F.COD_EQUIPMENT_PROGRAM 
+      FROM ADM_COMANDOS_SALIDA E 
+        LEFT JOIN ADM_COMANDOS_CLIENTE F ON F.COD_EQUIPMENT_PROGRAM = E.COD_EQUIPMENT_PROGRAM
+        LEFT JOIN ADM_COMANDOS_USUARIO G ON G.ID_COMANDO_CLIENTE = F.ID_COMANDO_CLIENTE
+      WHERE E.COD_TYPE_EQUIPMENT = '".$idTipoEquipo."' AND E.FLAG_SMS   = 0 AND  G.ID_USUARIO = ".$idUsuario;
+      $res_cmds = $objDb->sqlQuery($sql_cmds);
+      
+      if($objDb->sqlEnumRows($res_cmds)==0){
+        $cmdsR=0;
+      }else{
+        while($row_cmds=$objDb->sqlFetchArray($res_cmds)){//se recorren los resultados para obtener los comandos
+          if($cmdsR==""){
+            $cmdsR=$row_cmds["DESCRIPCION"]."%%%".$row_cmds["COD_EQUIPMENT_PROGRAM"];  
+          }else{
+            $cmdsR.="%%%%".$row_cmds["DESCRIPCION"]."%%%".$row_cmds["COD_EQUIPMENT_PROGRAM"]; 
+          }
+        }
+      }
+      $objDb->sqlFreeResult($res_cmds);
+      return $cmdsR;
+    }
+    /**
+    *@method        extRae posiciones del historico
     *@description   Extrae las 10 ultimas posiciones del historico
     *@paramas
     */
@@ -156,6 +186,7 @@ class monitoreo{
   	*/
    	public function cargarGrupos($idUsuario){
    		$objDb=$this->iniciarConexionDb();
+      $objDb->sqlQuery("SET NAMES 'utf8'");
    		$sqlG="SELECT ADM_GRUPOS.ID_GRUPO, ADM_GRUPOS.NOMBRE, ADM_USUARIOS_GRUPOS.COD_ENTITY,ADM_UNIDADES.DESCRIPTION
             FROM (ADM_USUARIOS_GRUPOS INNER JOIN ADM_GRUPOS ON ADM_GRUPOS.ID_GRUPO = ADM_USUARIOS_GRUPOS.ID_GRUPO) 
 		        INNER JOIN ADM_UNIDADES ON ADM_USUARIOS_GRUPOS.COD_ENTITY=ADM_UNIDADES.COD_ENTITY
