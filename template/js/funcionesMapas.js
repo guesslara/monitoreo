@@ -25,10 +25,8 @@ function mostrarMapa(){
 		google.maps.event.addListener(map, 'idle', showM);
 		google.maps.event.trigger(map, 'resize');
 		google.maps.event.addListener(map, 'click', function(event) {
-  			//document.getElementById("latlng").innerHTML = event.latLng;
   			colocarLatLon(event.latLng);
 		});
-		google.maps.event.trigger(map, 'resize');
 		directionsDisplay.setMap(map);
     }catch(err){
 		$("#error").show();

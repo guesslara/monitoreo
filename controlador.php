@@ -67,12 +67,14 @@ if($_SERVER["HTTP_REFERER"]==""){
 			$unit   = $_POST['idUnidad'];
 			$servidor= $_POST['servidor'];//variable nueva
 			$instancia =$_POST['instancia'];//variable nueva
+			$usuarioId = $_POST["usuarioId"];
+			$clienteId = $_POST["clienteId"];
 			
 			$Comandos =  new cCommands();
 			$Comandos->set_config_bd($config_bd);
 			$Comandos->set_unidad($unit);
 			$Comandos->set_idcomando($id_row);
-			$Comandos->set_usuario($userAdmin->user_info['ID_USUARIO']);
+			$Comandos->set_usuario($usuarioId);
 			$Comandos->set_comentario($comment);
 			$Comandos->set_origen('movilidad');
 			$Comandos->set_servidor($servidor);
@@ -92,5 +94,12 @@ if($_SERVER["HTTP_REFERER"]==""){
 			echo $response;
 			
 		break;
+		case "mostrarGeocercas":
+			/*echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";*/
+			echo $georeferencias=$objM->obtenerGeoreferencias($_POST["usuarioId"],$_POST["clienteId"]);
+		break;
+
 	}
 }

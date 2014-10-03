@@ -222,6 +222,12 @@ $(document).ready(
 			$("#cambiarActualizacion").fadeIn("slow");
 		});
 
+		$("#mon_chk_c").click(function(){
+			if(this.checked){
+				getGeos();
+			}
+		});
+
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
 	

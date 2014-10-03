@@ -87,15 +87,13 @@ function redimensionarDivs() {
  */
 window.onresize=redimensionarDivs;
 
-
-
 function showM(){
 	var bounds = map.getBounds();
 	var zoomLevel = map.getZoom();
 
 	monGeoZoom   = zoomLevel;
 	monGeoBnds   = bounds;
-	drawGeos();	
+	//drawGeos();	
 }
 
 // function mon_search_unidad(buscar,draw){
@@ -177,7 +175,6 @@ function checkTime(i){
   	}
 	return i;
 }
-
 // function mon_refresh_selected(){
 // 	for(var i=0;i<arrayunits.length;i++){
 // 		var units_info = arrayunits[i].split('|');
@@ -191,9 +188,6 @@ function checkTime(i){
 // 	mon_draw_table();
 // 	actualizaUltimasPosiciones();
 // }
-
-
-
 function stopTimer(){
 	if(mon_timer!=null){
 		mon_timer.stop();	
@@ -205,25 +199,17 @@ function stopTimer(){
 	}	
 	$("#mon_time").html("00:00");
 }
-
+/*
+*Funcion modificada para el proceso de las geocercas
+*/
 function getGeos(){
 	if(listReferencias==0){
+		//$("#mon_dialog").dialog("open");
 		arrayReferencias = [];
-		$.ajax({
-			type: "POST",
-	        url: "index.php?m=mMonitoreo&c=mGetGeos",
-	        success: function(datos){
-				var result = datos;
-				if(result!= 0){
-					listReferencias  = 1;
-					arrayReferencias = new Array();
-					arrayReferencias = result.split('|');					
-					drawGeos();					
-				}
-	        }
-		});
-	}else{
-		drawGeos();
+		usuarioId=$("#usuarioId").val();
+		clienteId=$("#usuarioCliente").val();
+		parametros="action=mostrarGeocercas&usuarioId="+usuarioId+"&clienteId="+clienteId;
+		ajaxMonitoreo("mostrarGeocercas","controlador",parametros,"cargador2","mon_dialog","POST");
 	}
 }
 
@@ -264,7 +250,7 @@ function drawGeos(){
 			}
 		}
 
-	if(arrayGeoInfo[0]=='C' && checkCercas){ 
+		if(arrayGeoInfo[0]=='C' && checkCercas){ 
 			var arrayGeoInfoLats = null;
 			arrayGeoInfoLats = arrayGeoInfo[6].split('&');
 			var geos_points_polygon = [];

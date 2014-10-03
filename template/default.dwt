@@ -70,7 +70,7 @@
     <!--Div Ultimas Posiciones-->
     <div id="divUltimasPosiciones">
       	<div style="border:0px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
-          &Uacute;ltimas Posiciones<!---<a href="#" id="enlaceVentana">Separar</a>-->
+          &Uacute;ltimas Posiciones<a href="#" id="enlaceVentana">Separar</a>
         </div>
         <div style="position:relative;border:0px solid #FF0000;height:90%;overflow:auto;">
             <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP">
@@ -113,7 +113,7 @@
 
       
       <div style="border-bottom:0px solid #999;padding:1px;width:165px;margin:5px;">
-        <input type="checkbox" name="mon_chk_c" id="mon_chk_c" />GeoCercas
+        <input type="checkbox" name="mon_chk_c" id="mon_chk_c" /><label for="mon_chk_c">GeoReferencias</label>
       </div>
 
       <div style="border-bottom:0px solid #999;padding:6px;width:157px;margin:5px;">
