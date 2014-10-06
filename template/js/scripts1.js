@@ -267,39 +267,6 @@ function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comando
 	clienteId=$("#usuarioCliente").val();
 	parametros="action=cargarComandosUnidad&idUsuario="+usuarioId+"&clienteId="+clienteId+"&tipo="+valor+"&imei="+imei+"&idUnidad="+idUnidad+"&servidor="+servidor+"&instancia="+instancia;
 	ajaxMonitoreo("cargarComandosUnidad","controlador",parametros,"mon_dialog","mon_dialog","POST");
-    /*
-    option="";
-    $("#mon_dialog").html("");
-    if(valor!="S/C"){
-	listado=valor.split("%%%%");
-	for(var i=0;i<listado.length-1;i++){
-	    values = listado[i].split("%%%");
-	    option = option + '<option value="'+values[1]+'">'+
-	    values[0]+'</option>';
-	}
-	//se arma la estructura que la va a contener
-	var comandosT="<Table border='0' cellpadding='0' cellspacing='0' width='100%'>";
-	comandosT+="<tr><td style='height:15px;padding:5px;'>Comandos:</td><td><select class='caja_txt' id='mon_sel_cmds'>"+option+"<select></td></tr>";
-	comandosT+="<tr><td valign='top'>Comentarios:</td><td><textarea  id='mon_cmds_com' class='caja_txt_a' /></td></tr>";
-	comandosT+="</table>";
-	comandosT+="<input type='hidden' id='mon_cmds_imei' value='"+imei+"' />";
-	comandosT+="<input type='hidden' id='mon_cmds_unit' value='"+idUnidad+"' />";
-	comandosT+="<input type='hidden' id='mon_cmds_servidor' value='"+servidor+"' />";
-	comandosT+="<input type='hidden' id='mon_cmds_instancia' value='"+instancia+"' />";
-	$("#mon_dialog").append(comandosT);
-    }else{
-	mensajeError="<h2>Esta unidad no tiene asignados comandos</h2>";
-	$("#mon_dialog").append(mensajeError);
-	$("#mon_dialog").dialog('open',{ modal: true,
-	    title:"Error",
-	    buttons: {
-		Ok: function() {
-		    $( this ).dialog( "close" );
-		}
-	}});
-    }
-    $("#mon_dialog").dialog('open');
-	*/
 }
 function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pdi,lat,lon,nivelBateria,direccion,idTr){
 	try{
@@ -323,7 +290,7 @@ function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pd
 	    var myLatLng 	= new google.maps.LatLng(lat,lon);
 	    var beachMarker = new google.maps.Marker({
 	        position: myLatLng,
-	        map: 	map,
+	        map: 	mapaMonitoreo,
 	        title: 	dunit,
 	        icon:   image,
 	    });
@@ -377,12 +344,12 @@ function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pd
 		content: info
 	    });
 	    
-	    infowindow.open(map,beachMarker);
+	    infowindow.open(mapaMonitoreo,beachMarker);
 
 	    var positon = new google.maps.LatLng(lat, lon);
-	    map.setZoom(18);
-	    map.setCenter(positon);	
-	    map.panTo(positon);
+	    mapaMonitoreo.setZoom(18);
+	    mapaMonitoreo.setCenter(positon);	
+	    mapaMonitoreo.panTo(positon);
 
 
     }catch(err){
@@ -555,7 +522,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 		    
 		    if(lat!=0 && lon !=0){
 				marker = new google.maps.Marker({
-					map: map,
+					map: mapaMonitoreo,
 					position: new google.maps.LatLng(lat,lon),
 					title: 	dunit,
 					icon: 	image,
@@ -571,7 +538,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 					    strokeWeight: 2,
 					    fillColor: '#546EFF',
 					    fillOpacity: 0.10,
-					    map: map,
+					    map: mapaMonitoreo,
 					    center: new google.maps.LatLng(lat,lon),
 						radius: radioLbs
 					};
@@ -594,7 +561,6 @@ function dibujarUltimasPosiciones(array_posiciones){
 		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,codTypeEquipment,lat,lon,imei,servidor,instancia);
 		}//fin for array_posiciones
 	}//fin if verificacion array_posiciones
-
 	//se vacia el array posiciones
 	array_posiciones.length=0;
 }

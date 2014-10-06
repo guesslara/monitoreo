@@ -277,16 +277,17 @@
 }
 
 #cambiarActualizacion{
-  top: 143px;
-	height: 60px;
+  top: 154px;
+	height: 100px;
 	position: absolute;
-	right: 0px;
-	width: 170px;
+	right: 35px;
+	width: 130px;
 	color: #000;
 	font-weight:bold;
 	background: #FFF;
 	padding: 5px;
-	box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);
+	/*box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);*/
+  border: 1px solid #CCC;
 	display: none;
   z-index: 9999;
 }

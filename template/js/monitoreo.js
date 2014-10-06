@@ -1,9 +1,7 @@
 var arrayunits 		= new Array();
-var draw_acordion	= 0;
 var array_selected  = Array();
 var markers = [];
 var arraygeos = [];  
-var map, infoBubble;
 var mon_timer,mon_timer_count;
 var info_window='';
 var infowindow;
@@ -88,36 +86,13 @@ function redimensionarDivs() {
 window.onresize=redimensionarDivs;
 
 function showM(){
-	var bounds = map.getBounds();
-	var zoomLevel = map.getZoom();
+	var bounds = mapaMonitoreo.getBounds();
+	var zoomLevel = mapaMonitoreo.getZoom();
 
 	monGeoZoom   = zoomLevel;
 	monGeoBnds   = bounds;
 	//drawGeos();	
 }
-
-// function mon_search_unidad(buscar,draw){
-// 	//alert(buscar);
-	
-// 	var existe = jQuery.inArray(buscar, array_selected);
-// 	var arraygroup = buscar.split('|');
-// 	if(existe<0){
-// 		array_selected.push(buscar);		
-// 		//$("#div_unit_"+arraygroup[2]).addClass("unit-selected");
-// 		$("#mon_acordeon_icon_"+arraygroup[2]).removeClass('icon_unit_unselected').addClass('icon_unit_selected');
-// 		/*mon_draw_table();*/
-// 	}else{
-// 		//$("#div_unit_"+arraygroup[2]).removeClass('unit-selected');
-// 		$("#mon_acordeon_icon_"+arraygroup[2]).removeClass('icon_unit_selected').addClass('icon_unit_unselected');
-// 		array_selected.splice(existe,1);
-// 		buscar="quitarElemento";
-// 	}
-// 	if(draw){
-// 		mon_draw_table();
-// 	}
-	
-// 	mostrarultimasPosiciones(buscar,arraygroup[2]);
-// }
 
 function mon_refresh_units(){
     /****************************************************************************************************************/
@@ -275,7 +250,7 @@ function drawGeos(){
 			} 		    
 			
 			var geos_polygon = new google.maps.Polygon(geos_options);
-			geos_polygon.setMap(map);
+			geos_polygon.setMap(mapaMonitoreo);
 			arraygeos.push(geos_polygon);
 		}
 	}		

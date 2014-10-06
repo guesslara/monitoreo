@@ -1,4 +1,4 @@
-var map;  	
+var mapaMonitoreo;  	
 var tab_active=0;
 var banderaUltimaPosicion=0;
 var barraUP=1;
@@ -131,7 +131,6 @@ $(document).ready(
 		$("#tablaX").click(function(){
 			cambiarFocus("divUltimasPosiciones");
 		})
-		//cambiarFocus();
 		//FUNCION QUE ACTUALIZA EL TEMPORIZADOR DE LAS UNIDADES
 		$("#mon_sel_time").change(function (){
 		    mon_refresh_units();//FUNCION PARA ACTUALIZAR LAS UNIDADES
@@ -227,7 +226,7 @@ $(document).ready(
 				getGeos();
 			}
 		});
-
+		init();//funcion inicial
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
 	

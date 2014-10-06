@@ -68,8 +68,7 @@ class monitoreo{
         $color_rgb  = $funciones->rgb2html($color['R'],$color['G'],$color['B']);
             
         $respuesta .= ($respuesta=="") ? "": "|";
-        $respuesta .= $row['TIPO']."!".$color_rgb."!".$row['IMAGE']."!".$row['NOMBRE']."!".
-                  $row['LATITUDE']."!".$row['LONGITUDE']."!";
+        $respuesta .= $row['TIPO']."!".$color_rgb."!".$row['IMAGE']."!".$row['NOMBRE']."!".$row['LATITUDE']."!".$row['LONGITUDE']."!";
         
         if($row['TIPO']!='G'){
           $a_position='';

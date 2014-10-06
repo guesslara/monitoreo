@@ -18,16 +18,16 @@ function mostrarMapa(){
         		position: google.maps.ControlPosition.TOP_LEFT
     		}
 		};
-		map = new google.maps.Map(document.getElementById('mon_content'),mapOptions);
-	    google.maps.event.addListener(map, 'click', function() {
+		mapaMonitoreo = new google.maps.Map(document.getElementById('mon_content'),mapOptions);
+	    google.maps.event.addListener(mapaMonitoreo, 'click', function() {
 	    	infoWindow.close();
 		});    
-		google.maps.event.addListener(map, 'idle', showM);
-		google.maps.event.trigger(map, 'resize');
-		google.maps.event.addListener(map, 'click', function(event) {
+		google.maps.event.addListener(mapaMonitoreo, 'idle', showM);
+		google.maps.event.trigger(mapaMonitoreo, 'resize');
+		google.maps.event.addListener(mapaMonitoreo, 'click', function(event) {
   			colocarLatLon(event.latLng);
 		});
-		directionsDisplay.setMap(map);
+		directionsDisplay.setMap(mapaMonitoreo);
     }catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
@@ -52,10 +52,10 @@ function add_info_marker(marker,content){
 		var marker = this;
 		var latLng = marker.getPosition();
 		infoWindow.setContent(content);
-		infoWindow.open(map, marker);
-		map.setZoom(18);
-		map.setCenter(latLng); 
-		map.panTo(latLng);     
+		infoWindow.open(mapaMonitoreo, marker);
+		mapaMonitoreo.setZoom(18);
+		mapaMonitoreo.setCenter(latLng); 
+		mapaMonitoreo.panTo(latLng);     
     });
 }
 /*
@@ -81,9 +81,9 @@ function muestraPosicionesHistorico(posicionesHist){
 			}
 			//posicion del mapa
 		  	var positon = new google.maps.LatLng(array_latitudes[(posicionesHist.length-1)],array_longitudes[(posicionesHist.length-1)]);
-			map.setZoom(16);
-			map.setCenter(positon);	
-			map.panTo(positon);
+			mapaMonitoreo.setZoom(16);
+			mapaMonitoreo.setCenter(positon);	
+			mapaMonitoreo.panTo(positon);
 			//proceso del dibujo de la linea
 			for(i=0;i<posicionesHist.length;i++){
 				flightPlanCoordinates[i]=new google.maps.LatLng(array_latitudes[i],array_longitudes[i]);
@@ -110,7 +110,7 @@ function muestraPosicionesHistorico(posicionesHist){
 				}]
 			});
 
-		  	flightPath.setMap(map);
+		  	flightPath.setMap(mapaMonitoreo);
 			
 		  	array_latitudes.length=0;
 		  	array_longitudes.length=0;
@@ -150,7 +150,7 @@ function mon_remove_map(){
 function calcularRuta(puntoA,puntoB){
 	try{	
 		var trafficLayer = new google.maps.TrafficLayer();//se instancia la capa del trafico
-	  	trafficLayer.setMap(map);//se muestra en el mapa
+	  	trafficLayer.setMap(mapaMonitoreo);//se muestra en el mapa
 		var request = {
 			origin:puntoA,
 			destination:puntoB,
