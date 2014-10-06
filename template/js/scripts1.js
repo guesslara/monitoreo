@@ -54,7 +54,7 @@ function controladorAcciones(accion,datos,divResultado){
 			//$("#"+divResultado).show().html(datos);
 			evaluaComandoEnviado(datos);
 		break;
-		case "mostrarGeocercas":
+		case "mostrarGeoreferencias":
 			//$("#"+divResultado).show().html(datos);
 			listReferencias  = 1;
 			arrayReferencias = new Array();
@@ -455,6 +455,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 		    var imei				= datosUnidad[23];
 		    var servidor			= datosUnidad[24];
 		    var instancia			= datosUnidad[25];
+		    var fondoFila			= "#FFF";
 		    //se procesan los datos
 		    if(type=='V'){
 				if(blockMotor!=1 ){
@@ -467,11 +468,13 @@ function dibujarUltimasPosiciones(array_posiciones){
 			    	}else  if(priory==1){
 			        	image = 'public/images/geo_icons/car_orange.png';	
 			        	colorImage = "width:12px;' src='public/images/geo_icons/circle_orange.png";
+			        	fondoFila = "orange";
 			    	}	
 				}else{
 			    	image = 'public/images/car_gray.png';	
 			    	colorImage = "width:12px;' public/images/circle_gray.png";
 			    	textoMensaje = 'MOTOR BLOQUEADO - ';
+			    	fondoFila = "gray";
 				}
 				otrosCampos= '<tr><td align="left">Velocidad:</td><td align="left">'	+ vel	+' Km/h.</td></tr>'+
 				'<tr><td align="left">Estado:</td><td align="left">'   	+ estatus	+'</td></tr>';
@@ -482,7 +485,8 @@ function dibujarUltimasPosiciones(array_posiciones){
 						colorImage = "width=10px;' src='public/images/geo_icons/battery_low.png";	
 			    	}else if(battery>33 && battery < 67){
 						image = 'public/images/geo_icons/phone_orange.png';
-						colorImage = "width=10px;' src='public/images/geo_icons/battery_medium.png";	
+						colorImage = "width=10px;' src='public/images/geo_icons/battery_medium.png";
+						fondoFila = "orange";	
 			    	}else if(battery>66){						
 			        	image = 'public/images/geo_icons/phone_green.png';
 						colorImage = "width=10px;' src='public/images/geo_icons/battery.png";	
@@ -558,7 +562,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 				}
 			}
 		    //mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia);
-		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,codTypeEquipment,lat,lon,imei,servidor,instancia);
+		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,codTypeEquipment,lat,lon,imei,servidor,instancia,fondoFila);
 		}//fin for array_posiciones
 	}//fin if verificacion array_posiciones
 	//se vacia el array posiciones
@@ -574,7 +578,7 @@ var clase="even";
 /*VARIABLE TEMPORAL CREADA*/
 var contador=0;
 /*FIN VARIABLE TEMPORAL*/
-function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia){
+function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia,fondoFila){
     //se recupera si se hara el seguimiento
     seguimiento=$("#seguimiento").val();
     direccion=direccion.replace(/\s/g,' ');
@@ -587,7 +591,7 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
     $("#"+idTr).remove();//eliminamos la fila
     
 	if($("#"+idTr).length==0){
-	    var filaTr="<tr id='"+idTr+"' class='registrosUP'>";
+	    var filaTr="<tr id='"+idTr+"' class='registrosUP' style='background:"+fondoFila+"'>";
 	    filaTr+="<td><img src='"+image+"' width='20' height='20' border='0' /></td>";
 	    filaTr+="<td><img "+colorImage+"' border='0' /></td>";
 	    filaTr+="<td><img "+typeLoc+"'/></td>";

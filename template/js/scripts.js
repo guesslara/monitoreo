@@ -140,10 +140,6 @@ $(document).ready(
 			$("#cambiarActualizacion").fadeIn("slow");
 		});
 		
-		$("#enlaceCerrarAjusteTiempo").click(function(){
-			$("#cambiarActualizacion").fadeOut("slow");
-		});
-
 		$("#btnCerrarVentanaError").click(function(){
 			$("#error").hide();
 		    $("#error_mensaje").html('');
@@ -221,12 +217,47 @@ $(document).ready(
 			$("#cambiarActualizacion").fadeIn("slow");
 		});
 
+		$("#btnMostrarOpcionesGeoreferencias").button({
+			icons:{ primary: "ui-icon-triangle-1-s"},
+			text:false
+		})
+
+		$("#btnMostrarOpcionesGeoreferencias").click(function(){
+			$("#menuGeoreferencias").show();
+		});
+
 		$("#mon_chk_c").click(function(){
 			if(this.checked){
 				getGeos();
 			}
 		});
+
+		$("#cambiarActualizacion").hover(function(){
+			$(this).css("background","F0F0F0");
+		},function(){
+			$(this).slideUp("fast");
+		})
+
+		$("#60secs, #1min, #2min").click(function(){
+			mon_refresh_units();
+		});
+
+		$("#menuGeoreferencias").hover(function(){
+			$(this).css("background","F0F0F0");
+		},function(){
+			$(this).slideUp("fast");
+		})
+
+		$("#chkGeoPuntos").click(function(){
+			if(this.checked){
+				accionesGeopuntos(1);
+			}else{
+				accionesGeopuntos(0);
+			}
+		});
+
 		init();//funcion inicial
+		
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
 	
@@ -242,6 +273,7 @@ function init(){
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
 		cargarGrupos();//carga de grupos
+		getGeos("G");//carga de geopuntos
 		mostrarMensaje=$("#seguimiento").val();
 		if(mostrarMensaje=="Y"){
 			//$( "#mensajeMejoras" ).dialog("open");

@@ -6,6 +6,8 @@ var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
 var directionsService = new google.maps.DirectionsService();
 var flightPlanCoordinates = [];
 var flightPath;
+var monGeoZoom=0;
+var monGeoBnds=0;
 function mostrarMapa(){
     try{
 		var mapOptions = {
@@ -41,6 +43,14 @@ function colocarLatLon(latLng){
 	document.getElementById("divLatitud").innerHTML = strLat[0].substring(1);
 	document.getElementById("divLongitud").innerHTML = strLat[1].substring(0,(strLat[1].length-1));
 	strLat.length=0;
+}
+
+function showM(){
+	var bounds = mapaMonitoreo.getBounds();
+	var zoomLevel = mapaMonitoreo.getZoom();
+
+	monGeoZoom   = zoomLevel;
+	monGeoBnds   = bounds;
 }
 
 function add_info_marker(marker,content){	
@@ -185,4 +195,93 @@ function calcularRuta(puntoA,puntoB){
     }
 }
 
+function drawGeos(){
+	var checkCercas = $('input[name=mon_chk_c]').is(':checked');
 
+	if(monMarkers || monMarkers.length>-1){
+		for (var i = 0; i < monMarkers.length; i++) {
+	          monMarkers[i].setMap(null);
+		}	
+		monMarkers = [];
+	}
+
+	for(var i=0;i<arrayReferencias.length;i++){
+		var arrayGeoInfo = arrayReferencias[i].split('!');
+
+		if(arrayGeoInfo[0]=='G'){
+			//if(monGeoZoom>13){
+				var pointU = new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]);
+
+				//if(monGeoBnds.contains(pointU)){
+					var image = 'public/images/'+arrayGeoInfo[2];
+				    var marker1 = new google.maps.Marker({
+					    map: mapaMonitoreo,
+					    position: new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]),
+					    title: 	arrayGeoInfo[3],
+						icon: 	image
+				    });
+					var content = '<div class="infoUnidadGlobo">'+
+					    '<div>Información del Geo Punto</div>'+
+						'<table width="400" cellpading="0" id="tblinfoUnidadGlobo" cellspacing="0">'+
+						    '<tr>'+
+							'<td colspan="2">&nbsp;</td>'+
+						    '<tr>'+
+							'<td align="left" width="125" class="estiloTituloTablaInfoUnidad">Punto de Interes:</td>'+
+							'<td align="left" width="275">'+arrayGeoInfo[3]+'</td>'+
+						    '</tr>'+
+						'</table>'+
+					    '</div>';
+				    add_info_marker(marker1,content);
+				    monMarkers.push(marker1);
+				//}
+			//}
+		}
+
+		if(arrayGeoInfo[0]=='C' && checkCercas){ 
+			var arrayGeoInfoLats = null;
+			arrayGeoInfoLats = arrayGeoInfo[6].split('&');
+			var geos_points_polygon = [];
+
+			for(j=0;j<arrayGeoInfoLats.length;j++){
+				var latlon = arrayGeoInfoLats[j].split('*');
+
+		        var Latit =  parseFloat(latlon[0]);
+		        var Longit = parseFloat(latlon[1]);
+		        var pointmarker = new google.maps.LatLng(Latit,Longit);
+		        geos_points_polygon.push(pointmarker);		        		        
+		    }
+
+			var geos_options = {
+			      paths: geos_points_polygon,
+			      strokeColor: arrayGeoInfo[1],
+			      strokeOpacity: 0.8,
+			      strokeWeight: 3,
+			      title: 	arrayGeoInfo[3],
+			      fillColor: arrayGeoInfo[1],
+			      fillOpacity: 0.35
+			} 		    
+			
+			var geos_polygon = new google.maps.Polygon(geos_options);
+			geos_polygon.setMap(mapaMonitoreo);
+			arraygeos.push(geos_polygon);
+		}
+	}		
+}
+
+function accionesGeopuntos(opcion){
+	if(opcion==0){//se ocultan todos los geopuntos
+		setAllMap(null);
+	}else if(opcion==1){
+		setAllMap(mapaMonitoreo);
+	}
+}
+
+function setAllMap(map){
+	for(var i=0;i< monMarkers.length;i++){
+		monMarkers[i].setMap(map);
+	}
+}
+// Shows any markers currently in the array.
+function showMarkers() {
+  	setAllMap(map);
+}

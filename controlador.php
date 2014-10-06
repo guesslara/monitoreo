@@ -94,11 +94,11 @@ if($_SERVER["HTTP_REFERER"]==""){
 			echo $response;
 			
 		break;
-		case "mostrarGeocercas":
+		case "mostrarGeoreferencias":
 			/*echo "<pre>";
 			print_r($_POST);
 			echo "</pre>";*/
-			echo $georeferencias=$objM->obtenerGeoreferencias($_POST["usuarioId"],$_POST["clienteId"]);
+			echo $georeferencias=$objM->obtenerGeoreferencias($_POST["usuarioId"],$_POST["clienteId"],$_POST["filtro"]);
 		break;
 
 	}

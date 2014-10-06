@@ -169,9 +169,9 @@
   text-decoration: none;
   margin-top: 5px;
 }
-.btnUAlertas{
+.btnAlertas{
   padding: 3px;
-  text-decoration: none;
+  width: 100px;
 }
 .imagenRuta{
   float:right;
@@ -283,7 +283,6 @@
 	right: 35px;
 	width: 130px;
 	color: #000;
-	font-weight:bold;
 	background: #FFF;
 	padding: 5px;
 	/*box-shadow: 0 0 0.5em 1px rgba(0, 0, 0, 0.3);*/
@@ -591,4 +590,17 @@
   padding:2px;
   width: 120px;
   float: left;
+}
+#menuGeoreferencias{
+  display:none;
+  border:1px solid #CCC;
+  background:#FFF;
+  z-index:999;
+  position:absolute;
+  top:121px;
+  right:40px;
+  width:120px;
+  height:60px;
+  padding:5px;
+  font-weight:bold;
 }

@@ -10,8 +10,6 @@ var arrayReferencias= Array();
 var listReferencias = 0;
 var aComandosAll = '';
 var UnitsString  = '';
-var monGeoZoom   ;
-var monGeoBnds   ;
 var monMarkers = [];
 var mon_array_autocomplete = Array();
 //variables adicionales
@@ -85,20 +83,13 @@ function redimensionarDivs() {
  */
 window.onresize=redimensionarDivs;
 
-function showM(){
-	var bounds = mapaMonitoreo.getBounds();
-	var zoomLevel = mapaMonitoreo.getZoom();
-
-	monGeoZoom   = zoomLevel;
-	monGeoBnds   = bounds;
-	//drawGeos();	
-}
 
 function mon_refresh_units(){
     /****************************************************************************************************************/
     /***Funcion desactivada solo hasta la nueva colocacion de los divs***********************************************/
-	var time = $("#mon_sel_time").val();
-	
+	//var time = $("#mon_sel_time").val();
+	var time = $('input:radio[name=tiempoActualizar]:checked').val();
+
 	if(mon_timer!=null){
 		mon_timer.stop();	
 		mon_timer=null;
@@ -109,7 +100,7 @@ function mon_refresh_units(){
 		if(array_selected.length>0){
 			//mon_load_units();
 			mon_refresh_units();
-			console.log("actualizarPosiciones - monitoreo.js linea 139");//se debe mandar a la funcion para actualizar las posiciones
+			//console.log("actualizarPosiciones - monitoreo.js linea 139");//se debe mandar a la funcion para actualizar las posiciones
 			//mon_arreglo_carga();
 			cargarUltimasPosiciones();
 			//actualizaUltimasPosiciones();
@@ -177,83 +168,15 @@ function stopTimer(){
 /*
 *Funcion modificada para el proceso de las geocercas
 */
-function getGeos(){
+function getGeos(filtro){
 	if(listReferencias==0){
 		//$("#mon_dialog").dialog("open");
 		arrayReferencias = [];
 		usuarioId=$("#usuarioId").val();
 		clienteId=$("#usuarioCliente").val();
-		parametros="action=mostrarGeocercas&usuarioId="+usuarioId+"&clienteId="+clienteId;
-		ajaxMonitoreo("mostrarGeocercas","controlador",parametros,"cargador2","mon_dialog","POST");
+		parametros="action=mostrarGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId+"&filtro="+filtro;
+		ajaxMonitoreo("mostrarGeoreferencias","controlador",parametros,"cargador2","mon_dialog","POST");
 	}
-}
-
-function drawGeos(){
-	var checkCercas = $('input[name=mon_chk_c]').is(':checked');
-
-	if(monMarkers || monMarkers.length>-1){
-		for (var i = 0; i < monMarkers.length; i++) {
-	          monMarkers[i].setMap(null);
-		}	
-		monMarkers = [];
-	}
-
-	for(var i=0;i<arrayReferencias.length;i++){
-		var arrayGeoInfo = arrayReferencias[i].split('!');
-
-		if(arrayGeoInfo[0]=='G'){
-			if(monGeoZoom>13){
-				var pointU = new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]);
-
-				if(monGeoBnds.contains(pointU)){
-					var image = 'public/images/'+arrayGeoInfo[2];	
-				    var marker1 = new google.maps.Marker({
-					    map: map,
-					    position: new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]),
-					    title: 	arrayGeoInfo[3],
-						icon: 	image
-				    });
-					var content = '<br><div class="div_unit_info ui-widget-content ui-corner-all">'+
-						'<div class="ui-widget-header ui-corner-all" align="center">Información del Geo Punto</div>'+
-								'<table width="400"><tr><th colspan="2">'+						  			
-								'<tr><td align="left">Punto de Interes:</td><td align="left">'+arrayGeoInfo[3]+'</td></tr>'+									
-								'</table>'+
-							'</div>';
-				    add_info_marker(marker1,content);
-				    monMarkers.push(marker1);
-				}
-			}
-		}
-
-		if(arrayGeoInfo[0]=='C' && checkCercas){ 
-			var arrayGeoInfoLats = null;
-			arrayGeoInfoLats = arrayGeoInfo[6].split('&');
-			var geos_points_polygon = [];
-
-			for(j=0;j<arrayGeoInfoLats.length;j++){
-				var latlon = arrayGeoInfoLats[j].split('*');
-
-		        var Latit =  parseFloat(latlon[0]);
-		        var Longit = parseFloat(latlon[1]);
-		        var pointmarker = new google.maps.LatLng(Latit,Longit);
-		        geos_points_polygon.push(pointmarker);		        		        
-		    }
-
-			var geos_options = {
-			      paths: geos_points_polygon,
-			      strokeColor: arrayGeoInfo[1],
-			      strokeOpacity: 0.8,
-			      strokeWeight: 3,
-			      title: 	arrayGeoInfo[3],
-			      fillColor: arrayGeoInfo[1],
-			      fillOpacity: 0.35
-			} 		    
-			
-			var geos_polygon = new google.maps.Polygon(geos_options);
-			geos_polygon.setMap(mapaMonitoreo);
-			arraygeos.push(geos_polygon);
-		}
-	}		
 }
 
 function monMessageValidate(dUnit){
