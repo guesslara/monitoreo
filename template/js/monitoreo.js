@@ -141,19 +141,7 @@ function checkTime(i){
   	}
 	return i;
 }
-// function mon_refresh_selected(){
-// 	for(var i=0;i<arrayunits.length;i++){
-// 		var units_info = arrayunits[i].split('|');
-// 		for(var u=0;u<array_selected.length;u++){
-// 			var units_selected = array_selected[u].split('|');
-// 			if(units_info[2] == units_selected[2]){
-// 				array_selected[u] = arrayunits[i];
-// 			}
-// 		}
-// 	}
-// 	mon_draw_table();
-// 	actualizaUltimasPosiciones();
-// }
+
 function stopTimer(){
 	if(mon_timer!=null){
 		mon_timer.stop();	

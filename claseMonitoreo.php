@@ -94,22 +94,22 @@ class monitoreo{
           $query_spatial = $objDb->sqlQuery($sql_spatial);
           $row_spatial   = $objDb->sqlFetchArray($query_spatial);
           if($row_spatial['GEO']!=NULL){
-            $last = $row_spatial['GEO'].length - 2; 
+            $last = $row_spatial['GEO'].length - 1;
             $mult = substr($row_spatial['GEO'] ,11 ,$last);
             $pre_positions=split(",",$mult);
             for($p=0;$p<count($pre_positions);$p++){  
               $a_position .= ($a_position=="") ? '':'&';          
               $fixed = str_replace(' ','*',$pre_positions[$p]); 
               $a_position .= ''.$fixed.'';
-            }     
+            }
           }
           $respuesta .= $a_position; 
         }else{
           $respuesta .= "null";
         }
       }
-      //echo $respuesta;
-      return $respuesta;
+      echo $respuesta;
+      //return $respuesta;
     }
     /**
     *@method        extrae los comandos para el tipo de unidad

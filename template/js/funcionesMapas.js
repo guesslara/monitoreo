@@ -196,7 +196,9 @@ function calcularRuta(puntoA,puntoB){
 		$("#error_mensaje").html('Ocurrio un error al pintra la Ruta especificada.');
     }
 }
-
+var latlonR ="";
+var LatitR  ="";
+var LongitR ="";
 function drawGeos(){
 	//var checkCercas = $('input[name=mon_chk_c]').is(':checked');
 
@@ -271,22 +273,21 @@ function drawGeos(){
 		}
 
 		if(arrayGeoInfo[0]=='R'){
+			console.log(arrayGeoInfo);
 			var arrayGeoInfoLatsLinea = [];
 			arrayGeoInfoLatsLinea = arrayGeoInfo[6].split('&');
-			console.log(arrayGeoInfoLatsLinea.length);
+			
 			for(k=0;k<arrayGeoInfoLatsLinea.length;k++){
-				console.log(arrayGeoInfoLatsLinea[k]);
-			 	var latlonR=arrayGeoInfoLatsLinea[k].split('*');
-				var LatitR = parseFloat(latlon[0]);
-			 	var LongitR = parseFloat(latlon[1]);
-			 	
-				flightPlanCoordinatesR[k]=new google.maps.LatLng(Latit,Longit);
-			}
+			 	latlonR=arrayGeoInfoLatsLinea[k].split('*');	
+				LatitR = parseFloat(latlonR[0]);
+			 	LongitR = parseFloat(latlonR[1]);
+				flightPlanCoordinatesR[k]=new google.maps.LatLng(LatitR,LongitR);
+			}	
 			//proceso del dibujo de la linea
 			var iconsetngs = {
 			    path: google.maps.SymbolPath.CIRCLE,
-			    strokeColor: '#155B90',
-			    fillColor: '#155B90',
+			    strokeColor: arrayGeoInfo[1],
+			    fillColor: '#FFFFFF',
 			    fillOpacity: 1,
 			    strokeWeight: 4        
 			};
@@ -294,7 +295,7 @@ function drawGeos(){
 			flightPathR = new google.maps.Polyline({
 			    path: flightPlanCoordinatesR,
 			    geodesic: false,
-			    strokeColor: '#FF0000',
+			    strokeColor: arrayGeoInfo[1],
 			    strokeOpacity: 1.0,
 			    strokeWeight: 2,
 			    icons: [{
@@ -305,8 +306,13 @@ function drawGeos(){
 			});
 			monRutas.push(flightPathR);
 		  	flightPathR.setMap(mapaMonitoreo);
+			  	/**/
 		  	latlon.length=0;
 		  	flightPathR=[];
+		  	latlonR="";
+		  	LatitR  ="";
+			LongitR ="";
+
 		}
 	}		
 }
