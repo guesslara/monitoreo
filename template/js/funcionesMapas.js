@@ -5,7 +5,9 @@ var rendererOptions = { draggable: true };
 var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
 var directionsService = new google.maps.DirectionsService();
 var flightPlanCoordinates = [];
+var flightPlanCoordinatesR = [];
 var flightPath;
+var flightPathR;
 var monGeoZoom=0;
 var monGeoBnds=0;
 function mostrarMapa(){
@@ -196,14 +198,14 @@ function calcularRuta(puntoA,puntoB){
 }
 
 function drawGeos(){
-	var checkCercas = $('input[name=mon_chk_c]').is(':checked');
+	//var checkCercas = $('input[name=mon_chk_c]').is(':checked');
 
-	if(monMarkers || monMarkers.length>-1){
-		for (var i = 0; i < monMarkers.length; i++) {
-	          monMarkers[i].setMap(null);
-		}	
-		monMarkers = [];
-	}
+	// if(monMarkers || monMarkers.length>-1){
+	// 	for (var i = 0; i < monMarkers.length; i++) {
+	//           monMarkers[i].setMap(null);
+	// 	}	
+	// 	monMarkers = [];
+	// }
 
 	for(var i=0;i<arrayReferencias.length;i++){
 		var arrayGeoInfo = arrayReferencias[i].split('!');
@@ -237,7 +239,8 @@ function drawGeos(){
 			//}
 		}
 
-		if(arrayGeoInfo[0]=='C' && checkCercas){ 
+		//if(arrayGeoInfo[0]=='C' && checkCercas){
+		if(arrayGeoInfo[0]=='C'){ 
 			var arrayGeoInfoLats = null;
 			arrayGeoInfoLats = arrayGeoInfo[6].split('&');
 			var geos_points_polygon = [];
@@ -264,22 +267,82 @@ function drawGeos(){
 			var geos_polygon = new google.maps.Polygon(geos_options);
 			geos_polygon.setMap(mapaMonitoreo);
 			arraygeos.push(geos_polygon);
+			listReferencias=1;
+		}
+
+		if(arrayGeoInfo[0]=='R'){
+			var arrayGeoInfoLatsLinea = [];
+			arrayGeoInfoLatsLinea = arrayGeoInfo[6].split('&');
+			console.log(arrayGeoInfoLatsLinea.length);
+			for(k=0;k<arrayGeoInfoLatsLinea.length;k++){
+				console.log(arrayGeoInfoLatsLinea[k]);
+			 	var latlonR=arrayGeoInfoLatsLinea[k].split('*');
+				var LatitR = parseFloat(latlon[0]);
+			 	var LongitR = parseFloat(latlon[1]);
+			 	
+				flightPlanCoordinatesR[k]=new google.maps.LatLng(Latit,Longit);
+			}
+			//proceso del dibujo de la linea
+			var iconsetngs = {
+			    path: google.maps.SymbolPath.CIRCLE,
+			    strokeColor: '#155B90',
+			    fillColor: '#155B90',
+			    fillOpacity: 1,
+			    strokeWeight: 4        
+			};
+
+			flightPathR = new google.maps.Polyline({
+			    path: flightPlanCoordinatesR,
+			    geodesic: false,
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+			    strokeWeight: 2,
+			    icons: [{
+				    icon: iconsetngs,
+				    repeat:'35px',         
+				    offset: '100%'
+				}]
+			});
+			monRutas.push(flightPathR);
+		  	flightPathR.setMap(mapaMonitoreo);
+		  	latlon.length=0;
+		  	flightPathR=[];
 		}
 	}		
 }
 
-function accionesGeopuntos(opcion){
+function accionesGeopuntosCercas(opcion){
+	//alert(opcion)
 	if(opcion==0){//se ocultan todos los geopuntos
-		setAllMap(null);
+		setAllMap(null,"G");
 	}else if(opcion==1){
-		setAllMap(mapaMonitoreo);
+		setAllMap(mapaMonitoreo,"G");
+	}else if(opcion==2){
+		setAllMap(null,"C");
+	}else if(opcion==3){
+		setAllMap(mapaMonitoreo,"C");
+	}else if(opcion==4){
+		setAllMap(null,"R");
+	}else if(opcion==5){
+		setAllMap(mapaMonitoreo,"R");
 	}
 }
 
-function setAllMap(map){
-	for(var i=0;i< monMarkers.length;i++){
-		monMarkers[i].setMap(map);
+function setAllMap(map,opcion){
+	if(opcion=="G"){
+		for(var i=0;i< monMarkers.length;i++){
+			monMarkers[i].setMap(map);
+		}
+	}else if(opcion=="C"){
+		for(var i=0;i< arraygeos.length;i++){
+			arraygeos[i].setMap(map);
+		}
+	}else if(opcion=="R"){
+		for(var i=0;i< monRutas.length;i++){
+			monRutas[i].setMap(map);
+		}
 	}
+	
 }
 // Shows any markers currently in the array.
 function showMarkers() {

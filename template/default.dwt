@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{PAGE_TITLE}</title>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=drawing"></script>
 <script type="text/javascript" src="public/js/ui/jquery.js"></script>
 <script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
 <script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
@@ -117,8 +117,8 @@
 
       <div id="menuGeoreferencias">
         <input type="checkbox" name="chkGeoPuntos" id="chkGeoPuntos" value="1" checked="checked"/><label for="chkGeoPuntos">Geopuntos</label><br />
-        <input type="checkbox" name="mon_chk_c" id="mon_chk_c" /><label for="mon_chk_c">GeoCercas</label><br />
-        <input type="checkbox" name="mon_chk_c" id="chkRutas" /><label for="mon_chk_c">Rutas</label>
+        <input type="checkbox" name="mon_chk_c" id="mon_chk_c" checked="checked" /><label for="mon_chk_c">GeoCercas</label><br />
+        <input type="checkbox" name="chkRutas" id="chkRutas" checked="checked" /><label for="chkRutas">Rutas</label>
       </div>
 
       <!--Div tiempo para actualizar-->

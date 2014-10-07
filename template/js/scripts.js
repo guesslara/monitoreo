@@ -228,7 +228,13 @@ $(document).ready(
 
 		$("#mon_chk_c").click(function(){
 			if(this.checked){
-				getGeos();
+				if(listReferencias==0){
+					getGeos("C");
+				}else{
+					accionesGeopuntosCercas(3);//mostrar las geocercas
+				}
+			}else{
+				accionesGeopuntosCercas(2);//ocultar las geocercas
 			}
 		});
 
@@ -250,9 +256,17 @@ $(document).ready(
 
 		$("#chkGeoPuntos").click(function(){
 			if(this.checked){
-				accionesGeopuntos(1);
+				accionesGeopuntosCercas(1);
 			}else{
-				accionesGeopuntos(0);
+				accionesGeopuntosCercas(0);
+			}
+		});
+
+		$("#chkRutas").click(function(){
+			if(this.checked){
+				accionesGeopuntosCercas(5);//se muestran las lineas
+			}else{
+				accionesGeopuntosCercas(4);//se ocultan las lineas
 			}
 		});
 

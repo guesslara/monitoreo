@@ -57,16 +57,13 @@ class monitoreo{
       $respuesta="";
       $objDb=$this->iniciarConexionDb();
       $objDb->sqlQuery("SET NAMES 'utf8'");
-      if($filtro=="G"){
-          $sql = "SELECT ID_OBJECT_MAP AS ID, ADM_GEOREFERENCIAS.TIPO,ADM_GEOREFERENCIAS.DESCRIPCION AS NOMBRE, PRIVACIDAD,LATITUDE,LONGITUDE,IF(COD_COLOR IS NULL, '0',COD_COLOR) AS COD_COLOR,IF(ADM_GEOREFERENCIAS_TIPO.IMAGE IS NULL,ADM_IMAGE.URL,ADM_GEOREFERENCIAS_TIPO.IMAGE) AS IMAGE
+      
+      $sql = "SELECT ID_OBJECT_MAP AS ID, ADM_GEOREFERENCIAS.TIPO,ADM_GEOREFERENCIAS.DESCRIPCION AS NOMBRE, PRIVACIDAD,LATITUDE,LONGITUDE,IF(COD_COLOR IS NULL, '0',COD_COLOR) AS COD_COLOR,IF(ADM_GEOREFERENCIAS_TIPO.IMAGE IS NULL,ADM_IMAGE.URL,ADM_GEOREFERENCIAS_TIPO.IMAGE) AS IMAGE
           FROM ADM_GEOREFERENCIAS
           LEFT JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO = ADM_GEOREFERENCIAS_TIPO.ID_TIPO
           LEFT JOIN ADM_IMAGE ON ADM_IMAGE.ID_IMG = ADM_GEOREFERENCIAS_TIPO.ID_IMAGE
-          WHERE ADM_GEOREFERENCIAS.ID_ADM_USUARIO = ".$usuarioId." OR (ADM_GEOREFERENCIAS.PRIVACIDAD = 'C' AND ADM_GEOREFERENCIAS.ID_CLIENTE = ".$clienteId.") OR (ADM_GEOREFERENCIAS.PRIVACIDAD = 'T' AND ADM_GEOREFERENCIAS.ID_CLIENTE = ".$clienteId.") AND ADM_GEOREFERENCIAS.TIPO='".$filtro."'";
-      }else{
-
-      }
-      
+          WHERE ADM_GEOREFERENCIAS.ID_ADM_USUARIO = ".$usuarioId." OR (ADM_GEOREFERENCIAS.PRIVACIDAD = 'C' AND ADM_GEOREFERENCIAS.ID_CLIENTE = ".$clienteId.") OR (ADM_GEOREFERENCIAS.PRIVACIDAD = 'T' AND ADM_GEOREFERENCIAS.ID_CLIENTE = ".$clienteId.")  AND ADM_GEOREFERENCIAS.TIPO IN ('C','G','R')";
+      //echo $sql;      
       $query = $objDb->sqlQuery($sql);
       while($row = $objDb->sqlFetchArray($query)){
         $color    = $dbf->getRow('ADM_COLORES','COD_COLOR='.@$row['COD_COLOR']);
@@ -75,7 +72,7 @@ class monitoreo{
         $respuesta .= ($respuesta=="") ? "": "|";
         $respuesta .= $row['TIPO']."!".$color_rgb."!".$row['IMAGE']."!".$row['NOMBRE']."!".$row['LATITUDE']."!".$row['LONGITUDE']."!";
         
-        if($row['TIPO']!='G'){
+        if($row['TIPO']=='C'){
           $a_position='';
           $sql_spatial = "SELECT ASTEXT(GEOM) AS GEO FROM ADM_GEOREFERENCIAS_ESPACIAL WHERE ID_OBJECT_MAP = ".$row['ID'];
           $query_spatial = $objDb->sqlQuery($sql_spatial);
@@ -91,10 +88,27 @@ class monitoreo{
             }     
           }
           $respuesta .= $a_position; 
+        }else if($row['TIPO']=='R'){
+          $a_position='';
+          $sql_spatial = "SELECT ASTEXT(GEOM) AS GEO FROM ADM_GEOREFERENCIAS_ESPACIAL WHERE ID_OBJECT_MAP = ".$row['ID'];
+          $query_spatial = $objDb->sqlQuery($sql_spatial);
+          $row_spatial   = $objDb->sqlFetchArray($query_spatial);
+          if($row_spatial['GEO']!=NULL){
+            $last = $row_spatial['GEO'].length - 2; 
+            $mult = substr($row_spatial['GEO'] ,11 ,$last);
+            $pre_positions=split(",",$mult);
+            for($p=0;$p<count($pre_positions);$p++){  
+              $a_position .= ($a_position=="") ? '':'&';          
+              $fixed = str_replace(' ','*',$pre_positions[$p]); 
+              $a_position .= ''.$fixed.'';
+            }     
+          }
+          $respuesta .= $a_position; 
         }else{
           $respuesta .= "null";
         }
       }
+      //echo $respuesta;
       return $respuesta;
     }
     /**

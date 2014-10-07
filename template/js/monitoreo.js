@@ -17,7 +17,7 @@ var array_latitudes	 = Array();
 var array_longitudes = Array();
 var banderaSeguimiento = false;
 var unidadSeleccionada = 0;
-
+var monRutas = [];
 /**
  *@name Funcion para redimensionar los divs
  *@param contenedor Div que se va a definir en la altura
@@ -169,14 +169,16 @@ function stopTimer(){
 *Funcion modificada para el proceso de las geocercas
 */
 function getGeos(filtro){
-	if(listReferencias==0){
+	//alert(filtro)
+	//if(listReferencias==0){
 		//$("#mon_dialog").dialog("open");
 		arrayReferencias = [];
 		usuarioId=$("#usuarioId").val();
 		clienteId=$("#usuarioCliente").val();
 		parametros="action=mostrarGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId+"&filtro="+filtro;
 		ajaxMonitoreo("mostrarGeoreferencias","controlador",parametros,"cargador2","mon_dialog","POST");
-	}
+
+	//}
 }
 
 function monMessageValidate(dUnit){

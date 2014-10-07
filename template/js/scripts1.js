@@ -56,7 +56,7 @@ function controladorAcciones(accion,datos,divResultado){
 		break;
 		case "mostrarGeoreferencias":
 			//$("#"+divResultado).show().html(datos);
-			listReferencias  = 1;
+			//listReferencias  = 1;
 			arrayReferencias = new Array();
 			arrayReferencias = datos.split('|');
 			drawGeos();
