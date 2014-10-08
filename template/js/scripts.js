@@ -1,50 +1,45 @@
-var mapaMonitoreo;  	
-var tab_active=0;
-var banderaUltimaPosicion=0;
-var barraUP=1;
-var focusVentanas=2;
-var mostrarBtnRutas=false;
-var arrayunits 		= new Array();
-var array_selected  = Array();
-var markers = [];
-var arraygeos = [];//array para almacenar las geocercas
-var arraygeosP = [];  //array para almacenar los datos de ultimas posiciones
+var mapaMonitoreo;//instancia del mapa	
+var tab_active			  	= 0;//tab activo
+var banderaUltimaPosicion 	= 0;//bandera de ultima posicion
+var barraUP				  	= 1;
+var focusVentanas		  	= 2;
+var mostrarBtnRutas		  	= false;
+var arrayunits 			  	= new Array();
+var array_selected  	  	= Array();
+var markers 			  	= [];//array para almacenar las unidades
+var arraygeos 			  	= [];//array para almacenar las geocercas
+var arraygeosP 			  	= [];//array para almacenar los datos de ultimas posiciones
 var mon_timer,mon_timer_count;
-var info_window='';
+var info_window			  	= '';
 var infowindow;
 var beachMarker;
-var arrayReferencias= Array();
-var listReferencias = 0;
-var aComandosAll = '';
-var UnitsString  = '';
-var monMarkers = [];
-var mon_array_autocomplete = Array();
+var arrayReferencias	  	= Array();
+var listReferencias 	  	= 0;
+var aComandosAll 		  	= '';
+var UnitsString  		  	= '';
+var monMarkers 			  	= [];
+var mon_array_autocomplete 	= Array();
 //variables adicionales
-var cargadorInicial=0;
-var array_latitudes	 = Array();
-var array_longitudes = Array();
-var banderaSeguimiento = false;
-var unidadSeleccionada = 0;
-var monRutas = [];
-$(document).ready(
-	function(){
-		//declaracion del objeto infowindow
-		infoWindow = new google.maps.InfoWindow;
-		//pestañas
-		$( "#tabs" ).tabs({ 
+var cargadorInicial		  	= 0;
+var array_latitudes	 	  	= Array();
+var array_longitudes 	  	= Array();
+var banderaSeguimiento 	  	= false;
+var unidadSeleccionada 	  	= 0;
+var monRutas 			  	= [];
+$(document).ready(function(){
+		infoWindow = new google.maps.InfoWindow;//declaracion del objeto infowindow
+		$( "#tabs" ).tabs({ //pestañas
         	select: function(event, ui) { 
-			tab_active = ui.index;
-			
-			if(tab_active==0){
-				mon_refresh_units();
-			}else{
-				stopTimer();
-			}
-			if(tab_active==3){
-				loadDashBoard()					
-			}			
+				tab_active = ui.index;
+				if(tab_active==0){
+					mon_refresh_units();
+				}else{
+					stopTimer();
+				}
+				if(tab_active==3){
+					loadDashBoard()					
+				}			
         	}
-		
 		});	
 		//Dialog mensajes		
 		$( "#dialog_message" ).dialog({
@@ -57,8 +52,7 @@ $(document).ready(
 				}
 			}
 		});	
-
-		$( "#mon_dialog" ).dialog({
+		$( "#mon_dialog" ).dialog({//ventana para el envio de comandos
 			autoOpen:false,
 			modal: true,
 			resizable: false,
@@ -72,8 +66,7 @@ $(document).ready(
 				}
 			}
 		});		
-
-		$( "#mon_dialogAll" ).dialog({
+		$( "#mon_dialogAll" ).dialog({//ventana para el envio de comandos a todas las unidades
 			autoOpen:false,
 			modal: true,
 			resizable: false,
@@ -84,8 +77,7 @@ $(document).ready(
 				}
 			}
 		});	
-
-		$("#gral_button_close").click(function() {
+		$("#gral_button_close").click(function() {//Boton para cerrar la sesion en la plataforma
 			location.href='index.php?m=login&c=login&md=lo';
 		});
 
@@ -140,8 +132,7 @@ $(document).ready(
 		})
 		
 		$("#mon_acordeon_unidades").click(function(){
-			//acciones sobre el div para cambiar su z-index
-			cambiarFocus("mon_acordeon_unidades");
+			cambiarFocus("mon_acordeon_unidades");//acciones sobre el div para cambiar su z-index
 		})
 		$("#contenedorSlider").click(function(){
 			//acciones sobre el div para cambiar su z-index
@@ -235,7 +226,7 @@ $(document).ready(
 			text: false
 		});
 
-		$("#btnActualizaTiempo").click(function(){
+		$("#btnActualizaTiempo,#mon_TiempoActualizar").click(function(){
 			$("#cambiarActualizacion").fadeIn("slow");
 		});
 
@@ -244,7 +235,7 @@ $(document).ready(
 			text:false
 		})
 
-		$("#btnMostrarOpcionesGeoreferencias").click(function(){
+		$("#btnMostrarOpcionesGeoreferencias,#btnMostrarOpcGeo2").click(function(){
 			$("#menuGeoreferencias").show();
 		});
 
@@ -322,10 +313,8 @@ function init(){
 
 function actualizaUltimasPosiciones(){
 	if(banderaUltimaPosicion==0){
-		//mon_build_puntos(0);
 		banderaUltimaPosicion=1;
 	}else{
-		//mon_build_puntos(0);
 		cargarUltimasPosiciones();
 	}
 	enviarAUP();//funcion para mostrar el div
@@ -333,19 +322,14 @@ function actualizaUltimasPosiciones(){
 function enviarAUP(){
 	$("#divUltimasPosiciones").show();//se muestra el div con las uposiciones
 	$("#btnMinimizarUP").show();
-	//animarBarraUnidades();//se oculta la barra de unidades
 	$("#btnMinimizarUP").css("bottom","238px");//se coloca el boton de minimizar
 	barraUP=1;
 }
 function cambiarFocus(divFocus){
-	//alert(divFocus)
-	//recuperar el z-index de los divs
 	focusVentanas+=1;
-	vAc=$("#"+divFocus).zIndex();
-	//alert(vAc);
+	vAc=$("#"+divFocus).zIndex();//recuperar el z-index de los divs
 	$("#"+divFocus).css("zIndex",focusVentanas);
 }
-
 function minimizarPanel(){
 	if (barraUP==1) {
 		$("#divUltimasPosiciones").hide("fast");
@@ -374,11 +358,10 @@ function animarBarraUnidades(){
 		img="ocultar2.png";
 		funcion="animarBarraUnidades(1)";
 		pal="ocultar";
-		$("#contenedorSlider").fadeTo("fast",1);
+		$("#contenedorSlider").show("fast");
 		barraUnidades=1;
-	}	
-	//se mueve el indicador de la cejilla
-	$("#btnCejillaOcultar").animate({ 
+	}
+	$("#btnCejillaOcultar").animate({ //se mueve el indicador de la cejilla
 		left: movIzqC
 	}, 100 );
 	//se cambia la imagen de la cejilla
@@ -394,17 +377,17 @@ function abrirTickets(){
 		var horizontalPadding = 10;
 		var verticalPadding = 0;
 		$('<iframe id="frameSoporte" src="http://reportenet.2gps.net/open1.php" />').dialog({
-		title: 'Soporte',
-		autoOpen: true,
-		width: 600,
-		height: 600,
-		modal: false,
-		resizable: false,
-		autoResize: true,
-		overlay: {
-		    opacity: 0.5,
-		    background: "black"
-		}
+			title: 'Soporte',
+			autoOpen: true,
+			width: 600,
+			height: 600,
+			modal: false,
+			resizable: false,
+			autoResize: true,
+			overlay: {
+			    opacity: 0.5,
+			    background: "black"
+			}
 		}).width(600 - horizontalPadding).height(600 - verticalPadding);
 	}catch(err){
 		$("#error").show();
@@ -455,38 +438,16 @@ function mostrarAvisos(){
 		},
 	});
 }
-
+/*Actualizar campos*/
 function updateFields(latInt, lonInt){
-	//alert('update');
 	var latInt = parseFloat(latInt);
 	var lonInt = parseFloat(lonInt);
-	
 	$("#txt_lat").val(latInt.toFixed(6));
 	$("#txt_lon").val(lonInt.toFixed(6));
-	
 	var point = new GLatLng(latInt,lonInt);
 	point_pan = point;
-	
 }
-
-function menudefault(){
-	$("#accordion_container").html("");
-	$.ajax({
-		type: "GET",
-        url: "index.php?m=mMonitoreo&c=menu",
-        data: "",
-        success: function(datos){
-			if(datos!=0){
-				$("#accordion_container").html(datos);
-			}else{
-				$("#accordion_container").html("No se han Creado un menú");
-			}
-			
-        }
-	});
-}
-
-//---------------------------------------------
+/*Funcion de Administracion*/
 function tabAd(){
 	$("#Admon").html("");
 	$.ajax({
@@ -494,11 +455,9 @@ function tabAd(){
         url: "index.php?m=mAdmon&c=default",
         data: "",
         success: function(datos){
-			//alert(datos)
 			if(datos!=0){
 				$("#Admon").html(datos);
 				menuAd();
-
 			}else{
 				$("#Admon").html("No se han Creado Grupos");
 			}
@@ -506,7 +465,7 @@ function tabAd(){
         }
 	});
 }
-//---------------------------------------------
+/*Carga de menu*/
 function menuAd(){
 	$("#adn_menu").html("");
 	$.ajax({
@@ -527,7 +486,7 @@ function menuAd(){
         }
 	});
 }
-//---------------------------------------------
+/*Funcion para mostrar el menu de Reportes*/
 function tabRe(){
 	$("#Report").html("");
 	$.ajax({

@@ -1,26 +1,22 @@
 /**
  *@name Funcion para redimensionar los divs
- *@param contenedor Div que se va a definir en la altura
  *@author Gerardo Lara
- *@description Obtiene el alto del div que se pasa como argumento y lo ajusta
+ *@description Obtiene el alto del div y redimensiona los divs
 */
 function redimensionarDivs() {
-    //alert("Cambio div");
     altoContenedor=$("#tabs").height();
     anchoContenedor=$("#tabs").width();
-    $("#mon_tabs").css("height",(altoContenedor-46)+"px");
-    
+    //TABS MONITOREO
+    $("#mon_tabs").css("height",(altoContenedor-46)+"px");    
     $("#mon_tabs_1").css("height",(altoContenedor-80)+"px");
     $("#mon_tabs-2").css("height",(altoContenedor-80)+"px");
     $("#mon_menu_acordeon").css("height",(altoContenedor-117)+"px");
-    
-    
     $("#mon_content").css("height",(altoContenedor-44)+"px");
     $("#Admon").css("height",(altoContenedor-43)+"px");//modificacion para el slider
     $("#contenedorSlider").css("height",(altoContenedor-44)+"px");
     $("#main_view").css("height",(altoContenedor-73)+"px");
     $("#window").css("height",(altoContenedor-75)+"px");
-    //Se verifica la existencia del tab de alertas
+    //TABS ALERTAS
     if($("#tabsAlertas").length){
 		$("#tabsAlertas").css("height",(altoContenedor-51)+"px");
 		$("#tabAlertasVigentes, #tabAlertasActivas, #tabAlertasInactivas").css("height",(altoContenedor-98)+"px");
@@ -54,22 +50,14 @@ function redimensionarDivs() {
 			$("#tabActivas").css("height",(altoContenedor-125)+"px");
 			$("#tabInactivas").css("height",(altoContenedor-125)+"px");
 		}
-    }
-    
+    }   
 }
-/**
- *@description Cada ves que se redimensiona la ventana del navegador se manda a llamar la funcion que redimensiona todos
- *los divs
- */
+/*@description Cada ves que se redimensiona la ventana del navegador se manda a llamar la funcion que redimensiona todos los divs*/
 window.onresize=redimensionarDivs;
-
-
+//actualiza unidades
 function mon_refresh_units(){
-    /****************************************************************************************************************/
-    /***Funcion desactivada solo hasta la nueva colocacion de los divs***********************************************/
 	//var time = $("#mon_sel_time").val();
 	var time = $('input:radio[name=tiempoActualizar]:checked').val();
-
 	if(mon_timer!=null){
 		mon_timer.stop();	
 		mon_timer=null;
@@ -78,17 +66,11 @@ function mon_refresh_units(){
 	start_counter(secondsreal);
 	mon_timer = $.timer(time , function(){
 		if(array_selected.length>0){
-			//mon_load_units();
-			mon_refresh_units();
-			//console.log("actualizarPosiciones - monitoreo.js linea 139");//se debe mandar a la funcion para actualizar las posiciones
-			//mon_arreglo_carga();
+			mon_refresh_units();//se llama asi misma
 			cargarUltimasPosiciones();
-			//actualizaUltimasPosiciones();
 		}
 	});
-	
 }
-
 var time_lapse=0;
 function start_counter(time){
 	if(mon_timer_count!=null){
@@ -114,14 +96,14 @@ function start_counter(time){
 	    }
 	});    
 }
-
+/*Funcion para verificar el tiempo*/
 function checkTime(i){
 	if (i<10){
   		i="0" + i;
   	}
 	return i;
 }
-
+/*Se detiene el tiempo de actualizacion*/
 function stopTimer(){
 	if(mon_timer!=null){
 		mon_timer.stop();	
@@ -133,11 +115,8 @@ function stopTimer(){
 	}	
 	$("#mon_time").html("00:00");
 }
-/*
-*Funcion modificada para el proceso de las geocercas
-*/
+/*Funcion modificada para el proceso de las geocercas*/
 function getGeos(){
-	//alert(filtro)
 	//if(listReferencias==0){
 		//$("#mon_dialog").dialog("open");
 		arrayReferencias = [];
@@ -145,15 +124,9 @@ function getGeos(){
 		clienteId=$("#usuarioCliente").val();
 		parametros="action=mostrarGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId;
 		ajaxMonitoreo("mostrarGeoreferencias","controlador",parametros,"cargador2","mon_dialog","POST");
-
 	//}
 }
-
-function monMessageValidate(dUnit){
-	$('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>La unidad '+dUnit+' No tiene reporte.</p>');
-	$("#dialog_message" ).dialog('open');   
-}
-
+/*Funcion pendiente para el envio de comandos a todas las unidades*/
 function sendCommandsAll(){
 	$("#mon_dialogAll").html("");
 	var optionsCombo='';
@@ -170,9 +143,7 @@ function sendCommandsAll(){
 				}
 			}
 		}
-
 		var table_cmds = $("<table class='total_width'>").appendTo("#mon_dialogAll");
-
 		$("<tr><td>Comandos:</td><td><select class='caja_txt' id='mon_sel_cmdsAll'>"+optionsCombo+"<select></td></tr>").appendTo(table_cmds);		
 		$("<tr><td valign='top'>Comentarios:</td><td><textarea  id='mon_cmds_comAll' class='caja_txt_a' /></td></tr>").appendTo(table_cmds);
 		$("<input type='hidden' id='mon_cmds_unitAll' value='"+ UnitsString+"' />").appendTo("#mon_dialogAll");
@@ -181,7 +152,7 @@ function sendCommandsAll(){
 	}
 	$("#mon_dialogAll").dialog('open',"position", { my: "left top", at: "left bottom", of: window});
 }
-
+/*Funcion pendiente para el envio de comandos a todas las unidades*/
 function sendCommands(){
 	if($("#mon_dialogAll").html()!='<h2>NO tiene permisos para enviar comandos.</h2>'){
 		var command = $("#mon_sel_cmdsAll").val();
@@ -225,4 +196,3 @@ function sendCommands(){
 		$("#mon_dialogAll").dialog("close");
 	}
 }
-

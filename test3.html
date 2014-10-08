@@ -2,123 +2,92 @@
 <head>
 <title>Some Title</title>
 <style>
-table {
-border-collapse : collapse;
-position : absolute;
-height : 100%;
+#ComboBox1{
+    margin:-5px 0 0 0;
+    width:250px;
+    height:25px;
+    background-color:#f1f1f1;
+    background-image:url(../web/imgs/select.png);
+    background-repeat:no-repeat;
+    background-position:right;
+    border:1px solid #999;
 }
-
-td, th {
-background-color: #aaaaaa;
-border-right : 1px solid #ffffff;
-color : #ffffff;
-width : 100px;
-text-align : center;
+.cont_option{
+    position:relative;
 }
-
-td.locked_left, th.locked_left {
-background-color: #88ff88;
-font-weight : bold;
-border-left : 1px solid #ffffff;
+.cont_option td{
+    width:50%;
 }
-
-#table_container_left {
-width : 190px;
-height : 113px;
-position : relative;
-float : left;
-overflow : hidden;
+.nove{
+    display:none;
 }
-
-#table_container_right {
-width : 150px;
-height : 128px;
-overflow : scroll;
-float : left;
-position : relative;
+.fondoselect{
+    background-color:#f1f1f1;
+    overflow:auto;
+    height:150px;
 }
 
 </style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script type="text/javascript">
-function initScroll() {
-var leftDiv = document.getElementById('table_container_left');
-var rightDiv = document.getElementById('table_container_right');
-rightDiv.onscroll = function() {
-leftDiv.scrollTop = this.scrollTop;
-};
-}
+$(document).ready(function(){
+        var esto;                  
+    
+    
+    $("#ComboBox1").toggle(function(){
+        
+        $("#ComboBox1 tr").removeClass("nove");
+        $(".cont_option").addClass("fondoselect");
+        //$(".cont_option").css("position":"absolute","left":"1px","top":"1px","overflow":"scroll");    
+    },function(){    
+ 
+            $("#ComboBox1 tr").addClass("nove");
+            esto.removeClass("nove");
+ 
+            $(".cont_option").removeClass("fondoselect");
+ 
+    });
+    
+    $("#ComboBox1 tr").click(function(){
+        $("#combobox1").val($(this).attr("id"));
+        dev($(this));
+    });
+    
+    $("#ComboBox1 tr:first").removeClass("nove");
+    $("#mos").click(function(){
+        alert($("#combobox1").val()+" - "+$("#algo").val());
+    });
+    
+    function dev(val){
+        esto = val
+    }
+    
+});
 </script>
 </head>
-<body on_load="initScroll();">
-<div id='table_container_left'>
-<table id="left_table">
-<thead>
-<tr>
-<th class='locked_left'>Number</th>
-<th class='locked_left'>English</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class='locked_left'>1</td>
-<td class='locked_left'>one</td>
-</tr>
-<tr>
-<td class='locked_left'>2</td>
-<td class='locked_left'>two</td>
-</tr>
-<tr>
-<td class='locked_left'>3</td>
-<td class='locked_left'>three</td>
-</tr>
-<tr>
-<td class='locked_left'>4</td>
-<td class='locked_left'>four</td>
-</tr>
-<tr>
-<td class='locked_left'>5</td>
-<td class='locked_left'>five</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id='table_container_right'>
-<table id="right_table">
-<thead>
-<tr>
-<th>French </th>
-<th>German </th>
-<th>Spanish</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>un</td>
-<td>eins</td>
-<td>one-es</td>
-</tr>
-<tr>
-<td>deux</td>
-<td>zwei</td>
-<td>two-es</td>
-</tr>
-<tr>
-<td>trois</td>
-<td>drei</td>
-<td>three-es</td>
-</tr>
-<tr>
-<td>quatre</td>
-<td>vier</td>
-<td>four-es</td>
-</tr>
-<tr>
-<td>cinq</td>
-<td>f�nf</td>
-<td>five-es</td>
-</tr>
-</tbody>
-</table>
-</div>
+<body>
+
+<table>
+    <tr><td>seleccion:</td><td>
+      
+  <div id="ComboBox1">
+  <div class="cont_option">
+    <table>
+      <tr id="1" class="nove"><td>banco1</td><td>124521545</td></tr>
+      <tr id="2" class="nove"><td>banco1502</td><td>1245425</td></tr>
+      <tr id="3" class="nove"><td>banco454</td><td>789454565454</td></tr>
+      <tr id="4" class="nove"><td>continental</td><td>123456789102</td></tr>
+      <tr id="5" class="nove"><td>scotibank</td><td>963245754</td></tr>
+      <tr id="6" class="nove"><td>nacion</td><td>8521475554</td></tr>
+      <tr id="7" class="nove"><td>aleman</td><td>123456789</td></tr>
+    </table>
+    <input type="hidden" id="combobox1" />
+  </div>
+  </div>      
+      </td></tr>
+    <tr><td>ingrese</td><td><input id="algo" /></td></tr>
+    <tr><td colspan="2" align="center"><button id="mos">Mostrar</button></td></tr>
+  </table>
+
 </body>
 </html>

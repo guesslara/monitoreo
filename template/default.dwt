@@ -15,13 +15,13 @@
 <link rel="stylesheet" type="text/css" media="screen" href="public/libs/phpgridv1.5.2/lib/js/jqgrid/css/ui.jqgrid.css">
 <script type="text/javascript" src="public/js/colorpicker.js"></script>
 <script type="text/javascript" src="public/js/ui/jquery.numeric.js"></script>
-<script  src="public/js/OpenLayers-2.13.1/OpenLayers.js" ></script>
+<!--<script  src="public/js/OpenLayers-2.13.1/OpenLayers.js" ></script>-->
 <link type="text/css" href="{PATH}/css/style_monitoreo.css" rel="stylesheet" />
 <link type="text/css" href="public/css/jqueryUIX.css" rel="stylesheet" />
 <link type="text/css" href="public/css/estiloX2.css" rel="stylesheet"/>
 <link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
 <link type="text/css" href="./public/libs/jtables/jtables.css" rel="stylesheet"/>
-
+<script type="text/javascript" src="public/libs/sumoselect/jquery.sumoselect.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
 
@@ -93,7 +93,7 @@
         </div>
     </div>
     <!--Fin Div Ultimas Posiciones-->
-
+    <!--Barra Monitoreo-->
     <div id="barraMonitoreo">
 
       <div style="border-bottom:1px solid #CCC;padding:5px;width:157px;margin:5px;overflow:hidden;height:35px;">
@@ -101,37 +101,32 @@
         <div style="float:left;">Lon:</div><div id="divLongitud" class="estiloLatLon">0</div>
       </div>
 
-      
-      <!--<div style="border-bottom:0px solid #999;height:30px;padding:1px;width:165px;margin:5px;" class="ui-state-default">
-        <input type="checkbox" name="mon_chk_c" id="mon_chk_c" /><label for="mon_chk_c">GeoReferencias</label>
-      </div>-->
-
       <div style="border-bottom:0px solid #999;padding:6px;width:157px;margin:5px;">
         <button id="gral_button_events" class="btnAlertas ui-state-default ui-corner-all" title="&Uacute;ltimas Alertas">U. Alertas</button>
       </div>
       
       <div style="border-bottom:0px solid #999;height:30px;padding:1px;width:165px;margin:5px;">
-        <div style="float:left;border-bottom:1px solid #CCC;width:122px;padding:5px;margin:5px 0px 5px 2px;height:9px;background:#FFF;font-weight:bold;">Georeferencias</div>
-        <button id="btnMostrarOpcionesGeoreferencias" style="float:left;margin-top:2px;">&nbsp;</button>
+        <div id="btnMostrarOpcGeo2" style="float:left;border-bottom:1px solid #CCC;width:125px;padding:5px;margin:5px 0px 5px 2px;height:15px;background:#FFF;font-weight:bold;">Georeferencias</div>
+        <button id="btnMostrarOpcionesGeoreferencias" style="float:left;margin-top:5px;">&nbsp;</button>
+        <div id="menuGeoreferencias">
+          <input type="checkbox" name="chkGeoPuntos" id="chkGeoPuntos" value="1" checked="checked"/><label for="chkGeoPuntos">Geopuntos</label><br />
+          <input type="checkbox" name="mon_chk_c" id="mon_chk_c" checked="checked" /><label for="mon_chk_c">GeoCercas</label><br />
+          <input type="checkbox" name="chkRutas" id="chkRutas" checked="checked" /><label for="chkRutas">Rutas</label>
+        </div>
       </div>
-
-      <div id="menuGeoreferencias">
-        <input type="checkbox" name="chkGeoPuntos" id="chkGeoPuntos" value="1" checked="checked"/><label for="chkGeoPuntos">Geopuntos</label><br />
-        <input type="checkbox" name="mon_chk_c" id="mon_chk_c" checked="checked" /><label for="mon_chk_c">GeoCercas</label><br />
-        <input type="checkbox" name="chkRutas" id="chkRutas" checked="checked" /><label for="chkRutas">Rutas</label>
-      </div>
-
       <!--Div tiempo para actualizar-->
-      <div id="mon_TiempoActualizar"  class="mon_div_time_lapse">
-        <span>Actualizar en: <span id="mon_time">00:00</span></span>
-      </div>
-      <div style="float:right;margin:5px 9px 5px 0px;border:0px solid #FF0000;"><button id="btnActualizaTiempo">&nbsp;</button></div>  
-            
-      <div id="cambiarActualizacion">Actualizar en:<br /><br />
-        <input type="radio" name="tiempoActualizar" id="60secs" value="30000"><label for="60secs">30 segundos</label><br />
-        <input type="radio" name="tiempoActualizar" id="1min" value="60000">&nbsp;&nbsp;<label for="1min">1 minuto</label><br />
-        <input type="radio" name="tiempoActualizar" id="2min" value="120000" checked="checked">&nbsp;&nbsp;<label for="2min">2 minutos</label><br />
-      </div>
+      <!--<div style="border-bottom:1px solid #999;height:30px;padding:1px;width:165px;">-->
+        <div id="mon_TiempoActualizar"  class="mon_div_time_lapse" style="float:left;">
+          <span>Actualizar en: <span id="mon_time">00:00</span></span>
+        </div>
+        <button id="btnActualizaTiempo" style="float:left;margin-top:5px;">&nbsp;</button>
+              
+        <div id="cambiarActualizacion">Actualizar en:<br /><br />
+          <input type="radio" name="tiempoActualizar" id="60secs" value="30000"><label for="60secs">30 segundos</label><br />
+          <input type="radio" name="tiempoActualizar" id="1min" value="60000">&nbsp;&nbsp;<label for="1min">1 minuto</label><br />
+          <input type="radio" name="tiempoActualizar" id="2min" value="120000" checked="checked">&nbsp;&nbsp;<label for="2min">2 minutos</label><br />
+        </div>
+      <!--</div>-->
       <!--Div tiempo para actualizar-->
 
       <div id="mostrarInfoAdicionalLatLon" style="{HISTORIAL}">
@@ -140,15 +135,11 @@
       </div>
 
     </div>
-
-
+    <!--Fin Barra Monitoreo-->
   </div><!--Monitoreo-->
   <div id="Admon"  class="pestana"></div><!--Admon-->
   <div id="Report" class="pestana"></div><!--Report-->
   <div id="DashBoard" class="pestana_dashboard"></div><!--DashBoard-->
-
-
-
   
   <!--Texto de Usuario-->
   <div class="mon-user-info">

@@ -238,7 +238,7 @@ function mon_datosUnidad(stringLoc,dunit,imei,textoMensaje,evt,fecha,direccion,p
 		  	'</div>';
     return info;
 }
-/*Funcion para mostrar los comandos disponibles*/
+/*Funcion para mostrar los comandos disponibles por Unidad*/
 function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comandos
 	$("#mon_dialog").dialog("open");
 	usuarioId=$("#usuarioId").val();
@@ -246,21 +246,20 @@ function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comando
 	parametros="action=cargarComandosUnidad&idUsuario="+usuarioId+"&clienteId="+clienteId+"&tipo="+valor+"&imei="+imei+"&idUnidad="+idUnidad+"&servidor="+servidor+"&instancia="+instancia;
 	ajaxMonitoreo("cargarComandosUnidad","controlador",parametros,"mon_dialog","mon_dialog","POST");
 }
-/**/
+/*Centra la posicion en el mapa y dibuja el infowindow*/
 function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pdi,lat,lon,nivelBateria,direccion,idTr,type){
 	try{
 		$("#tablaX tr").css("background","#FFF");
 		$("#"+idTr).css("background","#CEE3F6");
 		direccion=direccion.replace(/\s/g,' ');
-	    fecha		= fecha;//--s
-	    evt 		= evento;//--
-	    pdi 		= pdi;//--
-	    vel 		= velocidad;//--
-	    lat 		= parseFloat(lat);//19.519100
-	    lon 		= parseFloat(lon);//-99.234417
-	    dunit 		= unidad;//--
+	    fecha		= fecha;
+	    evt 		= evento;
+	    pdi 		= pdi;
+	    vel 		= velocidad;
+	    lat 		= parseFloat(lat);
+	    lon 		= parseFloat(lon);
+	    dunit 		= unidad;
 	    imei 		= imei;
-	    
 	    var radioLbs 	= 0;
 	    //var textoMensaje = (blockMotor==1) ? 'MOTOR BLOQUEADO -': '';
 	    var image = new google.maps.MarkerImage('public/images/car.png',
@@ -309,7 +308,6 @@ var array_temporal=new Array();
  *@date		30 - Agosto - 2014
 */
 function evaluarCadenaUnidades(strUnidadesCompleto){
-	//$("#mon_content").show().html(strUnidadesCompleto);
 	if(array_posiciones.length != 0){//se separan las unidades con datos de las que no se encontraron datos
 		array_posiciones.length=0;//se vacia el array posiciones
 	}
@@ -330,8 +328,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 	if(array_posiciones != ""){//se verifica que array_posiciones no este vacio
 		mon_remove_map();
 		for(i=0;i<array_posiciones.length;i++){//se recorre el array_posiciones y se extrae la informacion
-			var datosUnidad=array_posiciones[i].split(",");
-			//se separan los valores del array
+			var datosUnidad=array_posiciones[i].split(",");//se separan los valores del array
 			var id 					= datosUnidad[0];
 			var fecha				= datosUnidad[3];
 		    var evt 				= datosUnidad[5];
@@ -407,7 +404,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 				otrosCampos= '<tr><td align="left">Nivel de Bateria:</td><td align="left">'	+ battery	+'% </td></tr>';
 			}//fin if evaluacion de type
 
-			if(type_loc == 1){
+			if(type_loc == 1){//evaluacion type-loc
 				typeLoc = "height=14px;width=14px; src='public/images/geo_icons/antena_gps.png";		
 				stringLoc = 'GPS';
 				//radioLbs = 50;	

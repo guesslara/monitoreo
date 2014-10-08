@@ -258,7 +258,6 @@ function drawGeos(){
 		}
 
 		if(arrayGeoInfo[0]=='R'){
-			console.log(arrayGeoInfo);
 			var arrayGeoInfoLatsLinea = [];
 			arrayGeoInfoLatsLinea = arrayGeoInfo[6].split('&');
 			
