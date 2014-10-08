@@ -287,7 +287,7 @@ function init(){
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
 		cargarGrupos();//carga de grupos
-		getGeos("G");//carga de geopuntos
+		getGeos();//carga de geopuntos
 		mostrarMensaje=$("#seguimiento").val();
 		if(mostrarMensaje=="Y"){
 			//$( "#mensajeMejoras" ).dialog("open");

@@ -547,7 +547,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 						radius: radioLbs
 					};
 					var cityCircle = new google.maps.Circle(populationOptions);	
-			    	arraygeos.push(cityCircle);				    	
+			    	arraygeosP.push(cityCircle);				    	
 				};				
 		    }
 		    google.maps.event.addDomListener(window, 'load');

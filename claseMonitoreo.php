@@ -51,7 +51,7 @@ class monitoreo{
     *@description   Extrae los comandos para la unidad
     *@paramas
     */
-    public function obtenerGeoreferencias($usuarioId,$clienteId,$filtro){
+    public function obtenerGeoreferencias($usuarioId,$clienteId){
       $dbf = new dbFunctions();
       $funciones = new cFunctions();
       $respuesta="";

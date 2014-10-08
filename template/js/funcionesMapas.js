@@ -148,11 +148,11 @@ function mon_remove_map(){
 	    markers = [];
     }
 
-    if(arraygeos || arraygeos.length>-1){
-	    for (var i = 0; i < arraygeos.length; i++) {
-	      arraygeos[i].setMap(null);
+    if(arraygeosP || arraygeosP.length>-1){
+	    for (var i = 0; i < arraygeosP.length; i++) {
+	      arraygeosP[i].setMap(null);
 	    }	
-	    arraygeos = [];
+	    arraygeosP = [];
     }
 }
 

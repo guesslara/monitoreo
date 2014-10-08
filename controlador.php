@@ -98,7 +98,7 @@ if($_SERVER["HTTP_REFERER"]==""){
 			/*echo "<pre>";
 			print_r($_POST);
 			echo "</pre>";*/
-			echo $georeferencias=$objM->obtenerGeoreferencias($_POST["usuarioId"],$_POST["clienteId"],$_POST["filtro"]);
+			echo $georeferencias=$objM->obtenerGeoreferencias($_POST["usuarioId"],$_POST["clienteId"]);
 		break;
 
 	}

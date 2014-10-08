@@ -1,7 +1,8 @@
 var arrayunits 		= new Array();
 var array_selected  = Array();
 var markers = [];
-var arraygeos = [];  
+var arraygeos = [];
+var arraygeosP = [];  
 var mon_timer,mon_timer_count;
 var info_window='';
 var infowindow;
@@ -156,14 +157,14 @@ function stopTimer(){
 /*
 *Funcion modificada para el proceso de las geocercas
 */
-function getGeos(filtro){
+function getGeos(){
 	//alert(filtro)
 	//if(listReferencias==0){
 		//$("#mon_dialog").dialog("open");
 		arrayReferencias = [];
 		usuarioId=$("#usuarioId").val();
 		clienteId=$("#usuarioCliente").val();
-		parametros="action=mostrarGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId+"&filtro="+filtro;
+		parametros="action=mostrarGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId;
 		ajaxMonitoreo("mostrarGeoreferencias","controlador",parametros,"cargador2","mon_dialog","POST");
 
 	//}
