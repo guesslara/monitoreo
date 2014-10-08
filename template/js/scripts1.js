@@ -1,5 +1,3 @@
-/* Funciones del archivo Javascript */
-var cargadorInicial=0;
 /*
  *@name 	Funcion para hacer las peticiones ajax
  *@author	Gerardo Lara
@@ -71,15 +69,13 @@ function controladorAcciones(accion,datos,divResultado){
 function cargarUltimasPosiciones(){
 	usuarioId=$("#usuarioId").val();
 	clienteId=$("#usuarioCliente").val();
-	//console.log(array_selected);
 	unidades="";
 	for(i=0;i<array_selected.length;i++){
 		(unidades=="") ? unidades=array_selected[i] : unidades+=","+array_selected[i];
 	}
 	parametros="action=cargarUltimasPosiciones&filtro="+unidades+"&idUsuario="+usuarioId+"&clienteId="+clienteId;
 	ajaxMonitoreo("cargarUltimasPosiciones","controlador",parametros,"cargador2","mon_content","POST");
-	//se compara el valor de la bandera y se manda a llamar la funcion para actualizar el seguimiento
-	if(banderaSeguimiento){
+	if(banderaSeguimiento){//se compara el valor de la bandera y se manda a llamar la funcion para actualizar el seguimiento
 		dibujaSeguimiento(unidadSeleccionada);//variable global con el id de la unidad seleccionada
 		pintadoPosiciones=true;
 	}
@@ -93,8 +89,6 @@ function cargarGrupos(){
 	usuarioId=$("#usuarioId").val();
 	parametros="action=cargarGrupos&idUsuario="+usuarioId;
 	ajaxMonitoreo("cargarGrupos","controlador",parametros,"mon_menu_acordeon","mon_menu_acordeon","POST");
-    //url="./index.php?m=mMonitoreo4&c=mGetGrupos";
-    //ajaxAppPlataforma("dibujaGrupos",url,"","POST");
 }
 /*
  *@name 	Funcion para dibujar el acordeon de las unidades
@@ -106,18 +100,14 @@ function dibujaAcordeonGrupos(accion,datos){
 		idGrupo="";
 		bUnidades=false;
 		title="De clic para activar el seguimiento de la unidad"; title1="De clic para activar todas las unidades";
-		//se procesa el resultado para crear los grupos
-		datos=datos.split("|");
+		datos=datos.split("|");//se procesa el resultado para crear los grupos
 		acordeon="<div id='mon_acordeon_unidades' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
 		for(i=0;i<datos.length;i++){
-			//se descomponen los elementos para la creacion de los grupos
-			grupos=datos[i].split(",");
-			/*inclusion para el autocomplete*/
-			var miobjeto=new Object();
+			grupos=datos[i].split(",");//se descomponen los elementos para la creacion de los grupos
+			var miobjeto=new Object();/*inclusion para el autocomplete*/
 			miobjeto.label=grupos[3];
 			miobjeto.desc=grupos[2];
-			mon_array_autocomplete.push(miobjeto);
-			/*fin del autocomplete*/
+			mon_array_autocomplete.push(miobjeto);/*fin del autocomplete*/
 			img="img_"+grupos[2];//identificador de las imagenes
 			div="div_"+grupos[2];//identificador de los divs
 			grupo="grupo_"+i;
@@ -156,29 +146,22 @@ function dibujaAcordeonGrupos(accion,datos){
 }
 /*
  *@name 	Funcion para seleccionar la unidad
- *@param	idUnidad int
- *@param	bandera int
  *@author	Gerardo Lara
  *@date		6 - Mayo - 2014
 */
 function seleccionarUnidad(idUnidad,bandera) {    
     try{
-	    //alert(idUnidad);
 	    idUnidad=parseInt(idUnidad);
-	    //console.log("ID unidad :"+idUnidad);
 	    idABorrar = array_selected.indexOf(idUnidad);//se busca el id de la unidad en el array
 	    if(idABorrar == -1){//no existe en el array
 			array_selected.push(idUnidad);//se agrega el id de la unidad al array llamado array_selected
 			//se buscan los elementos concordantes
 			$("#mon_acordeon_unidades").find("#img_"+idUnidad).attr("src","./public/images/tick.png")//cambia la imagen del div
-			//$("#img_"+idUnidad).attr("src","./public/images/tick.png")//cambia la imagen del div
 	    }else{
 			array_selected.splice(idABorrar, 1);//se quita el elemento del array
 			$("#mon_acordeon_unidades").find("#img_"+idUnidad).attr("src","./public/images/ok16.png")//cambia la imagen del div
-			//$("#img_"+idUnidad).attr("src","./public/images/ok16.png")//cambia la imagen del div
 			//se quita la informacion de la tabla de informacion
 			idTr="#posicionTr_"+idUnidad;
-			//console.log(idTr);
 			mon_remove_map();
 			$(idTr).remove();
 			
@@ -194,14 +177,11 @@ function seleccionarUnidad(idUnidad,bandera) {
 /*
  *@name 	Funcion para seleccionar todas las unidades
  *@author	Gerardo Lara
- *@param	grupo string
- *@param	bandera int
  *@date		7 - Mayo - 2014
 */
 function seleccionarTodas(grupo,bandera){
     $("#"+grupo+" .listadoUnidades").each(function (index) {//se recorren los divs contenidos en cada grupo
 		idE=this.id;//id del elemento que se marcara
-		//console.log(idE);
 		srcImg=$("#"+idE+" img").attr("src");//averiguar el src de la imagen de cada elemento
 		if(srcImg.substring(16)=="ok16.png" && bandera==0){
 		    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
@@ -219,8 +199,7 @@ function seleccionarTodas(grupo,bandera){
 		mon_remove_map();
     }
 }
-
-
+/*Datos necesarios para el infowindow*/
 function mon_datosUnidad(stringLoc,dunit,imei,textoMensaje,evt,fecha,direccion,pdi,type){
     var info = '<div class="infoUnidadGlobo">'+
 			'<div>Informacion de la Unidad</div>'+
@@ -259,19 +238,20 @@ function mon_datosUnidad(stringLoc,dunit,imei,textoMensaje,evt,fecha,direccion,p
 		  	'</div>';
     return info;
 }
-
+/*Funcion para mostrar los comandos disponibles*/
 function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comandos
-	//alert(valor);
 	$("#mon_dialog").dialog("open");
 	usuarioId=$("#usuarioId").val();
 	clienteId=$("#usuarioCliente").val();
 	parametros="action=cargarComandosUnidad&idUsuario="+usuarioId+"&clienteId="+clienteId+"&tipo="+valor+"&imei="+imei+"&idUnidad="+idUnidad+"&servidor="+servidor+"&instancia="+instancia;
 	ajaxMonitoreo("cargarComandosUnidad","controlador",parametros,"mon_dialog","mon_dialog","POST");
 }
-function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pdi,lat,lon,nivelBateria,direccion,idTr){
+/**/
+function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pdi,lat,lon,nivelBateria,direccion,idTr,type){
 	try{
 		$("#tablaX tr").css("background","#FFF");
 		$("#"+idTr).css("background","#CEE3F6");
+		direccion=direccion.replace(/\s/g,' ');
 	    fecha		= fecha;//--s
 	    evt 		= evento;//--
 	    pdi 		= pdi;//--
@@ -294,54 +274,18 @@ function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pd
 	        title: 	dunit,
 	        icon:   image,
 	    });
-
 	    markers.push(beachMarker);
-	    //console.log(direccion);
 	    var image 		= '';
 	    var colorImage 		= '';
 	    var textoMensaje 	= '';
 	    var otrosCampos		= '';
 	    //var stringLoc		= '';
-	    var info = '<div class="infoUnidadGlobo">'+
-			    '<div>Informacion de la Unidad</div>'+
-				'<table width="400" cellpading="0" id="tblinfoUnidadGlobo" cellspacing="0">'+
-				    '<tr>'+
-					'<td colspan="2">&nbsp;</td>'+
-				    '<tr>'+
-					'<td align="left" width="125" class="estiloTituloTablaInfoUnidad">Localizado por:</td>'+
-					'<td align="left" width="275">'+stringLoc+'</td>'+
-				    '</tr>'+
-				    '<tr>'+
-					'<td align="left" class="estiloTituloTablaInfoUnidad">Unidad :</td>'+
-					'<td align="left">'+dunit+'</td>'+
-				    '</tr>'+
-				    '<tr>'+
-					'<td align="left" class="estiloTituloTablaInfoUnidad">IMEI :</td>'+
-					'<td align="left">'+imei+'</td>'+
-				    '</tr>'+
-				    '<tr>'+
-					'<td align="left" class="estiloTituloTablaInfoUnidad">Evento :</td>'+
-					'<td align="left">'+textoMensaje+evt+'</td>'+
-				    '</tr>'+
-				    '<tr>'+
-					'<td align="left" class="estiloTituloTablaInfoUnidad">Fecha  :</td>'+
-					'<td align="left">'+fecha+'</td>'+
-					otrosCampos+
-				    '</tr>'+								
-				    '<tr  rowspan="3">'+
-					'<td align="left" class="estiloTituloTablaInfoUnidad">Direccion:</td>'+
-					'<td align="left">'+direccion+'</td>'+
-				    '</tr>'+
-				    '<tr>'+
-					'<td>&nbsp;</td>'+
-					'<td align="left">'+pdi+'</td>'+
-				    '</tr>'+
-				'</table>'+
-			    '</div>';
-		
+	    //Se arma la informacion para el infowindow
+	    var info=mon_datosUnidad(stringLoc,unidad,imei,"",evento,fecha,direccion,pdi,type);
+	    
 	    if(infowindow){infoWindow.close();infowindow.setMap(null);}
-	    infowindow = new google.maps.InfoWindow({
-		content: info
+	    	infowindow = new google.maps.InfoWindow({
+			content: info
 	    });
 	    
 	    infowindow.open(mapaMonitoreo,beachMarker);
@@ -350,8 +294,6 @@ function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pd
 	    mapaMonitoreo.setZoom(18);
 	    mapaMonitoreo.setCenter(positon);	
 	    mapaMonitoreo.panTo(positon);
-
-
     }catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Ocurrio un error al intentar dibujar la Posicion de la unidad seleccionada.\n\n'+err.description);
@@ -368,8 +310,7 @@ var array_temporal=new Array();
 */
 function evaluarCadenaUnidades(strUnidadesCompleto){
 	//$("#mon_content").show().html(strUnidadesCompleto);
-	//se separan las unidades con datos de las que no se encontraron datos
-	if(array_posiciones.length != 0){
+	if(array_posiciones.length != 0){//se separan las unidades con datos de las que no se encontraron datos
 		array_posiciones.length=0;//se vacia el array posiciones
 	}
 	array_datos=strUnidadesCompleto.split("|||||");
@@ -377,8 +318,7 @@ function evaluarCadenaUnidades(strUnidadesCompleto){
 	array_posiciones=array_temporal.slice();//se copia a array_posiciones
 	array_temporal.length=0;//se vacia array_temporal
 	array_datos.length=0;//se vacia array_datos
-	//se llama a la funcion para recorrer el array ultimas posiciones
-	dibujarUltimasPosiciones(array_posiciones);
+	dibujarUltimasPosiciones(array_posiciones);//se llama a la funcion para recorrer el array ultimas posiciones
 }
 /*
  *@name 	Funcion para dibujar evaluar las ultimas posiciones
@@ -387,41 +327,10 @@ function evaluarCadenaUnidades(strUnidadesCompleto){
  *@date		30 - Agosto - 2014
 */
 function dibujarUltimasPosiciones(array_posiciones){
-	//se verifica que array_posiciones no este vacio
-	if(array_posiciones != ""){
+	if(array_posiciones != ""){//se verifica que array_posiciones no este vacio
 		mon_remove_map();
-		//se recorre el array_posiciones y se extrae la informacion
-		for(i=0;i<array_posiciones.length;i++){
+		for(i=0;i<array_posiciones.length;i++){//se recorre el array_posiciones y se extrae la informacion
 			var datosUnidad=array_posiciones[i].split(",");
-			var texto="<pre>[0]=> "+datosUnidad[0]+"<br>"+
-			"[1]=> "+datosUnidad[1]+"<br>"+
-			"[2]=> "+datosUnidad[2]+"<br>"+
-			"[3]=> "+datosUnidad[3]+"<br>"+
-			"[4]=> "+datosUnidad[4]+"<br>"+
-			"[5]=> "+datosUnidad[5]+"<br>"+
-			"[6]=> "+datosUnidad[6]+"<br>"+
-			"[7]=> "+datosUnidad[7]+"<br>"+
-			"[8]=> "+datosUnidad[8]+"<br>"+
-			"[9]=> "+datosUnidad[9]+"<br>"+
-			"[10]=> "+datosUnidad[10]+"<br>"+
-			"[11]=> "+datosUnidad[11]+"<br>"+
-			"[12]=> "+datosUnidad[12]+"<br>"+
-			"[13]=> "+datosUnidad[13]+"<br>"+
-			"[14]=> "+datosUnidad[14]+"<br>"+
-			"[15]=> "+datosUnidad[15]+"<br>"+
-			"[16]=> "+datosUnidad[16]+"<br>"+
-			"[17]=> "+datosUnidad[17]+"<br>"+
-			"[18]=> "+datosUnidad[18]+"<br>"+
-			"[19]=> "+datosUnidad[19]+"<br>"+
-			"[20]=> "+datosUnidad[20]+"<br>"+
-			"[21]=> "+datosUnidad[21]+"<br>"+
-			"[22]=> "+datosUnidad[22]+"<br>"+
-			"[23]=> "+datosUnidad[23]+"<br>"+
-			"[24]=> "+datosUnidad[24]+"<br>"+
-			"[25]=> "+datosUnidad[25]+"<br></pre>";
-			
-			//$("#mon_content").append(texto);
-
 			//se separan los valores del array
 			var id 					= datosUnidad[0];
 			var fecha				= datosUnidad[3];
@@ -523,7 +432,6 @@ function dibujarUltimasPosiciones(array_posiciones){
 				stringLoc = 'NO LOCALIZADO';
 		    }//fin evaluacion type-loc
 		    //eventos para el mapa
-		    
 		    if(lat!=0 && lon !=0){
 				marker = new google.maps.Marker({
 					map: mapaMonitoreo,
@@ -561,8 +469,7 @@ function dibujarUltimasPosiciones(array_posiciones){
 					dunit=$(divUnidadGrupo+" .listadoInfoUnidades").text();
 				}
 			}
-		    //mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia);
-		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,codTypeEquipment,lat,lon,imei,servidor,instancia,fondoFila);
+		    mostrarultimasPosiciones(id,dunit,battery,evt,fecha,vel,distancia,dire,image,colorImage,typeLoc,stringLoc,codTypeEquipment,lat,lon,imei,servidor,instancia,fondoFila,type);
 		}//fin for array_posiciones
 	}//fin if verificacion array_posiciones
 	//se vacia el array posiciones
@@ -578,7 +485,7 @@ var clase="even";
 /*VARIABLE TEMPORAL CREADA*/
 var contador=0;
 /*FIN VARIABLE TEMPORAL*/
-function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia,fondoFila){
+function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velocidad,pdi,direccion,image,colorImage,typeLoc,stringLoc,comandos,lat,lon,imei,servidor,instancia,fondoFila,type){
     //se recupera si se hara el seguimiento
     seguimiento=$("#seguimiento").val();
     direccion=direccion.replace(/\s/g,' ');
@@ -604,7 +511,7 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
 	    if (evento=="Sin Datos") {
 			filaTr+="<td>"+unidad+" C="+contador+"</td>";
 	    }else{
-			filaTr+="<td><a onclick='mon_center_map(\""+idUnidad+"\",\""+stringLoc+"\",\""+unidad+"\",\""+imei+"\",\""+evento+"\",\""+fecha+"\",\""+velocidad+"\",\""+pdi+"\",\""+lat+"\",\""+lon+"\",\""+nivelBateria+"\",\""+direccion+"\",\""+idTr+"\")' title='Ver Ubicacion' class='verUbicacion' style='color:blue;'>"+unidad+" C="+contador+"</a></td>";		
+			filaTr+="<td><a onclick='mon_center_map(\""+idUnidad+"\",\""+stringLoc+"\",\""+unidad+"\",\""+imei+"\",\""+evento+"\",\""+fecha+"\",\""+velocidad+"\",\""+pdi+"\",\""+lat+"\",\""+lon+"\",\""+nivelBateria+"\",\""+direccion+"\",\""+idTr+"\",\""+type+"\")' title='Ver Ubicacion' class='verUbicacion' style='color:blue;'>"+unidad+" C="+contador+"</a></td>";		
 	    }	    
 	    filaTr+="<td>"+nivelBateria+"</td>";
 	    filaTr+="<td>"+evento+"</td>";
@@ -621,8 +528,7 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
 
 function dibujaSeguimiento(idUnidad){
 	unidadSeleccionada=idUnidad;
-	//se cambia el valor de la bandera para que actualice con las posiciones
-	banderaSeguimiento=true;
+	banderaSeguimiento=true;//se cambia el valor de la bandera para que actualice con las posiciones
 	usuarioId=$("#usuarioId").val();
 	clienteId=$("#usuarioCliente").val();
 	//se envia la peticion para el pintado de los mapas
@@ -639,9 +545,7 @@ function mon_send_command(){
 	var instancia = $("#mon_cmds_instancia").val();
 	usuarioId=$("#usuarioId").val();
 	clienteId=$("#usuarioCliente").val();
-
-	if(imei!="" && command!="" && comment!=""){
-		//proceso de peticion ajax
+	if(imei!="" && command!="" && comment!=""){//proceso de peticion ajax
 		parametros="action=enviarComando&imei="+imei+"&command="+command+"&comment="+comment+"&idUnidad="+unit+"&servidor="+servidor+"&instancia="+instancia+"&usuarioId="+usuarioId+"&clienteId="+clienteId;
 		ajaxMonitoreo("enviarComando","controlador",parametros,"mon_dialog","mon_dialog","POST");
 	}else{
@@ -659,8 +563,7 @@ function evaluaComandoEnviado(result){
       	$('#dialog_message').html('<p align="center"><span class="ui-icon ui-icon-alert" style="float:left; margin:0 1px 25px 0;"></span>Comando enviado correctamente.</p>');
       	$("#dialog_message").dialog('open');
       	$("#mon_dialog").dialog("close");
-      	//se manda a actualizar la informacion de las unidades
-      	setTimeout(cargarUltimasPosiciones(),5000);
+      	setTimeout(cargarUltimasPosiciones(),5000);//se manda a actualizar la informacion de las unidades
   	}else if(result=='no-perm'){
 		$('#dialog_message').html("<div class='ui-state-highlight ui-corner-all' style='margin-top:20px;padding:0.7em;'><p><span class='ui-icon ui-icon-info' style='float:left;margin-right:.3em;'></span>No tiene permiso para realizar esta acción. <br> Consulte a su administrador.</p></div>");
       	$("#dialog_message" ).dialog('open');

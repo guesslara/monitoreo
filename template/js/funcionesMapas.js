@@ -1,15 +1,16 @@
 /*
 *Funciones para el manejo de los mapas
 */
-var rendererOptions = { draggable: true };
-var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
-var directionsService = new google.maps.DirectionsService();
-var flightPlanCoordinates = [];
-var flightPlanCoordinatesR = [];
-var flightPath;
-var flightPathR;
-var monGeoZoom=0;
-var monGeoBnds=0;
+var rendererOptions = { draggable: true };//variable para poder mover la linea de las rutas entre punto A y pnto B
+var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;//servicio para mostrar las direcciones
+var directionsService = new google.maps.DirectionsService();//servicio para las direcciones
+var flightPlanCoordinates = [];//areglo para pintar las posiciones del seguimiento x unidad
+var flightPlanCoordinatesR = [];//arreglo para pintar las lineas de geocercas
+var flightPath;//variable que se usara como objeto de la polilyne
+var flightPathR;//variable que se usara como objeto de la polilyne en el pintado de las rutas
+var monGeoZoom=0;//zoom del mapa
+var monGeoBnds=0;//latitud y longitud del mapa
+var strLat;//variable para almacenar las latitudes y longitudes extraidas
 function mostrarMapa(){
     try{
 		var mapOptions = {
@@ -37,7 +38,7 @@ function mostrarMapa(){
 		$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
     }
 }
-var strLat;
+/*Funcion que manda la latitud y longitud a los divs correspondientes*/
 function colocarLatLon(latLng){
 	strLat=latLng.toString();
 	strLat=strLat.split(",");
@@ -46,15 +47,14 @@ function colocarLatLon(latLng){
 	document.getElementById("divLongitud").innerHTML = strLat[1].substring(0,(strLat[1].length-1));
 	strLat.length=0;
 }
-
+//funcion que se ejecuta cuando se hace cualquier accion en el mapa
 function showM(){
 	var bounds = mapaMonitoreo.getBounds();
 	var zoomLevel = mapaMonitoreo.getZoom();
-
 	monGeoZoom   = zoomLevel;
 	monGeoBnds   = bounds;
 }
-
+/*evento que se almacena por cada unidad para mostrar el infowindow*/
 function add_info_marker(marker,content){	
     google.maps.event.addListener(marker, 'click',function() {
 		if(infowindow){
@@ -70,9 +70,7 @@ function add_info_marker(marker,content){
 		mapaMonitoreo.panTo(latLng);     
     });
 }
-/*
-*Funcion para pintar el seguimiento de la unidad
-*/
+/*Funcion para pintar el seguimiento de la unidad*/
 function muestraPosicionesHistorico(posicionesHist){
 	try{
 		if(posicionesHist != 0){
@@ -137,9 +135,7 @@ function muestraPosicionesHistorico(posicionesHist){
 		$("#error_mensaje").html('Ocurrio un error en el pintado de trayectoria.');
     }
 }
-/*
-*Funcion para remover los markers en el mapa
-*/
+/*Funcion para remover los markers en el mapa*/
 function mon_remove_map(){
     if(markers || markers.length>-1){
 	    for (var i = 0; i < markers.length; i++) {
@@ -155,10 +151,7 @@ function mon_remove_map(){
 	    arraygeosP = [];
     }
 }
-
-/*
-*Funcion que calcula la ruta
-*/
+/*Funcion que calcula la ruta*/
 function calcularRuta(puntoA,puntoB){
 	try{	
 		var trafficLayer = new google.maps.TrafficLayer();//se instancia la capa del trafico
@@ -173,27 +166,23 @@ function calcularRuta(puntoA,puntoB){
 		directionsService.route(request, function(result, status) {
 			if (status == google.maps.DirectionsStatus.OK) {
 		  		directionsDisplay.setDirections(result);
-			}else if(status == google.maps.DirectionsStatus.NOT_FOUND){
-				//revisar los puntos de origen y/o destino
+			}else if(status == google.maps.DirectionsStatus.NOT_FOUND){//revisar los puntos de origen y/o destino
 				$("#dialog_message").html("Favor de revisar los puntos de Origen(A) y/o destino(B).");
 				$("#dialog_message").dialog("open");
-			}else if(status == google.maps.DirectionsStatus.ZERO_RESULTS){
-				//revisar los puntos de origen y/o destino
+			}else if(status == google.maps.DirectionsStatus.ZERO_RESULTS){//revisar los puntos de origen y/o destino
 				$("#dialog_message").html("La búsqueda de Rutas no obtuvo ningun resultado.");
 				$("#dialog_message").dialog("open");
-			}else if(status == google.maps.DirectionsStatus.INVALID_REQUEST){
-				//revisar los puntos de origen y/o destino
+			}else if(status == google.maps.DirectionsStatus.INVALID_REQUEST){//revisar los puntos de origen y/o destino
 				$("#dialog_message").html("Verifique que el punto de Origen(A) y destino(B) no esten vacios.");
 				$("#dialog_message").dialog("open");
-			}else if(status == google.maps.DirectionsStatus.UNKNOWN_ERROR){
-				//revisar los puntos de origen y/o destino
+			}else if(status == google.maps.DirectionsStatus.UNKNOWN_ERROR){//revisar los puntos de origen y/o destino
 				$("#dialog_message").html("Ocurrio un error desconocido, intenet de nuevo la petición de la ruta.");
 				$("#dialog_message").dialog("open");
 			}
 		});
 	}catch(err){
 		$("#error").show();
-		$("#error_mensaje").html('Ocurrio un error al pintra la Ruta especificada.');
+		$("#error_mensaje").html('Ocurrio un error al trazar la Ruta especificada.');
     }
 }
 var latlonR ="";
@@ -201,17 +190,14 @@ var LatitR  ="";
 var LongitR ="";
 function drawGeos(){
 	//var checkCercas = $('input[name=mon_chk_c]').is(':checked');
-
 	// if(monMarkers || monMarkers.length>-1){
 	// 	for (var i = 0; i < monMarkers.length; i++) {
 	//           monMarkers[i].setMap(null);
 	// 	}	
 	// 	monMarkers = [];
 	// }
-
 	for(var i=0;i<arrayReferencias.length;i++){
 		var arrayGeoInfo = arrayReferencias[i].split('!');
-
 		if(arrayGeoInfo[0]=='G'){
 			//if(monGeoZoom>13){
 				var pointU = new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]);
@@ -240,7 +226,6 @@ function drawGeos(){
 				//}
 			//}
 		}
-
 		//if(arrayGeoInfo[0]=='C' && checkCercas){
 		if(arrayGeoInfo[0]=='C'){ 
 			var arrayGeoInfoLats = null;
@@ -316,24 +301,23 @@ function drawGeos(){
 		}
 	}		
 }
-
+//acciones para las georeferencias
 function accionesGeopuntosCercas(opcion){
-	//alert(opcion)
 	if(opcion==0){//se ocultan todos los geopuntos
 		setAllMap(null,"G");
-	}else if(opcion==1){
+	}else if(opcion==1){//se muestran todos los geopuntos
 		setAllMap(mapaMonitoreo,"G");
-	}else if(opcion==2){
+	}else if(opcion==2){//se ocultan las geocercas
 		setAllMap(null,"C");
-	}else if(opcion==3){
+	}else if(opcion==3){//se muestran las geocercas
 		setAllMap(mapaMonitoreo,"C");
-	}else if(opcion==4){
+	}else if(opcion==4){//se ocultan las rutas
 		setAllMap(null,"R");
-	}else if(opcion==5){
+	}else if(opcion==5){//se muestran las rutas
 		setAllMap(mapaMonitoreo,"R");
 	}
 }
-
+/*funcion para el manejo de las diferentes acciones con las georeferencias*/
 function setAllMap(map,opcion){
 	if(opcion=="G"){
 		for(var i=0;i< monMarkers.length;i++){
@@ -348,9 +332,5 @@ function setAllMap(map,opcion){
 			monRutas[i].setMap(map);
 		}
 	}
-	
 }
-// Shows any markers currently in the array.
-function showMarkers() {
-  	setAllMap(map);
-}
+

@@ -4,6 +4,28 @@ var banderaUltimaPosicion=0;
 var barraUP=1;
 var focusVentanas=2;
 var mostrarBtnRutas=false;
+var arrayunits 		= new Array();
+var array_selected  = Array();
+var markers = [];
+var arraygeos = [];//array para almacenar las geocercas
+var arraygeosP = [];  //array para almacenar los datos de ultimas posiciones
+var mon_timer,mon_timer_count;
+var info_window='';
+var infowindow;
+var beachMarker;
+var arrayReferencias= Array();
+var listReferencias = 0;
+var aComandosAll = '';
+var UnitsString  = '';
+var monMarkers = [];
+var mon_array_autocomplete = Array();
+//variables adicionales
+var cargadorInicial=0;
+var array_latitudes	 = Array();
+var array_longitudes = Array();
+var banderaSeguimiento = false;
+var unidadSeleccionada = 0;
+var monRutas = [];
 $(document).ready(
 	function(){
 		//declaracion del objeto infowindow
