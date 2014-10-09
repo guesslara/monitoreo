@@ -220,8 +220,6 @@ $(document).ready(function(){
 		$("#btnActualizaTiempo").button({
  			icons: {
 				primary: "ui-icon-triangle-1-s"
-				//secondary: "ui-icon-triangle-1-s"
-				//primary: "ui-icon-triangle-1-s"
 			},
 			text: false
 		});
@@ -237,18 +235,6 @@ $(document).ready(function(){
 
 		$("#btnMostrarOpcionesGeoreferencias,#btnMostrarOpcGeo2").click(function(){
 			$("#menuGeoreferencias").show();
-		});
-
-		$("#mon_chk_c").click(function(){
-			if(this.checked){
-				if(listReferencias==0){
-					getGeos("C");
-				}else{
-					accionesGeopuntosCercas(3);//mostrar las geocercas
-				}
-			}else{
-				accionesGeopuntosCercas(2);//ocultar las geocercas
-			}
 		});
 
 		$("#cambiarActualizacion").hover(function(){
@@ -267,22 +253,40 @@ $(document).ready(function(){
 			$(this).slideUp("fast");
 		})
 
-		$("#chkGeoPuntos").click(function(){
-			if(this.checked){
-				accionesGeopuntosCercas(1);
-			}else{
-				accionesGeopuntosCercas(0);
-			}
-		});
+ 		$("#mnuGeoreferencias2").multiselect({
+ 			noneSelectedText: "Georefencias",
+ 			header: "Elija una opción:",
+ 			selectedText: "# Geos. seleccionada(s)",
+ 			minWidth: 170,
+ 			height: 87
+ 		});
 
-		$("#chkRutas").click(function(){
-			if(this.checked){
-				accionesGeopuntosCercas(5);//se muestran las lineas
-			}else{
-				accionesGeopuntosCercas(4);//se ocultan las lineas
-			}
-		});
- //$("#example").multiselect();
+ 		$("#mnuGeoreferencias2").change(function(){
+ 			valoresMenu=$(this).val();
+ 			console.log(valoresMenu);
+ 			if(valoresMenu != null || valoresMenu != undefined){
+				if($.inArray("geopuntos",valoresMenu) != -1){
+			 		accionesGeopuntosCercas(1);
+			 	}else{
+			 		accionesGeopuntosCercas(0);
+			 	}
+			 	if($.inArray("geocercas",valoresMenu) != -1){
+			 		accionesGeopuntosCercas(3);
+			 	}else{
+			 		accionesGeopuntosCercas(2);
+			 	}
+			 	if($.inArray("rutas",valoresMenu) != -1){
+			 		accionesGeopuntosCercas(5);
+			 	}else{
+			 		accionesGeopuntosCercas(4);
+			 	}
+ 			}else{
+ 				accionesGeopuntosCercas(0);
+ 				accionesGeopuntosCercas(2);
+ 				accionesGeopuntosCercas(4);
+ 			}
+ 		})
+		
 		init();//funcion inicial
 		
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });

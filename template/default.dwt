@@ -21,7 +21,8 @@
 <link type="text/css" href="public/css/estiloX2.css" rel="stylesheet"/>
 <link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
 <link type="text/css" href="./public/libs/jtables/jtables.css" rel="stylesheet"/>
-<!--<script type="text/javascript" src="public/libs/jquery-ui-multiselect/src/jquery.multiselect.js"></script>-->
+<link rel="stylesheet" type="text/css" href="public/libs/jquery-ui-multiselect/jquery.multiselect.css">
+<script type="text/javascript" src="public/libs/jquery-ui-multiselect/src/jquery.multiselect.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
 </head>
@@ -104,22 +105,12 @@
         <button id="gral_button_events" class="btnAlertas ui-state-default ui-corner-all" title="&Uacute;ltimas Alertas">U. Alertas</button>
       </div>
       
-<select id="example" name="example" multiple="multiple">
-<option value="1">Option 1</option>
-<option value="2">Option 2</option>
-<option value="3">Option 3</option>
-<option value="4">Option 4</option>
-<option value="5">Option 5</option>
-</select>
-
-      <div style="border-bottom:0px solid #999;height:30px;padding:1px;width:165px;margin:5px;">
-        <div id="btnMostrarOpcGeo2" style="float:left;border-bottom:1px solid #CCC;width:125px;padding:5px;margin:5px 0px 5px 2px;height:15px;background:#FFF;font-weight:bold;">Georeferencias</div>
-        <button id="btnMostrarOpcionesGeoreferencias" style="float:left;margin-top:5px;">&nbsp;</button>
-        <div id="menuGeoreferencias">
-          <input type="checkbox" name="chkGeoPuntos" id="chkGeoPuntos" value="1" checked="checked"/><label for="chkGeoPuntos">Geopuntos</label><br />
-          <input type="checkbox" name="mon_chk_c" id="mon_chk_c" checked="checked" /><label for="mon_chk_c">GeoCercas</label><br />
-          <input type="checkbox" name="chkRutas" id="chkRutas" checked="checked" /><label for="chkRutas">Rutas</label>
-        </div>
+      <div style="border:0px solid #FF0000;margin:5px;">
+        <select id="mnuGeoreferencias2" name="mnuGeoreferencias2" multiple="multiple">
+          <option value="geopuntos" selected="selected">Geopuntos</option>
+          <option value="geocercas" selected="selected">Geocercas</option>
+          <option value="rutas" selected="selected">Rutas</option>
+        </select>
       </div>
       <!--Div tiempo para actualizar-->
       <!--<div style="border-bottom:1px solid #999;height:30px;padding:1px;width:165px;">-->
