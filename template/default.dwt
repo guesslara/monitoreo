@@ -21,10 +21,9 @@
 <link type="text/css" href="public/css/estiloX2.css" rel="stylesheet"/>
 <link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
 <link type="text/css" href="./public/libs/jtables/jtables.css" rel="stylesheet"/>
-<script type="text/javascript" src="public/libs/sumoselect/jquery.sumoselect.js"></script>
+<!--<script type="text/javascript" src="public/libs/sumoselect/jquery.sumoselect.js"></script>-->
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
-
 </head>
 <body>
 <input type="hidden" id="usuarioId" value="{IDUSUARIO}" />
