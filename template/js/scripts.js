@@ -282,7 +282,7 @@ $(document).ready(function(){
 				accionesGeopuntosCercas(4);//se ocultan las lineas
 			}
 		});
-
+ //$("#example").multiselect();
 		init();//funcion inicial
 		
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
