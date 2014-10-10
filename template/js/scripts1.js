@@ -238,6 +238,29 @@ function mon_datosUnidad(stringLoc,dunit,imei,textoMensaje,evt,fecha,direccion,p
 		  	'</div>';
     return info;
 }
+function datosDireccion(direccionCompleta,tipoLocalizacion,latlng){
+	(tipoLocalizacion=="APPROXIMATE") ? tipoLocalizacion="APROXIMADA" : tipoLocalizacion;
+	var info = '<div class="infoUnidadGlobo">'+
+			'<div>Informacion de la Dirección</div>'+
+			    '<table width="400" id="tblinfoUnidadGlobo" cellpading="0" cellspacing="0">'+
+				'<tr>'+
+				    '<td colspan="2">&nbsp;</td>'+
+				'<tr>'+
+				    '<td align="left" width="125" class="estiloTituloTablaInfoUnidad">Tipo de Localización::</td>'+
+				    '<td align="left" width="275">'+tipoLocalizacion+'</td>'+
+				'</tr>'+
+				'<tr>'+
+				    '<td align="left" class="estiloTituloTablaInfoUnidad">Dirección :</td>'+
+				    '<td align="left">'+direccionCompleta+'</td>'+
+				'</tr>'+
+				'<tr  rowspan="3">'+
+				    '<td align="left" class="estiloTituloTablaInfoUnidad">Latitud/Longitud:</td>'+
+				    '<td align="left">'+latlng+'</td>'+
+				'</tr>'+
+		  	    '</table>'+
+		  	'</div>';
+    return info;
+}
 /*Funcion para mostrar los comandos disponibles por Unidad*/
 function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comandos
 	$("#mon_dialog").dialog("open");

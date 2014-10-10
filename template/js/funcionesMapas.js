@@ -335,23 +335,59 @@ function setAllMap(map,opcion){
 	}
 }
 
-function buscarDireccion(txtParametro){
+function buscarDireccion(txtParametro,evento){
 	var direccionGeo=txtParametro;
-	if( direccionGeo.length > 3 ){
-		//alert(direccionGeo);
-		geocoder.geocode( { 'address': direccionGeo,'region': "Mexico"}, function(results, status) {
-		    if (status == google.maps.GeocoderStatus.OK) {
-		      mapaMonitoreo.setCenter(results[0].geometry.location);
-		      mapaMonitoreo.setZoom(14);
-		      var markerGeo = new google.maps.Marker({
-		          map: mapaMonitoreo,
-		          position: results[0].geometry.location
-		      });
-		      arrayDireccionesResult.push(markerGeo);
-		      console.log(arrayDireccionesResult);
-		    }/* else {
-		      alert('Geocode was not successful for the following reason: ' + status);
-		    }*/
-		 });
+	if(direccionGeo.length==0){
+		limpiaDirecciones();
+	}else{
+		if(evento.which==13){	
+			if( direccionGeo.length > 3 ){
+				limpiaDirecciones();
+				geocoder.geocode( { 'address': direccionGeo,'region': "Mexico"}, function(results, status) {
+				    if (status == google.maps.GeocoderStatus.OK) {
+						//console.log(results.length);
+						//variables para el infowindow
+						descripcionDireccion=results[0].formatted_address;
+						/*ciudad=results[0].address_components[0].long_name;
+						delMun=results[0].address_components[1].long_name
+						estado=results[0].address_components[2].long_name
+						region=results[0].address_components[3].long_name
+						cp=results[0].address_components[4].long_name*/
+						tipoLocalizacion=results[0].geometry.location_type
+						LatiLong=results[0].geometry.location.toString();
+						var infoDir=datosDireccion(descripcionDireccion,tipoLocalizacion,LatiLong);
+
+						var infowindowD=new google.maps.InfoWindow({
+							content:infoDir
+						});
+
+				      	mapaMonitoreo.setCenter(results[0].geometry.location);
+				      	mapaMonitoreo.setZoom(14);
+				      	var markerGeoDir = new google.maps.Marker({
+				        	map: mapaMonitoreo,
+				        	//draggable:true,
+				          	position: results[0].geometry.location
+				      	});
+				      	google.maps.event.addListener(markerGeoDir, 'click', function() {
+	    					infowindowD.open(mapaMonitoreo,markerGeoDir);
+	  					});
+				      	
+				      	arrayDireccionesResult.push(markerGeoDir);
+
+				    }else if(status== google.maps.GeocoderStatus.ZERO_RESULTS || status==google.maps.GeocoderStatus.UNKNOWN_ERROR){
+				      	$("#dialog_message").html("Direccion no encontrada, verifique la información introducida e intentelo de nuevo");
+						$("#dialog_message").dialog("open");
+				    }
+				 });
+			}
+		}
 	}
+}
+
+function limpiaDirecciones(){
+	//se borra el arreglo de las direcciones y se quitan del mapa
+	for(var i=0;i< arrayDireccionesResult.length;i++){
+		arrayDireccionesResult[i].setMap(null);
+	}
+	arrayDireccionesResult.length=0;//se vacia el arreglo
 }

@@ -22,12 +22,13 @@
     $aReports  = ($userAdmin->validar_submenu('mReports')) ? 'visible': 'invisible';
 
     //verificacion de permisos en la tabla de clientes con las funciones habilitadas
-    $sqlAdicional="SELECT MONITOREO_RUTAS,MONITOREO_SEGUIMIENTO FROM ADM_CLIENTES WHERE ID_CLIENTE='".$userAdmin->user_info["ID_CLIENTE"]."'";
+    $sqlAdicional="SELECT MONITOREO_RUTAS,MONITOREO_SEGUIMIENTO,MONITOREO_BUSQUEDA FROM ADM_CLIENTES WHERE ID_CLIENTE='".$userAdmin->user_info["ID_CLIENTE"]."'";
     $resAdicional=$db->sqlQuery($sqlAdicional);
     $rowAdicional=$db->sqlFetchArray($resAdicional);
     $ruta="display:none;";
     $hRuta="display:none";
     $seguimiento="N";
+    $busqueda="none";
 
     if($rowAdicional["MONITOREO_RUTAS"]==1){
     	$ruta="";
@@ -38,6 +39,10 @@
 		$hRuta="display:block;";
     }
     
+    if($rowAdicional["MONITOREO_BUSQUEDA"]==1){
+    	$busqueda="block";
+    }
+
 	$tpl->assign_vars(array(
 		'PAGE_TITLE'	=> 'Modulo Rastreo',
 		'PATH'			=> $dir_mod,
@@ -50,7 +55,8 @@
         'IDCLIENTE'		=> $userAdmin->user_info["ID_CLIENTE"],
         'RUTA'			=> $ruta,
         'SEGUIMIENTO'	=> $seguimiento,
-        'HISTORIAL'		=> $hRuta
+        'HISTORIAL'		=> $hRuta,
+        'BUSQUEDA'		=> $busqueda
 	));
 	
 	$tpl->pparse('default');

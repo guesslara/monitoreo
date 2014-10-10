@@ -294,8 +294,8 @@ $(document).ready(function(){
  			mostraCajaBusqueda($(this).attr("id"));
  		});
 		
- 		$("#txtDireccionM").keyup(function(){
- 			buscarDireccion($(this).val())
+ 		$("#txtDireccionM").keyup(function(e){
+ 			buscarDireccion($(this).val(),e)
  		})
 
 		init();//funcion inicial
