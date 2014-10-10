@@ -11,8 +11,10 @@ var flightPathR;//variable que se usara como objeto de la polilyne en el pintado
 var monGeoZoom=0;//zoom del mapa
 var monGeoBnds=0;//latitud y longitud del mapa
 var strLat;//variable para almacenar las latitudes y longitudes extraidas
+var geocoder;//variable para la busqueda de la direccion
 function mostrarMapa(){
     try{
+    	geocoder = new google.maps.Geocoder();
 		var mapOptions = {
 	  		zoom: 5,
 	  		center: new google.maps.LatLng(24.5154926,-111.4534356),
@@ -333,3 +335,23 @@ function setAllMap(map,opcion){
 	}
 }
 
+function buscarDireccion(txtParametro){
+	var direccionGeo=txtParametro;
+	if( direccionGeo.length > 3 ){
+		//alert(direccionGeo);
+		geocoder.geocode( { 'address': direccionGeo,'region': "Mexico"}, function(results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+		      mapaMonitoreo.setCenter(results[0].geometry.location);
+		      mapaMonitoreo.setZoom(14);
+		      var markerGeo = new google.maps.Marker({
+		          map: mapaMonitoreo,
+		          position: results[0].geometry.location
+		      });
+		      arrayDireccionesResult.push(markerGeo);
+		      console.log(arrayDireccionesResult);
+		    }/* else {
+		      alert('Geocode was not successful for the following reason: ' + status);
+		    }*/
+		 });
+	}
+}

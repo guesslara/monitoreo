@@ -73,7 +73,7 @@ body,document,html{
   /*font-weight:bold;*/
 }
 #mon_search{
-  height: 33px;
+  height: 53px;
   padding: 5px;
   position: relative;
   width: auto;
@@ -444,7 +444,11 @@ body,document,html{
 /*tags buscador*/
 #tags{
   margin-top: 6px;
-  width:130px;
+  width:172px;
+}
+#txtDireccionM{
+  margin-top: 6px;
+  width:150px; 
 }
 /*div geocercas*/
 .mon_div_geos{
@@ -495,7 +499,7 @@ body,document,html{
 }
 /*div para la busqueda de rutas*/
 #monitoreoRutas{
-  border:1px solid #CCC;
+  border-bottom:1px solid #CCC;
   height:75px;
   padding:5px;
   width:95%;

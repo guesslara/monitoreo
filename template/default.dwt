@@ -45,9 +45,18 @@
 	     </div>
 	     <div id="main_view" class="main_view">
 	        <div id="mon_search">
-            <label for="tags">Buscar: </label><input id="tags" />
+            <input id="tags" placeholder="Buscar" />
+            <!--<div id="divDireccion" style="width:182px;border:1px solid #FF0000;display:none;">-->
+              <input id="txtDireccionM" placeholder="Buscar dirección..." style="display:none;" />
+              <!--<a href="#" id="btnBuscarDireccion" class="btnSlider ui-state-default ui-corner-all" title="Buscar dirección"></a>-->  
+            <!--</div>-->
+              
             <a href="#" id="addRuta" style="{RUTA}" title="Buscar rutas"><img border="0" src="./public/images/route.png" height="24" width="24" class="imagenRuta" /></a>
-            <a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posici&oacute;n</a>
+            <a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posici&oacute;n</a><br />
+            <div style="margin-top:3px;border:0px solid #FF0000;">
+              <input type="radio" id="rdbUnidades" name="rdbOpcionBusca" checked="checked"><label for="rdbUnidades">Unidades</label>
+              <input type="radio" id="rdbDireccion" name="rdbOpcionBusca"><label for="rdbDireccion">Dirección</label>
+            </div>
           </div><!--fin div search-->
           <div id="monitoreoRutas">
             <div style="margin:2px;"><strong>A:</strong><input type="text" id="puntoDePartida" title="Indique el punto de partida de la ruta" placeholder="Punto de partida" style="width:230px;margin-left:3px;" /></div>

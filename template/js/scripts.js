@@ -18,7 +18,7 @@ var listReferencias 	  	= 0;
 var aComandosAll 		  	= '';
 var UnitsString  		  	= '';
 var monMarkers 			  	= [];
-var mon_array_autocomplete 	= Array();
+var mon_array_autocomplete 	= Array();//array donde se guardan los nombres de las unidades
 //variables adicionales
 var cargadorInicial		  	= 0;
 var array_latitudes	 	  	= Array();
@@ -26,6 +26,7 @@ var array_longitudes 	  	= Array();
 var banderaSeguimiento 	  	= false;
 var unidadSeleccionada 	  	= 0;
 var monRutas 			  	= [];
+var arrayDireccionesResult	= Array();
 $(document).ready(function(){
 		infoWindow = new google.maps.InfoWindow;//declaracion del objeto infowindow
 		$( "#tabs" ).tabs({ //pestañas
@@ -185,6 +186,7 @@ $(document).ready(function(){
 		});
 
 		$("#addRuta").click(function(){
+			altoMainView=$("#main_view").height();
 			if(mostrarBtnRutas==false){
 				$("#addRuta").attr("title","De clic para cerrar la busqueda de rutas")
 				$("#monitoreoRutas").show();
@@ -192,10 +194,12 @@ $(document).ready(function(){
 				$("#destinoRuta").attr("value","");
 				$("#puntoDePartida").focus();
 				mostrarBtnRutas=true;
+				$("#mon_menu_acordeon").css("height",(altoMainView-160)+"px");
 			}else{
 				$("#addRuta").attr("title","Buscar rutas")
 				$("#monitoreoRutas").hide();
 				mostrarBtnRutas=false;
+				$("#mon_menu_acordeon").css("height",(altoMainView-70)+"px");
 			}
 		});
 
@@ -263,7 +267,6 @@ $(document).ready(function(){
 
  		$("#mnuGeoreferencias2").change(function(){
  			valoresMenu=$(this).val();
- 			console.log(valoresMenu);
  			if(valoresMenu != null || valoresMenu != undefined){
 				if($.inArray("geopuntos",valoresMenu) != -1){
 			 		accionesGeopuntosCercas(1);
@@ -285,13 +288,33 @@ $(document).ready(function(){
  				accionesGeopuntosCercas(2);
  				accionesGeopuntosCercas(4);
  			}
- 		})
+ 		});
+
+ 		$("#rdbDireccion,#rdbUnidades").click(function(){
+ 			mostraCajaBusqueda($(this).attr("id"));
+ 		});
 		
+ 		$("#txtDireccionM").keyup(function(){
+ 			buscarDireccion($(this).val())
+ 		})
+
 		init();//funcion inicial
 		
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
-	
+
+function mostraCajaBusqueda(idRdb){
+	if(idRdb=="rdbDireccion"){
+		$("#tags").hide();
+		$("#txtDireccionM").show();
+		$("#txtDireccionM").focus();
+		$("#txtDireccionM").attr("value","");
+	}else if(idRdb=="rdbUnidades"){
+		$("#tags").show();
+		$("#tags").attr("value","");
+		$("#txtDireccionM").hide();
+	}
+}	
 /*
  *funciones a cargar al inicio de la aplicacion
 */
