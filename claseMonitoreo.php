@@ -203,7 +203,7 @@ class monitoreo{
             	$direccion1 = $cPositions->direccion_no_format($ultimasPosiciones[$i][6],$ultimasPosiciones[$i][7]);
             	$new_dir= $functions->codif($direccion1);      
             	$buscarPDI=true;          
-        	}else if($ultimasPosiciones[$i][6] == "0.000000" && $ultimasPosiciones[$i][6] == "0.000000"){
+        	}else if($ultimasPosiciones[$i][6] == "0.000000" && $ultimasPosiciones[$i][7] == "0.000000"){
                 $lbsClass->setLbsGCI($ultimasPosiciones[$i][17]);
                 $lbsClass->setLbsMac($ultimasPosiciones[$i][18]);
                 $lbsClass->setLbsLAI(0);
@@ -232,16 +232,19 @@ class monitoreo{
    		}
    		//comparamos los arrays el de unidades y el de las ultimas posiciones
       $resultado=array_diff($arrayUnidades, $idUnidadesRespuesta);
-      //echo "Total de unidades no disponibles ".count($resultado)."<br>";
-      for($i=0;$i<count($resultado);$i++){
-        if($strUltimasPosiciones==""){
-          $strUltimasPosiciones = $resultado[$i].",Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,0,0,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos";
-        }else{
-          $strUltimasPosiciones = $strUltimasPosiciones."|||||".$resultado[$i].",Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,0,0,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos";
-        }   
+      
+      if(count($resultado)!=0){
+        sort($resultado);
+
+        for($j=0;$j<count($resultado);$j++){
+          if($strUltimasPosiciones==""){
+            $strUltimasPosiciones = $resultado[$j].",Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,0,0,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos";
+          }else{
+            $strUltimasPosiciones = $strUltimasPosiciones."|||||".$resultado[$j].",Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,0,0,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos,Sin Datos";
+          }   
+        }
       }
-      //echo "<br><br><br><br><br><br><br><br><br>";
-      //echo $strUltimasPosiciones;
+      
       return $strUltimasPosiciones;
    	}
    	/**

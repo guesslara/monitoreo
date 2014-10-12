@@ -81,7 +81,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP fixed">
               <thead>
                 <tr>
-                  <th class="ui-state-default" colspan="5">Info</th>
+                  <th class="ui-state-default" colspan="6">Info</th>
                   <th class="ui-state-default">Unidad</th>
                   <th class="ui-state-default">Nivel de Bateria</th>
                   <th class="ui-state-default">Evento</th>
@@ -182,20 +182,7 @@
   <!--Botones Superiores-->
 </div><!--tabs-->
 <!--Dialogs-->
-  <div id="divAviso" style="display: none;font-family: Verdana;">
-    <!--<p><strong>Bienvenido(a) : {USER}</strong></p>
-    <p align="justify">Ahora puedes enviar Tickets de Servicio sobre cualquier situación que exista en la Plataforma.</p>
-    <p align="justify">Solo haz clic en el bot&oacute;n Soporte ubicado en la parte Superior, llena todos los campos y nos pondremos en contacto contigo a la brevedad.</p>
-    <p align="justify">As&iacute; mismo podr&aacute;s dar seguimiento a tus tickets mediante el siguiente enlace:</p>
-    <p align="center">
-      <a href="http://reportenet.2gps.net" target="_blank" style="color: blue;">Seguimiento a Tickets de Servicio</a>&nbsp;&nbsp;-&nbsp;&nbsp;
-      <a href="http://reportenet.2gps.net/manuales/manualUsuarioTickets.pdf" target="_blank" style="color: blue;">Descargar Manual de Usuario</a>
-    </p>
-    <p>&nbsp;</p>
-    <p align="center">Tu opini&oacute;n es muy importante para nosotros.</p>
-    <p align="center" style="font-weight: bold;font-size: 14px;">Equipo de Soporte ALG</p>
-    <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>-->
-  </div>
+  <div id="divAviso" style="display: none;font-family: Verdana;"></div>
   <div id="mensajeMejoras" title="Aviso">
     <p align="justify" style="font-size: 16px;color: skyblue;">Bienvenid@....</p>
     <hr style="background:#CCC;">

@@ -38,7 +38,7 @@ function controladorAcciones(accion,datos,divResultado){
 			dibujaAcordeonGrupos("",datos);
 		break;
 		case "cargarUltimasPosiciones":
-			//$("#"+divResultado).hide();
+			//$("#"+divResultado).show().html(datos);
 			evaluarCadenaUnidades(datos);
 		break;
 		case "pintarUbicaciones":
@@ -519,6 +519,7 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
     
 	if($("#"+idTr).length==0){
 	    var filaTr="<tr id='"+idTr+"' class='registrosUP' style='background:"+fondoFila+"'>";
+	    filaTr+="<td><input type='checkbox' name='' id='' checked='checked' /></td>";
 	    filaTr+="<td><img src='"+image+"' width='20' height='20' border='0' /></td>";
 	    filaTr+="<td><img "+colorImage+"' border='0' /></td>";
 	    filaTr+="<td><img "+typeLoc+"'/></td>";

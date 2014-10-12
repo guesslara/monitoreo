@@ -18,8 +18,65 @@ if($_SERVER["HTTP_REFERER"]==""){
 			echo $strGrupos;
 		break;
 		case "cargarUltimasPosiciones":
-			$res=$objM->cargarUltimasPosiciones($_POST["filtro"],$_POST["idUsuario"],$_POST["clienteId"]);
-			echo $res;
+			echo $res=$objM->cargarUltimasPosiciones($_POST["filtro"],$_POST["idUsuario"],$_POST["clienteId"]);
+			//NUEVO PROCESO PARA PINTAR LAS POSICIONES EXTRAIDAS DE LA BASE DE DATOS
+			/*
+			$cadena=$res;
+			echo "<br><br>".$cadena;
+			$elementos=explode("||||",$cadena);
+			//proceso de copiado de arrays
+			$array_temporal=$elementos;//se copia al array temporal
+			$array_posiciones=$array_temporal;//del temporal se copia a las posiciones
+			unset($array_temporal);			
+			unset($elementos);
+
+			echo "<pre>";
+			print_r($array_posiciones);
+			echo "</pre>";
+			$tpl->set_filenames(array('controlador' => 'tUltimasPosiciones'));
+			for($i=0;$i<count($array_posiciones);$i++){
+				$datosUnidad=explode(",",$array_posiciones[$i]);
+				echo "<pre>";
+				print_r($datosUnidad);
+				echo "</pre>";
+				$tpl->assign_block_vars('listadoPosiciones',array(
+					'ID'  				=> $datosUnidad[0],
+					'FECHA'  			=> $datosUnidad[3],
+					'EVENTO'  			=> $datosUnidad[5],
+					'ESTATUS'  			=> $datosUnidad[10],
+					'COLSTUS'  			=> $datosUnidad[11],
+					'PDI'  				=> $datosUnidad[14],
+					'VEL'  				=> $datosUnidad[4],
+					'DIRE'  			=> $datosUnidad[15],
+					'PRIORY'  			=> $datosUnidad[2],
+					'LATITUD'  			=> $datosUnidad[6],
+					'LONGITUD'  		=> $datosUnidad[7],
+					'DESUNIDAD'  		=> $datosUnidad[1],
+					'ICONS'  			=> $datosUnidad[12],
+					'ANGULO'  			=> $datosUnidad[9],
+					'COLPRIO'  			=> $datosUnidad[8],
+					'BLOCKMOTOR'  		=> $datosUnidad[12],
+					'TYPE'  			=> $datosUnidad[20],
+					'BATTERY'  			=> $datosUnidad[13],
+					'TYPE_LOC'  		=> $datosUnidad[19],
+					'DISTANCIA'  		=> $datosUnidad[16],
+					'RADIOLBS'  		=> 0,
+					'IMAGE'  			=> "",
+					'COLORIMAGE'  		=> "",
+					'TEXTOMENSAJE'  	=> "",
+					'OTROSCAMPOS'  		=> "",
+					'TYPELOC'  			=> "",
+					'STRINGLOC'  		=> "",
+					'CODTYPEEQUIPMENT'	=> $datosUnidad[21],
+					'COMANDOS'  		=> $datosUnidad[22],
+					'IMEI'  			=> $datosUnidad[23],
+					'SERVIDOR'  		=> $datosUnidad[24],
+					'INSTANCIA'  		=> $datosUnidad[25],
+					'FONDOFILA'  		=> "#FFF"
+				));
+			}
+			$tpl->pparse('controlador');
+			*/
 		break;
 		case "pintarUbicaciones":
 			$ubicaciones=$objM->extraerPosicionesHistorico($_POST["idUnidad"],$_POST["idUsuario"],$_POST["clienteId"]);

@@ -345,22 +345,11 @@ function buscarDireccion(txtParametro,evento){
 				limpiaDirecciones();
 				geocoder.geocode( { 'address': direccionGeo,'region': "Mexico"}, function(results, status) {
 				    if (status == google.maps.GeocoderStatus.OK) {
-						//console.log(results.length);
 						//variables para el infowindow
 						descripcionDireccion=results[0].formatted_address;
-						/*ciudad=results[0].address_components[0].long_name;
-						delMun=results[0].address_components[1].long_name
-						estado=results[0].address_components[2].long_name
-						region=results[0].address_components[3].long_name
-						cp=results[0].address_components[4].long_name*/
 						tipoLocalizacion=results[0].geometry.location_type
 						LatiLong=results[0].geometry.location.toString();
-						var infoDir=datosDireccion(descripcionDireccion,tipoLocalizacion,LatiLong);
-
-						var infowindowD=new google.maps.InfoWindow({
-							content:infoDir
-						});
-
+						//var infoDir=datosDireccion(descripcionDireccion,tipoLocalizacion,LatiLong);
 				      	mapaMonitoreo.setCenter(results[0].geometry.location);
 				      	mapaMonitoreo.setZoom(14);
 				      	var markerGeoDir = new google.maps.Marker({
@@ -368,9 +357,10 @@ function buscarDireccion(txtParametro,evento){
 				        	//draggable:true,
 				          	position: results[0].geometry.location
 				      	});
-				      	google.maps.event.addListener(markerGeoDir, 'click', function() {
-	    					infowindowD.open(mapaMonitoreo,markerGeoDir);
-	  					});
+				      	
+						var infowindowD=new google.maps.InfoWindow();
+	  					infowindowD.setContent(results[0].formatted_address);
+        				infowindowD.open(mapaMonitoreo, markerGeoDir);
 				      	
 				      	arrayDireccionesResult.push(markerGeoDir);
 
