@@ -36,7 +36,8 @@
 
 	if($rowAdicional["MONITOREO_SEGUIMIENTO"]==1){
 		$seguimiento="Y";
-		$hRuta="display:block;";
+		//$hRuta="display:block;";
+		$hRuta="display:none;";
     }
     
     if($rowAdicional["MONITOREO_BUSQUEDA"]==1){

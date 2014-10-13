@@ -519,7 +519,7 @@ function mostrarultimasPosiciones(idUnidad,unidad,nivelBateria,evento,fecha,velo
     
 	if($("#"+idTr).length==0){
 	    var filaTr="<tr id='"+idTr+"' class='registrosUP' style='background:"+fondoFila+"'>";
-	    filaTr+="<td><input type='checkbox' name='' id='' checked='checked' /></td>";
+	    filaTr+="<td><a href='#' onclick='seleccionarUnidad(\""+idUnidad+"\",0)' title='Quitar unidad del listado'><img src='./public/images/tick.png' border='0' /></a></td>";
 	    filaTr+="<td><img src='"+image+"' width='20' height='20' border='0' /></td>";
 	    filaTr+="<td><img "+colorImage+"' border='0' /></td>";
 	    filaTr+="<td><img "+typeLoc+"'/></td>";

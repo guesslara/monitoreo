@@ -210,7 +210,7 @@ $(document).ready(function(){
 		$( "#mensajeMejoras" ).dialog({
 			autoOpen:false,
 			modal: false,
-			width: 500,
+			width: 700,
 			height: 520,
 			modal: true,
 			buttons: {
@@ -330,7 +330,7 @@ function init(){
 		getGeos();//carga de geopuntos
 		mostrarMensaje=$("#seguimiento").val();
 		if(mostrarMensaje=="Y"){
-			//$( "#mensajeMejoras" ).dialog("open");
+			$( "#mensajeMejoras" ).dialog("open");
 		}
 	}catch(err){
 		$("#error").show();
