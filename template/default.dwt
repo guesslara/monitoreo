@@ -183,22 +183,24 @@
 </div><!--tabs-->
 <!--Dialogs-->
   <div id="divAviso" style="display: none;font-family: Verdana;"></div>
-  <div id="mensajeMejoras" title="Aviso">
+  <div id="mensajeMejoras" title="Actualizaciones....">
     <p align="justify" style="font-size: 16px;color: skyblue;">Actualizaciones:</p>
     <hr style="background:#CCC;">
     <p align="justify">Se han agregado varias funciones en el m&oacute;dulo:</p>
-    <p align="justify">Búsqueda de dirección.</p>
-    <p align="justify">Ahora aparecen dos opciones <strong>Unidades</strong> y <strong>Dirección</strong> al dar clic en cualquiera de las opciones la barra de Busqueda, cambiará y se podrá escribir la ubicacion que se desee buscar, si se selecciona la opcion de Unidades se buscará sobre las unidades en general.</p>
+    <p align="justify">Se ha mejorado la extracción de las ultimas posiciones, así como el <strong>Envio de Comandos</strong>.</p>
+    <p align="justify">Se ha colocado una barra del lado derecho indicando las posibles acciones sobre la Consola de Monitoreo, que contiene la <strong>Latitud</strong> y <strong>Longitud</strong>, el botón de <strong>U. Alertas</strong>, así como el menú <strong>Georeferencias</strong> y el <strong>Tiempo de Actualización</strong>.</p>
+    <p align="justify"><strong>Búsqueda de dirección.</strong></p>
+    <p align="justify">Ahora aparecen dos opciones <strong>Unidades</strong> y <strong>Dirección</strong> al dar clic en cualquiera de las opciones la barra de Búsqueda, cambiará y se podrá escribir la ubicación que se desee buscar, si se selecciona la opción de Unidades se buscará sobre las unidades.</p>
     <p align="justify"><img src="{PATH}/images/direccion.png" border="0" /></p>
-    <p align="justify">Georeferencias: Ahora se podran visualizar los siguientes elementos Geopuntos, Geocercas y Rutas. Estas se visualizarán en el mapa de manera automática, se podrán quitar las mismas por separado para dejar solo las seleccionadas.</p>
+    <p align="justify"><strong>Georeferencias:</strong> Ahora se podrán visualizar los siguientes elementos: <strong>Geopuntos</strong>, <strong>Geocercas</strong> y <strong>Rutas</strong>. Estas se visualizarán en el mapa de manera automática, se podrán quitar las mismas por separado para dejar solo las seleccionadas.</p>
     <p align="justify"><img src="{PATH}/images/georeferencias.png" border="0" /></p>
     <p align="justify">Al dar clic se mostrarán las opciones necesarias en forma de menu.</p>
     <p align="justify"><img src="{PATH}/images/selGeoreferencias.png" border="0" /></p>
-    <p align="justify">Visualización de Geopuntos.</p>
+    <p align="justify"><strong>Visualización de Geopuntos.</strong></p>
     <p align="justify"><img src="{PATH}/images/pdi.png" border="0" /></p>
-    <p align="justify">Botón seleccionar/quitar selección: Ahora desde el listado de posiciones se puede quitar una unidad del seguimiento.</p>
+    <p align="justify"><strong>Botón seleccionar/quitar selección:</strong> Ahora desde el listado de posiciones se puede quitar una unidad del seguimiento.</p>
     <p align="justify"><img src="{PATH}/images/opcionesUnidad2.png" border="0" /></p>
-    <p align="justify">Botón seguimiento: Dentro de las opciones de la unidad, ahora aparece una opción más, que al ser presionado mostrará una línea en el seguimiento de la unidad en el mapa.</p><br>
+    <p align="justify"><strong>Botón seguimiento:</strong> Dentro de las opciones de la unidad, ahora aparece una opción más, que al ser presionado mostrará una línea en el seguimiento de la unidad en el mapa.</p><br>
     <p align="center" style="font-weight: bold;font-size: 14px;">Equipo ALG - Movilizandome</p>
     <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>
     <p align="justify"></p>
