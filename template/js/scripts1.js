@@ -4,8 +4,9 @@
  *@date		26 - Agosto - 2014
 */
 function ajaxMonitoreo(accion,c,parametros,divCarga,divResultado,tipoPeticion){
+	(accion=="cargaReportes" || accion=="cargaMenuReportes" || accion=="mostrarNuevoMenu") ? m="mReportes" : m="mMonitoreo4";
 	$.ajax({
-		url: "index.php?m=mMonitoreo4&c="+c,
+		url: "index.php?m="+m+"&c="+c,
 		type: tipoPeticion,
 		data: parametros,
 		beforeSend:function(){ 
@@ -58,6 +59,15 @@ function controladorAcciones(accion,datos,divResultado){
 			arrayReferencias = new Array();
 			arrayReferencias = datos.split('|');
 			drawGeos();
+		break;
+		case "cargaReportes":
+			$("#"+divResultado).show().html(datos);
+		break;
+		case "cargaMenuReportes":
+			$("#"+divResultado).show().html(datos);
+		break;
+		case "mostrarNuevoMenu":
+			$("#"+divResultado).show().html(datos);
 		break;
     }
 }

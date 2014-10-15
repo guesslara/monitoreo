@@ -12,7 +12,8 @@ function redimensionarDivs() {
     $("#mon_tabs-2").css("height",(altoContenedor-80)+"px");
     $("#mon_menu_acordeon").css("height",(altoContenedor-142)+"px");
     $("#mon_content").css("height",(altoContenedor-44)+"px");
-    $("#Admon").css("height",(altoContenedor-43)+"px");//modificacion para el slider
+    $("#Admon").css("height",(altoContenedor-43)+"px");
+    $("#Report").css("height",(altoContenedor-43)+"px");
     $("#contenedorSlider").css("height",(altoContenedor-44)+"px");
     $("#main_view").css("height",(altoContenedor-73)+"px");
     $("#window").css("height",(altoContenedor-75)+"px");

@@ -298,6 +298,10 @@ $(document).ready(function(){
  			buscarDireccion($(this).val(),e)
  		})
 
+ 		$("#copiadoLatLon").click(function(){
+
+ 		});
+
 		init();//funcion inicial
 		
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
@@ -329,9 +333,9 @@ function init(){
 		cargarGrupos();//carga de grupos
 		getGeos();//carga de geopuntos
 		mostrarMensaje=$("#seguimiento").val();
-		if(mostrarMensaje=="Y"){
+		/*if(mostrarMensaje=="Y"){
 			$( "#mensajeMejoras" ).dialog("open");
-		}
+		}*/
 	}catch(err){
 		$("#error").show();
 		$("#error_mensaje").html('Error al cargarse las dependencias.');
@@ -516,42 +520,15 @@ function menuAd(){
 /*Funcion para mostrar el menu de Reportes*/
 function tabRe(){
 	$("#Report").html("");
-	$.ajax({
-		type: "GET",
-        url: "index.php?m=mReportes&c=default",
-        data: "",
-        success: function(datos){
-			if(datos!=0){
-				$("#Report").html(datos);
-				menuRe();
-
-			}else{
-				$("#Report").html("No se han Creado Grupos");
-			}
-			
-        }
-	});
+	ajaxMonitoreo("cargaReportes","default","","Report","Report","POST");
+	menuRe();
 }
 //---------------------------------------------
 function menuRe(){
+	usuarioId=$("#usuarioId").val();
 	$("#rep_menu").html("");
-	$.ajax({
-		type: "GET",
-        url: "index.php?m=mReportes&c=menu",
-        data: "",
-        success: function(datos){
-			//alert(datos)
-			if(datos!=0){
-				$("#rep_menu").html(datos);
-				//document.getElementById('adn_menu').innerHTML = datos;
-				//$("#adn_menu").css('border-color', 'red');
-
-			}else{
-				$("#rep_menu").html("No se han Creado Grupos");
-			}
-			
-        }
-	});
+	ajaxMonitoreo("cargaMenuReportes","menu","","rep_menu","rep_menu","POST");
+	ajaxMonitoreo("mostrarNuevoMenu","controlador","action=mostrarNuevoMenu&idUsuario="+usuarioId,"menuReportes","menuReportes","POST");
 }
 //---------------------------------------------
 function tabAj(){

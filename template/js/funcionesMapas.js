@@ -45,8 +45,7 @@ function colocarLatLon(latLng){
 	strLat=latLng.toString();
 	strLat=strLat.split(",");
 	//se envia el valor a los divs
-	document.getElementById("divLatitud").innerHTML = strLat[0].substring(1);
-	document.getElementById("divLongitud").innerHTML = strLat[1].substring(0,(strLat[1].length-1));
+	document.getElementById("divLatLon").innerHTML = strLat[0].substring(1)+","+strLat[1].substring(0,(strLat[1].length-1));
 	strLat.length=0;
 }
 //funcion que se ejecuta cuando se hace cualquier accion en el mapa

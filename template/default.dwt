@@ -102,8 +102,7 @@
     <div id="barraMonitoreo">
 
       <div style="border-bottom:1px solid #CCC;padding:5px;width:157px;margin:5px;overflow:hidden;height:35px;">
-        <div style="float:left;width:23px;">Lat:</div><div id="divLatitud" class="estiloLatLon">0</div>
-        <div style="float:left;">Lon:</div><div id="divLongitud" class="estiloLatLon">0</div>
+        <div id="divLatLon" style="background:#FFF;border:1px solid #CCC;height:30px;"></div>
       </div>
 
       <div style="border-bottom:0px solid #999;padding:6px;width:157px;margin:5px;">
@@ -141,7 +140,7 @@
     <!--Fin Barra Monitoreo-->
   </div><!--Monitoreo-->
   <div id="Admon"  class="pestana"></div><!--Admon-->
-  <div id="Report" class="pestana"></div><!--Report-->
+  <div id="Report" class="pestana" style="border:1px solid #FF0000;"></div><!--Report-->
   <div id="DashBoard" class="pestana_dashboard"></div><!--DashBoard-->
   
   <!--Texto de Usuario-->
@@ -187,6 +186,11 @@
     <p align="justify" style="font-size: 16px;color: skyblue;">Actualizaciones:</p>
     <hr style="background:#CCC;">
     <p align="justify">Se han agregado varias funciones en el m&oacute;dulo:</p>
+    <p align="justify">Se han agregado varias funciones en el m&oacute;dulo:</p>
+    <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 14 de Octubre:</span></p>
+    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Se ha corregido el problema de pintado del mapa en Mozilla Firefox en el módulo Georeferencias.</strong></span></p>
+    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Se cambio la manera de poder ver las Latitudes y Longitudes y hacer más facil su selección.</strong></span></p>
+    <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 13 de Octubre:</span></p>
     <p align="justify">Se ha mejorado la extracción de las ultimas posiciones, así como el <strong>Envio de Comandos</strong>.</p>
     <p align="justify">Se ha colocado una barra del lado derecho indicando las posibles acciones sobre la Consola de Monitoreo, que contiene la <strong>Latitud</strong> y <strong>Longitud</strong>, el botón de <strong>U. Alertas</strong>, así como el menú <strong>Georeferencias</strong> y el <strong>Tiempo de Actualización</strong>.</p>
     <p align="justify"><strong>Búsqueda de dirección.</strong></p>
