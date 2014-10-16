@@ -40,6 +40,7 @@ function controladorAcciones(accion,datos,divResultado){
 		break;
 		case "cargarUltimasPosiciones":
 			//$("#"+divResultado).show().html(datos);
+			//alert(datos);
 			evaluarCadenaUnidades(datos);
 		break;
 		case "pintarUbicaciones":

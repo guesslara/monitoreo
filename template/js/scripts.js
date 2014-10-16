@@ -27,16 +27,17 @@ var banderaSeguimiento 	  	= false;
 var unidadSeleccionada 	  	= 0;
 var monRutas 			  	= [];
 var arrayDireccionesResult	= Array();
+
 $(document).ready(function(){
 		infoWindow = new google.maps.InfoWindow;//declaracion del objeto infowindow
 		$( "#tabs" ).tabs({ //pestañas
         	select: function(event, ui) { 
 				tab_active = ui.index;
-				if(tab_active==0){
+				/*if(tab_active==0){
 					mon_refresh_units();
 				}else{
 					stopTimer();
-				}
+				}*/
 				if(tab_active==3){
 					loadDashBoard()					
 				}			
@@ -326,7 +327,8 @@ function init(){
 	try{
 		mostrarMapa();
 		tabAd();//tab administracion
-		tabRe();//tab reportes
+		//tabRe();//tab reportes
+		menuRe();//menu reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
@@ -519,9 +521,9 @@ function menuAd(){
 }
 /*Funcion para mostrar el menu de Reportes*/
 function tabRe(){
-	$("#Report").html("");
-	ajaxMonitoreo("cargaReportes","default","","Report","Report","POST");
-	menuRe();
+	//$("#Report").html("");
+	//ajaxMonitoreo("cargaReportes","default","","Report","Report","POST");
+	//menuRe();
 }
 //---------------------------------------------
 function menuRe(){

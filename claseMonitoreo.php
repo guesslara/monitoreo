@@ -190,10 +190,10 @@ class monitoreo{
    		$lbsClass = new LocationBasedService();
     	$lbsClass->setConfigBdParams($configBdLbs);
    		$ultimasPosiciones=$cPositions->get_last_position2($arrayUnidades,$idCliente,"",$idUsuario);
-   		//echo "<br>Cantidad de ultimas posiciones".count($ultimasPosiciones);
-   		//echo "<pre>";
-   		//print_r($ultimasPosiciones);
-   		//echo "</pre>";
+   		/*echo "<br>Cantidad de ultimas posiciones".count($ultimasPosiciones);
+   		echo "<pre>";
+   		print_r($ultimasPosiciones);
+   		echo "</pre>";*/
    		//se recorre el array obtenido para verificar que la latiud y longitud sean diferentes a 0
    		$idUnidadesRespuesta=array();
    		for($i=0;$i<count($ultimasPosiciones);$i++){
@@ -244,7 +244,7 @@ class monitoreo{
           }   
         }
       }
-      
+      //echo "<br>".$strUltimasPosiciones;
       return $strUltimasPosiciones;
    	}
    	/**
