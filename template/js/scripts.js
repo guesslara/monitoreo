@@ -530,7 +530,7 @@ function menuRe(){
 	usuarioId=$("#usuarioId").val();
 	$("#rep_menu").html("");
 	ajaxMonitoreo("cargaMenuReportes","menu","","rep_menu","rep_menu","POST");
-	ajaxMonitoreo("mostrarNuevoMenu","controlador","action=mostrarNuevoMenu&idUsuario="+usuarioId,"menuReportes","menuReportes","POST");
+	//ajaxMonitoreo("mostrarNuevoMenu","controlador","action=mostrarNuevoMenu&idUsuario="+usuarioId,"menuReportes","menuReportes","POST");
 }
 //---------------------------------------------
 function tabAj(){
