@@ -142,8 +142,8 @@
   </div><!--Monitoreo-->
   <div id="Admon"  class="pestana"></div><!--Admon-->
 
-  <div id="Report" class="pestana" style="border:1px solid #FF0000;">
-    <div id="rep_menu" class="menu" style="border:1px solid #FF0000;overflow:auto;"></div><!--Div Menu-->
+  <div id="Report" class="pestana" style="border:1px solid #A9D0F5;">
+    <div id="rep_menu" style="float:left;border:1px solid #A9D0F5;overflow:auto;width:187px;"></div><!--Div Menu-->
     <div id="rep_content" class="pestana_contenido">
       <span id="span_welcome">Seleccione una opción del Menú</span>
     </div>

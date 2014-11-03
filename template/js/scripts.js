@@ -27,9 +27,17 @@ var banderaSeguimiento 	  	= false;
 var unidadSeleccionada 	  	= 0;
 var monRutas 			  	= [];
 var arrayDireccionesResult	= Array();
+var conexionIe				= true;
 
 $(document).ready(function(){
-		infoWindow = new google.maps.InfoWindow;//declaracion del objeto infowindow
+		try{
+			infoWindow = new google.maps.InfoWindow;//declaracion del objeto infowindow
+		}catch(err){
+			conexionIe=false;
+			$("#error").show();
+			$("#error_mensaje").html('Revise su conex&oacute;n a Internet.<br><br>El Mapa no pudo mostrarse.');
+		}
+		
 		$( "#tabs" ).tabs({ //pestañas
         	select: function(event, ui) { 
 				tab_active = ui.index;
@@ -299,9 +307,6 @@ $(document).ready(function(){
  			buscarDireccion($(this).val(),e)
  		})
 
- 		$("#copiadoLatLon").click(function(){
-
- 		});
 
 		init();//funcion inicial
 		

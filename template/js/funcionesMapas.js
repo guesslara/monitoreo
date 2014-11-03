@@ -197,107 +197,109 @@ function drawGeos(){
 	// 	}	
 	// 	monMarkers = [];
 	// }
-	for(var i=0;i<arrayReferencias.length;i++){
-		var arrayGeoInfo = arrayReferencias[i].split('!');
-		if(arrayGeoInfo[0]=='G'){
-			//if(monGeoZoom>13){
-				var pointU = new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]);
+	if(conexionIe){
+		for(var i=0;i<arrayReferencias.length;i++){
+			var arrayGeoInfo = arrayReferencias[i].split('!');
+			if(arrayGeoInfo[0]=='G'){
+				//if(monGeoZoom>13){
+					var pointU = new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]);
 
-				//if(monGeoBnds.contains(pointU)){
-					var image = 'public/images/'+arrayGeoInfo[2];
-				    var marker1 = new google.maps.Marker({
-					    map: mapaMonitoreo,
-					    position: new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]),
-					    title: 	arrayGeoInfo[3],
-						icon: 	image
-				    });
-					var content = '<div class="infoUnidadGlobo">'+
-					    '<div>Información del Geo Punto</div>'+
-						'<table width="400" cellpading="0" id="tblinfoUnidadGlobo" cellspacing="0">'+
-						    '<tr>'+
-							'<td colspan="2">&nbsp;</td>'+
-						    '<tr>'+
-							'<td align="left" width="125" class="estiloTituloTablaInfoUnidad">Punto de Interes:</td>'+
-							'<td align="left" width="275">'+arrayGeoInfo[3]+'</td>'+
-						    '</tr>'+
-						'</table>'+
-					    '</div>';
-				    add_info_marker(marker1,content);
-				    monMarkers.push(marker1);
+					//if(monGeoBnds.contains(pointU)){
+						var image = 'public/images/'+arrayGeoInfo[2];
+					    var marker1 = new google.maps.Marker({
+						    map: mapaMonitoreo,
+						    position: new google.maps.LatLng(arrayGeoInfo[4],arrayGeoInfo[5]),
+						    title: 	arrayGeoInfo[3],
+							icon: 	image
+					    });
+						var content = '<div class="infoUnidadGlobo">'+
+						    '<div>Información del Geo Punto</div>'+
+							'<table width="400" cellpading="0" id="tblinfoUnidadGlobo" cellspacing="0">'+
+							    '<tr>'+
+								'<td colspan="2">&nbsp;</td>'+
+							    '<tr>'+
+								'<td align="left" width="125" class="estiloTituloTablaInfoUnidad">Punto de Interes:</td>'+
+								'<td align="left" width="275">'+arrayGeoInfo[3]+'</td>'+
+							    '</tr>'+
+							'</table>'+
+						    '</div>';
+					    add_info_marker(marker1,content);
+					    monMarkers.push(marker1);
+					//}
 				//}
-			//}
-		}
-		//if(arrayGeoInfo[0]=='C' && checkCercas){
-		if(arrayGeoInfo[0]=='C'){ 
-			var arrayGeoInfoLats = null;
-			arrayGeoInfoLats = arrayGeoInfo[6].split('&');
-			var geos_points_polygon = [];
+			}
+			//if(arrayGeoInfo[0]=='C' && checkCercas){
+			if(arrayGeoInfo[0]=='C'){ 
+				var arrayGeoInfoLats = null;
+				arrayGeoInfoLats = arrayGeoInfo[6].split('&');
+				var geos_points_polygon = [];
 
-			for(j=0;j<arrayGeoInfoLats.length;j++){
-				var latlon = arrayGeoInfoLats[j].split('*');
+				for(j=0;j<arrayGeoInfoLats.length;j++){
+					var latlon = arrayGeoInfoLats[j].split('*');
 
-		        var Latit =  parseFloat(latlon[0]);
-		        var Longit = parseFloat(latlon[1]);
-		        var pointmarker = new google.maps.LatLng(Latit,Longit);
-		        geos_points_polygon.push(pointmarker);		        		        
-		    }
+			        var Latit =  parseFloat(latlon[0]);
+			        var Longit = parseFloat(latlon[1]);
+			        var pointmarker = new google.maps.LatLng(Latit,Longit);
+			        geos_points_polygon.push(pointmarker);		        		        
+			    }
 
-			var geos_options = {
-			      paths: geos_points_polygon,
-			      strokeColor: arrayGeoInfo[1],
-			      strokeOpacity: 0.8,
-			      strokeWeight: 3,
-			      title: 	arrayGeoInfo[3],
-			      fillColor: arrayGeoInfo[1],
-			      fillOpacity: 0.35
-			} 		    
-			
-			var geos_polygon = new google.maps.Polygon(geos_options);
-			geos_polygon.setMap(mapaMonitoreo);
-			arraygeos.push(geos_polygon);
-			listReferencias=1;
-		}
+				var geos_options = {
+				      paths: geos_points_polygon,
+				      strokeColor: arrayGeoInfo[1],
+				      strokeOpacity: 0.8,
+				      strokeWeight: 3,
+				      title: 	arrayGeoInfo[3],
+				      fillColor: arrayGeoInfo[1],
+				      fillOpacity: 0.35
+				} 		    
+				
+				var geos_polygon = new google.maps.Polygon(geos_options);
+				geos_polygon.setMap(mapaMonitoreo);
+				arraygeos.push(geos_polygon);
+				listReferencias=1;
+			}
 
-		if(arrayGeoInfo[0]=='R'){
-			var arrayGeoInfoLatsLinea = [];
-			arrayGeoInfoLatsLinea = arrayGeoInfo[6].split('&');
-			
-			for(k=0;k<arrayGeoInfoLatsLinea.length;k++){
-			 	latlonR=arrayGeoInfoLatsLinea[k].split('*');	
-				LatitR = parseFloat(latlonR[0]);
-			 	LongitR = parseFloat(latlonR[1]);
-				flightPlanCoordinatesR[k]=new google.maps.LatLng(LatitR,LongitR);
-			}	
-			//proceso del dibujo de la linea
-			var iconsetngs = {
-			    path: google.maps.SymbolPath.CIRCLE,
-			    strokeColor: arrayGeoInfo[1],
-			    fillColor: '#FFFFFF',
-			    fillOpacity: 1,
-			    strokeWeight: 4        
-			};
+			if(arrayGeoInfo[0]=='R'){
+				var arrayGeoInfoLatsLinea = [];
+				arrayGeoInfoLatsLinea = arrayGeoInfo[6].split('&');
+				
+				for(k=0;k<arrayGeoInfoLatsLinea.length;k++){
+				 	latlonR=arrayGeoInfoLatsLinea[k].split('*');	
+					LatitR = parseFloat(latlonR[0]);
+				 	LongitR = parseFloat(latlonR[1]);
+					flightPlanCoordinatesR[k]=new google.maps.LatLng(LatitR,LongitR);
+				}	
+				//proceso del dibujo de la linea
+				var iconsetngs = {
+				    path: google.maps.SymbolPath.CIRCLE,
+				    strokeColor: arrayGeoInfo[1],
+				    fillColor: '#FFFFFF',
+				    fillOpacity: 1,
+				    strokeWeight: 4        
+				};
 
-			flightPathR = new google.maps.Polyline({
-			    path: flightPlanCoordinatesR,
-			    geodesic: false,
-			    strokeColor: arrayGeoInfo[1],
-			    strokeOpacity: 1.0,
-			    strokeWeight: 2,
-			    icons: [{
-				    icon: iconsetngs,
-				    repeat:'35px',         
-				    offset: '100%'
-				}]
-			});
-			monRutas.push(flightPathR);
-		  	flightPathR.setMap(mapaMonitoreo);
-			  	/**/
-		  	latlon.length=0;
-		  	flightPathR=[];
-		  	latlonR="";
-		  	LatitR  ="";
-			LongitR ="";
+				flightPathR = new google.maps.Polyline({
+				    path: flightPlanCoordinatesR,
+				    geodesic: false,
+				    strokeColor: arrayGeoInfo[1],
+				    strokeOpacity: 1.0,
+				    strokeWeight: 2,
+				    icons: [{
+					    icon: iconsetngs,
+					    repeat:'35px',         
+					    offset: '100%'
+					}]
+				});
+				monRutas.push(flightPathR);
+			  	flightPathR.setMap(mapaMonitoreo);
+				  	/**/
+			  	latlon.length=0;
+			  	flightPathR=[];
+			  	latlonR="";
+			  	LatitR  ="";
+				LongitR ="";
 
+			}
 		}
 	}		
 }
