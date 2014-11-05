@@ -588,3 +588,5 @@ body,document,html{
   padding:5px;
   font-weight:bold;
 }
+/*opciones para el tab reportes*/
+.menuReportes{float:left;border:0.5px solid #A9D0F5;overflow:auto;width:190px;/*box-shadow: 0 0 0.3em 1px #A9D0F5;*/}
