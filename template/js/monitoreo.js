@@ -56,10 +56,12 @@ function redimensionarDivs() {
     //tabs reportes
     if($("#tabReporteResumen").length){
     	var altoContenedorTabsReporte=$("#idContenedorTabsDetalleReporte").height();
-    	$("#tabReporteResumen").css("height",(altoContenedorTabsReporte-280)+"px");
+    	console.log(altoContenedorTabsReporte);
+    	$("#tabReporteResumen").css("height",(altoContenedorTabsReporte-30)+"px");
 		//$("#tabReporteDetalle").css("height",(altoContenedor-500)+"px");   
 	}
 }
+
 /*@description Cada ves que se redimensiona la ventana del navegador se manda a llamar la funcion que redimensiona todos los divs*/
 window.onresize=redimensionarDivs;
 //actualiza unidades
