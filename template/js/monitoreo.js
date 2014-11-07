@@ -4,20 +4,49 @@
  *@description Obtiene el alto del div y redimensiona los divs
 */
 function redimensionarDivs() {
-    altoContenedor=$("#tabs").height();
-    anchoContenedor=$("#tabs").width();
+    var altoContenedor = $ ( "#tabs" ).height( );
+    var anchoContenedor = $ ( "#tabs" ).width( );
     //TABS MONITOREO
-    $("#mon_tabs").css("height",(altoContenedor-46)+"px");    
-    $("#mon_tabs_1").css("height",(altoContenedor-80)+"px");
-    $("#mon_tabs-2").css("height",(altoContenedor-80)+"px");
-    $("#mon_menu_acordeon").css("height",(altoContenedor-142)+"px");
-    $("#mon_content").css("height",(altoContenedor-44)+"px");
-    $("#Admon").css("height",(altoContenedor-43)+"px");
-    $("#Report").css("height",(altoContenedor-43)+"px");
-    $("#rep_menu").css("height",(altoContenedor-43)+"px");
-    $("#contenedorSlider").css("height",(altoContenedor-44)+"px");
-    $("#main_view").css("height",(altoContenedor-73)+"px");
-    $("#window").css("height",(altoContenedor-75)+"px");
+    $ ( "#mon_tabs" ).css( "height" , ( altoContenedor - 46 ) + "px" );    
+    $ ( "#mon_tabs_1" ).css( "height" , ( altoContenedor - 80 ) + "px" );
+    $ ( "#mon_tabs-2" ).css( "height" , ( altoContenedor - 80 ) + "px" );
+    $ ( "#mon_menu_acordeon" ).css( "height" , ( altoContenedor - 142 ) + "px" );
+    $ ( "#mon_content" ).css( "height" , ( altoContenedor - 44 ) + "px" );
+    $ ( "#Admon" ).css( "height" , ( altoContenedor - 43 ) + "px" );
+    $ ( "#Report" ).css( "height" , ( altoContenedor - 43 )+"px" );
+    $ ( "#rep_menu" ).css( "height" , ( altoContenedor - 43 )+"px" );
+    $ ( "#contenedorSlider" ).css( "height" , ( altoContenedor - 44 )+"px" );
+    $ ( "#main_view" ).css( "height" , ( altoContenedor - 73 )+"px" );
+    $ ( "#window" ).css( "height" , ( altoContenedor - 75 )+"px" );
+    //TABS TAREAS
+    if($("#tabsTareas").length){
+    	console.log("tabs tareas");
+        $("#tabsTareas").css("height",(altoContenedor-50)+"px");
+        if($("#gbox_tareastoday,#gbox_tareaspendientes,#gbox_tareasvencidas").length){
+            //grid tareas hoy
+			$("#gbox_tareastoday").css("height",(altoContenedor-92)+"px");
+			$("#gbox_tareastoday").css("width","99.9%");
+			$("#gview_tareastoday").css("height",(altoContenedor-118)+"px");
+			$("#gview_tareastoday").css("width","99.9%");
+			$("#tareastoday_pager").css("width","99.9%");
+
+			$("#gbox_tareaspendientes").css("height",(altoContenedor-92)+"px");
+			$("#gbox_tareaspendientes").css("width","99.9%");
+			$("#gview_tareaspendientes").css("height",(altoContenedor-118)+"px");
+			$("#gview_tareaspendientes").css("width","99.9%");
+			$("#tareaspendientes_pager").css("width","99.9%");
+
+			$("#gbox_tareasvencidas").css("height",(altoContenedor-92)+"px");
+			$("#gbox_tareasvencidas").css("width","99.9%");
+			$("#gview_tareasvencidas").css("height",(altoContenedor-118)+"px");
+			$("#gview_tareasvencidas").css("width","99.9%");
+			$("#tareasvencidas_pager").css("width","99.9%");
+
+			$(".ui-jqgrid-hdiv").css("width","99.9%");
+			//$(".ui-jqgrid-bdiv").css("border","1px solid #FF0000");
+			$(".ui-jqgrid-bdiv").css("height","90%");
+        }
+    }
     //TABS ALERTAS
     if($("#tabsAlertas").length){
 		$("#tabsAlertas").css("height",(altoContenedor-51)+"px");
