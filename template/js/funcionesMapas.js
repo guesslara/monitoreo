@@ -189,7 +189,7 @@ function calcularRuta(puntoA,puntoB){
 var latlonR ="";
 var LatitR  ="";
 var LongitR ="";
-function drawGeos(){
+function drawGeos(opcion){
 	//var checkCercas = $('input[name=mon_chk_c]').is(':checked');
 	// if(monMarkers || monMarkers.length>-1){
 	// 	for (var i = 0; i < monMarkers.length; i++) {
@@ -301,7 +301,10 @@ function drawGeos(){
 
 			}
 		}
-	}		
+	}
+	accionesGeopuntosCercas(0);
+	accionesGeopuntosCercas(2);
+	accionesGeopuntosCercas(4);
 }
 //acciones para las georeferencias
 function accionesGeopuntosCercas(opcion){

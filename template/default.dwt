@@ -112,9 +112,9 @@
       
       <div style="border:0px solid #FF0000;margin:5px;">
         <select id="mnuGeoreferencias2" name="mnuGeoreferencias2" multiple="multiple">
-          <option value="geopuntos" selected="selected">Geopuntos</option>
-          <option value="geocercas" selected="selected">Geocercas</option>
-          <option value="rutas" selected="selected">Rutas</option>
+          <option value="geopuntos">Geopuntos</option>
+          <option value="geocercas">Geocercas</option>
+          <option value="rutas">Rutas</option>
         </select>
       </div>
       <!--Div tiempo para actualizar-->

@@ -332,7 +332,6 @@ function init(){
 	try{
 		mostrarMapa();
 		tabAd();//tab administracion
-		//tabRe();//tab reportes
 		menuRe();//menu reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/

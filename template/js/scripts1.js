@@ -59,7 +59,7 @@ function controladorAcciones(accion,datos,divResultado){
 			/*listReferencias  = 1;*/
 			arrayReferencias = new Array();
 			arrayReferencias = datos.split('|');
-			drawGeos();
+			drawGeos(0);
 		break;
 		case "cargaReportes":
 			$("#"+divResultado).show().html(datos);
