@@ -298,7 +298,7 @@ function drawGeos(opcion){
 			  	latlonR="";
 			  	LatitR  ="";
 				LongitR ="";
-
+				flightPlanCoordinatesR.length=0;
 			}
 		}
 	}

@@ -18,6 +18,27 @@ function redimensionarDivs() {
     $ ( "#contenedorSlider" ).css( "height" , ( altoContenedor - 44 )+"px" );
     $ ( "#main_view" ).css( "height" , ( altoContenedor - 73 )+"px" );
     $ ( "#window" ).css( "height" , ( altoContenedor - 75 )+"px" );
+    //cuestionarios
+    if($("#qst_main").length){
+    	//altoCuestionarios=$(document).height();
+	    $("#qst_main").css("height",(altoContenedor-80)+"px");
+	    
+	    $("#gbox_cuestionarios").css("height",(altoContenedor-84)+"px");
+		$("#gbox_cuestionarios").css("width","99.9%");
+
+		//$("#gbox_cuestionarios").css("border","1px solid #FF0000");
+
+		$("#gview_cuestionarios").css("height",(altoContenedor-111)+"px");
+		$("#gview_cuestionarios").css("width","99.9%");
+
+		//$("#gview_cuestionarios").css("border","1px solid #FF0000");
+
+		$("#cuestionarios_pager").css("width","99.9%");
+		
+		$(".ui-jqgrid-hdiv").css("width","99.93%");
+		$(".ui-jqgrid-bdiv").css("height","92%");
+		$(".ui-jqgrid-bdiv").css("width","99.9%");
+    }
     //TABS TAREAS
     if($("#tabsTareas").length){
     	console.log("tabs tareas");
@@ -41,6 +62,12 @@ function redimensionarDivs() {
 			$("#gview_tareasvencidas").css("height",(altoContenedor-118)+"px");
 			$("#gview_tareasvencidas").css("width","99.9%");
 			$("#tareasvencidas_pager").css("width","99.9%");
+
+			$("#gbox_tareasterminadas").css("height",(altoContenedor-92)+"px");
+			$("#gbox_tareasterminadas").css("width","99.9%");
+			$("#gview_tareasterminadas").css("height",(altoContenedor-118)+"px");
+			$("#gview_tareasterminadas").css("width","99.9%");
+			$("#tareasterminadas_pager").css("width","99.9%");
 
 			$(".ui-jqgrid-hdiv").css("width","99.9%");
 			//$(".ui-jqgrid-bdiv").css("border","1px solid #FF0000");
