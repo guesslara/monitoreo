@@ -305,13 +305,41 @@ $(document).ready(function(){
 		
  		$("#txtDireccionM").keyup(function(e){
  			buscarDireccion($(this).val(),e)
- 		})
+ 		});
 
+ 		$("#btnCejillaGeoreferencias").click(function(){
+ 			//se procede a ocultar los paneles de monitoreo
+ 			$("#tituloUnidadesDisponibles").hide();
+ 			$("#main_view").hide();
+
+ 			$("#tituloGeoreferencias").show();
+
+ 			
+ 		});
+
+ 		$("#cboFiltroGeoreferencias").change(function(){
+ 			filtroGeo=$("#cboFiltroGeoreferencias").val();//se recupera el filtro a mostrar
+ 			if(filtroGeo != ""){
+				//se pintan los tipos de georeferencias
+				mostrarTiposGeoreferencias(filtroGeo);
+ 			}
+ 		});
 
 		init();//funcion inicial
-		
+		//A BORRAR
+		$("#tituloUnidadesDisponibles").hide();
+ 		$("#main_view").hide();
+ 		//FIN A BORRAR
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
+
+function mostrarTiposGeoreferencias(filtroGeo){
+	usuarioId=$("#usuarioId").val();
+	clienteId=$("#usuarioCliente").val();
+	parametros="action=mostrarTipoGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId+"&filtroGeo="+filtroGeo;
+	ajaxMonitoreo("mostrarTipoGeoreferencias","controlador",parametros,"cargador2","mon_menu_acordeonGeoreferencias","POST");
+
+}
 
 function mostraCajaBusqueda(idRdb){
 	if(idRdb=="rdbDireccion"){

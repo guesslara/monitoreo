@@ -18,6 +18,10 @@ function redimensionarDivs() {
     $ ( "#contenedorSlider" ).css( "height" , ( altoContenedor - 44 )+"px" );
     $ ( "#main_view" ).css( "height" , ( altoContenedor - 73 )+"px" );
     $ ( "#window" ).css( "height" , ( altoContenedor - 75 )+"px" );
+    //divs adicionales georeferencias
+	$ ( "#main_viewGeoreferencias" ).css( "height" , ( altoContenedor - 73 )+"px" );
+	$ ( "#mon_menu_acordeonGeoreferencias" ).css( "height" , ( altoContenedor - 172 ) + "px" );
+
     //cuestionarios
     if($("#qst_main").length){
     	//altoCuestionarios=$(document).height();

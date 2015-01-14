@@ -70,6 +70,15 @@ function controladorAcciones(accion,datos,divResultado){
 		case "mostrarNuevoMenu":
 			$("#"+divResultado).show().html(datos);
 		break;
+		case "mostrarTipoGeoreferencias":
+			//$("#"+divResultado).show().html(datos);
+			if(datos==0){
+				$("#error").show();
+				$("#error_mensaje").html('No hay tipos de Georeferencias en la Base de Datos para este usuario.');
+			}else{
+				dibujarAcordeonGeoreferencias("",datos);
+			}
+		break;
     }
 }
 /*
@@ -140,6 +149,62 @@ function dibujaAcordeonGrupos(accion,datos){
 		$("#mon_acordeon_unidades").accordion({clearStyle: true, autoHeight: false});
 
 		$("#tags").autocomplete({
+	      source: mon_array_autocomplete,
+	      select: function( event, ui ) {      	
+			seleccionarUnidad(ui.item.desc+"",0);
+			enviarAUP();
+			cargarUltimasPosiciones();
+			mon_refresh_units();
+	      },open: function () {
+	        $(this).data("autocomplete").menu.element.width(250);
+	    	}
+	    });
+	}catch(err){
+		$("#error").show();
+	    $("#error_mensaje").html('Ocurrio un error al crear los Grupos.');
+	}
+}
+/*
+ *@name 	Funcion para dibujar el acordeon de las unidades
+ *@author	Gerardo Lara
+ *@date		6 - Mayo - 2014
+*/
+function dibujarAcordeonGeoreferencias(accion,datos){
+	try{
+		idGrupo="";
+		bUnidades=false;
+		title="De clic para activar el seguimiento de la unidad"; title1="De clic para activar todas las unidades";
+		datos=datos.split("|");//se procesa el resultado para crear los grupos
+		//console.log(datos);
+		acordeon="<div id='mon_acordeon_GeoreferenciasM' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
+		for(i=0;i<datos.length;i++){
+			grupos=datos[i].split(",");//se descomponen los elementos para la creacion de los grupos
+			console.log(grupos)
+			var miobjeto=new Object();/*inclusion para el autocomplete*/
+			miobjeto.label=grupos[3];
+			miobjeto.desc=grupos[2];
+			mon_array_autocomplete.push(miobjeto);/*fin del autocomplete*/
+			img="img_"+grupos[2];//identificador de las imagenes
+			div="div_"+grupos[2];//identificador de los divs
+			grupo="grupo_"+i;
+			imgT="imgT_"+i;
+			if (grupos[0] != idGrupo) {//se verifica si se crea un grupo
+				if (bUnidades) {
+					acordeon+="</div>";
+					bUnidades=false;
+				}
+				acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodas(\""+grupo+"\",0)' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarUnidad("+grupos[2]+",0)' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
+				bUnidades=true;
+			}else{
+				acordeon+="<div onclick='seleccionarUnidad("+grupos[2]+",0)' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";    
+			}
+			idGrupo=grupos[0];
+		}
+		acordeon+="</div>";
+		$("#mon_menu_acordeonGeoreferencias").append(acordeon);
+		$("#mon_acordeon_GeoreferenciasM").accordion({clearStyle: true, autoHeight: false});
+
+		$("#tagsGeoreferencias").autocomplete({
 	      source: mon_array_autocomplete,
 	      select: function( event, ui ) {      	
 			seleccionarUnidad(ui.item.desc+"",0);

@@ -47,6 +47,39 @@ class monitoreo{
       return $table_name . $idCliente;
     }
     /**
+    *@method        extrae los tipos de georeferencias
+    *@description   Extrae los tipos de georeferencias
+    *@paramas
+    */
+    public function obtenerTiposGeoreferencias($usuarioId,$clienteId,$filtroGeo){
+      $mensaje="";
+      $objDb=$this->iniciarConexionDb();
+      $objDb->sqlQuery("SET NAMES 'utf8'");
+      if($filtroGeo=="pdi"){
+        $filtro="G";
+      }
+      //echo "<br>".
+      $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE
+      FROM ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO
+      WHERE TIPO='".$filtro."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
+      ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
+      $res=$objDb->sqlQuery($sqlTipo);
+      //$res="0";
+      if($objDb->sqlEnumRows($res)==0){
+        $mensaje="0";
+      }else{
+        //se pintan los datos
+        while($row=$objDb->sqlFetchArray($res)){
+          if($mensaje==""){
+            $mensaje=$row["DESCRIPCION_GEO"].",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"];
+          }else{
+            $mensaje.="|".$row["DESCRIPCION_GEO"].",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"];
+          }
+        }  
+      }
+      return $mensaje;
+    }
+    /**
     *@method        extrae las georeferencias
     *@description   Extrae los comandos para la unidad
     *@paramas

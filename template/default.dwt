@@ -41,7 +41,7 @@
   <div id="Monitoreo" class="pestana">
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
-	     <div class="divMenu">	    
+	     <div id="tituloUnidadesDisponibles" class="divMenu">	    
 	       Unidades Disponibles
 	     </div>
 	     <div id="main_view" class="main_view">
@@ -62,10 +62,42 @@
           </div><!--fin div monitoreo de rutas-->
           <div id="mon_menu_acordeon" class="mon_div_acordeon"></div><!--acordeon de las unidades-->
 	     </div><!--Fin del div main_view-->
+
+
+       <!--Modificaciones para las georeferencias-->
+       <div id="tituloGeoreferencias" class="divMenu">Georeferencias</div>
+       <div id="main_viewGeoreferencias" class="main_view" style="border:1px solid #FF0000;">
+          <div id="mon_searchGeoMonitoreo">
+            <input id="tagsGeoreferencias" placeholder="Buscar" />
+            
+            <!--<a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posici&oacute;n</a><br />-->
+            <div style="margin-top:3px;border-top:0px solid #FF0000;">
+              <input type="radio" id="rdbPDIs" name="rdbOpcionBusca" checked="checked"><label for="rdbPDIs">PDI</label>
+              <input type="radio" id="rdbGeocercas" name="rdbOpcionBusca"><label for="rdbGeocercas">Geocercas</label>
+              <input type="radio" id="rdbRutas" name="rdbOpcionBusca"><label for="rdbRutas">Rutas</label>
+            </div>
+            <div style="border-top:1px solid #CCC;margin-top:8px;padding:5px;">Ver:&nbsp;
+              <select name="cboFiltroGeoreferencias" id="cboFiltroGeoreferencias">
+                <option value="" selected="selected">Selecciona...</option>
+                <option value="pdi">Puntos de Interes</option>
+                <option value="geocerca">Geocercas</option>
+                <option value="ruta">Rutas</option>
+              </select>
+            </div>
+            
+          </div><!--fin div search-->
+          <div id="mon_menu_acordeonGeoreferencias" class="mon_div_acordeon" style="border:1px solid blue;">
+
+          </div><!--acordeon de las unidades-->
+       </div>
+
     </div><!--fin contenedor Slider-->
     <!--Div Pestaña-->
     <div id="btnCejillaOcultar" title="Dar clic para ocultar la barra de unidades">
       <img src="./public/images/ocultar2.png" border="0" style="margin: 7px 0px 0px 2px;" />
+    </div>
+    <div id="btnCejillaGeoreferencias" title="Dar clic para mostrar opciones Georeferencias">
+      <img src="./public/images/default.png" border="0" width="24" style="margin: 7px 0px 0px -2px;" />
     </div>
     <!--fin Div Pestaña-->
     <!--Fin Informacion de las unidades-->

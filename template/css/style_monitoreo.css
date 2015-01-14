@@ -80,6 +80,14 @@ body,document,html{
   border-bottom:1px solid #CCC;
 }
 
+#mon_searchGeoMonitoreo{
+  height: 83px;
+  padding: 5px;
+  position: relative;
+  width: auto;
+  border-bottom:1px solid #CCC;
+}
+
 #contenedorSlider{
   overflow: hidden;
   position: absolute;
@@ -188,6 +196,27 @@ body,document,html{
   border-bottom: 1px solid #CCC;
   cursor: pointer;
 }
+#btnCejillaGeoreferencias{
+  height: 35px;
+  width: 20px;
+  color: #FFF;
+  background: #fff;
+  position: absolute;
+  z-index: 1000;
+  top: 66px;
+  left: 305px;
+  -webkit-box-shadow: 1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+}
+#btnCejillaGeoreferencias:hover{
+  background: #F0F0F0;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  cursor: pointer;
+}
+
+
 /*estilos para el acordeon*/
 .espacioTitulo{
   margin-left:18px;
@@ -446,6 +475,12 @@ body,document,html{
   margin-top: 6px;
   width:172px;
 }
+
+#tagsGeoreferencias{
+  margin-top: 6px;
+  width:240px;
+}
+
 #txtDireccionM{
   margin-top: 6px;
   width:172px; 
