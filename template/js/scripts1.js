@@ -267,7 +267,16 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo,imagen,latitud,longit
 }
 
 function seleccionarTodosGeoreferencias(grupo,bandera){
-
+	$("#"+grupo+" .listadoUnidades").each(function (index) {//se recorren los divs contenidos en cada grupo
+		idE=this.id;//id del elemento que se marcara
+		srcImg=$("#"+idE+" img").attr("src");//averiguar el src de la imagen de cada elemento
+		console.log(srcImg);
+		if(srcImg.substring(16)=="ok16.png" && bandera==0){
+		    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
+		}else if(srcImg.substring(16)=="tick.png" && bandera==1){
+		    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
+		}
+    });
 }
 /*
  *@name 	Funcion para seleccionar la unidad
