@@ -320,6 +320,10 @@ function accionesGeopuntosCercas(opcion){
 		setAllMap(null,"R");
 	}else if(opcion==5){//se muestran las rutas
 		setAllMap(mapaMonitoreo,"R");
+	}else if(opcion==6){//se muestran las rutas
+		setAllMap(null,"Geopuntos");
+	}else if(opcion==7){//se muestran las rutas
+		setAllMap(mapaMonitoreo,"Geopuntos");
 	}
 }
 /*funcion para el manejo de las diferentes acciones con las georeferencias*/
@@ -335,6 +339,11 @@ function setAllMap(map,opcion){
 	}else if(opcion=="R"){
 		for(var i=0;i< monRutas.length;i++){
 			monRutas[i].setMap(map);
+		}
+	}else if(opcion=="Geopuntos"){
+		console.log(opcion);
+		for(var i=0;i< arrayGeopuntosGeo.length;i++){
+			arrayGeopuntosGeo[i].setMap(map);
 		}
 	}
 }

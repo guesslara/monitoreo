@@ -20,7 +20,7 @@ function redimensionarDivs() {
     $ ( "#window" ).css( "height" , ( altoContenedor - 75 )+"px" );
     //divs adicionales georeferencias
 	$ ( "#main_viewGeoreferencias" ).css( "height" , ( altoContenedor - 73 )+"px" );
-	$ ( "#mon_menu_acordeonGeoreferencias" ).css( "height" , ( altoContenedor - 172 ) + "px" );
+	$ ( "#mon_menu_acordeonGeoreferencias" ).css( "height" , ( altoContenedor - 142 ) + "px" );
 
     //cuestionarios
     if($("#qst_main").length){

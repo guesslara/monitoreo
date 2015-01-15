@@ -19,6 +19,7 @@ var aComandosAll 		  	= '';
 var UnitsString  		  	= '';
 var monMarkers 			  	= [];
 var mon_array_autocomplete 	= Array();//array donde se guardan los nombres de las unidades
+var mon_array_autocompleteGeo 	= Array();//array donde se guardan los nombres de las unidades
 //variables adicionales
 var cargadorInicial		  	= 0;
 var array_latitudes	 	  	= Array();
@@ -28,6 +29,10 @@ var unidadSeleccionada 	  	= 0;
 var monRutas 			  	= [];
 var arrayDireccionesResult	= Array();
 var conexionIe				= true;
+//modificacion georeferencias
+var arrayGeopuntosGeo		= Array();
+var georeferenciasSel		= Array();
+
 
 $(document).ready(function(){
 		try{
@@ -317,13 +322,14 @@ $(document).ready(function(){
  			
  		});
 
- 		$("#cboFiltroGeoreferencias").change(function(){
- 			filtroGeo=$("#cboFiltroGeoreferencias").val();//se recupera el filtro a mostrar
- 			if(filtroGeo != ""){
-				//se pintan los tipos de georeferencias
-				mostrarTiposGeoreferencias(filtroGeo);
- 			}
- 		});
+ 		$("input[name=rdbOpcionBuscaGeo]").click(function () {    
+        	//alert("La edad seleccionada es: " + $('input:radio[name=edad]:checked').val());
+        	//alert("La edad seleccionada es: " + $(this).val());
+        	filtroGeo=$(this).val();
+        	$("#mon_menu_acordeonGeoreferencias").html("");
+        	mon_array_autocompleteGeo.length=0;
+        	mostrarTiposGeoreferencias(filtroGeo);
+    	});
 
 		init();//funcion inicial
 		//A BORRAR

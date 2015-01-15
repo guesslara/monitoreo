@@ -72,19 +72,10 @@
             
             <!--<a href="#" id="btnUltimaPosicion" class="btnSlider ui-state-default ui-corner-all" title="&Uacute;ltima posici&oacute;n">U.Posici&oacute;n</a><br />-->
             <div style="margin-top:3px;border-top:0px solid #FF0000;">
-              <input type="radio" id="rdbPDIs" name="rdbOpcionBusca" checked="checked"><label for="rdbPDIs">PDI</label>
-              <input type="radio" id="rdbGeocercas" name="rdbOpcionBusca"><label for="rdbGeocercas">Geocercas</label>
-              <input type="radio" id="rdbRutas" name="rdbOpcionBusca"><label for="rdbRutas">Rutas</label>
+              <input type="radio" id="rdbPDIs" name="rdbOpcionBuscaGeo" value="G"><label for="rdbPDIs">PDI</label>
+              <input type="radio" id="rdbGeocercas" name="rdbOpcionBuscaGeo" value="C"><label for="rdbGeocercas">Geocercas</label>
+              <input type="radio" id="rdbRutas" name="rdbOpcionBuscaGeo" value="R"><label for="rdbRutas">Rutas</label>
             </div>
-            <div style="border-top:1px solid #CCC;margin-top:8px;padding:5px;">Ver:&nbsp;
-              <select name="cboFiltroGeoreferencias" id="cboFiltroGeoreferencias">
-                <option value="" selected="selected">Selecciona...</option>
-                <option value="pdi">Puntos de Interes</option>
-                <option value="geocerca">Geocercas</option>
-                <option value="ruta">Rutas</option>
-              </select>
-            </div>
-            
           </div><!--fin div search-->
           <div id="mon_menu_acordeonGeoreferencias" class="mon_div_acordeon" style="border:1px solid blue;">
 

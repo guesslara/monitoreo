@@ -171,9 +171,12 @@ function dibujaAcordeonGrupos(accion,datos){
 */
 function dibujarAcordeonGeoreferencias(accion,datos){
 	try{
-		idGrupo="";
+		//$("mon_menu_acordeonGeoreferencias").html("");
+		//$("mon_acordeon_GeoreferenciasM").html("");
+		//mon_array_autocompleteGeo.length=0;
+		idGrupoGeo="";
 		bUnidades=false;
-		title="De clic para activar el seguimiento de la unidad"; title1="De clic para activar todas las unidades";
+		title="De clic para mostrar la Georeferencia"; title1="De clic para activar todas las georeferencias";
 		datos=datos.split("|");//se procesa el resultado para crear los grupos
 		//console.log(datos);
 		acordeon="<div id='mon_acordeon_GeoreferenciasM' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
@@ -181,36 +184,40 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 			grupos=datos[i].split(",");//se descomponen los elementos para la creacion de los grupos
 			console.log(grupos)
 			var miobjeto=new Object();/*inclusion para el autocomplete*/
-			miobjeto.label=grupos[3];
-			miobjeto.desc=grupos[2];
-			mon_array_autocomplete.push(miobjeto);/*fin del autocomplete*/
-			img="img_"+grupos[2];//identificador de las imagenes
-			div="div_"+grupos[2];//identificador de los divs
+			miobjeto.label=grupos[2];
+			miobjeto.desc=grupos[0];
+			mon_array_autocompleteGeo.push(miobjeto);/*fin del autocomplete*/
+			img="img_"+grupos[1];//identificador de las imagenes
+			div="div_"+grupos[1];//identificador de los divs
 			grupo="grupo_"+i;
 			imgT="imgT_"+i;
-			if (grupos[0] != idGrupo) {//se verifica si se crea un grupo
+			if (grupos[0] != idGrupoGeo) {//se verifica si se crea un grupo
 				if (bUnidades) {
 					acordeon+="</div>";
 					bUnidades=false;
 				}
-				acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodas(\""+grupo+"\",0)' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarUnidad("+grupos[2]+",0)' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
+				acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0)' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
 				bUnidades=true;
 			}else{
-				acordeon+="<div onclick='seleccionarUnidad("+grupos[2]+",0)' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";    
+				acordeon+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";    
 			}
-			idGrupo=grupos[0];
+			idGrupoGeo=grupos[0];
 		}
 		acordeon+="</div>";
 		$("#mon_menu_acordeonGeoreferencias").append(acordeon);
 		$("#mon_acordeon_GeoreferenciasM").accordion({clearStyle: true, autoHeight: false});
 
+
+
+
+
 		$("#tagsGeoreferencias").autocomplete({
-	      source: mon_array_autocomplete,
+	      source: mon_array_autocompleteGeo,
 	      select: function( event, ui ) {      	
-			seleccionarUnidad(ui.item.desc+"",0);
-			enviarAUP();
-			cargarUltimasPosiciones();
-			mon_refresh_units();
+			//seleccionarUnidad(ui.item.desc+"",0);
+			//enviarAUP();
+			//cargarUltimasPosiciones();
+			//mon_refresh_units();
 	      },open: function () {
 	        $(this).data("autocomplete").menu.element.width(250);
 	    	}
@@ -219,6 +226,48 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 		$("#error").show();
 	    $("#error_mensaje").html('Ocurrio un error al crear los Grupos.');
 	}
+}
+function seleccionarGeoreferencia(idObjectMap,bandera,tipo,imagen,latitud,longitud){
+	//console.log(idObjectMap);
+	//console.log(bandera);
+	if(tipo=="G"){
+		imageGeopunto="public/images/"+imagen;
+		//console.log(imageGeopunto);
+		//se crea el marker para los geopuntos
+		markerGeoReferenciasG=new google.maps.Marker({
+			map:mapaMonitoreo,
+			position:new google.maps.LatLng(latitud,longitud),
+			title: idObjectMap.toString(),
+			icon: imageGeopunto
+		});
+		//cambiar la imagen
+		idGeoABorrar=georeferenciasSel.indexOf(idObjectMap);
+		if(idGeoABorrar == -1){//no existe en el array
+			georeferenciasSel.push(idObjectMap);
+			$("#mon_acordeon_GeoreferenciasM").find("#img_"+idObjectMap).attr("src","./public/images/tick.png")//cambia la imagen del div
+			arrayGeopuntosGeo.push(markerGeoReferenciasG);
+		}else{
+			console.log("Posicion: "+idGeoABorrar);
+			console.log("Title del marker: "+arrayGeopuntosGeo[idGeoABorrar].title);
+			georeferenciasSel.splice(idGeoABorrar, 1);//se quita el elemento del array
+			accionesGeopuntosCercas(6);
+			arrayGeopuntosGeo.splice(idGeoABorrar, 1);//se quita el elemento del array
+			$("#mon_acordeon_GeoreferenciasM").find("#img_"+idObjectMap).attr("src","./public/images/ok16.png")//cambia la imagen del div
+			console.log(arrayGeopuntosGeo);
+			
+			//se ocultan los markers
+			//accionesGeopuntosCercas(6);
+			//se vuelve a pintar las ubicaciones
+			accionesGeopuntosCercas(7);
+		}
+		
+		
+		console.log(georeferenciasSel);
+	}
+}
+
+function seleccionarTodosGeoreferencias(grupo,bandera){
+
 }
 /*
  *@name 	Funcion para seleccionar la unidad

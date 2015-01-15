@@ -55,26 +55,21 @@ class monitoreo{
       $mensaje="";
       $objDb=$this->iniciarConexionDb();
       $objDb->sqlQuery("SET NAMES 'utf8'");
-      if($filtroGeo=="pdi"){
-        $filtro="G";
-      }
-      //echo "<br>".
-      $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE
-      FROM ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO
-      WHERE TIPO='".$filtro."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
+      //$sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE,TIPO
+      //FROM ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO
+      //WHERE TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."' ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
+      $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE,ADM_GEOREFERENCIAS.TIPO AS TIPO,URL
+      FROM (ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO) INNER JOIN ADM_IMAGE ON ADM_GEOREFERENCIAS_TIPO.ID_IMAGE=ADM_IMAGE.ID_IMG
+      WHERE ADM_GEOREFERENCIAS.TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
       ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
+
+
       $res=$objDb->sqlQuery($sqlTipo);
-      //$res="0";
       if($objDb->sqlEnumRows($res)==0){
         $mensaje="0";
       }else{
-        //se pintan los datos
-        while($row=$objDb->sqlFetchArray($res)){
-          if($mensaje==""){
-            $mensaje=$row["DESCRIPCION_GEO"].",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"];
-          }else{
-            $mensaje.="|".$row["DESCRIPCION_GEO"].",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"];
-          }
+        while($row=$objDb->sqlFetchArray($res)){//se pintan los datos
+          ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"] : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"];
         }  
       }
       return $mensaje;
