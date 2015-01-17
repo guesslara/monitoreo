@@ -32,7 +32,8 @@ var conexionIe				= true;
 //modificacion georeferencias
 var arrayGeopuntosGeo		= Array();
 var georeferenciasSel		= Array();
-
+var contenteStrGeo			= "";
+var gruposSelGeoreferencias	= Array();//variable para almacenar las georeferencias
 
 $(document).ready(function(){
 		try{

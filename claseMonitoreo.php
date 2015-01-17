@@ -46,6 +46,20 @@ class monitoreo{
       }
       return $table_name . $idCliente;
     }
+    public function extraerInfoGeoreferencia($usuarioId,$clienteId,$idObjectMap){
+      $mensaje="";
+      $objDb=$this->iniciarConexionDb();
+      $objDb->sqlQuery("SET NAMES 'utf8'");
+      $sql="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS TIPO,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,CALLE,NO_INT,NO_EXT,COLONIA,MUNICIPIO,ESTADO,CP,LATITUDE,LONGITUDE 
+      FROM ALG_BD_CORPORATE_MOVI.ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO
+      WHERE ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."' AND ID_OBJECT_MAP='".$idObjectMap."';";
+      $res=$objDb->sqlQuery($sql);
+      if($res){
+        $row=$objDb->sqlFetchArray($res);
+        $mensaje=$row["TIPO"]."||".$row["DESCRIPCION"]."||".$row["CALLE"]."||".$row["NO_INT"]."||".$row["NO_EXT"]."||".$row["COLONIA"]."||".$row["MUNICIPIO"]."||".$row["ESTADO"]."||".$row["CP"]."||".$row["LATITUDE"]."||".$row["LONGITUDE"];
+      }
+      return $mensaje;
+    }
     /**
     *@method        extrae los tipos de georeferencias
     *@description   Extrae los tipos de georeferencias

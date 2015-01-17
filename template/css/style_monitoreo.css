@@ -319,6 +319,17 @@ body,document,html{
   font-weight:bold;
   color:#666;
 }
+.infoUnidadGloboGeoreferencias{
+  height:240px;
+  width:390px;
+  margin: 3px 3px 3px 3px;
+}
+.infoUnidadGloboGeoreferencias div{
+  border-bottom:1px solid blue;
+  font-size:12px;
+  font-weight:bold;
+  color:#666;
+}
 #tblinfoUnidadGlobo{
   font-size:10px;
 }

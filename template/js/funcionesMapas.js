@@ -71,6 +71,21 @@ function add_info_marker(marker,content){
 		mapaMonitoreo.panTo(latLng);     
     });
 }
+function verInfoGeoreferencia(marker){
+	google.maps.event.addListener(marker, 'click',function() {
+		if(infowindow){
+		    infoWindow.close();
+		    infowindow.setMap(null);
+		}
+		var marker = this;
+		var latLng = marker.getPosition();
+		infoWindow.setContent(contenteStrGeo.toString());
+		infoWindow.open(mapaMonitoreo, marker);
+		mapaMonitoreo.setZoom(18);
+		mapaMonitoreo.setCenter(latLng); 
+		mapaMonitoreo.panTo(latLng);     
+    });	
+}
 /*Funcion para pintar el seguimiento de la unidad*/
 function muestraPosicionesHistorico(posicionesHist){
 	try{
@@ -308,6 +323,7 @@ function drawGeos(opcion){
 }
 //acciones para las georeferencias
 function accionesGeopuntosCercas(opcion){
+	console.log("opcion: "+opcion);
 	if(opcion==0){//se ocultan todos los geopuntos
 		setAllMap(null,"G");
 	}else if(opcion==1){//se muestran todos los geopuntos
@@ -341,7 +357,7 @@ function setAllMap(map,opcion){
 			monRutas[i].setMap(map);
 		}
 	}else if(opcion=="Geopuntos"){
-		console.log(opcion);
+		console.log(arrayGeopuntosGeo);
 		for(var i=0;i< arrayGeopuntosGeo.length;i++){
 			arrayGeopuntosGeo[i].setMap(map);
 		}
