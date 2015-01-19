@@ -266,3 +266,16 @@ function sendCommands(){
 		$("#mon_dialogAll").dialog("close");
 	}
 }
+function geoPuntos(tipoGeo,descripcion,calle,noInt,noExt,colonia,municipio,estado,cp,latitud,longitud){
+	this.tipoGeo		=	tipoGeo;
+	this.descripcion	=	descripcion;
+	this.calle 			=	calle;
+	this.noInt 			= 	noInt;
+	this.noExt			=	noExt;
+	this.colonia		=	colonia;
+	this.municipio		=	municipio;
+	this.estado			=	estado;
+	this.cp 			=	cp;
+	this.latitud		=	latitud;
+	this.longitud		=	longitud;
+}
