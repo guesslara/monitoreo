@@ -71,7 +71,7 @@ function add_info_marker(marker,content){
 		mapaMonitoreo.panTo(latLng);     
     });
 }
-function verInfoGeoreferencia(marker){
+function verInfoGeoreferencia(marker,content){
 	google.maps.event.addListener(marker, 'click',function() {
 		if(infowindow){
 		    infoWindow.close();
@@ -79,7 +79,7 @@ function verInfoGeoreferencia(marker){
 		}
 		var marker = this;
 		var latLng = marker.getPosition();
-		infoWindow.setContent(contenteStrGeo.toString());
+		infoWindow.setContent(content);
 		infoWindow.open(mapaMonitoreo, marker);
 		mapaMonitoreo.setZoom(18);
 		mapaMonitoreo.setCenter(latLng); 

@@ -163,55 +163,5 @@ if($_SERVER["HTTP_REFERER"]==""){
 			//echo "</pre>";
 			echo $tiposG=$objM->obtenerTiposGeoreferencias($_POST["usuarioId"],$_POST["clienteId"],$_POST["filtroGeo"]);
 		break;
-		case "extraerDatosGeoreferencia":
-			$resultado=$objM->extraerInfoGeoreferencia($_POST["usuarioId"],$_POST["clienteId"],$_POST["idObjectMap"]);
-			$resultado=explode("||", $resultado);
-			echo "<div style='border-bottom:1px solid blue;'>Informaci&oacute;n Georeferencia</div><table border='0' id='tblinfoUnidadGlobo' cellpadding='1' cellspacing='1' width='380'>
-				<tr>
-					<td width='130' class='estiloTituloTablaInfoUnidad'>Clasificado como:</td>
-					<td width='270'>".$resultado[0]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>Descripcion:</td>
-					<td>".$resultado[1]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>Calle:</td>
-					<td>".$resultado[2]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>No. Interior:</td>
-					<td>".$resultado[3]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>No. Ext:</td>
-					<td>".$resultado[4]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>Colonia:</td>
-					<td>".$resultado[5]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>Municipio:</td>
-					<td>".$resultado[6]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>Estadp:</td>
-					<td>".$resultado[7]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>C.P.:</td>
-					<td>".$resultado[8]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>Latitud:</td>
-					<td>".$resultado[9]."</td>
-				</tr>
-				<tr>
-					<td class='estiloTituloTablaInfoUnidad'>Longitud:</td>
-					<td>".$resultado[10]."</td>
-				</tr>
-			</table>";
-		break;
 	}
 }

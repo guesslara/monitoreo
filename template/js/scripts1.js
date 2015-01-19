@@ -175,67 +175,91 @@ function dibujaAcordeonGrupos(accion,datos){
 */
 function dibujarAcordeonGeoreferencias(accion,datos){
 	try{
-		//$("mon_menu_acordeonGeoreferencias").html("");
-		//$("mon_acordeon_GeoreferenciasM").html("");
-		//mon_array_autocompleteGeo.length=0;
+		accionesGeopuntosCercas(6);
+		georeferenciasSel.length=0;
+		arrayGeopuntosGeo.length=0;
+		console.log(arrayGeopuntosGeo);
+		
+		accionesGeopuntosCercas(7);
+		datosGeopuntos="";
 		idGrupoGeo="";
 		bUnidades=false;
 		title="De clic para mostrar la Georeferencia"; title1="De clic para activar todas las georeferencias";
 		datos=datos.split("|");//se procesa el resultado para crear los grupos
 		//console.log(datos);
-
-		//se copia el array en otra variable
-		gruposSelGeoreferencias=datos.slice();
-
 		acordeon="<div id='mon_acordeon_GeoreferenciasM' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
 		for(i=0;i<datos.length;i++){
 			grupos=datos[i].split(",");//se descomponen los elementos para la creacion de los grupos
-			//console.log(grupos)
+			console.log(grupos)
 			var miobjeto=new Object();/*inclusion para el autocomplete*/
 			miobjeto.label=grupos[2];
 			miobjeto.desc=grupos[0];
+			miobjeto.idObjectMap=grupos[1];
+			miobjeto.tipo=grupos[5];
+
+
 			mon_array_autocompleteGeo.push(miobjeto);/*fin del autocomplete*/
 			img="img_"+grupos[1];//identificador de las imagenes
 			div="div_"+grupos[1];//identificador de los divs
 			grupo="grupoG_"+i;
-			imgT="imgT_"+i;
+			imgT="imgTG_"+i;
+			//modificacion y prueba de los objetos de informacion para javascript
+			if(grupos[5]=="G"){
+				datosGeopuntos=new geoPuntos(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5],grupos[6],grupos[7],grupos[8],grupos[9],grupos[10],grupos[11],grupos[12],grupos[13]);
+				datosGeoreferencias.push(datosGeopuntos);
+				console.log(datosGeoreferencias);
+			}else if(grupos[5]=="C"){
+				datosGeocerca=new geoCerca(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5]);
+				datosGeocercas.push(datosGeocerca);
+				console.log(datosGeocercas);
+			}
+			
 			if (grupos[0] != idGrupoGeo) {//se verifica si se crea un grupo
 				if (bUnidades) {
 					acordeon+="</div>";
 					bUnidades=false;
 				}
-				acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0)' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
+				//acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0)' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
+				acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0,\""+grupos[5]+"\")' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
 				bUnidades=true;
 			}else{
-				acordeon+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";    
+				//acordeon+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
+				acordeon+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";    
 			}
 			idGrupoGeo=grupos[0];
+			datosGeopuntos="";
 		}
 		acordeon+="</div>";
 		$("#mon_menu_acordeonGeoreferencias").append(acordeon);
 		$("#mon_acordeon_GeoreferenciasM").accordion({clearStyle: true, autoHeight: false});
 
+
 		$("#tagsGeoreferencias").autocomplete({
 	      source: mon_array_autocompleteGeo,
-	      select: function( event, ui ) {      	
-			//seleccionarUnidad(ui.item.desc+"",0);
-			//enviarAUP();
-			//cargarUltimasPosiciones();
-			//mon_refresh_units();
+	      select: function( event, ui ) {
+			seleccionarGeoreferencia(ui.item.idObjectMap,0,ui.item.tipo);
+			
 	      },open: function () {
 	        $(this).data("autocomplete").menu.element.width(250);
 	    	}
 	    });
+
+
+		
+
+
 	}catch(err){
 		$("#error").show();
-	    $("#error_mensaje").html('Ocurrio un error al crear los Grupos.');
+	    $("#error_mensaje").html('Ocurrio un error al cargar las georeferencias.');
+	    console.log(err);
 	}
 }
-function seleccionarGeoreferencia(idObjectMap,bandera,tipo,imagen,latitud,longitud){
+function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 	//console.log(idObjectMap);
 	//console.log(bandera);
 	if(tipo=="G"){
-		imageGeopunto="public/images/"+imagen;
+		//imageGeopunto="public/images/"+imagen;
+		imageGeopunto="public/images/"+extraerDatosGeoreferencia(idObjectMap,"imagen");
 		//console.log(imageGeopunto);
 		//cambiar la imagen
 		idGeoABorrar=georeferenciasSel.indexOf(idObjectMap);
@@ -243,19 +267,15 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo,imagen,latitud,longit
 			//se crea el marker para los geopuntos
 			markerGeoReferenciasG=new google.maps.Marker({
 				map:mapaMonitoreo,
-				position:new google.maps.LatLng(parseFloat(latitud),parseFloat(longitud)),
+				position:new google.maps.LatLng(parseFloat(extraerDatosGeoreferencia(idObjectMap,"latitud")),parseFloat(extraerDatosGeoreferencia(idObjectMap,"longitud"))),
 				title: idObjectMap.toString(),
 				icon: imageGeopunto
 			});
-			verInfoGeoreferencia(markerGeoReferenciasG,extraerDatosGeoreferencia(idObjectMap));
+			verInfoGeoreferencia(markerGeoReferenciasG,extraerDatosGeoreferencia(idObjectMap,"datosGeopunto"));
 			georeferenciasSel.push(idObjectMap);
 			$("#mon_acordeon_GeoreferenciasM").find("#img_"+idObjectMap).attr("src","./public/images/tick.png")//cambia la imagen del div
 			arrayGeopuntosGeo.push(markerGeoReferenciasG);
 		}else{
-			//console.log("IDOBJECTMAP "+idObjectMap);
-			//console.log("Posicion: "+idGeoABorrar);
-			//console.log("Title del marker: "+arrayGeopuntosGeo[idGeoABorrar].title);
-			//console.log(arrayGeopuntosGeo);
 			//se ocultan los markers
 			accionesGeopuntosCercas(6);
 			//se busca el elemento a borrar
@@ -277,58 +297,116 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo,imagen,latitud,longit
 	}
 }
 
-function seleccionarTodosGeoreferencias(grupo,bandera){
-	console.log(gruposSelGeoreferencias);
-	var idsGeoreferenciasP= Array();
+function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
+	console.log("grupo: "+grupo)
 	$("#"+grupo+" .listadoUnidades").each(function (index) {//se recorren los divs contenidos en cada grupo
 		idE=this.id;//id del elemento que se marcara
 		srcImg=$("#"+idE+" img").attr("src");//averiguar el src de la imagen de cada elemento
 		//console.log("imagen: "+srcImg.substring(16));
 		//console.log("bandera: "+bandera);
 		if(srcImg.substring(16)=="ok16.png" && bandera==0){
-			//seleccionarGeoreferencia(idObjectMap,bandera,tipo,imagen,latitud,longitud)
 			console.log(parseInt(idE.substring(4)));
 		    //seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
-		    idsGeoreferenciasP.push(parseInt(idE.substring(4)));
-
+			seleccionarGeoreferencia(parseInt(idE.substring(4)),0,tipo)
 
 		}else if(srcImg.substring(16)=="tick.png" && bandera==1){
-		    seleccionarUnidad(parseInt(idE.substring(4)));//se envia a la funcion para cambiar las imagenes y almacenar el valor
+		    seleccionarGeoreferencia(parseInt(idE.substring(4)),0,tipo);//se envia a la funcion para cambiar las imagenes y almacenar el valor
 		}
     });
 
-	console.log(idsGeoreferenciasP)
+	
+	imagenT=$("#imgTG_"+grupo.substring(7)).attr("src");//imagen del div del grupo
 
-
-	//se recorre el array de gruposSelGeoreferencias en busca de coincidencias
-	for(i=0;i<idsGeoreferenciasP.length;i++){
-		for(j=0;j<gruposSelGeoreferencias.length;j++){
-			valoresGrupos=gruposSelGeoreferencias[i].split(",");
-			if(parseInt(valoresGrupos[1])==parseInt(idsGeoreferenciasP[i])){
-				//seleccionarGeoreferencia(idObjectMap,bandera,tipo,imagen,latitud,longitud)
-				seleccionarGeoreferencia(valoresGrupos[1],0,valoresGrupos[5],valoresGrupos[6],valoresGrupos[3],valoresGrupos[4]);
-			}
-		}	
-	}
-
-    imagenT=$("#imgT_"+grupo.substring(6)).attr("src");//imagen del div del grupo
+	console.log(imagenT.substring(16));
 
     if (imagenT.substring(16)=="ok16.png") {
-		$("#imgT_"+grupo.substring(6)).attr("src","./public/images/tick.png");//cambia la imagen del div
-		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',1)");//cambia la bandera de la funcion
+		$("#imgTG_"+grupo.substring(7)).attr("src","./public/images/tick.png");//cambia la imagen del div
+		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodosGeoreferencias('"+grupo+"',1,\""+tipo+"\")");//cambia la bandera de la funcion
     }else{
-		$("#imgT_"+grupo.substring(6)).attr("src","./public/images/ok16.png");//cambia la imagen del div
-		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodas('"+grupo+"',0)");//cambia la bandera de la funcion
-		mon_remove_map();
+		$("#imgTG_"+grupo.substring(7)).attr("src","./public/images/ok16.png");//cambia la imagen del div
+		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodosGeoreferencias('"+grupo+"',0,\""+tipo+"\")");//cambia la bandera de la funcion
+		
     }
 
     
 }
-function extraerDatosGeoreferencia(idObjectMap){
-	usuarioId=$("#usuarioId").val();
-	clienteId=$("#usuarioCliente").val();
-	parametros="action=extraerDatosGeoreferencia&usuarioId="+usuarioId+"&clienteId="+clienteId+"&idObjectMap="+idObjectMap;
-	ajaxMonitoreo("extraerDatosGeoreferencia","controlador",parametros,"cargador2","mon_dialog","POST");
+function extraerDatosGeoreferencia(idObjectMap,propiedad){
+	indiceObjeto="";
+	datos="";
+	for(i=0;i<datosGeoreferencias.length;i++){
+		if(parseInt(datosGeoreferencias[i].idObjectMap)==parseInt(idObjectMap)){
+			indiceObjeto=i;
+			break;
+		}
+	}
+
+	switch(propiedad){
+		case "imagen":
+			datos=datosGeoreferencias[indiceObjeto].url;
+		break;
+		case "latitud":
+			datos=datosGeoreferencias[indiceObjeto].latitud;
+		break;
+		case "longitud":
+			datos=datosGeoreferencias[indiceObjeto].longitud;
+		break;
+		case "datosGeopunto":
+			datos="<div style='height:38px;border-bottom:1px solid blue;'><div style='float:left;border:0px solid red;'><img src='public/images/"+datosGeoreferencias[indiceObjeto].url+"' border='0' /></div><div style='float:left;margin-top:10px;border:0px solid red;'>Informacion Georeferencia</div></div><table border='0' id='tblinfoUnidadGlobo' cellpadding='1' cellspacing='1' width='380'>"+
+				"<tr>"+
+					"<td width='130' class='estiloTituloTablaInfoUnidad'>Clasificado como:</td>"+
+					"<td width='270'>"+datosGeoreferencias[indiceObjeto].tipoGeo+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>Descripcion:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].descripcion+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>Calle:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].calle+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>No. Interior:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].noInt+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>No. Ext:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].noExt+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>Colonia:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].colonia+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>Municipio:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].municipio+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>Estadp:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].estado+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>C.P.:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].cp+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>Latitud:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].latitud+"</td>"+
+				"</tr>"+
+				"<tr>"+
+					"<td class='estiloTituloTablaInfoUnidad'>Longitud:</td>"+
+					"<td>"+datosGeoreferencias[indiceObjeto].longitud+"</td>"+
+				"</tr>"+
+				"</table>";
+		break;
+	}
+
+
+		//en base al idObjectMap de busca se recorre el array de objetos y se extraen sus propiedades
+		//recorro el array datosGeoreferencias y busco el idObjectMap y extraigo su posicion y sus propiedades
+
+	return datos;
+
+	
 }
 /*
  *@name 	Funcion para seleccionar la unidad

@@ -266,9 +266,15 @@ function sendCommands(){
 		$("#mon_dialogAll").dialog("close");
 	}
 }
-function geoPuntos(tipoGeo,descripcion,calle,noInt,noExt,colonia,municipio,estado,cp,latitud,longitud){
+
+function geoPuntos(tipoGeo,idObjectMap,descripcion,latitud,longitud,tipo,url,calle,noInt,noExt,colonia,municipio,estado,cp){
 	this.tipoGeo		=	tipoGeo;
+	this.idObjectMap	=	idObjectMap;
 	this.descripcion	=	descripcion;
+	this.latitud		=	latitud;
+	this.longitud		=	longitud;
+	this.tipo 			= 	tipo;
+	this.url 			=	url;
 	this.calle 			=	calle;
 	this.noInt 			= 	noInt;
 	this.noExt			=	noExt;
@@ -276,6 +282,13 @@ function geoPuntos(tipoGeo,descripcion,calle,noInt,noExt,colonia,municipio,estad
 	this.municipio		=	municipio;
 	this.estado			=	estado;
 	this.cp 			=	cp;
-	this.latitud		=	latitud;
-	this.longitud		=	longitud;
+}
+
+function geoCerca(tipoGeo,idObjectMap,descripcion,tipo,url,geom){
+	this.tipoGeo		=	tipoGeo;
+	this.idObjectMap	=	idObjectMap;
+	this.descripcion	=	descripcion;
+	this.tipo 			= 	tipo;
+	this.url 			=	url;
+	this.geom 			=	geom;
 }

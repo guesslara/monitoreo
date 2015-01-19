@@ -46,20 +46,6 @@ class monitoreo{
       }
       return $table_name . $idCliente;
     }
-    public function extraerInfoGeoreferencia($usuarioId,$clienteId,$idObjectMap){
-      $mensaje="";
-      $objDb=$this->iniciarConexionDb();
-      $objDb->sqlQuery("SET NAMES 'utf8'");
-      $sql="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS TIPO,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,CALLE,NO_INT,NO_EXT,COLONIA,MUNICIPIO,ESTADO,CP,LATITUDE,LONGITUDE 
-      FROM ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO
-      WHERE ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."' AND ID_OBJECT_MAP='".$idObjectMap."';";
-      $res=$objDb->sqlQuery($sql);
-      if($res){
-        $row=$objDb->sqlFetchArray($res);
-        $mensaje=$row["TIPO"]."||".$row["DESCRIPCION"]."||".$row["CALLE"]."||".$row["NO_INT"]."||".$row["NO_EXT"]."||".$row["COLONIA"]."||".$row["MUNICIPIO"]."||".$row["ESTADO"]."||".$row["CP"]."||".$row["LATITUDE"]."||".$row["LONGITUDE"];
-      }
-      return $mensaje;
-    }
     /**
     *@method        extrae los tipos de georeferencias
     *@description   Extrae los tipos de georeferencias
@@ -72,10 +58,19 @@ class monitoreo{
       //$sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE,TIPO
       //FROM ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO
       //WHERE TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."' ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
-      $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE,ADM_GEOREFERENCIAS.TIPO AS TIPO,URL
-      FROM (ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO) INNER JOIN ADM_IMAGE ON ADM_GEOREFERENCIAS_TIPO.ID_IMAGE=ADM_IMAGE.ID_IMG
-      WHERE ADM_GEOREFERENCIAS.TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
-      ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
+      if($filtroGeo=="G"){
+        $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE,ADM_GEOREFERENCIAS.TIPO AS TIPO,URL,CALLE,NO_INT,NO_EXT,COLONIA,MUNICIPIO,ESTADO,CP
+        FROM (ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO) INNER JOIN ADM_IMAGE ON ADM_GEOREFERENCIAS_TIPO.ID_IMAGE=ADM_IMAGE.ID_IMG
+        WHERE ADM_GEOREFERENCIAS.TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
+        ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
+      }else if($filtroGeo=="C"){
+        $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ADM_GEOREFERENCIAS.ID_OBJECT_MAP AS ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,ADM_GEOREFERENCIAS.TIPO AS TIPO,URL,ASTEXT(GEOM) AS GEOM
+        FROM ((ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO) 
+        INNER JOIN ADM_IMAGE ON ADM_GEOREFERENCIAS_TIPO.ID_IMAGE=ADM_IMAGE.ID_IMG) INNER JOIN ADM_GEOREFERENCIAS_ESPACIAL ON ADM_GEOREFERENCIAS.ID_OBJECT_MAP=ADM_GEOREFERENCIAS_ESPACIAL.ID_OBJECT_MAP
+        WHERE ADM_GEOREFERENCIAS.TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
+        ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
+      }
+      
 
 
       $res=$objDb->sqlQuery($sqlTipo);
@@ -83,7 +78,12 @@ class monitoreo{
         $mensaje="0";
       }else{
         while($row=$objDb->sqlFetchArray($res)){//se pintan los datos
-          ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"] : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".$row["DESCRIPCION"].",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"];
+          if($filtroGeo=="G"){
+            ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "-", $row["CALLE"]).",".$row["NO_INT"].",".$row["NO_EXT"].",".str_replace(",", "-", $row["COLONIA"]).",".$row["MUNICIPIO"].",".$row["ESTADO"].",".$row["CP"] : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "-", $row["CALLE"]).",".$row["NO_INT"].",".$row["NO_EXT"].",".str_replace(",", "-", $row["COLONIA"]).",".$row["MUNICIPIO"].",".$row["ESTADO"].",".$row["CP"];
+          }else if($filtroGeo=="C"){
+            ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]) : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]);            
+          }
+          
         }  
       }
       return $mensaje;
