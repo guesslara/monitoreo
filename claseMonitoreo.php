@@ -64,9 +64,11 @@ class monitoreo{
         WHERE ADM_GEOREFERENCIAS.TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
         ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
       }else if($filtroGeo=="C"){
-        $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ADM_GEOREFERENCIAS.ID_OBJECT_MAP AS ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,ADM_GEOREFERENCIAS.TIPO AS TIPO,URL,ASTEXT(GEOM) AS GEOM
-        FROM ((ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO) 
-        INNER JOIN ADM_IMAGE ON ADM_GEOREFERENCIAS_TIPO.ID_IMAGE=ADM_IMAGE.ID_IMG) INNER JOIN ADM_GEOREFERENCIAS_ESPACIAL ON ADM_GEOREFERENCIAS.ID_OBJECT_MAP=ADM_GEOREFERENCIAS_ESPACIAL.ID_OBJECT_MAP
+        $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ADM_GEOREFERENCIAS.ID_OBJECT_MAP AS ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,ADM_GEOREFERENCIAS.TIPO AS TIPO,URL,ASTEXT(GEOM) AS GEOM,ADM_COLORES.DESCRIPTION AS COLOR,R,G,B
+        FROM (((ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO) 
+        INNER JOIN ADM_IMAGE ON ADM_GEOREFERENCIAS_TIPO.ID_IMAGE=ADM_IMAGE.ID_IMG) 
+        INNER JOIN ADM_GEOREFERENCIAS_ESPACIAL ON ADM_GEOREFERENCIAS.ID_OBJECT_MAP=ADM_GEOREFERENCIAS_ESPACIAL.ID_OBJECT_MAP)
+        INNER JOIN ADM_COLORES ON ADM_GEOREFERENCIAS.COD_COLOR=ADM_COLORES.COD_COLOR
         WHERE ADM_GEOREFERENCIAS.TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."'
         ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
       }
@@ -81,7 +83,9 @@ class monitoreo{
           if($filtroGeo=="G"){
             ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "-", $row["CALLE"]).",".$row["NO_INT"].",".$row["NO_EXT"].",".str_replace(",", "-", $row["COLONIA"]).",".$row["MUNICIPIO"].",".$row["ESTADO"].",".$row["CP"] : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["LATITUDE"].",".$row["LONGITUDE"].",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "-", $row["CALLE"]).",".$row["NO_INT"].",".$row["NO_EXT"].",".str_replace(",", "-", $row["COLONIA"]).",".$row["MUNICIPIO"].",".$row["ESTADO"].",".$row["CP"];
           }else if($filtroGeo=="C"){
-            ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]) : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]);            
+            $funciones = new cFunctions();
+            $color_rgb  = $funciones->rgb2html($row['R'],$row['G'],$row['B']);
+            ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]).",".$row["COLOR"].",".$row["R"].",".$row["G"].",".$row["B"] : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]).",".$row["COLOR"].",".$row["R"].",".$row["G"].",".$row["B"];            
           }
           
         }  

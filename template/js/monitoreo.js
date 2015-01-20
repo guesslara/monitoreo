@@ -291,4 +291,8 @@ function geoCerca(tipoGeo,idObjectMap,descripcion,tipo,url,geom){
 	this.tipo 			= 	tipo;
 	this.url 			=	url;
 	this.geom 			=	geom;
+	this.color 			=	color;
+	this.R 				= 	R;
+	this.G 				= 	G;
+	this.B 				=	B;
 }
