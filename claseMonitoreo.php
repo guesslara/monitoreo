@@ -85,7 +85,7 @@ class monitoreo{
           }else if($filtroGeo=="C"){
             $funciones = new cFunctions();
             $color_rgb  = $funciones->rgb2html($row['R'],$row['G'],$row['B']);
-            ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]).",".$row["COLOR"].",".$row["R"].",".$row["G"].",".$row["B"] : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]).",".$row["COLOR"].",".$row["R"].",".$row["G"].",".$row["B"];            
+            ($mensaje=="") ? $mensaje=str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["COLOR"].",".$color_rgb.",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]) : $mensaje.="|".str_replace(",", "-", $row["DESCRIPCION_GEO"]).",".$row["ID_OBJECT_MAP"].",".str_replace(",", "-", $row["DESCRIPCION"]).",".$row["COLOR"].",".$color_rgb.",".$row["TIPO"].",".$row["URL"].",".str_replace(",", "*", $row["GEOM"]);
           }
           
         }  

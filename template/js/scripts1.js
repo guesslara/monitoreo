@@ -256,11 +256,12 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 }
 function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 	//if(tipo=="G"){
-		imageGeopunto="public/images/"+extraerDatosGeoreferencia(idObjectMap,"imagen");
+		
 		idGeoABorrar=georeferenciasSel.indexOf(idObjectMap);
 		if(idGeoABorrar == -1){//no existe en el array
 			
 			if(tipo=="G"){
+				imageGeopunto="public/images/"+extraerDatosGeoreferencia(idObjectMap,"imagen");
 				markerGeoReferenciasG=new google.maps.Marker({//se crea el marker para los geopuntos
 					map:mapaMonitoreo,
 					position:new google.maps.LatLng(parseFloat(extraerDatosGeoreferencia(idObjectMap,"latitud")),parseFloat(extraerDatosGeoreferencia(idObjectMap,"longitud"))),
@@ -279,7 +280,7 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 				    new google.maps.LatLng(25.774252, -80.190262)
 				];
 				var coordenadasGeocerca=Array();
-				//datosGeocerca=extraerDatosGeoreferencia(idObjectMap,"Geocerca");
+				datosGeocerca=extraerDatosGeoreferencia(idObjectMap,"Geocerca");
 			}
 
 			
@@ -334,6 +335,8 @@ function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
     
 }
 function extraerDatosGeoreferencia(idObjectMap,propiedad){
+	console.log(propiedad);
+
 	indiceObjeto="";
 	datos="";
 	for(i=0;i<datosGeoreferencias.length;i++){
@@ -401,9 +404,10 @@ function extraerDatosGeoreferencia(idObjectMap,propiedad){
 				"</tr>"+
 				"</table>";
 		break;
-		//case "Geocerca":
-
-		//break;
+		case "Geocerca":
+			datos=datosGeoreferencias[indiceObjeto].geom;
+			console.log(datos);
+		break;
 	}
 
 
