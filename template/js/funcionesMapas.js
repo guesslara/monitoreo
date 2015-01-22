@@ -86,6 +86,18 @@ function verInfoGeoreferencia(marker,content){
 		mapaMonitoreo.panTo(latLng);     
     });	
 }
+//function verInfoGeocerca(geocerca,content){
+function verInfoGeocerca(event){
+	//var vertices=geocerca.getPaths;
+	console.log("title "+this.title)
+
+	//var contentString=content;
+	var contentString=extraerDatosGeoreferencia(this.title,"datosGeocerca");
+	//se reemplaza el contenido del info window y posicion
+	infoWindow.setContent(contentString);
+	infoWindow.setPosition(event.latLng);
+	infoWindow.open(mapaMonitoreo);
+}
 /*Funcion para pintar el seguimiento de la unidad*/
 function muestraPosicionesHistorico(posicionesHist){
 	try{
@@ -340,6 +352,10 @@ function accionesGeopuntosCercas(opcion){
 		setAllMap(null,"Geopuntos");
 	}else if(opcion==7){//se muestran las rutas
 		setAllMap(mapaMonitoreo,"Geopuntos");
+	}else if(opcion==8){//se muestran las rutas
+		setAllMap(null,"Geocercas");
+	}else if(opcion==9){//se muestran las rutas
+		setAllMap(mapaMonitoreo,"Geocercas");
 	}
 }
 /*funcion para el manejo de las diferentes acciones con las georeferencias*/
@@ -360,6 +376,11 @@ function setAllMap(map,opcion){
 		console.log(arrayGeopuntosGeo);
 		for(var i=0;i< arrayGeopuntosGeo.length;i++){
 			arrayGeopuntosGeo[i].setMap(map);
+		}
+	}else if(opcion=="Geocercas"){
+		console.log(arrayGeocercasGeo);
+		for(var i=0;i< arrayGeocercasGeo.length;i++){
+			arrayGeocercasGeo[i].setMap(map);
 		}
 	}
 }

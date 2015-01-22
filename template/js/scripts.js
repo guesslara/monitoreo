@@ -32,6 +32,9 @@ var conexionIe				= true;
 //modificacion georeferencias
 var arrayGeopuntosGeo		= Array();
 var georeferenciasSel		= Array();
+var arrayGeocercasGeo		= Array();
+//var infoGeocerca			= "";  BORRAR
+
 
 var datosGeoreferencias		= Array();
 var datosGeocercas 			= Array();
