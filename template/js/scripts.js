@@ -33,12 +33,13 @@ var conexionIe				= true;
 var arrayGeopuntosGeo		= Array();
 var georeferenciasSel		= Array();
 var arrayGeocercasGeo		= Array();
+var arrayGeorutasGeo		= Array();
 //var infoGeocerca			= "";  BORRAR
 
 
 var datosGeoreferencias		= Array();
 var datosGeocercas 			= Array();
-
+var datosGeorutas 			= Array();
 
 $(document).ready(function(){
 		try{
@@ -377,7 +378,7 @@ function init(){
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
 		cargarGrupos();//carga de grupos
-		getGeos();//carga de geopuntos
+		//getGeos();//carga de geopuntos
 		mostrarMensaje=$("#seguimiento").val();
 		/*if(mostrarMensaje=="Y"){
 			$( "#mensajeMejoras" ).dialog("open");

@@ -284,7 +284,7 @@ function geoPuntos(tipoGeo,idObjectMap,descripcion,latitud,longitud,tipo,url,cal
 	this.cp 			=	cp;
 }
 
-function geoCerca(tipoGeo,idObjectMap,descripcion,fondo,color,tipo,url,geom){
+function geoCercaRuta(tipoGeo,idObjectMap,descripcion,fondo,color,tipo,url,geom){
 	this.tipoGeo		=	tipoGeo;
 	this.idObjectMap	=	idObjectMap;
 	this.descripcion	=	descripcion;
@@ -295,3 +295,4 @@ function geoCerca(tipoGeo,idObjectMap,descripcion,fondo,color,tipo,url,geom){
 	this.color 			=	color;
 	
 }
+

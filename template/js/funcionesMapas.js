@@ -335,7 +335,7 @@ function drawGeos(opcion){
 }
 //acciones para las georeferencias
 function accionesGeopuntosCercas(opcion){
-	console.log("opcion: "+opcion);
+	//console.log("opcion: "+opcion);
 	if(opcion==0){//se ocultan todos los geopuntos
 		setAllMap(null,"G");
 	}else if(opcion==1){//se muestran todos los geopuntos
@@ -356,6 +356,10 @@ function accionesGeopuntosCercas(opcion){
 		setAllMap(null,"Geocercas");
 	}else if(opcion==9){//se muestran las rutas
 		setAllMap(mapaMonitoreo,"Geocercas");
+	}else if(opcion==10){//se muestran las rutas
+		setAllMap(null,"Georutas");
+	}else if(opcion==11){//se muestran las rutas
+		setAllMap(mapaMonitoreo,"Georutas");
 	}
 }
 /*funcion para el manejo de las diferentes acciones con las georeferencias*/
@@ -381,6 +385,11 @@ function setAllMap(map,opcion){
 		console.log(arrayGeocercasGeo);
 		for(var i=0;i< arrayGeocercasGeo.length;i++){
 			arrayGeocercasGeo[i].setMap(map);
+		}
+	}else if(opcion=="Georutas"){
+		console.log(arrayGeorutasGeo);
+		for(var i=0;i< arrayGeorutasGeo.length;i++){
+			arrayGeorutasGeo[i].setMap(map);
 		}
 	}
 }
