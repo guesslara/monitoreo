@@ -41,8 +41,9 @@
   <div id="Monitoreo" class="pestana">
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
-	     <div id="tituloUnidadesDisponibles" class="divMenu">	    
-	       Unidades Disponibles
+	     <div id="tituloUnidadesDisponibles" class="divMenu"><strong>Mostrar</strong>
+	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked"><label for="tituloUnidadesDisponibles1">Unidades</label>
+         <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias"><label for="tituloGeoreferenciasDisponibles">Georeferencias</label>
 	     </div>
 	     <div id="main_view" class="main_view">
 	        <div id="mon_search">
@@ -65,8 +66,7 @@
 
 
        <!--Modificaciones para las georeferencias-->
-       <div id="tituloGeoreferencias" class="divMenu">Georeferencias</div>
-       <div id="main_viewGeoreferencias" class="main_view" style="border:1px solid #FF0000;">
+       <div id="main_viewGeoreferencias" class="main_view">
           <div id="mon_searchGeoMonitoreo">
             <input id="tagsGeoreferencias" placeholder="Buscar" />
             
@@ -77,7 +77,7 @@
               <input type="radio" id="rdbRutas" name="rdbOpcionBuscaGeo" value="R"><label for="rdbRutas">Rutas</label>
             </div>
           </div><!--fin div search-->
-          <div id="mon_menu_acordeonGeoreferencias" class="mon_div_acordeon" style="border:1px solid blue;">
+          <div id="mon_menu_acordeonGeoreferencias" class="mon_div_acordeon">
 
           </div><!--acordeon de las unidades-->
        </div>
@@ -86,9 +86,6 @@
     <!--Div Pestaña-->
     <div id="btnCejillaOcultar" title="Dar clic para ocultar la barra de unidades">
       <img src="./public/images/ocultar2.png" border="0" style="margin: 7px 0px 0px 2px;" />
-    </div>
-    <div id="btnCejillaGeoreferencias" title="Dar clic para mostrar opciones Georeferencias">
-      <img src="./public/images/default.png" border="0" width="24" style="margin: 7px 0px 0px -2px;" />
     </div>
     <!--fin Div Pestaña-->
     <!--Fin Informacion de las unidades-->
@@ -134,11 +131,11 @@
       </div>
       
       <div style="border:0px solid #FF0000;margin:5px;">
-        <select id="mnuGeoreferencias2" name="mnuGeoreferencias2" multiple="multiple">
+        <!--<select id="mnuGeoreferencias2" name="mnuGeoreferencias2" multiple="multiple">
           <option value="geopuntos">Geopuntos</option>
           <option value="geocercas">Geocercas</option>
           <option value="rutas">Rutas</option>
-        </select>
+        </select>-->
       </div>
       <!--Div tiempo para actualizar-->
       <!--<div style="border-bottom:1px solid #999;height:30px;padding:1px;width:165px;">-->

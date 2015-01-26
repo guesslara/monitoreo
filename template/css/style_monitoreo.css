@@ -59,7 +59,7 @@ body,document,html{
 	height: 14px;
 	background: #F0F0F0;
 	padding: 6px;
-	text-align: center;
+	text-align: left;
 }
 .divMenu a {
   font-family: Verdana;
@@ -295,7 +295,7 @@ body,document,html{
   border-bottom: 1px solid #f0f0f0;
 }
 #cambiarActualizacion{
-  top: 157px;
+  top: 127px;
 	height: 100px;
 	position: absolute;
 	right: 42px;

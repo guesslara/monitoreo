@@ -1,41 +1,42 @@
 var mapaMonitoreo;//instancia del mapa	
-var tab_active			  	= 0;//tab activo
-var banderaUltimaPosicion 	= 0;//bandera de ultima posicion
-var barraUP				  	= 1;
-var focusVentanas		  	= 2;
-var mostrarBtnRutas		  	= false;
-var arrayunits 			  	= new Array();
-var array_selected  	  	= Array();
-var markers 			  	= [];//array para almacenar los markers
+var tab_active			  			= 0;//tab activo
+var banderaUltimaPosicion 			= 0;//bandera de ultima posicion
+var barraUP				  			= 1;
+var focusVentanas		  			= 2;
+var mostrarBtnRutas		  			= false;
+var arrayunits 			  			= new Array();
+var array_selected  	  			= Array();
+var markers 			  			= [];//array para almacenar los markers
 
-var arraygeosP 			  	= [];//array para almacenar los datos de ultimas posiciones
+var arraygeosP 			  			= [];//array para almacenar los datos de ultimas posiciones
 var mon_timer,mon_timer_count;
-var info_window			  	= '';
+var info_window			  			= '';
 var infowindow;
 var beachMarker;
-var arrayReferencias	  	= Array();
-var aComandosAll 		  	= '';
-var UnitsString  		  	= '';
+var arrayReferencias	  			= Array();
+var aComandosAll 		  			= '';
+var UnitsString  		  			= '';
 
-var mon_array_autocomplete 	= Array();//array donde se guardan los nombres de las unidades
-var mon_array_autocompleteGeo 	= Array();//array donde se guardan los nombres de las unidades
+var mon_array_autocomplete 			= Array();//array donde se guardan los nombres de las unidades
+var mon_array_autocompleteGeo 		= Array();//array donde se guardan los nombres de las georeferencias
 //variables adicionales
-var cargadorInicial		  	= 0;
-var array_latitudes	 	  	= Array();
-var array_longitudes 	  	= Array();
-var banderaSeguimiento 	  	= false;
-var unidadSeleccionada 	  	= 0;
-var arrayDireccionesResult	= Array();
-var conexionIe				= true;
+var cargadorInicial		  			= 0;
+var array_latitudes	 	  			= Array();
+var array_longitudes 	  			= Array();
+var banderaSeguimiento 	  			= false;
+var unidadSeleccionada 	  			= 0;
+var arrayDireccionesResult			= Array();
+var conexionIe						= true;
 //modificacion georeferencias
-var arrayGeopuntosGeo		= Array();
-var georeferenciasSel		= Array();
-var arrayGeocercasGeo		= Array();
-var arrayGeorutasGeo		= Array();
+var arrayGeopuntosGeo				= Array();
+var arrayGeocercasGeo				= Array();
+var arrayGeorutasGeo				= Array();
 
-var datosGeoreferencias		= Array();
-var datosGeocercas 			= Array();
-var datosGeorutas 			= Array();
+var datosGeoreferencias				= Array();
+var datosGeocercas 					= Array();
+var datosGeorutas 					= Array();
+
+var georeferenciasSel 				= Array();
 
 $(document).ready(function(){
 		try{
@@ -281,24 +282,28 @@ $(document).ready(function(){
  			minWidth: 170,
  			height: 87
  		});
-
+/*
  		$("#mnuGeoreferencias2").change(function(){
  			valoresMenu=$(this).val();
+
+ 			//console.log(valoresMenu);
+
+
  			if(valoresMenu != null || valoresMenu != undefined){
 				if($.inArray("geopuntos",valoresMenu) != -1){
-			 		accionesGeopuntosCercas(1);
+			 		accionesGeopuntosCercas(6);//mostrar
 			 	}else{
-			 		accionesGeopuntosCercas(0);
+			 		accionesGeopuntosCercas(7);//ocultar
 			 	}
 			 	if($.inArray("geocercas",valoresMenu) != -1){
-			 		accionesGeopuntosCercas(3);
+			 		accionesGeopuntosCercas(9);//mostrar
 			 	}else{
-			 		accionesGeopuntosCercas(2);
+			 		accionesGeopuntosCercas(8);//ocultar
 			 	}
 			 	if($.inArray("rutas",valoresMenu) != -1){
-			 		accionesGeopuntosCercas(5);
+			 		accionesGeopuntosCercas(11);//mostrar
 			 	}else{
-			 		accionesGeopuntosCercas(4);
+			 		accionesGeopuntosCercas(10);//ocultar
 			 	}
  			}else{
  				accionesGeopuntosCercas(0);
@@ -306,6 +311,32 @@ $(document).ready(function(){
  				accionesGeopuntosCercas(4);
  			}
  		});
+*/
+ 		$("#ui-multiselect-mnuGeoreferencias2-option-0").click(function(){
+ 			//console.log($(this).is(':checked'));
+ 			if($(this).is(':checked')==false){
+ 				accionesGeopuntosCercas(6);//se ocultan los geopuntos
+ 			}else{
+ 				accionesGeopuntosCercas(7);//se muestran los geopuntos
+ 			}
+ 		});
+
+ 		$("#ui-multiselect-mnuGeoreferencias2-option-1").click(function(){
+			if($(this).is(':checked')==false){
+ 				accionesGeopuntosCercas(8);//se ocultan los geopuntos
+ 			}else{
+ 				accionesGeopuntosCercas(9);//se muestran los geopuntos
+ 			}
+ 		});
+
+ 		$("#ui-multiselect-mnuGeoreferencias2-option-2").click(function(){
+			if($(this).is(':checked')==false){
+ 				accionesGeopuntosCercas(10);//se ocultan los geopuntos
+ 			}else{
+ 				accionesGeopuntosCercas(11);//se muestran los geopuntos
+ 			}
+ 		});
+
 
  		$("#rdbDireccion,#rdbUnidades").click(function(){
  			mostraCajaBusqueda($(this).attr("id"));
@@ -315,15 +346,17 @@ $(document).ready(function(){
  			buscarDireccion($(this).val(),e)
  		});
 
- 		$("#btnCejillaGeoreferencias").click(function(){
- 			//se procede a ocultar los paneles de monitoreo
- 			$("#tituloUnidadesDisponibles").hide();
- 			$("#main_view").hide();
+		$("#tituloUnidadesDisponibles1,#tituloGeoreferenciasDisponibles").click(function () {
+        	filtroControl=$(this).val();
+        	if(filtroControl=="georeferencias"){
+        		$("#main_view").hide();
+        		$("#main_viewGeoreferencias").show();
+        	}else if(filtroControl=="unidades"){
+				$("#main_view").show();
+        		$("#main_viewGeoreferencias").hide();
+        	}
 
- 			$("#tituloGeoreferencias").show();
-
- 			
- 		});
+    	}); 		
 
  		$("input[name=rdbOpcionBuscaGeo]").click(function () {    
         	//alert("La edad seleccionada es: " + $('input:radio[name=edad]:checked').val());
@@ -335,10 +368,6 @@ $(document).ready(function(){
     	});
 
 		init();//funcion inicial
-		//A BORRAR
-		$("#tituloUnidadesDisponibles").hide();
- 		$("#main_view").hide();
- 		//FIN A BORRAR
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});
 

@@ -89,7 +89,7 @@ function verInfoGeoreferencia(marker,content){
 //function verInfoGeocerca(geocerca,content){
 function verInfoGeocerca(event){
 	//var vertices=geocerca.getPaths;
-	console.log("title "+this.title)
+	//console.log("title "+this.title)
 
 	//var contentString=content;
 	var contentString=extraerDatosGeoreferencia(this.title,"datosGeocerca");
@@ -257,17 +257,14 @@ function setAllMap(map,opcion){
 			monRutas[i].setMap(map);
 		}
 	}else if(opcion=="Geopuntos"){
-		console.log(arrayGeopuntosGeo);
 		for(var i=0;i< arrayGeopuntosGeo.length;i++){
 			arrayGeopuntosGeo[i].setMap(map);
 		}
 	}else if(opcion=="Geocercas"){
-		console.log(arrayGeocercasGeo);
 		for(var i=0;i< arrayGeocercasGeo.length;i++){
 			arrayGeocercasGeo[i].setMap(map);
 		}
 	}else if(opcion=="Georutas"){
-		console.log(arrayGeorutasGeo);
 		for(var i=0;i< arrayGeorutasGeo.length;i++){
 			arrayGeorutasGeo[i].setMap(map);
 		}

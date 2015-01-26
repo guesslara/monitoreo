@@ -74,7 +74,7 @@ function controladorAcciones(accion,datos,divResultado){
 		break;
 		case "extraerDatosGeoreferencia":
 			contenteStrGeo=datos;
-			console.log(contenteStrGeo);
+			//console.log(contenteStrGeo);
 		break;
     }
 }
@@ -168,10 +168,10 @@ function dibujaAcordeonGrupos(accion,datos){
 */
 function dibujarAcordeonGeoreferencias(accion,datos){
 	try{
-		accionesGeopuntosCercas(6);
+		//accionesGeopuntosCercas(6);
 		georeferenciasSel.length=0;
 		arrayGeopuntosGeo.length=0;
-		//console.log(arrayGeopuntosGeo);
+		////console.log(arrayGeopuntosGeo);
 		
 		accionesGeopuntosCercas(7);
 		datosGeopuntos="";
@@ -180,14 +180,14 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 		itemNombre="";
 		title="De clic para mostrar la Georeferencia"; title1="De clic para activar todas las georeferencias";
 		datos=datos.split("||||");//se procesa el resultado para crear los grupos
-		//console.log(datos);
+		////console.log(datos);
 		acordeon="<div id='mon_acordeon_GeoreferenciasM' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
 
-		//console.log("Longitud de Geopuntos: "+datos.length);
+		////console.log("Longitud de Geopuntos: "+datos.length);
 
 		for(i=0;i<datos.length;i++){
 			grupos=datos[i].split(",");//se descomponen los elementos para la creacion de los grupos
-			//console.log(grupos)
+			////console.log(grupos)
 			var miobjeto=new Object();/*inclusion para el autocomplete*/
 			miobjeto.label=grupos[2];
 			miobjeto.desc=grupos[0];
@@ -204,11 +204,11 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 			if(grupos[5]=="G"){
 				datosGeopuntos=new geoPuntos(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5],grupos[6],grupos[7],grupos[8],grupos[9],grupos[10],grupos[11],grupos[12],grupos[13]);
 				datosGeoreferencias.push(datosGeopuntos);
-				//console.log(datosGeoreferencias);
+				////console.log(datosGeoreferencias);
 			}else if(grupos[5]=="C"){
 				datosGeocerca=new geoCercaRuta(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5],grupos[6],grupos[7],grupos[8],grupos[9]);
 				datosGeocercas.push(datosGeocerca);
-				//console.log(datosGeocercas);
+				////console.log(datosGeocercas);
 			}else if(grupos[5]=="R"){
 				datosGeoruta=new geoCercaRuta(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5],grupos[6],grupos[7],grupos[8],grupos[9]);
 				datosGeorutas.push(datosGeoruta);
@@ -237,8 +237,6 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 			datosGeopuntos="";
 		}
 		acordeon+="</div>";
-		console.log(datosGeorutas)
-
 
 		$("#mon_menu_acordeonGeoreferencias").append(acordeon);
 		$("#mon_acordeon_GeoreferenciasM").accordion({clearStyle: true, autoHeight: false});
@@ -254,20 +252,15 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 	    	}
 	    });
 
-
-		
-
-
 	}catch(err){
 		$("#error").show();
 	    $("#error_mensaje").html('Ocurrio un error al cargar las georeferencias.');
-	    console.log(err);
+	    //console.log(err);
 	}
 }
 function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 	idGeoABorrar=georeferenciasSel.indexOf(idObjectMap);
 	if(idGeoABorrar == -1){//no existe en el array
-		
 		if(tipo=="G"){
 			imageGeopunto="public/images/"+extraerDatosGeoreferencia(idObjectMap,"imagen");
 			markerGeoReferenciasG=new google.maps.Marker({//se crea el marker para los geopuntos
@@ -279,14 +272,19 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 			verInfoGeoreferencia(markerGeoReferenciasG,extraerDatosGeoreferencia(idObjectMap,"datosGeopunto"));
 			georeferenciasSel.push(idObjectMap);
 			arrayGeopuntosGeo.push(markerGeoReferenciasG);
+			//se verifica si el check de informacion esta habilitado caso contrario lo habilitamos
+			if(!$("#ui-multiselect-mnuGeoreferencias2-option-0").is(':checked')){
+	            $("#ui-multiselect-mnuGeoreferencias2-option-0").attr('checked', true);
+	        }
+
 		}else if(tipo=="C"){
 			var geocercaMonitoreo;
 			datosGeocerca=extraerDatosGeoreferencia(idObjectMap,"Geocerca");
 			color=extraerDatosGeoreferencia(idObjectMap,"GeocercaColor");
 			var coordernadasGeocerca=[];
-			//console.log("DatosGeocerca "+datosGeocerca);
+			////console.log("DatosGeocerca "+datosGeocerca);
 			//se llena el arreglo de las coordenadas para la geocerca
-			console.log("Longitud datosGeocerca "+datosGeocerca.length);
+			////console.log("Longitud datosGeocerca "+datosGeocerca.length);
 			for(i=0;i<datosGeocerca.length;i++){
 				coordenadas=datosGeocerca[i].split(" ");
 				coordernadasGeocerca[i]=new google.maps.LatLng(parseFloat(coordenadas[0]),parseFloat(coordenadas[1]));
@@ -303,18 +301,23 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 			georeferenciasSel.push(idObjectMap);
 			//se almacena la geocerca en el array de geocercas	
 			arrayGeocercasGeo.push(geocercaMonitoreo);
-			//console.log(coordernadasGeocerca);
+			////console.log(coordernadasGeocerca);
 			//se limpia el array del pintado de geocercas
 			geocercaMonitoreo="";
 			coordernadasGeocerca.length=0;
-			//console.log(arrayGeocercasGeo);
+			////console.log(arrayGeocercasGeo);
+
+			if(!$("#ui-multiselect-mnuGeoreferencias2-option-1").is(':checked')){
+				$("#ui-multiselect-mnuGeoreferencias2-option-1").attr("checked",true);
+			}
+
 		}else if(tipo=="R"){
 			datosGeoruta=extraerDatosGeoreferencia(idObjectMap,"Georuta");
 			colorGeoruta=extraerDatosGeoreferencia(idObjectMap,"GeorutaColor");
 			var coordernadasGeoruta=[];
-			//console.log("DatosGeocerca "+datosGeocerca);
+			////console.log("DatosGeocerca "+datosGeocerca);
 			//se llena el arreglo de las coordenadas para la geocerca
-			console.log("Longitud datosGeocerca "+datosGeoruta.length);
+			////console.log("Longitud datosGeocerca "+datosGeoruta.length);
 			for(i=0;i<datosGeoruta.length;i++){
 				coordenadas=datosGeoruta[i].split(" ");
 				coordernadasGeoruta[i]=new google.maps.LatLng(parseFloat(coordenadas[0]),parseFloat(coordenadas[1]));
@@ -333,6 +336,11 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 			arrayGeorutasGeo.push(georutaMonitoreo);
 			georutaMonitoreo="";
 			coordernadasGeoruta.length=0;
+
+			if(!$("#ui-multiselect-mnuGeoreferencias2-option-2").is(':checked')){
+				$("#ui-multiselect-mnuGeoreferencias2-option-2").attr("checked",true);
+			}
+
 		}
 		$("#mon_acordeon_GeoreferenciasM").find("#img_"+idObjectMap).attr("src","./public/images/tick.png")//cambia la imagen del div
 		
@@ -351,11 +359,11 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 		}else if(tipo=="C"){
 			accionesGeopuntosCercas(8);//se ocultan las geocercas
 
-			console.log("Longitud del array "+arrayGeocercasGeo.length);
+			////console.log("Longitud del array "+arrayGeocercasGeo.length);
 
 			for(var i=0;i< arrayGeocercasGeo.length;i++){//se busca el elemento a borrar
 				if(idObjectMap==arrayGeocercasGeo[i].title){
-					console.log("Se elimina elemento")
+					////console.log("Se elimina elemento")
 					arrayGeocercasGeo.splice(i, 1);//se quita el elemento del array de markers
 				}
 			}
@@ -364,10 +372,10 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 			accionesGeopuntosCercas(9);//se muestran las geocercas
 		}else if(tipo=="R"){
 			accionesGeopuntosCercas(10);//se ocultan las geocercas
-			console.log("Longitud del array "+arrayGeorutasGeo.length);
+			////console.log("Longitud del array "+arrayGeorutasGeo.length);
 			for(var i=0;i< arrayGeorutasGeo.length;i++){//se busca el elemento a borrar
 				if(idObjectMap==arrayGeorutasGeo[i].title){
-					console.log("Se elimina elemento")
+					////console.log("Se elimina elemento")
 					arrayGeorutasGeo.splice(i, 1);//se quita el elemento del array de markers
 				}
 			}
@@ -382,7 +390,7 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 }
 
 function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
-	console.log("grupo: "+grupo)
+	////console.log("grupo: "+grupo)
 	//$("#textoCargadorGral").html("Pintando Georeferencias");
 	//$("#cargador2").show();
 
@@ -399,7 +407,7 @@ function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
 	
 	imagenT=$("#imgTG_"+grupo.substring(7)).attr("src");//imagen del div del grupo
 
-	console.log(imagenT.substring(16));
+	////console.log(imagenT.substring(16));
 
     if (imagenT.substring(16)=="ok16.png") {
 		$("#imgTG_"+grupo.substring(7)).attr("src","./public/images/tick.png");//cambia la imagen del div
@@ -413,7 +421,7 @@ function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
     //$("#cargador2").hide();
 }
 function extraerDatosGeoreferencia(idObjectMap,propiedad){
-	console.log(propiedad);
+	//console.log(propiedad);
 
 	indiceObjeto="";
 	datos="";
@@ -524,7 +532,7 @@ function extraerDatosGeoreferencia(idObjectMap,propiedad){
 			datos=datosGeorutas[indiceObjeto].geom;
 			datos=datos.substring(11,datos.length-1);//se separan en un array las coordenadas
 			datos=datos.split("*");
-			console.log(datos);
+			//console.log(datos);
 		break;
 		case "GeorutaColor":
 			datos=datosGeorutas[indiceObjeto].color;
