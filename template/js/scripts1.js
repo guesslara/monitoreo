@@ -54,13 +54,6 @@ function controladorAcciones(accion,datos,divResultado){
 			//$("#"+divResultado).show().html(datos);
 			evaluaComandoEnviado(datos);
 		break;
-		case "mostrarGeoreferencias":
-			//$("#"+divResultado).show().html(datos);
-			/*listReferencias  = 1;*/
-			arrayReferencias = new Array();
-			arrayReferencias = datos.split('|');
-			drawGeos(0);
-		break;
 		case "cargaReportes":
 			$("#"+divResultado).show().html(datos);
 		break;

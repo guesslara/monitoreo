@@ -185,17 +185,7 @@ function stopTimer(){
 	}	
 	$("#mon_time").html("00:00");
 }
-/*Funcion modificada para el proceso de las geocercas*/
-function getGeos(){
-	//if(listReferencias==0){
-		//$("#mon_dialog").dialog("open");
-		arrayReferencias = [];
-		usuarioId=$("#usuarioId").val();
-		clienteId=$("#usuarioCliente").val();
-		parametros="action=mostrarGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId;
-		ajaxMonitoreo("mostrarGeoreferencias","controlador",parametros,"cargador2","mon_dialog","POST");
-	//}
-}
+
 /*Funcion pendiente para el envio de comandos a todas las unidades*/
 function sendCommandsAll(){
 	$("#mon_dialogAll").html("");

@@ -6,18 +6,17 @@ var focusVentanas		  	= 2;
 var mostrarBtnRutas		  	= false;
 var arrayunits 			  	= new Array();
 var array_selected  	  	= Array();
-var markers 			  	= [];//array para almacenar las unidades
-var arraygeos 			  	= [];//array para almacenar las geocercas
+var markers 			  	= [];//array para almacenar los markers
+
 var arraygeosP 			  	= [];//array para almacenar los datos de ultimas posiciones
 var mon_timer,mon_timer_count;
 var info_window			  	= '';
 var infowindow;
 var beachMarker;
 var arrayReferencias	  	= Array();
-var listReferencias 	  	= 0;
 var aComandosAll 		  	= '';
 var UnitsString  		  	= '';
-var monMarkers 			  	= [];
+
 var mon_array_autocomplete 	= Array();//array donde se guardan los nombres de las unidades
 var mon_array_autocompleteGeo 	= Array();//array donde se guardan los nombres de las unidades
 //variables adicionales
@@ -26,7 +25,6 @@ var array_latitudes	 	  	= Array();
 var array_longitudes 	  	= Array();
 var banderaSeguimiento 	  	= false;
 var unidadSeleccionada 	  	= 0;
-var monRutas 			  	= [];
 var arrayDireccionesResult	= Array();
 var conexionIe				= true;
 //modificacion georeferencias
@@ -34,8 +32,6 @@ var arrayGeopuntosGeo		= Array();
 var georeferenciasSel		= Array();
 var arrayGeocercasGeo		= Array();
 var arrayGeorutasGeo		= Array();
-//var infoGeocerca			= "";  BORRAR
-
 
 var datosGeoreferencias		= Array();
 var datosGeocercas 			= Array();
@@ -378,7 +374,6 @@ function init(){
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
 		cargarGrupos();//carga de grupos
-		//getGeos();//carga de geopuntos
 		mostrarMensaje=$("#seguimiento").val();
 		/*if(mostrarMensaje=="Y"){
 			$( "#mensajeMejoras" ).dialog("open");
