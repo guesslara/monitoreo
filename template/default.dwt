@@ -41,7 +41,7 @@
   <div id="Monitoreo" class="pestana">
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
-	     <div id="tituloUnidadesDisponibles" class="divMenu"><strong>Mostrar</strong>
+	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header"><strong>Mostrar</strong>
 	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked"><label for="tituloUnidadesDisponibles1">Unidades</label>
          <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias"><label for="tituloGeoreferenciasDisponibles">Georeferencias</label>
 	     </div>
@@ -96,7 +96,7 @@
     <!--Div Ultimas Posiciones-->
     <div id="divUltimasPosiciones">
       	<div style="border:0px solid #FF0000;height:12px;padding:3px;font-size:9px;" class="fg-toolbar ui-widget-header">
-          &Uacute;ltimas Posiciones<a href="#" id="enlaceVentana">Separar</a>
+          &Uacute;ltimas Posiciones<!--<a href="#" id="enlaceVentana">Separar</a>-->
         </div>
         <div style="position:relative;border:0px solid #FF0000;height:90%;overflow:auto;">
             <table border="0" cellpadding="0" cellspacing="0" width="99%" id="tablaX" class="tablaUP fixed">
