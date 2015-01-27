@@ -282,7 +282,7 @@ $(document).ready(function(){
  			minWidth: 170,
  			height: 87
  		});
- 		
+
  		$("#ui-multiselect-mnuGeoreferencias2-option-0").click(function(){
  			//console.log($(this).is(':checked'));
  			if($(this).is(':checked')==false){

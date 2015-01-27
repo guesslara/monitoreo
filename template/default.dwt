@@ -212,11 +212,10 @@
   <div id="mensajeMejoras" title="Actualizaciones....">
     <p align="justify" style="font-size: 16px;color: skyblue;">Actualizaciones:</p>
     <hr style="background:#CCC;">
-    <p align="justify">Se han agregado varias funciones en el m&oacute;dulo:</p>
     <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 27 de Enero 2015:</span></p>
     <p align="justify"><strong>Clasificaci&oacute;n Georeferencias.</strong></p>
-    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Ahora cada georeferencia se puede clasificar con un Tipo de Georeferencia.</strong></span></p>
-    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Posibilidad de mostrar Georeferencias previamente seleccionadas.</strong></span></p>
+    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Ahora cada georeferencia se puede clasificar con un Tipo de Georeferencia esto desde el m&oacute;dulo de Georeferencias.</strong></span></p>
+    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Corrección al momento de seleccionar una georeferencia y recueprar las previamente seleccionadas.</strong></span></p>
     <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 26 de Enero 2015:</span></p>
     <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Se ha colocado una nueva forma de ver las georeferencias.</strong></span></p>
     <p align="justify"></p>
