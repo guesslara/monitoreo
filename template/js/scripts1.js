@@ -374,10 +374,6 @@ function seleccionarGeoreferencia(idObjectMap,bandera,tipo){
 }
 
 function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
-	////console.log("grupo: "+grupo)
-	//$("#textoCargadorGral").html("Pintando Georeferencias");
-	//$("#cargador2").show();
-
 	$("#"+grupo+" .listadoUnidades").each(function (index) {//se recorren los divs contenidos en cada grupo
 		idE=this.id;//id del elemento que se marcara
 		srcImg=$("#"+idE+" img").attr("src");//averiguar el src de la imagen de cada elemento
@@ -387,12 +383,7 @@ function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
 		    seleccionarGeoreferencia(parseInt(idE.substring(4)),0,tipo);//se envia a la funcion para cambiar las imagenes y almacenar el valor
 		}
     });
-
-	
 	imagenT=$("#imgTG_"+grupo.substring(7)).attr("src");//imagen del div del grupo
-
-	////console.log(imagenT.substring(16));
-
     if (imagenT.substring(16)=="ok16.png") {
 		$("#imgTG_"+grupo.substring(7)).attr("src","./public/images/tick.png");//cambia la imagen del div
 		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodosGeoreferencias('"+grupo+"',1,\""+tipo+"\")");//cambia la bandera de la funcion
@@ -401,8 +392,6 @@ function seleccionarTodosGeoreferencias(grupo,bandera,tipo){
 		$("#"+grupo+" .listadoUnidadesTodas").attr("onclick","seleccionarTodosGeoreferencias('"+grupo+"',0,\""+tipo+"\")");//cambia la bandera de la funcion
 		
     }
-
-    //$("#cargador2").hide();
 }
 function extraerDatosGeoreferencia(idObjectMap,propiedad){
 	indiceObjeto="";
