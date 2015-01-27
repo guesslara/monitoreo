@@ -213,25 +213,18 @@
     <p align="justify" style="font-size: 16px;color: skyblue;">Actualizaciones:</p>
     <hr style="background:#CCC;">
     <p align="justify">Se han agregado varias funciones en el m&oacute;dulo:</p>
-    <p align="justify">Se han agregado varias funciones en el m&oacute;dulo:</p>
-    <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 14 de Octubre:</span></p>
-    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Se ha corregido el problema de pintado del mapa en Mozilla Firefox en el módulo Georeferencias.</strong></span></p>
-    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Se cambio la manera de poder ver las Latitudes y Longitudes y hacer más facil su selección.</strong></span></p>
-    <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 13 de Octubre:</span></p>
-    <p align="justify">Se ha mejorado la extracción de las ultimas posiciones, así como el <strong>Envio de Comandos</strong>.</p>
-    <p align="justify">Se ha colocado una barra del lado derecho indicando las posibles acciones sobre la Consola de Monitoreo, que contiene la <strong>Latitud</strong> y <strong>Longitud</strong>, el botón de <strong>U. Alertas</strong>, así como el menú <strong>Georeferencias</strong> y el <strong>Tiempo de Actualización</strong>.</p>
-    <p align="justify"><strong>Búsqueda de dirección.</strong></p>
-    <p align="justify">Ahora aparecen dos opciones <strong>Unidades</strong> y <strong>Dirección</strong> al dar clic en cualquiera de las opciones la barra de Búsqueda, cambiará y se podrá escribir la ubicación que se desee buscar, si se selecciona la opción de Unidades se buscará sobre las unidades.</p>
-    <p align="justify"><img src="{PATH}/images/direccion.png" border="0" /></p>
+    <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 27 de Enero 2015:</span></p>
+    <p align="justify"><strong>Clasificaci&oacute;n Georeferencias.</strong></p>
+    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Ahora cada georeferencia se puede clasificar con un Tipo de Georeferencia.</strong></span></p>
+    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Posibilidad de mostrar Georeferencias previamente seleccionadas.</strong></span></p>
+    <p align="justify"><span style="color:#FF0000;font-weight:bold;">Actualización 26 de Enero 2015:</span></p>
+    <p align="justify"><img src="./public/images/tick.png" border="0" />&nbsp;<span style="font-size: 12px;"><strong>Se ha colocado una nueva forma de ver las georeferencias.</strong></span></p>
+    <p align="justify"></p>
+    <p align="justify"><strong>Navegacion de georeferencias por separado.</strong></p>
+    <p align="justify">Ahora aparecen dos opciones <strong>Unidades</strong> y <strong>Georeferencias</strong> al dar clic en cualquiera de las opciones la barra de unidades cambiara para mostrar las georeferencias disponibles.</p>
+    <p align="justify"><img src="{PATH}/images/opciones2.png" border="0" /></p>
     <p align="justify"><strong>Georeferencias:</strong> Ahora se podrán visualizar los siguientes elementos: <strong>Geopuntos</strong>, <strong>Geocercas</strong> y <strong>Rutas</strong>. Estas se visualizarán en el mapa de manera automática, se podrán quitar las mismas por separado para dejar solo las seleccionadas.</p>
     <p align="justify"><img src="{PATH}/images/georeferencias.png" border="0" /></p>
-    <p align="justify">Al dar clic se mostrarán las opciones necesarias en forma de menu.</p>
-    <p align="justify"><img src="{PATH}/images/selGeoreferencias.png" border="0" /></p>
-    <p align="justify"><strong>Visualización de Geopuntos.</strong></p>
-    <p align="justify"><img src="{PATH}/images/pdi.png" border="0" /></p>
-    <p align="justify"><strong>Botón seleccionar/quitar selección:</strong> Ahora desde el listado de posiciones se puede quitar una unidad del seguimiento.</p>
-    <p align="justify"><img src="{PATH}/images/opcionesUnidad2.png" border="0" /></p>
-    <p align="justify"><strong>Botón seguimiento:</strong> Dentro de las opciones de la unidad, ahora aparece una opción más, que al ser presionado mostrará una línea en el seguimiento de la unidad en el mapa.</p><br>
     <p align="center" style="font-weight: bold;font-size: 14px;">Equipo ALG - Movilizandome</p>
     <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>
     <p align="justify"></p>

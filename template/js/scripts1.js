@@ -518,7 +518,6 @@ function verificarGeoreferenciasSeleccionadas(){
 	}catch(err){
 		$("#error").show();
 	    $("#error_mensaje").html('Ocurrio un error al cargar las georeferencias.');
-	    //console.log(err);
 	}
 }
 /*

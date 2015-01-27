@@ -282,36 +282,7 @@ $(document).ready(function(){
  			minWidth: 170,
  			height: 87
  		});
-/*
- 		$("#mnuGeoreferencias2").change(function(){
- 			valoresMenu=$(this).val();
-
- 			//console.log(valoresMenu);
-
-
- 			if(valoresMenu != null || valoresMenu != undefined){
-				if($.inArray("geopuntos",valoresMenu) != -1){
-			 		accionesGeopuntosCercas(6);//mostrar
-			 	}else{
-			 		accionesGeopuntosCercas(7);//ocultar
-			 	}
-			 	if($.inArray("geocercas",valoresMenu) != -1){
-			 		accionesGeopuntosCercas(9);//mostrar
-			 	}else{
-			 		accionesGeopuntosCercas(8);//ocultar
-			 	}
-			 	if($.inArray("rutas",valoresMenu) != -1){
-			 		accionesGeopuntosCercas(11);//mostrar
-			 	}else{
-			 		accionesGeopuntosCercas(10);//ocultar
-			 	}
- 			}else{
- 				accionesGeopuntosCercas(0);
- 				accionesGeopuntosCercas(2);
- 				accionesGeopuntosCercas(4);
- 			}
- 		});
-*/
+ 		
  		$("#ui-multiselect-mnuGeoreferencias2-option-0").click(function(){
  			//console.log($(this).is(':checked'));
  			if($(this).is(':checked')==false){
