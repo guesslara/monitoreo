@@ -56,9 +56,10 @@ body,document,html{
 }
 .divMenu{
 	border-bottom: 1px solid #CCC;
-	height: 14px;
+	height: 27px;
+  width: 100%;
 	/*background: #F0F0F0;*/
-	padding: 6px;
+	/*padding: 6px;*/
 	text-align: left;
 }
 .divMenu a {

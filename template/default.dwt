@@ -41,8 +41,8 @@
   <div id="Monitoreo" class="pestana">
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
-	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header ui-buttonset" style="border:1px solid #FF0000;"><strong>Mostrar:</strong>
-	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked" class="ui-helper-hidden-accessible" style="top:-10px;"><label for="tituloUnidadesDisponibles1" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-state-active"><span class="ui-button-text">Unidades</span></label>
+	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header ui-buttonset" style="border:1px solid #FF0000;">
+	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked" class="ui-helper-hidden-accessible"><label for="tituloUnidadesDisponibles1" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-state-active"><span class="ui-button-text">Unidades</span></label>
          <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias" class="ui-helper-hidden-accessible"><label for="tituloGeoreferenciasDisponibles" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right"><span class="ui-button-text">Georeferencias</label>
 	     </div>
 	     <div id="main_view" class="main_view">
