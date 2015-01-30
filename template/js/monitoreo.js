@@ -120,6 +120,12 @@ function redimensionarDivs() {
     	$("#tabReporteResumen").css("height",(altoContenedorTabsReporte-30)+"px");
 		//$("#tabReporteDetalle").css("height",(altoContenedor-500)+"px");   
 	}
+	//ajuste catalogos
+	if($("#divContenedorCatalogo").length){
+		$("#divContenedorCatalogo").css("height",(altoContenedor-30)+"px");
+		$("#divContenedorCatalogo").css("width",anchoContenedor+"px");
+	}
+
 }
 
 /*@description Cada ves que se redimensiona la ventana del navegador se manda a llamar la funcion que redimensiona todos los divs*/
