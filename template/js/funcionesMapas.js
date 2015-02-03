@@ -28,8 +28,7 @@ function mostrarMapa(){
 		mapaMonitoreo = new google.maps.Map(document.getElementById('mon_content'),mapOptions);
 	    google.maps.event.addListener(mapaMonitoreo, 'click', function() {
 	    	infoWindow.close();
-		});    
-		google.maps.event.addListener(mapaMonitoreo, 'idle', showM);
+		});
 		google.maps.event.trigger(mapaMonitoreo, 'resize');
 		google.maps.event.addListener(mapaMonitoreo, 'click', function(event) {
   			colocarLatLon(event.latLng);
@@ -47,13 +46,6 @@ function colocarLatLon(latLng){
 	//se envia el valor a los divs
 	document.getElementById("divLatLon").innerHTML = strLat[0].substring(1)+","+strLat[1].substring(0,(strLat[1].length-1));
 	strLat.length=0;
-}
-//funcion que se ejecuta cuando se hace cualquier accion en el mapa
-function showM(){
-	var bounds = mapaMonitoreo.getBounds();
-	var zoomLevel = mapaMonitoreo.getZoom();
-	monGeoZoom   = zoomLevel;
-	monGeoBnds   = bounds;
 }
 /*evento que se almacena por cada unidad para mostrar el infowindow*/
 function add_info_marker(marker,content){	
@@ -88,13 +80,8 @@ function verInfoGeoreferencia(marker,content){
 }
 //function verInfoGeocerca(geocerca,content){
 function verInfoGeocerca(event){
-	//var vertices=geocerca.getPaths;
-	//console.log("title "+this.title)
-
-	//var contentString=content;
 	var contentString=extraerDatosGeoreferencia(this.title,"datosGeocerca");
-	//se reemplaza el contenido del info window y posicion
-	infoWindow.setContent(contentString);
+	infoWindow.setContent(contentString);//se reemplaza el contenido del info window y posicion
 	infoWindow.setPosition(event.latLng);
 	infoWindow.open(mapaMonitoreo);
 }
@@ -216,19 +203,7 @@ function calcularRuta(puntoA,puntoB){
 //acciones para las georeferencias
 function accionesGeopuntosCercas(opcion){
 	//console.log("opcion: "+opcion);
-	if(opcion==0){//se ocultan todos los geopuntos
-		setAllMap(null,"G");
-	}else if(opcion==1){//se muestran todos los geopuntos
-		setAllMap(mapaMonitoreo,"G");
-	}else if(opcion==2){//se ocultan las geocercas
-		setAllMap(null,"C");
-	}else if(opcion==3){//se muestran las geocercas
-		setAllMap(mapaMonitoreo,"C");
-	}else if(opcion==4){//se ocultan las rutas
-		setAllMap(null,"R");
-	}else if(opcion==5){//se muestran las rutas
-		setAllMap(mapaMonitoreo,"R");
-	}else if(opcion==6){//se muestran las rutas
+	if(opcion==6){//se muestran las rutas
 		setAllMap(null,"Geopuntos");
 	}else if(opcion==7){//se muestran las rutas
 		setAllMap(mapaMonitoreo,"Geopuntos");
@@ -244,19 +219,7 @@ function accionesGeopuntosCercas(opcion){
 }
 /*funcion para el manejo de las diferentes acciones con las georeferencias*/
 function setAllMap(map,opcion){
-	if(opcion=="G"){
-		for(var i=0;i< monMarkers.length;i++){
-			monMarkers[i].setMap(map);
-		}
-	}else if(opcion=="C"){
-		for(var i=0;i< arraygeos.length;i++){
-			arraygeos[i].setMap(map);
-		}
-	}else if(opcion=="R"){
-		for(var i=0;i< monRutas.length;i++){
-			monRutas[i].setMap(map);
-		}
-	}else if(opcion=="Geopuntos"){
+	if(opcion=="Geopuntos"){
 		for(var i=0;i< arrayGeopuntosGeo.length;i++){
 			arrayGeopuntosGeo[i].setMap(map);
 		}
@@ -270,7 +233,6 @@ function setAllMap(map,opcion){
 		}
 	}
 }
-
 function buscarDireccion(txtParametro,evento){
 	var direccionGeo=txtParametro;
 	if(direccionGeo.length==0){
@@ -309,7 +271,6 @@ function buscarDireccion(txtParametro,evento){
 		}
 	}
 }
-
 function limpiaDirecciones(){
 	//se borra el arreglo de las direcciones y se quitan del mapa
 	for(var i=0;i< arrayDireccionesResult.length;i++){

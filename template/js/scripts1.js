@@ -168,10 +168,6 @@ function dibujaAcordeonGrupos(accion,datos){
 */
 function dibujarAcordeonGeoreferencias(accion,datos){
 	try{
-		//accionesGeopuntosCercas(6);
-		//georeferenciasSel.length=0;
-		//arrayGeopuntosGeo.length=0;
-		////console.log(arrayGeopuntosGeo);
 		accionesGeopuntosCercas(7);
 		datosGeopuntos="";
 		idGrupoGeo="";

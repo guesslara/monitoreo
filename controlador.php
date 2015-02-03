@@ -163,5 +163,10 @@ if($_SERVER["HTTP_REFERER"]==""){
 			//echo "</pre>";
 			echo $tiposG=$objM->obtenerTiposGeoreferencias($_POST["usuarioId"],$_POST["clienteId"],$_POST["filtroGeo"]);
 		break;
+		case "ultimoEventos":
+			echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";
+		break;
 	}
 }

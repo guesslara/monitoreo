@@ -256,7 +256,7 @@ function sendCommands(){
 		$("#mon_dialogAll").dialog("close");
 	}
 }
-
+//CONSTRUCCION DE LAS CLASES PARA LOS OBJETOS DE LAS GEOREFERENCIAS
 function geoPuntos(tipoGeo,idObjectMap,descripcion,latitud,longitud,tipo,url,calle,noInt,noExt,colonia,municipio,estado,cp){
 	this.tipoGeo		=	tipoGeo;
 	this.idObjectMap	=	idObjectMap;
@@ -273,7 +273,6 @@ function geoPuntos(tipoGeo,idObjectMap,descripcion,latitud,longitud,tipo,url,cal
 	this.estado			=	estado;
 	this.cp 			=	cp;
 }
-
 function geoCercaRuta(tipoGeo,idObjectMap,descripcion,fondo,color,tipo,url,geom){
 	this.tipoGeo		=	tipoGeo;
 	this.idObjectMap	=	idObjectMap;
@@ -285,4 +284,3 @@ function geoCercaRuta(tipoGeo,idObjectMap,descripcion,fondo,color,tipo,url,geom)
 	this.color 			=	color;
 	
 }
-

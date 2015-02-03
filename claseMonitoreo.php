@@ -47,6 +47,37 @@ class monitoreo{
       return $table_name . $idCliente;
     }
     /**
+    *@method        ultimos eventos
+    *@description   Extrae los ultimos eventos generados
+    *@paramas
+    */
+    public function verUltimosEventos($idUsuario){
+      $mensaje="";
+      $objDb=$this->iniciarConexionDb();
+      $objDb->sqlQuery("SET NAMES 'utf8'");
+      echo $sql="SELECT h.COD_HISTORY,u.DESCRIPTION AS UNIT, h.GPS_DATETIME AS DATE, e.DESCRIPTION AS EVENTO, h.LATITUD, h.LONGITUD
+            FROM HIST1143_LOCK h INNER JOIN ADM_UNIDADES u ON h.COD_ENTITY = u.COD_ENTITY INNER JOIN ADM_EVENTOS  e ON e.COD_EVENT  = h.COD_EVENT
+            WHERE h.COD_ENTITY IN (SELECT COD_ENTITY FROM ADM_USUARIOS_GRUPOS WHERE ID_USUARIO = ".$idUsuario.") AND   h.GPS_DATETIME > NOW()-INTERVAL 1 HOUR /*AND CAST(h.GPS_DATETIME AS DATE) < CURRENT_DATE()*/ ORDER BY h.FECHA_SAVE DESC ";
+      $res=$objDb->sqlQuery($sql);
+      $cPositions=new cPositions();
+      /*
+      $direction = $Positions->direccion_no_format($row['LATITUD'],$row['LONGITUD']);
+      $data .= ($data!="") ? ', ': '';
+      $data .= '{"ID"    : "'.$row['COD_HISTORY'].'" , '.
+         ' "UNIT"  : "'.$row['UNIT'].'" , '.
+         ' "DATE"  : "'.$row['DATE'].'" , '.             
+         ' "EVENT" : "'.$row['EVENTO'].'" , '.
+         ' "LAT"   : "'.$row['LATITUD'].'" , '.
+         ' "LON"   : "'.$row['LONGITUD'].'" , '.
+           ' "DIR"   : "'.$direction.'" }';
+      */
+      while($row=$objDb->sqlFetchArray($res)){
+        echo "<br>".$direction = $cPositions->direccion_no_format($row['LATITUD'],$row['LONGITUD']);
+      }
+
+
+    }
+    /**
     *@method        extrae los tipos de georeferencias
     *@description   Extrae los tipos de georeferencias
     *@paramas
@@ -55,9 +86,6 @@ class monitoreo{
       $mensaje="";
       $objDb=$this->iniciarConexionDb();
       $objDb->sqlQuery("SET NAMES 'utf8'");
-      //$sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE,TIPO
-      //FROM ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO
-      //WHERE TIPO='".$filtroGeo."' AND ACTIVO='S' AND ADM_GEOREFERENCIAS.ID_CLIENTE='".$clienteId."' ORDER BY ADM_GEOREFERENCIAS.ID_TIPO_GEO";
       if($filtroGeo=="G"){
         $sqlTipo="SELECT ADM_GEOREFERENCIAS_TIPO.DESCRIPCION AS DESCRIPCION_GEO,ID_OBJECT_MAP,ADM_GEOREFERENCIAS.DESCRIPCION AS DESCRIPCION,LATITUDE,LONGITUDE,ADM_GEOREFERENCIAS.TIPO AS TIPO,URL,CALLE,NO_INT,NO_EXT,COLONIA,MUNICIPIO,ESTADO,CP
         FROM (ADM_GEOREFERENCIAS INNER JOIN ADM_GEOREFERENCIAS_TIPO ON ADM_GEOREFERENCIAS.ID_TIPO_GEO=ADM_GEOREFERENCIAS_TIPO.ID_TIPO) INNER JOIN ADM_IMAGE ON ADM_GEOREFERENCIAS_TIPO.ID_IMAGE=ADM_IMAGE.ID_IMG
@@ -196,8 +224,6 @@ class monitoreo{
       $objDb=$this->iniciarConexionDb();
       $objDb->sqlQuery("SET NAMES 'utf8'");
       $tabla="HIST".$this->extraerNombreTabla($clienteId);
-      //$sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE GPS_DATETIME BETWEEN '".date("Y-m-d")." 00:00:00' AND '".date("Y-m-d")." 23:59:59' AND COD_ENTITY=".$idUnidad." ORDER BY GPS_DATETIME ASC LIMIT 0,10";
-      //$sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE FROM ".$tabla." WHERE GPS_DATETIME BETWEEN '2014-05-27 00:00:00' AND '2014-05-27 23:59:59' AND COD_ENTITY=".$idUnidad." ORDER BY GPS_DATETIME ASC LIMIT 0,10";
       $sqlH="SELECT DISTINCT GPS_DATETIME,LATITUDE,LONGITUDE 
         FROM ".$tabla." 
         WHERE GPS_DATETIME LIKE '".date("Y-m-d")."%' AND COD_ENTITY='".$idUnidad."' AND VELOCITY >=5

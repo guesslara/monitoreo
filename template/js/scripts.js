@@ -15,7 +15,7 @@ var infowindow;
 var beachMarker;
 var arrayReferencias	  			= Array();
 var aComandosAll 		  			= '';
-var UnitsString  		  			= '';
+//var UnitsString  		  			= '';
 
 var mon_array_autocomplete 			= Array();//array donde se guardan los nombres de las unidades
 var mon_array_autocompleteGeo 		= Array();//array donde se guardan los nombres de las georeferencias
@@ -50,11 +50,6 @@ $(document).ready(function(){
 		$( "#tabs" ).tabs({ //pestañas
         	select: function(event, ui) { 
 				tab_active = ui.index;
-				/*if(tab_active==0){
-					mon_refresh_units();
-				}else{
-					stopTimer();
-				}*/
 				if(tab_active==3){
 					loadDashBoard()					
 				}			
@@ -109,8 +104,7 @@ $(document).ready(function(){
 		});
 		
 		$("#gral_button_soporte").click(function(e){
-			//codigo necesario para el boton
-			if($("#frameSoporte").length==0){
+			if($("#frameSoporte").length==0){//codigo necesario para el boton
 				abrirTickets();
 			}else{
 				if ($('#frameSoporte').is(':visible')){
@@ -125,6 +119,7 @@ $(document).ready(function(){
 		$("#gral_button_events").click(function() {
   			var caracteristicas = "height=560,width=660,scrollTo,resizable=1,scrollbars=1,location=0";
 			nueva=window.open("index.php?m=mMonitoreo&c=mShowEvents", 'Popup', caracteristicas);
+			//nueva=window.open("index.php?m=mMonitoreo4&c=mUltimosEventos", 'Popup', caracteristicas);			
 		});
 		
 		$("#btnUltimaPosicion").click(function(){
@@ -197,7 +192,6 @@ $(document).ready(function(){
 		$("#enlaceCerrarSesion").click(function(){
 			window.location.href="index.php?m=login";
 		})
-
 
 		$("#enlaceVentana").click(function(){
  			window.open("modules/mMonitoreo4/test4.html", "popupId", "location=no,menubar=no,titlebar=no,resizable=yes,toolbar=no, menubar=no,width=500,height=500");
@@ -329,9 +323,7 @@ $(document).ready(function(){
 
     	}); 		
 
- 		$("input[name=rdbOpcionBuscaGeo]").click(function () {    
-        	//alert("La edad seleccionada es: " + $('input:radio[name=edad]:checked').val());
-        	//alert("La edad seleccionada es: " + $(this).val());
+ 		$("input[name=rdbOpcionBuscaGeo]").click(function (){
         	filtroGeo=$(this).val();
         	$("#mon_menu_acordeonGeoreferencias").html("");
         	mon_array_autocompleteGeo.length=0;
@@ -511,15 +503,6 @@ function mostrarAvisos(){
 		},
 	});
 }
-/*Actualizar campos*/
-function updateFields(latInt, lonInt){
-	var latInt = parseFloat(latInt);
-	var lonInt = parseFloat(lonInt);
-	$("#txt_lat").val(latInt.toFixed(6));
-	$("#txt_lon").val(lonInt.toFixed(6));
-	var point = new GLatLng(latInt,lonInt);
-	point_pan = point;
-}
 /*Funcion de Administracion*/
 function tabAd(){
 	$("#Admon").html("");
@@ -559,51 +542,9 @@ function menuAd(){
         }
 	});
 }
-/*Funcion para mostrar el menu de Reportes*/
-function tabRe(){
-	//$("#Report").html("");
-	//ajaxMonitoreo("cargaReportes","default","","Report","Report","POST");
-	//menuRe();
-}
-//---------------------------------------------
 function menuRe(){
 	usuarioId=$("#usuarioId").val();
 	$("#rep_menu").html("");
 	ajaxMonitoreo("cargaMenuReportes","menu","","rep_menu","rep_menu","POST");
 	//ajaxMonitoreo("mostrarNuevoMenu","controlador","action=mostrarNuevoMenu&idUsuario="+usuarioId,"menuReportes","menuReportes","POST");
-}
-//---------------------------------------------
-function tabAj(){
-	$("#Ajuste").html("");
-	$.ajax({
-		type: "GET",
-        url: "index.php?m=mAjuste&c=default",
-        data: "",
-        success: function(datos){
-			if(datos!=0){
-				$("#Ajuste").html(datos);
-
-			}else{
-				$("#Ajuste").html("No se han Creado Grupos");
-			}
-			
-        }
-	});
-}
-
-function loadDashBoard(){
-	$("#DashBoard").html("");
-	$.ajax({
-		type: "GET",
-        url: "index.php?m=mReports&c=default",
-        data: "",
-        success: function(datos){
-			if(datos!=0){
-				$("#DashBoard").html(datos);
-			}else{
-				$("#DashBoard").html("");
-			}
-			
-        }
-	});
 }
