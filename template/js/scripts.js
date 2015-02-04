@@ -16,7 +16,6 @@ var beachMarker;
 var arrayReferencias	  			= Array();
 var aComandosAll 		  			= '';
 //var UnitsString  		  			= '';
-
 var mon_array_autocomplete 			= Array();//array donde se guardan los nombres de las unidades
 var mon_array_autocompleteGeo 		= Array();//array donde se guardan los nombres de las georeferencias
 //variables adicionales
@@ -529,16 +528,11 @@ function menuAd(){
         url: "index.php?m=mAdmon&c=menu",
         data: "",
         success: function(datos){
-			//alert(datos)
 			if(datos!=0){
 				$("#adn_menu").html(datos);
-				//document.getElementById('adn_menu').innerHTML = datos;
-				//$("#adn_menu").css('border-color', 'red');
-
 			}else{
 				$("#adn_menu").html("No se han Creado Grupos");
 			}
-			
         }
 	});
 }
@@ -546,5 +540,5 @@ function menuRe(){
 	usuarioId=$("#usuarioId").val();
 	$("#rep_menu").html("");
 	ajaxMonitoreo("cargaMenuReportes","menu","","rep_menu","rep_menu","POST");
-	//ajaxMonitoreo("mostrarNuevoMenu","controlador","action=mostrarNuevoMenu&idUsuario="+usuarioId,"menuReportes","menuReportes","POST");
+	ajaxMonitoreo("mostrarNuevoMenu","controlador","action=mostrarNuevoMenu&idUsuario="+usuarioId,"menuReportes","menuReportes","POST");
 }
