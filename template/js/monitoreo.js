@@ -122,8 +122,16 @@ function redimensionarDivs() {
 	}
 	//ajuste catalogos
 	if($("#divContenedorCatalogo").length){
-		$("#divContenedorCatalogo").css("height",(altoContenedor-30)+"px");
-		$("#divContenedorCatalogo").css("width",anchoContenedor+"px");
+		$("#divContenedorCatalogo").css("height",(altoContenedor-47)+"px");
+		//$("#divContenedorCatalogo").css("width",(anchoContenedor-207)+"px");
+
+		$("#divCArbol").css("height",(altoContenedor-54)+"px");
+		$("#divCCatalogo").css("height",(altoContenedor-54)+"px");
+		$("#divCCatalogoDetalle").css("height",(altoContenedor-54)+"px");
+
+		$("#divArbol").css("height",(altoContenedor-120)+"px");
+		$("#divCatalogo").css("height",(altoContenedor-120)+"px");
+		$("#divCatalogoDetalle").css("height",(altoContenedor-120)+"px");
 	}
 
 }
