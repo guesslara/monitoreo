@@ -55,7 +55,7 @@ class monitoreo{
       $mensaje="";
       $objDb=$this->iniciarConexionDb();
       $objDb->sqlQuery("SET NAMES 'utf8'");
-      echo $sql="SELECT h.COD_HISTORY,u.DESCRIPTION AS UNIT, h.GPS_DATETIME AS DATE, e.DESCRIPTION AS EVENTO, h.LATITUD, h.LONGITUD
+      $sql="SELECT h.COD_HISTORY,u.DESCRIPTION AS UNIT, h.GPS_DATETIME AS DATE, e.DESCRIPTION AS EVENTO, h.LATITUD, h.LONGITUD
             FROM HIST1143_LOCK h INNER JOIN ADM_UNIDADES u ON h.COD_ENTITY = u.COD_ENTITY INNER JOIN ADM_EVENTOS  e ON e.COD_EVENT  = h.COD_EVENT
             WHERE h.COD_ENTITY IN (SELECT COD_ENTITY FROM ADM_USUARIOS_GRUPOS WHERE ID_USUARIO = ".$idUsuario.") AND   h.GPS_DATETIME > NOW()-INTERVAL 1 HOUR /*AND CAST(h.GPS_DATETIME AS DATE) < CURRENT_DATE()*/ ORDER BY h.FECHA_SAVE DESC ";
       $res=$objDb->sqlQuery($sql);
@@ -71,11 +71,11 @@ class monitoreo{
          ' "LON"   : "'.$row['LONGITUD'].'" , '.
            ' "DIR"   : "'.$direction.'" }';
       */
-      while($row=$objDb->sqlFetchArray($res)){
-        echo "<br>".$direction = $cPositions->direccion_no_format($row['LATITUD'],$row['LONGITUD']);
-      }
-
-
+      //while($row=$objDb->sqlFetchArray($res)){
+        //echo "<br>".$direction = $cPositions->direccion_no_format($row['LATITUD'],$row['LONGITUD']);
+      //}
+      $grid=new gridDatos();
+      $grid->mostrarDatos($sql);
     }
     /**
     *@method        extrae los tipos de georeferencias
