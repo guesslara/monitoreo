@@ -57,7 +57,8 @@
         'RUTA'			=> $ruta,
         'SEGUIMIENTO'	=> $seguimiento,
         'HISTORIAL'		=> $hRuta,
-        'BUSQUEDA'		=> $busqueda
+        'BUSQUEDA'		=> $busqueda,
+        'PROFILE'		=> $idProfile
 	));
 	
 	$tpl->pparse('default');

@@ -30,6 +30,7 @@
 <input type="hidden" id="usuarioId" value="{IDUSUARIO}" />
 <input type="hidden" id="usuarioCliente" value="{IDCLIENTE}" />
 <input type="hidden" id="seguimiento" value="{SEGUIMIENTO}" />
+<input type="hidden" id="profl" value="{PROFILE}" />
 <div id="tabs" class="pestana_principal">
   <ul>
     <li ><a href="#Monitoreo">Monitoreo</a></li>
@@ -159,13 +160,20 @@
     </div>
     <!--Fin Barra Monitoreo-->
   </div><!--Monitoreo-->
-  <div id="Admon"  class="pestana">
-
+  <div id="Admon"  class="pestana" style="border:1px solid #FF0000;">
+    <div id="adm_menu" class="menu"></div><!--adn_menu-->
+    <div id="adm_content" class="pestana_contenido">
+      <span id="span_welcome">Seleccione una opción del Menú</span>
+    </div><!--adm_content-->
+    <div id="cargadorModulo">
+      <div class="imagenCargando"><img src="./public/images/cargando.gif" border="0" /></div>
+      <div class="textoCargador">Cargando m&oacute;dulo...</div>
+    </div>
 
   </div><!--Admon-->
 
   <div id="Report" class="pestana" style="border:1px solid #A9D0F5;">
-    <div id="rep_menu" class="menuReportes ui-corner-all"></div><!--Div Menu-->
+    <div id="rep_menu" class="menuPROFILE ui-corner-all"></div><!--Div Menu-->
     <div id="rep_content" class="pestana_contenido">
       <span id="span_welcome">Seleccione una opción del Menú</span>
     </div>

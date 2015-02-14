@@ -359,7 +359,7 @@ function mostraCajaBusqueda(idRdb){
 function init(){
 	try{
 		mostrarMapa();
-		tabAd();//tab administracion
+		//tabAd();//tab administracion
 		menuRe();//menu reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
@@ -523,7 +523,7 @@ function tabAd(){
 /*Carga de menu*/
 function menuAd(){
 	$("#adn_menu").html("");
-	$.ajax({
+	/*$.ajax({
 		type: "GET",
         url: "index.php?m=mAdmon&c=menu",
         data: "",
@@ -534,7 +534,9 @@ function menuAd(){
 				$("#adn_menu").html("No se han Creado Grupos");
 			}
         }
-	});
+	});*/
+	profile=$("#profl").val();
+	ajaxMonitoreo("cargarMenuAdmon","controlador","action=mostrarMenuAdmon&profl="+profile,"adm_menu","adm_menu","POST");
 }
 function menuRe(){
 	usuarioId=$("#usuarioId").val();

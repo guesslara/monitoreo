@@ -168,5 +168,10 @@ if($_SERVER["HTTP_REFERER"]==""){
 			print_r($_POST);
 			echo "</pre>";
 		break;
+		case "mostrarMenuAdmon":
+			echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";
+		break;
 	}
 }
