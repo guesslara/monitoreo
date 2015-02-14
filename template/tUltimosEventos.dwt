@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+ 
+<html lang="es">
+ 
+<head>
+<title>Titulo de la web</title>
+<meta charset="utf-8" />
+<script type="text/javascript" src="public/js/ui/jquery.js"></script>
+<script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
+<script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
+<script type="text/javascript" src="public/js/jquery.timer.js"></script>
+<script type="text/javascript" src="public/libs/jtables/jtables.js"></script>
+<script type="text/javascript" src="{PATH}/js/scripts.js"></script>
+<script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
+<script type="text/javascript" src="{PATH}/js/scripts1.js"></script>
+<script type="text/javascript" src="{PATH}/js/funcionesMapas.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="public/libs/phpgridv1.5.2/lib/js/jqgrid/css/ui.jqgrid.css">
+<script type="text/javascript" src="public/js/colorpicker.js"></script>
+<script type="text/javascript" src="public/js/ui/jquery.numeric.js"></script>
+<link type="text/css" href="{PATH}/css/style_monitoreo.css" rel="stylesheet" />
+<link type="text/css" href="public/css/jqueryUIX.css" rel="stylesheet" />
+<link type="text/css" href="public/css/estiloX2.css" rel="stylesheet"/>
+<link type="text/css" href="public/css/ui.panel.css" rel="stylesheet" />
+<link type="text/css" href="./public/libs/jtables/jtables.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="public/libs/jquery-ui-multiselect/jquery.multiselect.css">
+<script type="text/javascript" src="public/libs/jquery-ui-multiselect/src/jquery.multiselect.js"></script>
+<script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
+<script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
+
+
+</head>
+ 
+<body>
+    <header>
+       <h1>Mi sitio web</h1>
+       <p>Mi sitio web creado en html5</p>
+    </header>
+    <section>
+       <article>
+           <h2>Titilo de contenido<h2>
+           <p> Contenido (ademas de imagenes, citas, videos etc.) </p>
+       </article>
+    </section>
+    <aside>
+       <h3>Titulo de contenido</h3>
+           <p>contenido</p>
+    </aside>
+    <footer>
+        Creado por mi el 2011
+    </footer>
+</body>
+</html>

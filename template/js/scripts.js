@@ -117,8 +117,8 @@ $(document).ready(function(){
 
 		$("#gral_button_events").click(function() {
   			var caracteristicas = "height=560,width=660,scrollTo,resizable=1,scrollbars=1,location=0";
-			nueva=window.open("index.php?m=mMonitoreo&c=mShowEvents", 'Popup', caracteristicas);
-			//nueva=window.open("index.php?m=mMonitoreo4&c=mUltimosEventos", 'Popup', caracteristicas);			
+			//nueva=window.open("index.php?m=mMonitoreo&c=mShowEvents", 'Popup', caracteristicas);
+			nueva=window.open("index.php?m=mMonitoreo4&c=mUltimosEventos", 'Popup', caracteristicas);			
 		});
 		
 		$("#btnUltimaPosicion").click(function(){
