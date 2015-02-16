@@ -11,10 +11,10 @@
 	
 	$tpl->set_filenames(array('default'=>'default'));
 		
-	$idProfile = $userAdmin->user_info['ID_PROFILE'];
-    /*echo "<pre>";
-	print_r($userAdmin);
-	echo "</pre>";*/
+	$idProfile = $userAdmin->user_info['ID_PERFIL'];
+    //echo "<pre>";
+	//print_r($userAdmin);
+	//echo "</pre>";
 	$validate  = $dbf->getRow('ADM_USUARIOS_SUPER',' ID_USUARIO = '.$userAdmin->user_info['ID_USUARIO']);
 	
 	$s_admin   = ($validate) ? 'visible': 'invisible';

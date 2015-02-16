@@ -358,9 +358,10 @@ function mostraCajaBusqueda(idRdb){
 */
 function init(){
 	try{
-		mostrarMapa();
+		//mostrarMapa();
 		//tabAd();//tab administracion
-		menuRe();//menu reportes
+		menuAd();
+		//menuRe();//menu reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
@@ -522,7 +523,7 @@ function tabAd(){
 }
 /*Carga de menu*/
 function menuAd(){
-	$("#adn_menu").html("");
+	$("#adm_menu").html("");
 	/*$.ajax({
 		type: "GET",
         url: "index.php?m=mAdmon&c=menu",
@@ -536,11 +537,42 @@ function menuAd(){
         }
 	});*/
 	profile=$("#profl").val();
-	ajaxMonitoreo("cargarMenuAdmon","controlador","action=mostrarMenuAdmon&profl="+profile,"adm_menu","adm_menu","POST");
+	ajaxMonitoreo("cargarMenuAdmon","controlador","action=mostrarMenuAdmon&profl="+profile,"cargador2","adm_menu","POST");
 }
 function menuRe(){
 	usuarioId=$("#usuarioId").val();
 	$("#rep_menu").html("");
 	ajaxMonitoreo("cargaMenuReportes","menu","","rep_menu","rep_menu","POST");
 	ajaxMonitoreo("mostrarNuevoMenu","controlador","action=mostrarNuevoMenu&idUsuario="+usuarioId,"menuReportes","menuReportes","POST");
+}
+function adm_abrir_modulo(m,indice){
+	//alert(m);
+	//$("#accordion_container").html("");
+	$("#adm_menu div").each(function( index ) {
+		//console.log( index + ": " + $( this ).text() );
+		id=$(this).attr("id");
+		console.log(id);
+		$("#"+id).removeClass("ui-state-active");
+		$("#"+id).addClass("estiloDivMenuAdmon");
+	});
+	$("#"+indice).addClass("ui-state-active")
+	$.ajax({
+		type: "POST",
+		url: "index.php?m="+m+"&c=default",
+		data: "",
+		beforeSend:function(){
+			$("#cargadorModulo").show(); 
+			$("#span_welcome").html(""); 
+		},
+		success: function(datos){
+			if(datos!=0){
+				$("#cargadorModulo").hide(); 
+				$("#adm_content").html(datos);
+			    //$("#example").treeview();
+			}else{
+				$("#adm_content").html("No se han Creado un menú");
+			}
+			
+		}
+	});
 }

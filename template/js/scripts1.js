@@ -76,6 +76,9 @@ function controladorAcciones(accion,datos,divResultado){
 			contenteStrGeo=datos;
 			//console.log(contenteStrGeo);
 		break;
+		case "cargarMenuAdmon":
+			$("#"+divResultado).show().html(datos);
+		break;
     }
 }
 /*

@@ -7,6 +7,7 @@
 <script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
 <script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
 <script type="text/javascript" src="public/js/jquery.timer.js"></script>
+<script type="text/javascript" src="public/js/menu.js"></script>
 <script type="text/javascript" src="public/libs/jtables/jtables.js"></script>
 <script type="text/javascript" src="{PATH}/js/scripts.js"></script>
 <script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
@@ -161,7 +162,7 @@
     <!--Fin Barra Monitoreo-->
   </div><!--Monitoreo-->
   <div id="Admon"  class="pestana" style="border:1px solid #FF0000;">
-    <div id="adm_menu" class="menu"></div><!--adn_menu-->
+    <div id="adm_menu" class="" style="background-color:#F5F8FF;width:16%; height:101.2%; float:left;  border:1px solid #A6C9E2;overflow: auto;margin:-5px 3px -5px -5px;"></div><!--adn_menu-->
     <div id="adm_content" class="pestana_contenido">
       <span id="span_welcome">Seleccione una opción del Menú</span>
     </div><!--adm_content-->

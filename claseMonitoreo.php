@@ -46,6 +46,27 @@ class monitoreo{
       }
       return $table_name . $idCliente;
     }
+    public function cargarMenuAdministracion($perfil){
+      $mensaje="";
+      $objDb=$this->iniciarConexionDb();
+      $objDb->sqlQuery("SET NAMES utf8");
+      $sql ="SELECT ADM_SUBMENU.ID_SUBMENU,DESCRIPTION,UBICACION
+      FROM ADM_PERFIL_PERMISOS INNER JOIN ADM_SUBMENU ON ADM_SUBMENU.ID_SUBMENU = ADM_PERFIL_PERMISOS.ID_SUBMENU
+      WHERE ADM_PERFIL_PERMISOS.ID_PERFIL = ".$perfil." AND ADM_SUBMENU.TIPO = 'M' ORDER BY ADM_SUBMENU.DESCRIPTION  ASC";
+      $res=$objDb->sqlQuery($sql);
+      if($objDb->sqlEnumRows($res)==0){
+        $mensaje="0";//no hay resultados
+      }else{
+        while($rowMenu=$objDb->sqlFetchArray($res)){
+          if($mensaje==""){
+            $mensaje=$rowMenu['ID_SUBMENU']."??".$rowMenu['DESCRIPTION']."??".$rowMenu["UBICACION"];
+          }else{
+            $mensaje.="|||".$rowMenu['ID_SUBMENU']."??".$rowMenu['DESCRIPTION']."??".$rowMenu["UBICACION"];
+          }
+        }
+      }
+      return $mensaje;
+    }
     /**
     *@method        ultimos eventos
     *@description   Extrae los ultimos eventos generados

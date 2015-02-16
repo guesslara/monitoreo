@@ -169,9 +169,23 @@ if($_SERVER["HTTP_REFERER"]==""){
 			echo "</pre>";
 		break;
 		case "mostrarMenuAdmon":
-			echo "<pre>";
-			print_r($_POST);
-			echo "</pre>";
+			$menuAdmon=$objM->cargarMenuAdministracion($_POST["profl"]);
+			$menuAdmon=explode("|||",$menuAdmon);
+			//echo "<pre>";
+			//print_r($menuAdmon);
+			//echo "</pre>";
+			$tpl->set_filenames(array('controlador' => 'tMenu'));
+			for($i=0;$i<count($menuAdmon);$i++){
+				$valores=explode("??",$menuAdmon[$i]);
+				$idm="ui-id-".($i+1);
+				$tpl->assign_block_vars('listadoMenuAdmon',array(
+					'IDSUBMENU'  	=> $valores[0],
+					'DESCRIPCION' 	=> $valores[1],
+					'LNK'			=> $valores[2],
+					'IDM'			=> $idm
+				));
+			}
+			$tpl->pparse('controlador');
 		break;
 	}
 }
