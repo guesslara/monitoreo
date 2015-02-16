@@ -157,7 +157,7 @@ if($_SERVER["HTTP_REFERER"]==""){
 			echo "</pre>";*/
 			echo $georeferencias=$objM->obtenerGeoreferencias($_POST["usuarioId"],$_POST["clienteId"]);
 		break;
-		case "mostrarTipoGeoreferencias":
+		case "mostrarTipoGeoreferenciasMonitoreo":
 			//echo "<pre>";
 			//print_r($_POST);
 			//echo "</pre>";

@@ -14,7 +14,7 @@ function ajaxMonitoreo(accion,c,parametros,divCarga,divResultado,tipoPeticion){
 		},
 		success: function(data) {
 			$("#"+divCarga).hide();
-			controladorAcciones(accion,data,divResultado);
+			controladorAccionesM(accion,data,divResultado);
 		},
 		timeout:90000000,
 		error:function() {
@@ -29,7 +29,8 @@ function ajaxMonitoreo(accion,c,parametros,divCarga,divResultado,tipoPeticion){
  *@author	Gerardo Lara
  *@date		6 - Mayo - 2014
 */
-function controladorAcciones(accion,datos,divResultado){
+function controladorAccionesM(accion,datos,divResultado){
+	//console.log("Accion: "+accion);
     switch(accion){
 		case "dibujaGrupos":
 	    	dibujaAcordeonGrupos(accion,datos);
@@ -63,8 +64,9 @@ function controladorAcciones(accion,datos,divResultado){
 		case "mostrarNuevoMenu":
 			$("#"+divResultado).show().html(datos);
 		break;
-		case "mostrarTipoGeoreferencias":
-			//$("#"+divResultado).show().html(datos);
+		case "mostrarTipoGeoreferenciasMonitoreo":
+			//console.log(datos);
+			//$("#"+divResultado).show().html("");
 			if(datos==0){
 				$("#error").show();
 				$("#error_mensaje").html('No hay tipos de Georeferencias en la Base de Datos para este usuario.');
@@ -171,16 +173,19 @@ function dibujaAcordeonGrupos(accion,datos){
 */
 function dibujarAcordeonGeoreferencias(accion,datos){
 	try{
+		//console.log("Datos: "+datos);
+		$("#mon_menu_acordeonGeoreferencias").html("");
 		accionesGeopuntosCercas(7);
-		datosGeopuntos="";
-		idGrupoGeo="";
-		bUnidades=false;
+		datosGeopuntosMonitoreo="";
+		idGrupoGeoMonitoreo="";
+		bUnidadesMonitoreo=false;
 		itemNombre="";
 		title="De clic para mostrar la Georeferencia"; title1="De clic para activar todas las georeferencias";
-		datos=datos.split("||||");//se procesa el resultado para crear los grupos
-		acordeon="<div id='mon_acordeon_GeoreferenciasM' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
-		for(i=0;i<datos.length;i++){
-			grupos=datos[i].split(",");//se descomponen los elementos para la creacion de los grupos
+		datosMonitoreo=datos.split("||||");//se procesa el resultado para crear los grupos
+		acordeonGeoreferencias="<div id='mon_acordeon_GeoreferenciasM' style='border:0px solid #FF0000;height:auto;position:relative;width:99%;'>";
+		console.log("MonitoreoLOngitud del array: "+datosMonitoreo.length);
+		for(i=0;i<datosMonitoreo.length;i++){
+			grupos=datosMonitoreo[i].split(",");//se descomponen los elementos para la creacion de los grupos
 			////console.log(grupos)
 			var miobjeto=new Object();/*inclusion para el autocomplete*/
 			miobjeto.label=grupos[2];
@@ -194,8 +199,8 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 			imgT="imgTG_"+i;
 			//modificacion y prueba de los objetos de informacion para javascript
 			if(grupos[5]=="G"){
-				datosGeopuntos=new geoPuntos(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5],grupos[6],grupos[7],grupos[8],grupos[9],grupos[10],grupos[11],grupos[12],grupos[13]);
-				datosGeoreferencias.push(datosGeopuntos);
+				datosGeopuntosMonitoreo=new geoPuntos(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5],grupos[6],grupos[7],grupos[8],grupos[9],grupos[10],grupos[11],grupos[12],grupos[13]);
+				datosGeoreferencias.push(datosGeopuntosMonitoreo);
 				////console.log(datosGeoreferencias);
 			}else if(grupos[5]=="C"){
 				datosGeocerca=new geoCercaRuta(grupos[0],grupos[1],grupos[2],grupos[3],grupos[4],grupos[5],grupos[6],grupos[7],grupos[8],grupos[9]);
@@ -212,24 +217,24 @@ function dibujarAcordeonGeoreferencias(accion,datos){
 				itemNombre=grupos[2];
 			}
 
-			if (grupos[0] != idGrupoGeo) {//se verifica si se crea un grupo
-				if (bUnidades) {
-					acordeon+="</div>";
-					bUnidades=false;
+			if (grupos[0] != idGrupoGeoMonitoreo) {//se verifica si se crea un grupo
+				if (bUnidadesMonitoreo) {
+					acordeonGeoreferencias+="</div>";
+					bUnidadesMonitoreo=false;
 				}
-				//acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0)' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
-				acordeon+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0,\""+grupos[5]+"\")' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\")' id='"+div+"' class='listadoUnidades' title='"+grupos[2]+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+itemNombre+"</span></div>";
-				bUnidades=true;
+				//acordeonGeoreferencias+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0)' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
+				acordeonGeoreferencias+="<h3><span class='espacioTitulo'>"+grupos[0]+"</span></h3><div id='"+grupo+"'><div onclick='seleccionarTodosGeoreferencias(\""+grupo+"\",0,\""+grupos[5]+"\")' class='listadoUnidadesTodas' title='"+title1+"'><img id='"+imgT+"' src='./public/images/ok16.png' border='0' /><span class='textoTodas'>Todas</span></div><div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\")' id='"+div+"' class='listadoUnidades' title='"+grupos[2]+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+itemNombre+"</span></div>";
+				bUnidadesMonitoreo=true;
 			}else{
-				//acordeon+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
-				acordeon+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\")' id='"+div+"' class='listadoUnidades' title='"+grupos[2]+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+itemNombre+"</span></div>";    
+				//acordeonGeoreferencias+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\",\""+grupos[6]+"\",\""+grupos[3]+"\",\""+grupos[4]+"\")' id='"+div+"' class='listadoUnidades' title='"+title+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+grupos[2]+"</span></div>";
+				acordeonGeoreferencias+="<div onclick='seleccionarGeoreferencia("+grupos[1]+",0,\""+grupos[5]+"\")' id='"+div+"' class='listadoUnidades' title='"+grupos[2]+"'><img id='"+img+"' src='./public/images/ok16.png' border='0' /><span class='listadoInfoUnidades'>"+itemNombre+"</span></div>";    
 			}
-			idGrupoGeo=grupos[0];
-			datosGeopuntos="";
+			idGrupoGeoMonitoreo=grupos[0];
+			datosGeopuntosMonitoreo="";
 		}
-		acordeon+="</div>";
+		acordeonGeoreferencias+="</div>";
 
-		$("#mon_menu_acordeonGeoreferencias").append(acordeon);
+		$("#mon_menu_acordeonGeoreferencias").append(acordeonGeoreferencias);
 		$("#mon_acordeon_GeoreferenciasM").accordion({clearStyle: true, autoHeight: false});
 
 
@@ -642,7 +647,7 @@ function mon_get_info(valor,imei,idUnidad,servidor,instancia){//envio de comando
 	usuarioId=$("#usuarioId").val();
 	clienteId=$("#usuarioCliente").val();
 	parametros="action=cargarComandosUnidad&idUsuario="+usuarioId+"&clienteId="+clienteId+"&tipo="+valor+"&imei="+imei+"&idUnidad="+idUnidad+"&servidor="+servidor+"&instancia="+instancia;
-	ajaxMonitoreo("cargarComandosUnidad","controlador",parametros,"mon_dialog","mon_dialog","POST");
+	ajaxMonitoreo("cargarComandosUnidad","controlador",parametros,"cargador2","mon_dialog","POST");
 }
 /*Centra la posicion en el mapa y dibuja el infowindow*/
 function mon_center_map(idUnidad,stringLoc,unidad,imei,evento,fecha,velocidad,pdi,lat,lon,nivelBateria,direccion,idTr,type){

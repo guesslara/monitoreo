@@ -69,6 +69,8 @@ $(document).ready(function(){
 			autoOpen:false,
 			modal: true,
 			resizable: false,
+			width: 280,
+			height: 180,
 			title: "Envio de Comandos",
 			buttons: {
 				Cancelar: function(){
@@ -324,7 +326,7 @@ $(document).ready(function(){
 
  		$("input[name=rdbOpcionBuscaGeo]").click(function (){
         	filtroGeo=$(this).val();
-        	$("#mon_menu_acordeonGeoreferencias").html("");
+        	//console.log(filtroGeo);
         	mon_array_autocompleteGeo.length=0;
         	mostrarTiposGeoreferencias(filtroGeo);
     	});
@@ -336,8 +338,9 @@ $(document).ready(function(){
 function mostrarTiposGeoreferencias(filtroGeo){
 	usuarioId=$("#usuarioId").val();
 	clienteId=$("#usuarioCliente").val();
-	parametros="action=mostrarTipoGeoreferencias&usuarioId="+usuarioId+"&clienteId="+clienteId+"&filtroGeo="+filtroGeo;
-	ajaxMonitoreo("mostrarTipoGeoreferencias","controlador",parametros,"cargador2","mon_menu_acordeonGeoreferencias","POST");
+	parametros="action=mostrarTipoGeoreferenciasMonitoreo&usuarioId="+usuarioId+"&clienteId="+clienteId+"&filtroGeo="+filtroGeo;
+	//$("#mon_menu_acordeonGeoreferencias").html("");
+	ajaxMonitoreo("mostrarTipoGeoreferenciasMonitoreo","controlador",parametros,"cargador2","mon_menu_acordeonGeoreferencias","POST");
 
 }
 
@@ -358,8 +361,8 @@ function mostraCajaBusqueda(idRdb){
 */
 function init(){
 	try{
-		//mostrarMapa();
-		//tabAd();//tab administracion
+		mostrarMapa();
+		tabAd();//tab administracion
 		menuAd();
 		//menuRe();//menu reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
@@ -524,7 +527,7 @@ function tabAd(){
 /*Carga de menu*/
 function menuAd(){
 	$("#adm_menu").html("");
-	/*$.ajax({
+	$.ajax({
 		type: "GET",
         url: "index.php?m=mAdmon&c=menu",
         data: "",
@@ -535,9 +538,9 @@ function menuAd(){
 				$("#adn_menu").html("No se han Creado Grupos");
 			}
         }
-	});*/
-	profile=$("#profl").val();
-	ajaxMonitoreo("cargarMenuAdmon","controlador","action=mostrarMenuAdmon&profl="+profile,"cargador2","adm_menu","POST");
+	});
+	//profile=$("#profl").val();
+	//ajaxMonitoreo("cargarMenuAdmon","controlador","action=mostrarMenuAdmon&profl="+profile,"cargador2","adm_menu","POST");
 }
 function menuRe(){
 	usuarioId=$("#usuarioId").val();
