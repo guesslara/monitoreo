@@ -674,3 +674,64 @@ body,document,html{
   font-size:20px;
   margin-top:13px;
  }
+ /*ajustes para la barra lateral de administracion*/
+ #adm_menu{
+    width: 190px;
+    background-color: #EBF0FA;
+    float:left;
+    border: 1px solid #EBF0FA;
+    height: 100%;
+    margin:-5px -2px 0px -4px;
+    overflow-y: auto;
+}
+#adm_menu ul{
+   margin : 0 0 0 0px;
+   padding: 0 0 0 0px;
+   list-style: none;
+}
+#adm_menu li{
+   /*background-color: #ffffcc;*/
+   margin: 2 2 2 2px;
+   padding: 8 8 8 8px;
+   height: 15px;
+   padding: 5px;
+   /*font-weight: bold;*/
+}
+#adm_menu li:hover{
+    background-color: #FFF;
+    cursor: pointer;
+}
+.principal{
+    margin: -3px -3px 0px 190px;
+    background-color: #ffffff;
+    padding: 2 2 2 2px;
+    height: 100%;
+    overflow: auto;
+    border:1px solid #A6C9E2;
+}
+#rep_menu{
+    width: 190px;
+    background-color: #EBF0FA;
+    float:left;
+    border: 1px solid #EBF0FA;
+    height: 100%;
+    margin:-5px -2px 0px -4px;
+    overflow-y: auto;
+}
+#rep_menu ul{
+   margin : 0 0 0 0px;
+   padding: 0 0 0 0px;
+   list-style: none;
+}
+#rep_menu li{
+   /*background-color: #ffffcc;*/
+   margin: 2 2 2 2px;
+   padding: 8 8 8 8px;
+   height: 15px;
+   padding: 5px;
+   /*font-weight: bold;*/
+}
+#rep_menu li:hover{
+    background-color: #FFF;
+    cursor: pointer;
+}

@@ -361,10 +361,10 @@ function mostraCajaBusqueda(idRdb){
 */
 function init(){
 	try{
-		mostrarMapa();
-		tabAd();//tab administracion
+		//mostrarMapa();
+		//tabAd();//tab administracion
 		menuAd();
-		//menuRe();//menu reportes
+		menuRe();//menu reportes
 		redimensionarDivs();/*Funcion para redimensionar los divs*/
 		//mostrarAvisos();/*Funcion para mostrar la advertencia*/
 		//nuevas funciones para agilizar la carga
@@ -527,7 +527,7 @@ function tabAd(){
 /*Carga de menu*/
 function menuAd(){
 	$("#adm_menu").html("");
-	$.ajax({
+	/*$.ajax({
 		type: "GET",
         url: "index.php?m=mAdmon&c=menu",
         data: "",
@@ -538,9 +538,9 @@ function menuAd(){
 				$("#adn_menu").html("No se han Creado Grupos");
 			}
         }
-	});
-	//profile=$("#profl").val();
-	//ajaxMonitoreo("cargarMenuAdmon","controlador","action=mostrarMenuAdmon&profl="+profile,"cargador2","adm_menu","POST");
+	});*/
+	profile=$("#profl").val();
+	ajaxMonitoreo("cargarMenuAdmon","controlador","action=mostrarMenuAdmon&profl="+profile,"cargador2","adm_menu","POST");
 }
 function menuRe(){
 	usuarioId=$("#usuarioId").val();
@@ -551,12 +551,12 @@ function menuRe(){
 function adm_abrir_modulo(m,indice){
 	//alert(m);
 	//$("#accordion_container").html("");
-	$("#adm_menu div").each(function( index ) {
+	$("#adm_menu li").each(function( index ) {
 		//console.log( index + ": " + $( this ).text() );
 		id=$(this).attr("id");
 		console.log(id);
 		$("#"+id).removeClass("ui-state-active");
-		$("#"+id).addClass("estiloDivMenuAdmon");
+		//$("#"+id).addClass("estiloDivMenuAdmon");
 	});
 	$("#"+indice).addClass("ui-state-active")
 	$.ajax({

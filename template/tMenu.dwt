@@ -1,11 +1,11 @@
 <script type="text/javascript">
 	$(document).ready(function() {
-		$( "#menuModulos" ).menu();
+		//$( "#menuModulos" ).menu();
   	});
 </script>
  <style>
 .estiloDivMenuAdmon{
-	position:relative;margin-top:3px;width:94%;height:15px;padding:5px;
+	position:relative;margin-top:3px;height:15px;padding:5px;/*width:94%;*/
 }
 .estiloDivMenuAdmon:hover{
 	background: url("public/css/images/ui-bg_glass_75_d0e5f5_1x400.png") repeat-x scroll 50% 50% #d0e5f5;
@@ -14,15 +14,16 @@
     font-weight: bold;
     cursor:pointer;
 }
-</style>
-<!--<ul id="menuModulos" class="ui-menu ui-widget ui-widget-content" style="border:1px solid #FF0000;width:97%;">-->
-	
-	<!--<li id="{listadoMenuAdmon.IDM}" class="ui-menu ui-menu-item ui-state-active" style="margin-top:5px;" onClick="adm_abrir_modulo('{listadoMenuAdmon.LNK}','{listadoMenuAdmon.IDM}')">{listadoMenuAdmon.DESCRIPCION}</li>-->
-	
-<!--</ul>-->
 
-<!-- BEGIN listadoMenuAdmon -->
-<div id="{listadoMenuAdmon.IDM}" class="estiloDivMenuAdmon" title="De click para cargar el m&oacute;dulo" onClick="adm_abrir_modulo('{listadoMenuAdmon.LNK}','{listadoMenuAdmon.IDM}')">
+</style>
+<ul style="border:0px solid #FF0000;">
+<!-- BEGIN listadoMenuAdmon -->	
+	<li id="{listadoMenuAdmon.IDM}" onClick="adm_abrir_modulo('{listadoMenuAdmon.LNK}','{listadoMenuAdmon.IDM}')">{listadoMenuAdmon.DESCRIPCION}</li>
+<!-- END listadoMenuAdmon -->	
+</ul>
+
+
+<!--<div id="{listadoMenuAdmon.IDM}" class="estiloDivMenuAdmon" title="De click para cargar el m&oacute;dulo" onClick="adm_abrir_modulo('{listadoMenuAdmon.LNK}','{listadoMenuAdmon.IDM}')">
 	{listadoMenuAdmon.DESCRIPCION}
-</div>
-<!-- END listadoMenuAdmon -->
+</div>-->
+

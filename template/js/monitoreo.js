@@ -13,6 +13,8 @@ function redimensionarDivs() {
     $ ( "#mon_menu_acordeon" ).css( "height" , ( altoContenedor - 142 ) + "px" );
     $ ( "#mon_content" ).css( "height" , ( altoContenedor - 44 ) + "px" );
     $ ( "#Admon" ).css( "height" , ( altoContenedor - 43 ) + "px" );
+    $ ( "#adm_menu" ).css( "height" , ( altoContenedor - 35 ) + "px" );
+    $ ( "#adm_content").css( "height" , ( altoContenedor - 40) + "px");
     $ ( "#Report" ).css( "height" , ( altoContenedor - 43 )+"px" );
     $ ( "#rep_menu" ).css( "height" , ( altoContenedor - 43 )+"px" );
     $ ( "#contenedorSlider" ).css( "height" , ( altoContenedor - 44 )+"px" );
