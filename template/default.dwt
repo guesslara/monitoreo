@@ -7,7 +7,6 @@
 <script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
 <script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
 <script type="text/javascript" src="public/js/jquery.timer.js"></script>
-<script type="text/javascript" src="public/js/menu.js"></script>
 <script type="text/javascript" src="public/libs/jtables/jtables.js"></script>
 <script type="text/javascript" src="{PATH}/js/scripts.js"></script>
 <script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
