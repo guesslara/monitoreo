@@ -24,6 +24,7 @@
 <script type="text/javascript" src="public/libs/jquery-ui-multiselect/src/jquery.multiselect.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="libs/manuales.js"></script>
 
 </head>
 <body>
@@ -41,9 +42,9 @@
   <div id="Monitoreo" class="pestana">
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
-	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header ui-buttonset" style="border:1px solid #FF0000;">
-	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked" class="ui-helper-hidden-accessible"><label for="tituloUnidadesDisponibles1" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-state-active"><span class="ui-button-text">Unidades</span></label>
-         <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias" class="ui-helper-hidden-accessible"><label for="tituloGeoreferenciasDisponibles" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right"><span class="ui-button-text">Georeferencias</label>
+	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header">&nbsp;Mostrar:
+	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked"><label for="tituloUnidadesDisponibles1"><span class="ui-button-text">Unidades</span></label>
+         <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias"><label for="tituloGeoreferenciasDisponibles"><span class="ui-button-text">Georeferencias</label>
 	     </div>
 	     <div id="main_view" class="main_view">
 	        <div id="mon_search">
@@ -128,6 +129,7 @@
 
       <div style="border-bottom:0px solid #999;padding:6px;width:157px;margin:5px;">
         <button id="gral_button_events" class="btnAlertas ui-state-default ui-corner-all" title="&Uacute;ltimas Alertas">U. Alertas</button>
+        {BOTONAYUDA}
       </div>
       
       <div style="border:0px solid #FF0000;margin:5px;">
@@ -242,6 +244,7 @@
   </div>
   <div id="mensajesTickets" style="display: none;"><p style="font-size: 12px;">Cierre la ventana de <strong>Soporte</strong> antes de enviar otro Ticket.</p></div>
   <div id="dialog_message" title="&iexcl;Aviso!"></div>
+  <div id="ayudaPortal" style="display:none"></div>
   <div id="mon_dialog"></div>
   <div id="mon_dialogAll"></div>
 </body>

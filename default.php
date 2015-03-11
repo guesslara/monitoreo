@@ -10,7 +10,19 @@
 	$db = new sql($config_bd['host'],$config_bd['port'],$config_bd['bname'],$config_bd['user'],$config_bd['pass']);
 	
 	$tpl->set_filenames(array('default'=>'default'));
-		
+	//modificacion para el boton de ayuda
+	$manuales=new componenteManuales();
+	$manuales->__set("modulo", $_GET["m"]);
+	$manuales->getManuales();
+	$pdf=$manuales->__get("pdf");
+	$video=$manuales->__get("video");
+
+	if($video==""){
+		$botonAyuda="<a href='".$pdf."' target='_blank' class='ui-state-highlight ui-corner-all' style='padding:5px;margin-left:5px;text-decoration:none;float:right;color:#2e6e9e;font-weight:bold;' title='Ayuda'>Ayuda</a>";
+	}else{
+		$botonAyuda="<a href='#' onclick='abrirAyudaPortal(\"".$pdf."\",\"".$video."\")' class='ui-state-highlight ui-corner-all' style='padding:5px;margin-left:5px;text-decoration:none;float:right;color:#2e6e9e;font-weight:bold;' title='Ayuda'>Ayuda</a>";
+	}
+
 	$idProfile = $userAdmin->user_info['ID_PERFIL'];
     //echo "<pre>";
 	//print_r($userAdmin);
@@ -58,7 +70,8 @@
         'SEGUIMIENTO'	=> $seguimiento,
         'HISTORIAL'		=> $hRuta,
         'BUSQUEDA'		=> $busqueda,
-        'PROFILE'		=> $idProfile
+        'PROFILE'		=> $idProfile,
+        'BOTONAYUDA'	=> $botonAyuda
 	));
 	
 	$tpl->pparse('default');
