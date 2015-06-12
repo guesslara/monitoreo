@@ -331,6 +331,13 @@ $(document).ready(function(){
         	mostrarTiposGeoreferencias(filtroGeo);
     	});
 
+    	$("#bienvenidaNuevaVersion").dialog({
+			autoOpen:false,
+			width: 700,
+			height: 600,
+			modal: true
+		});
+
 		init();//funcion inicial
 		//$("#barraMonitoreo").draggable({ cursor: "move",containment: "#Monitoreo" });
 	});

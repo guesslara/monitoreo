@@ -42,9 +42,9 @@
   <div id="Monitoreo" class="pestana">
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
-	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header ui-buttonset" style="border:1px solid #FF0000;">
-	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked" class="ui-helper-hidden-accessible"><label for="tituloUnidadesDisponibles1" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-state-active"><span class="ui-button-text">Unidades</span></label>
-         <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias" class="ui-helper-hidden-accessible"><label for="tituloGeoreferenciasDisponibles" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right"><span class="ui-button-text">Georeferencias</label>
+	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header">&nbsp;Mostrar&nbsp;
+	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked"><label for="tituloUnidadesDisponibles1">Unidades</label>
+         <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias"><label for="tituloGeoreferenciasDisponibles">Georeferencias</label>
 	     </div>
 	     <div id="main_view" class="main_view">
 	        <div id="mon_search">
@@ -240,6 +240,59 @@
     <p align="left">* Para cerrar esta ventana da clic en el bot&oacute;n <strong>Cerrar</strong></p>
     <p align="justify"></p>
     <p align="justify"></p>
+  </div>
+  <div id="bienvenidaNuevaVersion">
+    <div id="paso1">
+      <div style="font-size:16px;margin:10px;color:#819FF7;font-weight:bold;">Bienvenid@:</div>
+      <p style="font-size:14px;">Presentamos el M&oacute;dulo de Monitoreo en su versi&oacute;n 2.</p>
+      <p style="text-align:justify;font-size:14px;">Se han incluido nuevas caracter&iacute;sticas para hacer su navegaci&oacute;n m&aacute;s sencilla.</p>
+      <p style="text-align:justify;font-size:14px;">Nueva Barra de Unidades y Georeferencias</p>
+      <p style="text-align:justify;font-size:14px;"><img src="{PATH}/images/barraMonitoreo.png" height="400" border="0" /></p>
+    </div>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;">Siguiente >></button>
+    <div id="paso2">
+      <p style="text-align:justify;font-size:14px;">Visualización de Georeferencias:</p>
+      <p style="text-align:justify;font-size:14px;"><img src="{PATH}/images/opciones3.png" border="0" /></p>
+      <p style="text-align:justify;font-size:14px;">Ahora se pueden mostrar las georeferencias asociadas y se pueden mostrar en el mapa e interactuar de forma separada.</p>
+    </div>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;"><< Anterior</button>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;">Siguiente >></button>
+    <div id="paso3">
+      <p style="text-align:justify;font-size:14px;">Botón Última Posición</p>
+      <p style="text-align:justify;font-size:14px;"><img src="{PATH}/images/Uposicion.png" border="0" /></p>
+      <p style="text-align:justify;font-size:14px;">Ahora al seleccionar las unidades se tendrá que dar click en el botón Última Posición, para mostrar un resumen acerca de las ubicaciones de las diferentes unidades seleccionadas.</p>
+    </div>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;"><< Anterior</button>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;">Siguiente >></button>
+    <div id="paso4">
+      <p style="text-align:justify;font-size:14px;">Barra Posiciones</p>
+      <p style="text-align:justify;font-size:14px;"><img src="{PATH}/images/posiciones.png" width="650" border="0" /></p>
+      <p style="text-align:justify;font-size:14px;">Cuando se muestre la última posición ahora mostrara más información de las unidades seleccionadas Nivel de Bateria, Localización, etc.</p>
+    </div>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;"><< Anterior</button>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;">Siguiente >></button>
+    <div id="paso5">
+      <p style="text-align:justify;font-size:14px;">Barra Opciones Latitudes / Longitudes</p>
+      <p style="text-align:justify;font-size:14px;"><img src="{PATH}/images/latitudes.png" border="0" /></p>
+      <p style="text-align:justify;font-size:14px;">Ahora al dar click en cualquier lugar del mapa en esta sección se mostrará la latitud y longitud seleccionada.</p>
+    </div>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;"><< Anterior</button>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;">Siguiente >></button>
+    <div id="paso6">
+      <p style="text-align:justify;font-size:14px;">Botón Rutas</p>
+      <p style="text-align:justify;font-size:14px;"><img src="{PATH}/images/botonRutas2.png" border="0" /></p>
+      <p style="text-align:justify;font-size:14px;">Esta nueva funcionalidad permitirá buscar ubicaciones entre un punto A - Origen y un punto B - Destino, además de mostrar la información relacionada al transito.</p>
+      <p style="text-align:justify;font-size:14px;"><img src="{PATH}/images/puntoAB.png" border="0" /></p>
+    </div>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;"><< Anterior</button>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;">Siguiente >></button>
+    <div id="paso7">
+      <p style="text-align:justify;font-size:14px;">&nbsp;</p>
+      <p style="text-align:center;font-size:14px;">No olvide enviarnos sus comentarios y/o sugerencias a nuestro departamento de Soporte.</p>
+      <p align="center" style="font-weight: bold;font-size: 14px;">Equipo ALG - Movilizandome</p>
+      <p style="text-align:justify;font-size:14px;">&nbsp;</p>
+    </div>
+    <button id="" class="ui-state-default ui-corner-all" role="button" style="height:25px;">Cerrar</button>
   </div>
   <div id="mensajesTickets" style="display: none;"><p style="font-size: 12px;">Cierre la ventana de <strong>Soporte</strong> antes de enviar otro Ticket.</p></div>
   <div id="dialog_message" title="&iexcl;Aviso!"></div>
