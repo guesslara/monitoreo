@@ -7,7 +7,6 @@
 <script type="text/javascript" src="public/js/ui/jqueryUI.js"></script>
 <script type="text/javascript" src="public/js/ui/ui.panel.min.js"></script>
 <script type="text/javascript" src="public/js/jquery.timer.js"></script>
-<script type="text/javascript" src="public/js/menu.js"></script>
 <script type="text/javascript" src="public/libs/jtables/jtables.js"></script>
 <script type="text/javascript" src="{PATH}/js/scripts.js"></script>
 <script type="text/javascript" src="{PATH}/js/monitoreo.js"></script>
@@ -25,6 +24,7 @@
 <script type="text/javascript" src="public/libs/jquery-ui-multiselect/src/jquery.multiselect.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/i18n/grid.locale-es.js"></script>
 <script type="text/javascript" src="public/libs/phpgridv1.5.2/lib/js/jqgrid/js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="libs/manuales.js"></script>
 
 </head>
 <body>
@@ -42,9 +42,9 @@
   <div id="Monitoreo" class="pestana">
     <!--Informacion de las unidades-->
     <div id="contenedorSlider">
-	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header">&nbsp;Mostrar&nbsp;
-	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked"><label for="tituloUnidadesDisponibles1">Unidades</label>
-         <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias"><label for="tituloGeoreferenciasDisponibles">Georeferencias</label>
+	     <div id="tituloUnidadesDisponibles" class="divMenu ui-widget-header">&nbsp;Mostrar:
+	       <input type="radio" id="tituloUnidadesDisponibles1" name="rdbOpcionUnidades" value="unidades" checked="checked"><label for="tituloUnidadesDisponibles1"><span class="ui-button-text">Unidades</span></label>
+         <input type="radio" id="tituloGeoreferenciasDisponibles" name="rdbOpcionUnidades" value="georeferencias"><label for="tituloGeoreferenciasDisponibles"><span class="ui-button-text">Georeferencias</label>
 	     </div>
 	     <div id="main_view" class="main_view">
 	        <div id="mon_search">
@@ -129,6 +129,7 @@
 
       <div style="border-bottom:0px solid #999;padding:6px;width:157px;margin:5px;">
         <button id="gral_button_events" class="btnAlertas ui-state-default ui-corner-all" title="&Uacute;ltimas Alertas">U. Alertas</button>
+        {BOTONAYUDA}
       </div>
       
       <div style="border:0px solid #FF0000;margin:5px;">
@@ -296,6 +297,7 @@
   </div>
   <div id="mensajesTickets" style="display: none;"><p style="font-size: 12px;">Cierre la ventana de <strong>Soporte</strong> antes de enviar otro Ticket.</p></div>
   <div id="dialog_message" title="&iexcl;Aviso!"></div>
+  <div id="ayudaPortal" style="display:none"></div>
   <div id="mon_dialog"></div>
   <div id="mon_dialogAll"></div>
 </body>
